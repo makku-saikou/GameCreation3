@@ -12,4 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d569ecdb0a752843939eae8fda00970, type: 3}
   m_Name: QuickToolConfig
   m_EditorClassIdentifier: 
-  quickToolButtonData: []
+  quickToolButtonData:
+  - name: "\u7D2B\u5730\u4E01\u6D4B\u8BD5\u573A\u666F"
+    commandType: 0
+    color: {r: 0.630785, g: 0, b: 1, a: 1}
+    lineBreak: 0
+    commandParam: Assets/Scenes/Dev/PurpleTest.unity
+    command:
+      m_PersistentCalls:
+        m_Calls: []
+  - name: E2E
+    commandType: 4
+    color: {r: 1, g: 1, b: 1, a: 1}
+    lineBreak: 0
+    commandParam: Tool/E2E/E2E.exe
+    command:
+      m_PersistentCalls:
+        m_Calls: []
