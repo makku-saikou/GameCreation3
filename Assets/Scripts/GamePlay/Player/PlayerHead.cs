@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿// -------------------------------------------------
+// Copyright@ makku-saikou
+// Author : jianhao li
+// Date: 2025_03_08
+// File: PlayerHead.cs
+// Description: 头部的控制逻辑,调用舌头的相关方法
+// -------------------------------------------------
+using UnityEngine;
 
 namespace GamePlay.Player
 {
@@ -6,6 +13,9 @@ namespace GamePlay.Player
     public class PlayerHead : MonoBehaviour
     {
         [SerializeField] private PlayerTongue playerTongue;
+        [SerializeField] private Transform tongueRoot;
+        public Transform TongueRoot => tongueRoot;
+        // [SerializeField] private TongueChain tongueChain;
         public bool canMove;
         private void Update()
         {
@@ -14,7 +24,16 @@ namespace GamePlay.Player
             {
                 LaunchTongue();
             }
-            
+            if (Input.GetMouseButtonUp(0))
+            {
+                RetractTongue();
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                InteractTongue();
+            }
+            // tongueChain.SpringJoint2D.connectedAnchor = tongueRoot.position;
+            // tongueChain.ResetJoint();
         }
 
         private void UpdateDirection()
@@ -34,6 +53,11 @@ namespace GamePlay.Player
         private void RetractTongue()
         {
             playerTongue.Retract();
+        }
+
+        private void InteractTongue()
+        {
+            playerTongue.Interact();
         }
     }
 }

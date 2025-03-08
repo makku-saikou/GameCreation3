@@ -1,4 +1,12 @@
-﻿using System;
+﻿// -------------------------------------------------
+// Copyright@ makku-saikou
+// Author : jianhao li
+// Date: 2025_03_08
+// File: PlayerTongue.cs
+// Description: 舌头相关控制逻辑
+// -------------------------------------------------
+using System;
+using GamePlay.Item;
 using PurpleFlowerCore;
 using UnityEngine;
 
@@ -12,18 +20,25 @@ namespace GamePlay.Player
         Pushing,
         Retracting
     }
-    // todo: temp状态机
+    // todo: temp状态机，之后考虑使用统一的状态机模块
     public class PlayerTongue : MonoBehaviour
     {
         [SerializeField] private float tongueDistance = 8f;
-        [SerializeField] private float flightTime;
         [SerializeField] private float tongueSpeed;
         // [SerializeField] private SpringJoint2D springJoint2D; // 当前的实现中,考虑到需要SpringJoint的情况较少并且会造成更多麻烦,我们暂不使用joing
+        [SerializeField] private DistanceJoint2D distanceJoint2D;
         [SerializeField] private PlayerHead head;
-        [SerializeField] private Transform root;
-        private float _currentFlightTime;
-        private TongueState _tongueState;
-        
+        [SerializeField] private PlayerController entity;
+        // [SerializeField] private Transform root;
+        private float _currentFlightDistance;
+        [SerializeField]private TongueState _tongueState;
+        private IConnectable _currentConnectableItem;
+
+        private void Start()
+        {
+            transform.position = head.TongueRoot.position;
+        }
+
         private void Update()
         {
             switch (_tongueState)
@@ -51,8 +66,8 @@ namespace GamePlay.Player
         
         public void Launch(Vector3 position, Vector2 direction)
         {
-            gameObject.SetActive(true);
-            _currentFlightTime = flightTime;
+            if(_tongueState != TongueState.Idle) return;
+            _currentFlightDistance = 0;
             transform.position = position;
             transform.right = direction;
             _tongueState = TongueState.Launching;
@@ -60,53 +75,62 @@ namespace GamePlay.Player
         
         private void UpdateLaunch()
         {
-            if (_currentFlightTime <= 0)
+            if (_currentFlightDistance >= tongueDistance)
             {
-                _tongueState = TongueState.Retracting;
-                gameObject.SetActive(false);
+                Retract();
+                return;
             }
-            _currentFlightTime -= Time.deltaTime;
+            _currentFlightDistance += Time.deltaTime * tongueSpeed;
             transform.position += transform.right * (Time.deltaTime * tongueSpeed);
+            var res = Physics2D.OverlapCircle(transform.position, 0.1f);
+            if (res != null && res.CompareTag("Connectable"))
+            {
+                _currentConnectableItem = res.GetComponent<IConnectable>();
+                _tongueState = TongueState.Connecting;
+                head.canMove = false;
+                transform.parent = null;
+                distanceJoint2D.enabled = true;
+                distanceJoint2D.connectedAnchor = transform.position;
+            }
         }
         
         private void UpdateConnecting()
         {
-            // todo: 判断目标是否可移动，之后要主要是否考虑质量
-            Transform headTransform = head.transform;
-            if(Vector3.SqrMagnitude(transform.position - headTransform.position) > tongueDistance * tongueDistance)
+            // todo: 判断目标是否可移动，之后要注意是否考虑质量
+            if(Vector3.SqrMagnitude(transform.position - entity.transform.position) < tongueDistance * tongueDistance)
             {
-                headTransform.position = Vector3.Lerp(headTransform.position, transform.position, 0.1f);
-            }
-        }
-        
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            Debug.Log(1);
-            if (other.CompareTag("Connectable") && _tongueState == TongueState.Launching)
+                distanceJoint2D.distance = Vector3.Distance(transform.position, entity.transform.position);
+            }else
             {
-                PFCLog.Debug("Connect");
-                _tongueState = TongueState.Connecting;
-                head.canMove = false;
-                transform.parent = root;
-                // todo: 获得交互物，以某种方式处理交互事件
+                distanceJoint2D.distance = tongueDistance;
             }
         }
         
         private void UpdateRetract()
         {
-            if (Vector3.SqrMagnitude(transform.position - head.transform.position) < 0.1f)
+            if (Vector3.SqrMagnitude(transform.position - head.TongueRoot.position) < 0.05f)
             {
                 _tongueState = TongueState.Idle;
                 head.canMove = true;
-                gameObject.SetActive(false);
             }
-            transform.position = Vector3.Lerp(transform.position, head.transform.position, 0.1f);
+            transform.position = Vector3.MoveTowards(transform.position, head.TongueRoot.position, 0.1f);
         }
 
         public void Retract()
         {
             transform.parent = head.transform;
+            transform.localScale = Vector3.one; // temp
             _tongueState = TongueState.Retracting;
+            distanceJoint2D.enabled = false;
+            _currentConnectableItem = null;
+        }
+
+        public void Interact()
+        {
+            if(_currentConnectableItem == null) return;
+            if (_tongueState != TongueState.Connecting) return;
+            _currentConnectableItem.Interact(entity);
+            Retract();
         }
     }
 }

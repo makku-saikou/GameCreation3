@@ -1,4 +1,13 @@
+// -------------------------------------------------
+// Copyright@ makku-saikou
+// Author : jianhao li
+// Date: 2025_03_08
+// File: PlayerController.cs
+// Description: 玩家角色主要控制逻辑
+// -------------------------------------------------
+
 using System;
+using PurpleFlowerCore;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -23,21 +32,21 @@ namespace GamePlay.Player
         public float groundCheckRadius = 0.3f;              // 地面检测圆半径
         public LayerMask groundLayer;                       // 地面Layer
 
-        [Header("WallCheck")] 
-        public Transform wallCheckPoint;                    // 墙体检测点
-        public Transform ledgeCheckPoint;                   // 墙角检测点
-        public float wallCheckDistance;                     // 墙体检测距离
+        // [Header("WallCheck")] 
+        // public Transform wallCheckPoint;                    // 墙体检测点
+        // public Transform ledgeCheckPoint;                   // 墙角检测点
+        // public float wallCheckDistance;                     // 墙体检测距离
 
-        [Header("WallJump")]
-        public Vector2 wallJumpDirection;                   // 蹬墙跳方向
-        public float wallJumpForce = 20f;                   // 蹬墙跳力度
+        // [Header("WallJump")]
+        // public Vector2 wallJumpDirection;                   // 蹬墙跳方向
+        // public float wallJumpForce = 20f;                   // 蹬墙跳力度
 
-        [Header("LedgeClimb")]
+        // [Header("LedgeClimb")]
         // 爬墙结束后设置的位置偏移量
-        public float ledgeClimbXOffset1 = 0.3f;
-        public float ledgeClimbYOffset1 = 0f;
-        public float ledgeClimbXOffset2 = 0.5f;
-        public float ledgeClimbYOffset2 = 2f;
+        // public float ledgeClimbXOffset1 = 0.3f;
+        // public float ledgeClimbYOffset1 = 0f;
+        // public float ledgeClimbXOffset2 = 0.5f;
+        // public float ledgeClimbYOffset2 = 2f;
         
         private float _movementInput;                       // 输入方向
         private int _amountOfJumpLeft;                      // 剩余跳跃次数
@@ -67,6 +76,9 @@ namespace GamePlay.Player
         private Vector2 _ledgePos2;
         
         private Rigidbody2D _rb;
+        public Rigidbody2D Rb => _rb;
+        [SerializeField] private PlayerHead _head;
+        public PlayerHead Head => _head;
         // private Animator _ani;
         // private static readonly int IsWalking = Animator.StringToHash("IsWalking");
         // private static readonly int IsGrounded = Animator.StringToHash("IsGrounded");
@@ -79,7 +91,7 @@ namespace GamePlay.Player
             _rb = GetComponent<Rigidbody2D>();
             // _ani = GetComponent<Animator>();
             _amountOfJumpLeft = amountOfJump;
-            wallJumpDirection.Normalize();
+            // wallJumpDirection.Normalize();
         }
 
         private void Update()
@@ -87,9 +99,9 @@ namespace GamePlay.Player
             CheckInput();
             CheckMovementState();
             CheckJumpState();
-            CheckWallSlideState();
-            CheckLedgeClimb();
-            UpdateAnimations();
+            // CheckWallSlideState();
+            // CheckLedgeClimb();
+            // UpdateAnimations();
         }
         
         private void FixedUpdate()
@@ -163,8 +175,10 @@ namespace GamePlay.Player
             if (_jumpTimer > 0)
             {
                 if (!_isGrounded && _isTouchingWall && _movementInput != 0 &&
-                    Math.Abs(_movementInput - _facingDirection) > 0) 
-                    WallJump();
+                    Math.Abs(_movementInput - _facingDirection) > 0)
+                {
+                    // WallJump();
+                }
                 else if (_isGrounded) 
                     NormalJump();
                 
@@ -194,54 +208,54 @@ namespace GamePlay.Player
                              !_isLedgeClimb;
         }
 
-        private void CheckLedgeClimb()
-        {
-            if (_ledgeDetected && !_isLedgeClimb)
-            {
-                _isLedgeClimb = true;
-                if (_isFacingRight)
-                {
-                    _ledgePos1 = new Vector2(
-                        Mathf.Floor(_ledgePosBot.x + wallCheckDistance) - ledgeClimbXOffset1,
-                        Mathf.Floor(_ledgePosBot.y) + ledgeClimbYOffset1);
-                    _ledgePos2 = new Vector2(
-                        Mathf.Floor(_ledgePosBot.x + wallCheckDistance) + ledgeClimbXOffset2,
-                        Mathf.Floor(_ledgePosBot.y) + ledgeClimbYOffset2);
-                }
-                else
-                {
-                    _ledgePos1 = new Vector2(
-                        Mathf.Ceil(_ledgePosBot.x - wallCheckDistance) + ledgeClimbXOffset1,
-                        Mathf.Floor(_ledgePosBot.y) + ledgeClimbYOffset1);
-                    _ledgePos2 = new Vector2(
-                        Mathf.Floor(_ledgePosBot.x - wallCheckDistance) - ledgeClimbXOffset2,
-                        Mathf.Floor(_ledgePosBot.y) + ledgeClimbYOffset2);
-                }
-                _canMove = false;
-                _canFlip = false;
-                
-                // _ani.SetBool(CanClimbLedge, true);
-            }
-
-            if (_isLedgeClimb) 
-                transform.position = _ledgePos1;
-        }
+        // private void CheckLedgeClimb()
+        // {
+        //     if (_ledgeDetected && !_isLedgeClimb)
+        //     {
+        //         _isLedgeClimb = true;
+        //         if (_isFacingRight)
+        //         {
+        //             _ledgePos1 = new Vector2(
+        //                 Mathf.Floor(_ledgePosBot.x + wallCheckDistance) - ledgeClimbXOffset1,
+        //                 Mathf.Floor(_ledgePosBot.y) + ledgeClimbYOffset1);
+        //             _ledgePos2 = new Vector2(
+        //                 Mathf.Floor(_ledgePosBot.x + wallCheckDistance) + ledgeClimbXOffset2,
+        //                 Mathf.Floor(_ledgePosBot.y) + ledgeClimbYOffset2);
+        //         }
+        //         else
+        //         {
+        //             _ledgePos1 = new Vector2(
+        //                 Mathf.Ceil(_ledgePosBot.x - wallCheckDistance) + ledgeClimbXOffset1,
+        //                 Mathf.Floor(_ledgePosBot.y) + ledgeClimbYOffset1);
+        //             _ledgePos2 = new Vector2(
+        //                 Mathf.Floor(_ledgePosBot.x - wallCheckDistance) - ledgeClimbXOffset2,
+        //                 Mathf.Floor(_ledgePosBot.y) + ledgeClimbYOffset2);
+        //         }
+        //         _canMove = false;
+        //         _canFlip = false;
+        //         
+        //         // _ani.SetBool(CanClimbLedge, true);
+        //     }
+        //
+        //     if (_isLedgeClimb) 
+        //         transform.position = _ledgePos1;
+        // }
         
         private void CheckSurroundings()
         {
             _isGrounded = 
                 Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundLayer);
 
-            _isTouchingWall =
-                Physics2D.Raycast(wallCheckPoint.position, transform.right, wallCheckDistance, groundLayer);
-            _isTouchingLedge = 
-                Physics2D.Raycast(ledgeCheckPoint.position, transform.right, wallCheckDistance, groundLayer);
-
-            if (_isTouchingWall && !_isTouchingLedge && !_ledgeDetected)
-            {
-                _ledgeDetected = true;
-                _ledgePosBot = wallCheckPoint.position;
-            }
+            // _isTouchingWall =
+            //     Physics2D.Raycast(wallCheckPoint.position, transform.right, wallCheckDistance, groundLayer);
+            // _isTouchingLedge = 
+            //     Physics2D.Raycast(ledgeCheckPoint.position, transform.right, wallCheckDistance, groundLayer);
+        
+            // if (_isTouchingWall && !_isTouchingLedge && !_ledgeDetected)
+            // {
+            //     _ledgeDetected = true;
+            //     _ledgePosBot = wallCheckPoint.position;
+            // }
         }
         
         private void ApplyMovement()
@@ -254,11 +268,14 @@ namespace GamePlay.Player
                 _rb.velocity = velocity;
             }
             else if (_canMove)
+            {
                 // 正常移动
-                _rb.velocity = new Vector2(movementSpeed * _movementInput, _rb.velocity.y);
+                if(_movementInput != 0)
+                    _rb.velocity = new Vector2(movementSpeed * _movementInput, _rb.velocity.y);
+            }
         
-            if (_isWallSliding && _rb.velocity.y < -wallSlidingSpeed) // 限制滑墙状态的速度
-                _rb.velocity = new Vector2(_rb.velocity.x, -wallSlidingSpeed);
+            // if (_isWallSliding && _rb.velocity.y < -wallSlidingSpeed) // 限制滑墙状态的速度
+            //     _rb.velocity = new Vector2(_rb.velocity.x, -wallSlidingSpeed);
         }
         
         private void NormalJump()
@@ -272,30 +289,30 @@ namespace GamePlay.Player
             _checkVariableJump = true;
         }
 
-        private void WallJump()
-        {
-            if (!_canWallJump) return;
-            
-            _rb.velocity = new Vector2(_rb.velocity.x, 0);
-            _amountOfJumpLeft = amountOfJump;
-            _amountOfJumpLeft--;
-                
-            var forceToAdd = new Vector2(
-                wallJumpForce * wallJumpDirection.x * _movementInput, 
-                wallJumpForce * wallJumpDirection.y);
-            _rb.AddForce(forceToAdd, ForceMode2D.Impulse);
-                
-            _jumpTimer = 0;
-            _freezeTimer = 0;
-            _isWallSliding = false;
-            _checkVariableJump = true;
-            _canMove = true;
-            _canFlip = true;
-
-            _wallJumpTimer = wallJumpTimerSet;
-            _lastWallJumpDirection = -_facingDirection;
-            _hasWallJump = true;
-        }
+        // private void WallJump()
+        // {
+        //     if (!_canWallJump) return;
+        //     
+        //     _rb.velocity = new Vector2(_rb.velocity.x, 0);
+        //     _amountOfJumpLeft = amountOfJump;
+        //     _amountOfJumpLeft--;
+        //         
+        //     var forceToAdd = new Vector2(
+        //         wallJumpForce * wallJumpDirection.x * _movementInput, 
+        //         wallJumpForce * wallJumpDirection.y);
+        //     _rb.AddForce(forceToAdd, ForceMode2D.Impulse);
+        //         
+        //     _jumpTimer = 0;
+        //     _freezeTimer = 0;
+        //     _isWallSliding = false;
+        //     _checkVariableJump = true;
+        //     _canMove = true;
+        //     _canFlip = true;
+        //
+        //     _wallJumpTimer = wallJumpTimerSet;
+        //     _lastWallJumpDirection = -_facingDirection;
+        //     _hasWallJump = true;
+        // }
 
         private void Flip()
         {
@@ -325,11 +342,12 @@ namespace GamePlay.Player
 
         private void OnDrawGizmos()
         {
+            // Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckRadius);
+            // var wallCheckPosition = wallCheckPoint.position;
+            // Gizmos.DrawLine(wallCheckPosition, new Vector3(wallCheckPosition.x + wallCheckDistance, wallCheckPosition.y, wallCheckPosition.z));
+            // var ledgeCheckPosition = ledgeCheckPoint.position;
+            // Gizmos.DrawLine(ledgeCheckPosition, new Vector3(ledgeCheckPosition.x + wallCheckDistance, ledgeCheckPosition.y, ledgeCheckPosition.z));
             Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckRadius);
-            var wallCheckPosition = wallCheckPoint.position;
-            Gizmos.DrawLine(wallCheckPosition, new Vector3(wallCheckPosition.x + wallCheckDistance, wallCheckPosition.y, wallCheckPosition.z));
-            var ledgeCheckPosition = ledgeCheckPoint.position;
-            Gizmos.DrawLine(ledgeCheckPosition, new Vector3(ledgeCheckPosition.x + wallCheckDistance, ledgeCheckPosition.y, ledgeCheckPosition.z));
         }
     }
 }
