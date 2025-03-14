@@ -11,6 +11,7 @@ using UnityEngine;
 
 namespace GamePlay.Player
 {
+    [Obsolete]
     public class TongueChain : MonoBehaviour
     {
         private SpringJoint2D _springJoint2D;

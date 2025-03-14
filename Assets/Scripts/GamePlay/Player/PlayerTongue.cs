@@ -25,7 +25,6 @@ namespace GamePlay.Player
     {
         [SerializeField] private float tongueDistance = 8f;
         [SerializeField] private float tongueSpeed;
-        // [SerializeField] private SpringJoint2D springJoint2D; // 当前的实现中,考虑到需要SpringJoint的情况较少并且会造成更多麻烦,我们暂不使用joing
         [SerializeField] private DistanceJoint2D distanceJoint2D;
         [SerializeField] private PlayerHead head;
         [SerializeField] private PlayerController entity;

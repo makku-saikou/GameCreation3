@@ -3327,7 +3327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   jumpForce: 24
-  amountOfJump: 2
+  amountOfJump: 1
   wallSlidingSpeed: 1.5
   airDragMultiplier: 1
   variableJumpHeightMultiplier: 0.5
