@@ -3,16 +3,16 @@
 namespace Common.FSM
 {
 	public delegate void LStateDelegate();
-	public delegate void LStateDelegateState(Common.FSM.IState state);
+	public delegate void LStateDelegateState(IState state);
 	public delegate void LStateDelegateFloat(float f);
 	
-	public class LState : Common.FSM.IState 
+	public class LState : IState 
 	{
 		private string _name; // 状态名
 		private string _tag; // 状态标签
 		private float _timer; // 计时器
-		private Common.FSM.IStateMachine _parent; //当前状态的状态机
-		private List<Common.FSM.ITransition> _transitions; //状态过渡
+		private IStateMachine _parent; //当前状态的状态机
+		private List<ITransition> _transitions; //状态过渡
 		
 		public event LStateDelegateState OnEnter;
 		

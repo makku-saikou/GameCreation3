@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using PurpleFlowerCore;
 
 namespace Common.FSM
 {
-	// 网上找的状态机
 	public class LStateMachine : LState, IStateMachine 
 	{
 		private IState _currentState; // 当前状态
@@ -48,6 +48,7 @@ namespace Common.FSM
 			// 状态机运行过程中,不能删除当前状态
 			if (_currentState == state) 
 			{
+				PFCLog.Error("FSM","Can't remove current state");
 				return;
 			}
 			if (state != null && _states.Contains (state)) 
@@ -56,7 +57,7 @@ namespace Common.FSM
 				state.Parent = null;
 				if (_defaultState == state) 
 				{
-					_defaultState = (_states.Count >= 1) ? _states [0] : null;
+					_defaultState = _states.Count >= 1 ? _states [0] : null;
 				}
 			}
 		}
@@ -96,10 +97,11 @@ namespace Common.FSM
 
             _currentState ??= _defaultState;
 
+            // 首先检查任何状态下的过渡
             for (int i = 0; i < count; i++)
             {
-                ITransition t = _anyStateTransitions [i];
-                if (t.To!= _currentState && t.ShouldBegin())
+                ITransition t = _anyStateTransitions[i];
+                if (t.To != _currentState && t.ShouldBegin())
                 {
                     _isTransition = true;
                     _t = t;
@@ -107,6 +109,7 @@ namespace Common.FSM
                 }
             }
 
+            // 然后检查当前状态下的过渡
 			List<ITransition> ts = _currentState.Transitions;
 			count = ts.Count;
 			for (int i = 0; i < count; i++) 
