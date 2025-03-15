@@ -7,6 +7,7 @@
 // -------------------------------------------------
 
 using System;
+using PurpleFlowerCore.Utility;
 using UnityEngine;
 
 // 考虑到玩家状态较多，各种子状态需要考虑有无连接或其他情况，舌头本身也有多种状态
@@ -20,46 +21,36 @@ namespace GamePlay.Player
         public float movementSpeed = 10f;                   // 移动速度
         public float jumpForce = 16f;                       // 跳跃力度
         public int amountOfJump = 1;                        // 跳跃次数（可以连续几段跳）
-        public float wallSlidingSpeed = 1.5f;               // 滑墙速度
 
         [Header("JumpOptimize")]
         public float airDragMultiplier = 0.95f;             // 如果在空中没有输入，则会更快落下
         public float variableJumpHeightMultiplier = 0.5f;   // 提前松开空格，则会跳的更低
         public float jumpTimerSet = 0.15f;                  // 跳跃缓冲时间
-        public float freezeTimerSet = 0.1f;                 // 蹬墙跳时的冻结时间（优化操作手感）
-        public float wallJumpTimerSet = 0.5f;               // 蹬墙跳缓冲时间（防止连续上跳）
         
         [Header("GroundCheck")]
         public Transform groundCheckPoint;                  // 地面检测点
         public float groundCheckRadius = 0.3f;              // 地面检测圆半径
         public LayerMask groundLayer;                       // 地面Layer
         
-        [HideInInspector]public float movementInput;                       // 输入方向
-        [HideInInspector]public int amountOfJumpLeft;                      // 剩余跳跃次数
-        [HideInInspector]public int facingDirection = 1;                   // _isFacingRight的数值形式，方便计算
-        [HideInInspector]public bool isFacingRight = true;                 // 是否正面向右边
-        [HideInInspector]public bool isWalking;                            // 是否在行走，动画参数
-        [HideInInspector]public bool isGrounded;                           // 是否在地面上，由Physics2D判定
-        [HideInInspector]public bool isTouchingWall;                       // 是否贴墙，由Physics2D判定
-        [HideInInspector]public bool isTouchingLedge;                      // 是否贴墙角，由Physics2D判定
-        [HideInInspector]public bool isWallSliding;                        // 是否滑墙
-        [HideInInspector]public bool checkVariableJump;                    // 当成功跳跃时被激活，若跳跃期间松开空格，则会施加额外的向下的力
-        [HideInInspector]public bool canNormalJump;                        // 是否可以进行普通跳跃
-        [HideInInspector]public bool canMove;                              // 是否可以移动
-        [HideInInspector]public bool canFlip;                              // 是否可以转向
-        [HideInInspector]public float jumpTimer;                           // 跳跃计时器，提供输入提前量，优化下一次跳跃的手感
-        [HideInInspector]public float freezeTimer;                         // 在触发蹬墙跳前冻结移动和转向
-        [HideInInspector]public float wallJumpTimer;                       // 防止在同一面墙上连续上跳
-        [HideInInspector]public int lastWallJumpDirection;                 // 记录上次蹬墙跳的方向，用处同上
-        [HideInInspector]public bool hasWallJump;
+        [RO] public float movementInput;                       // 输入方向
+        [RO] public int amountOfJumpLeft;                      // 剩余跳跃次数
+        [RO] public int facingDirection = 1;                   // _isFacingRight的数值形式，方便计算
+        [RO] public bool isFacingRight = true;                 // 是否正面向右边
+        [RO] public bool isWalking;                            // 是否在行走，动画参数
+        [RO] public bool isGrounded;                           // 是否在地面上，由Physics2D判定
+        [RO] public bool isTouchingWall;                       // 是否贴墙，由Physics2D判定
+        [RO] public bool isWallSliding;                        // 是否滑墙
+        [RO] public bool checkVariableJump;                    // 当成功跳跃时被激活，若跳跃期间松开空格，则会施加额外的向下的力
+        [RO] public bool canNormalJump;                        // 是否可以进行普通跳跃
+        [RO] public bool canMove = true;                       // 是否可以移动
+        [RO] public bool canFlip = true;                       // 是否可以转向
+        [RO] public float jumpTimer;                           // 跳跃计时器，提供输入提前量，优化下一次跳跃的手感
         
         private Rigidbody2D _rb;
         public Rigidbody2D Rb => _rb;
         [SerializeField] private PlayerHead _head;
         public PlayerHead Head => _head;
         
-        
-
         private void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
@@ -89,25 +80,6 @@ namespace GamePlay.Player
                     NormalJump();
                 else
                     jumpTimer = jumpTimerSet;
-            }
-
-            // 冻结一小段时间的移动与转向，使得蹬墙跳的触发更加容易
-            if (Input.GetButtonDown("Horizontal") &&
-                isTouchingWall && !isGrounded && Math.Abs(movementInput - facingDirection) > 0) 
-            {
-                canMove = false;
-                canFlip = false;
-                freezeTimer = freezeTimerSet;
-            }
-            
-            if (freezeTimer >= 0)
-            {
-                freezeTimer -= Time.deltaTime;
-                if (freezeTimer <= 0)
-                {
-                    canMove = true;
-                    canFlip = true;
-                }
             }
 
             if (checkVariableJump && !Input.GetButton("Jump"))

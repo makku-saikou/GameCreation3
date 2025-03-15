@@ -3328,17 +3328,27 @@ MonoBehaviour:
   movementSpeed: 10
   jumpForce: 24
   amountOfJump: 1
-  wallSlidingSpeed: 1.5
   airDragMultiplier: 1
   variableJumpHeightMultiplier: 0.5
   jumpTimerSet: 0.15
-  freezeTimerSet: 0.1
-  wallJumpTimerSet: 0.5
   groundCheckPoint: {fileID: 1909178460}
   groundCheckRadius: 0.3
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  movementInput: 0
+  amountOfJumpLeft: 0
+  facingDirection: 1
+  isFacingRight: 1
+  isWalking: 0
+  isGrounded: 0
+  isTouchingWall: 0
+  isWallSliding: 0
+  checkVariableJump: 0
+  canNormalJump: 0
+  canMove: 1
+  canFlip: 1
+  jumpTimer: 0
   _head: {fileID: 1713369368}
 --- !u!232 &1942500127
 DistanceJoint2D:
