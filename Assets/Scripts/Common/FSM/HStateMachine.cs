@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PurpleFlowerCore;
 
 namespace Common.FSM
@@ -15,6 +16,8 @@ namespace Common.FSM
 		private List<HTransition> _anyStateTransitions; // 任何状态下的过渡
 		
 		public HState CurrentState => _currentState;
+		
+		public event Action<HState, HState> OnStateChanged;
 		
 		public HState DefaultState 
 		{
@@ -212,6 +215,7 @@ namespace Common.FSM
             {
                 _tempState = t.From;
             }
+            OnStateChanged?.Invoke(_tempState, _currentState);
             _currentState.EnterCallback(_tempState);
 		}
 

@@ -51,9 +51,7 @@ namespace GamePlay.Player
         [RO] public bool canMove = true;                       // 是否可以移动
         [RO] public bool canFlip = true;                       // 是否可以转向
         [RO] public float jumpTimer;                           // 跳跃计时器，提供输入提前量，优化下一次跳跃的手感
-
-
-
+        
         public void Init()
         {
             amountOfJumpLeft = amountOfJump;

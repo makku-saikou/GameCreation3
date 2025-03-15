@@ -1,0 +1,83 @@
+// -------------------------------------------------
+// Copyright@ makku-saikou
+// Author : jianhao li
+// Date: 2025_03_15
+// File: PlayerHeadDirectionLimitProxy.cs
+// Description:
+// -------------------------------------------------
+
+using Common.FSM;
+using PurpleFlowerCore;
+using UnityEngine;
+
+namespace GamePlay.Player
+{
+    public class PlayerHeadDirectionLimitProxy : MonoBehaviour
+    {
+        [SerializeField] private PlayerController playerController;
+        [SerializeField] private PlayerHead playerHead;
+        [SerializeField][Range(0,1)] private float OnGroundUpLimit;
+        [SerializeField][Range(0,1)] private float OnGroundDownLimit;
+        
+        private DirectionLimit _OnGroundLimit;
+        
+        private void Start()
+        {
+            _OnGroundLimit = OnGroundLimit;
+            CheckDirectionLimit(null, null);
+            RegisterEvents();
+        }
+
+        private Vector3 OnGroundLimit(Vector3 direction)
+        {
+            PFCLog.Debug(direction);
+
+            if (direction.y > 0)
+            {
+                if (direction.y > OnGroundUpLimit)
+                {
+                    direction.y = OnGroundUpLimit;
+                    if(playerController.Property.isFacingRight)
+                        direction.x = 1 - OnGroundUpLimit * OnGroundUpLimit;
+                    else
+                        direction.x = -1 + OnGroundUpLimit * OnGroundUpLimit;
+                }
+            }
+            else
+            {
+                if (direction.y < -OnGroundDownLimit)
+                {
+                    direction.y = -OnGroundDownLimit;
+                    if(playerController.Property.isFacingRight)
+                        direction.x = 1 - OnGroundDownLimit * OnGroundDownLimit;
+                    else
+                        direction.x = -1 + OnGroundDownLimit * OnGroundDownLimit;
+                }
+            }
+            return direction;
+        }
+        
+        /// <summary>
+        /// 为了确保事件注册在玩家初始化之后，且由于我们不会使该组建失效，所以在Start中注册事件
+        /// </summary>
+        private void RegisterEvents()
+        {
+            playerController.StateMachine.OnStateChanged += CheckDirectionLimit;
+        }
+        
+        // private void OnEnable()
+        // {
+        //     playerController.StateMachine.OnStateChanged += CheckDirectionLimit;
+        // }
+        //
+        private void OnDisable()
+        {
+            playerController.StateMachine.OnStateChanged -= CheckDirectionLimit;
+        }
+        
+        private void CheckDirectionLimit(HState from, HState to)
+        {
+            playerHead.DirectionLimit = _OnGroundLimit;
+        }
+    }
+}

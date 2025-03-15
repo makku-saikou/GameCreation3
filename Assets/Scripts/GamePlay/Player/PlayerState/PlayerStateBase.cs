@@ -12,6 +12,7 @@ using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
 {
+    // 我们暂时将所有的逻辑都放在这个类里，之后会考虑拆分
     public class PlayerStateBase : HState
     {
         private PlayerProperty _p;

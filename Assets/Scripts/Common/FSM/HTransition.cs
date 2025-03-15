@@ -29,7 +29,7 @@
 			set => _name = value;
 		}
 		
-		public HTransition(string name,Common.FSM.HState fromState,Common.FSM.HState toState)
+		public HTransition(string name, HState fromState, HState toState)
 		{
 			_name = name;
 			_from = fromState;

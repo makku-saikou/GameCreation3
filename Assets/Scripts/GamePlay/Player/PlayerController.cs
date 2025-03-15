@@ -30,7 +30,7 @@ namespace GamePlay.Player
         private Rigidbody2D _rb;
         public Rigidbody2D Rb => _rb;
 
-        private void Start()
+        private void Awake()
         {
             // temp
             Init();
@@ -46,6 +46,9 @@ namespace GamePlay.Player
             StateMachine.FixedUpdateCallback();
         }
 
+        /// <summary>
+        /// 原则是，我们确保关于Player的逻辑模块都在Init之后初始化
+        /// </summary>
         private void Init()
         {
             _rb = GetComponent<Rigidbody2D>();
@@ -61,8 +64,6 @@ namespace GamePlay.Player
             
         }
         
-
-
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(playerProperty.groundCheckPoint.position, playerProperty.groundCheckRadius);
