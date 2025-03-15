@@ -3,20 +3,20 @@ using PurpleFlowerCore;
 
 namespace Common.FSM
 {
-	public class LStateMachine : LState, IStateMachine 
+	public class HStateMachine : HState
 	{
-		private IState _currentState; // 当前状态
-		private IState _defaultState; // 默认状态
-		private List<IState> _states; // 所有状态
+		private HState _currentState; // 当前状态
+		private HState _defaultState; // 默认状态
+		private List<HState> _states; // 所有状态
 
 		private bool _isTransition;	// 是否在过渡
-		private ITransition _t;	// 当前正在执行的过渡
+		private HTransition _t;	// 当前正在执行的过渡
 
-		private List<ITransition> _anyStateTransitions; // 任何状态下的过渡
+		private List<HTransition> _anyStateTransitions; // 任何状态下的过渡
 		
-		public IState CurrentState => _currentState;
+		public HState CurrentState => _currentState;
 		
-		public IState DefaultState 
+		public HState DefaultState 
 		{
 			get => _defaultState;
 			set 
@@ -26,14 +26,14 @@ namespace Common.FSM
 			}
 		}
 		
-		public LStateMachine(string name, IState defaultState): base (name)
+		public HStateMachine(HState defaultState)
 		{
-			_states = new List<IState> ();
-            _anyStateTransitions = new List<ITransition>();
+			_states = new List<HState> ();
+            _anyStateTransitions = new List<HTransition>();
 			_defaultState = defaultState;
 		}
 		
-		public void AddState(IState state)
+		public void AddState(HState state)
 		{
 			if (state != null && !_states.Contains (state))
 			{
@@ -43,7 +43,7 @@ namespace Common.FSM
 			}
 		}
 
-		public void RemoveState (IState state)
+		public void RemoveState (HState state)
 		{
 			// 状态机运行过程中,不能删除当前状态
 			if (_currentState == state) 
@@ -62,20 +62,18 @@ namespace Common.FSM
 			}
 		}
 		
-		public IState GetStateWithTag (string tag)
+		public HState GetStateWithTag (string tag)
 		{
 			return null;
 		}
 		
-		public override void EnterCallback (IState prev)
+		public override void EnterCallback (HState prev)
 		{
-			base.EnterCallback (prev);
 			_currentState.EnterCallback (prev);
 		}
 		
-		public override void ExitCallback (IState next)
+		public override void ExitCallback (HState next)
 		{
-			base.ExitCallback (next);
 			_currentState.ExitCallback (next);
 		}
 		
@@ -90,9 +88,7 @@ namespace Common.FSM
 				}
 				return;
             }
-
-            base.UpdateCallback (deltaTime);
-
+			
             int count = _anyStateTransitions.Count;
 
             _currentState ??= _defaultState;
@@ -100,7 +96,7 @@ namespace Common.FSM
             // 首先检查任何状态下的过渡
             for (int i = 0; i < count; i++)
             {
-                ITransition t = _anyStateTransitions[i];
+	            HTransition t = _anyStateTransitions[i];
                 if (t.To != _currentState && t.ShouldBegin())
                 {
                     _isTransition = true;
@@ -110,11 +106,11 @@ namespace Common.FSM
             }
 
             // 然后检查当前状态下的过渡
-			List<ITransition> ts = _currentState.Transitions;
+			List<HTransition> ts = _currentState.Transitions;
 			count = ts.Count;
 			for (int i = 0; i < count; i++) 
 			{
-				ITransition t = ts [i];
+				HTransition t = ts [i];
 				if (t.ShouldBegin()) 
 				{
 					_isTransition = true;
@@ -136,14 +132,13 @@ namespace Common.FSM
 				}
 				return;
 			}
-            base.LateUpdateCallback (deltaTime);
 
             _currentState ??= _defaultState;
 
             int count = _anyStateTransitions.Count;
             for (int i = 0; i < count; i++)
             {
-                ITransition t = _anyStateTransitions [i];
+	            HTransition t = _anyStateTransitions [i];
                 if (t.To!= _currentState && t.ShouldBegin())
                 {
                     _isTransition = true;
@@ -151,11 +146,11 @@ namespace Common.FSM
                     return;
                 }
             }
-			List<ITransition> ts = _currentState.Transitions;
+			List<HTransition> ts = _currentState.Transitions;
 			count = ts.Count;
 			for (int i = 0; i < count; i++)
 			{
-				ITransition t = ts [i];
+				HTransition t = ts [i];
 				if (t.ShouldBegin()) 
 				{
 					_isTransition = true;
@@ -166,7 +161,7 @@ namespace Common.FSM
 			_currentState.LateUpdateCallback (deltaTime);
 		}
 		
-		public override void FixedUpdateCallback ()
+		public override void FixedUpdateCallback()
 		{
 			if (_isTransition) 
 			{
@@ -177,14 +172,13 @@ namespace Common.FSM
 				}
 				return;
 			}
-            base.FixedUpdateCallback ();
 
             _currentState ??= _defaultState;
 
             int count = _anyStateTransitions.Count;
             for (int i = 0; i < count; i++)
             {
-                ITransition t = _anyStateTransitions [i];
+	            HTransition t = _anyStateTransitions [i];
                 if (t.To!= _currentState && t.ShouldBegin())
                 {
                     _isTransition = true;
@@ -193,11 +187,11 @@ namespace Common.FSM
                 }
             }
 
-			List<ITransition> ts = _currentState.Transitions;
+			List<HTransition> ts = _currentState.Transitions;
 			count = ts.Count;
 			for (int i = 0; i < count; i++) 
 			{
-				ITransition t = ts [i];
+				HTransition t = ts [i];
 				if (t.ShouldBegin()) 
 				{
 					_isTransition = true;
@@ -208,8 +202,8 @@ namespace Common.FSM
 			_currentState.FixedUpdateCallback ();
 		}
 
-		private IState _tempState;
-		private void DoTransition(ITransition t)
+		private HState _tempState;
+		private void DoTransition(HTransition t)
 		{
             _tempState = _currentState;
 			_currentState.ExitCallback (t.To);
@@ -221,7 +215,7 @@ namespace Common.FSM
             _currentState.EnterCallback(_tempState);
 		}
 
-        public void AddAnyState(ITransition t)
+        public void AddAnyState(HTransition t)
         {
             if (_anyStateTransitions.Contains(t))
                 return;

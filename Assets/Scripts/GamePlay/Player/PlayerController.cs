@@ -7,6 +7,8 @@
 // -------------------------------------------------
 
 using System;
+using Common.FSM;
+using GamePlay.Player.PlayerState;
 using PurpleFlowerCore.Utility;
 using UnityEngine;
 
@@ -50,6 +52,12 @@ namespace GamePlay.Player
         public Rigidbody2D Rb => _rb;
         [SerializeField] private PlayerHead _head;
         public PlayerHead Head => _head;
+
+        [SerializeField] private PlayerProperty playerProperty;
+        public PlayerProperty Property => playerProperty;
+
+        private HStateMachine stateMachine;
+        public HStateMachine StateMachine => stateMachine;
         
         private void Start()
         {
@@ -62,12 +70,30 @@ namespace GamePlay.Player
             CheckInput();
             CheckMovementState();
             CheckJumpState();
+            
+            StateMachine.UpdateCallback(Time.deltaTime);
         }
         
         private void FixedUpdate()
         {
             ApplyMovement();
             CheckSurroundings();
+            
+            StateMachine.FixedUpdateCallback();
+        }
+
+        private void Init()
+        {
+            playerProperty = new PlayerProperty();
+            OnGround onGround = new OnGround(playerProperty);
+            // 注意这里的状态机和PFC的状态机名称类似，在这个项目里我们暂时使用Common。FSM的状态机
+            stateMachine = new HStateMachine(onGround);
+        }
+
+        [Obsolete]
+        private void Init(PlayerProperty property)
+        {
+            
         }
         
         private void CheckInput()
