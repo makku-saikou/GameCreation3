@@ -16,6 +16,7 @@ namespace GamePlay.Player
         [SerializeField] private PlayerController playerController;
         private void Update()
         {
+            // todo: 根据状态
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 direction = mousePosition - transform.position;
             direction.z = 0;

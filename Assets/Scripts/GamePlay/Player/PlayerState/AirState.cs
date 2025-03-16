@@ -7,20 +7,25 @@
 
 using Common.FSM;
 using PurpleFlowerCore;
+using PurpleFlowerCore.Resource;
+using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
 {
     public class AirState : PlayerStateBase
     {
         
-        public AirState(PlayerController player, string name) : base(player, name)
-        {
-        }
+        public AirState(PlayerController player, string name) : base(player, name) { }
 
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
             PFCLog.Debug("Enter Air State");
+            AddressableModule addressableModule = new AddressableModule();
+            addressableModule.Load<Sprite>("Body1", sprite =>
+            {
+                _player.SpriteRenderer.sprite = sprite.Result;
+            });
         }
 
         public override void ExitCallback(HState next)

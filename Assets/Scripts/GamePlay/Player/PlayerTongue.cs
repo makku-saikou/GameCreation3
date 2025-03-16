@@ -7,7 +7,6 @@
 // -------------------------------------------------
 using System;
 using GamePlay.Item;
-using PurpleFlowerCore;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -25,10 +24,10 @@ namespace GamePlay.Player
     {
         [SerializeField] private float tongueDistance = 8f;
         [SerializeField] private float tongueSpeed;
+        [SerializeField] private float retractSpeed;
         [SerializeField] private DistanceJoint2D distanceJoint2D;
         [SerializeField] private PlayerHead head;
         [SerializeField] private PlayerController entity;
-        // [SerializeField] private Transform root;
         private float _currentFlightDistance;
         [SerializeField]private TongueState _tongueState;
         private IConnectable _currentConnectableItem;
@@ -110,9 +109,12 @@ namespace GamePlay.Player
             if (Vector3.SqrMagnitude(transform.position - head.TongueRoot.position) < 0.05f)
             {
                 _tongueState = TongueState.Idle;
+                transform.position = head.TongueRoot.position;
                 head.canMove = true;
             }
-            transform.position = Vector3.MoveTowards(transform.position, head.TongueRoot.position, 0.1f);
+            Vector3 direction = head.TongueRoot.position - transform.position;
+            direction.Normalize();
+            transform.position += direction.normalized * (Time.deltaTime * retractSpeed);
         }
 
         public void Retract()

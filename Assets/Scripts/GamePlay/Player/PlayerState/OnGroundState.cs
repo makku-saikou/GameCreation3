@@ -7,6 +7,8 @@
 
 using System;
 using Common.FSM;
+using PurpleFlowerCore;
+using PurpleFlowerCore.Resource;
 using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
@@ -15,10 +17,19 @@ namespace GamePlay.Player.PlayerState
     {
         private float jumpTimer; // 跳跃计时器，提供输入提前量，优化下一次跳跃的手感
         
-        public OnGroundState(PlayerController player, string name) : base(player, name)
+        public OnGroundState(PlayerController player, string name) : base(player, name) { }
+        
+        public override void EnterCallback(HState prev)
         {
-            
+            base.EnterCallback(prev);
+            PFCLog.Debug("Enter OnGround State");
+            AddressableModule addressableModule = new AddressableModule();
+            addressableModule.Load<Sprite>("Body0", sprite =>
+            {
+                _player.SpriteRenderer.sprite = sprite.Result;
+            });
         }
+        
         public override void UpdateCallback(float deltaTime)
         {
             base.UpdateCallback(deltaTime);

@@ -9,6 +9,7 @@
 using System;
 using Common.FSM;
 using GamePlay.Player.PlayerState;
+using PurpleFlowerCore;
 using UnityEngine;
 
 // 考虑到玩家状态较多，各种子状态需要考虑有无连接或其他情况，舌头本身也有多种状态
@@ -26,6 +27,9 @@ namespace GamePlay.Player
 
         private HStateMachine _stateMachine;
         public HStateMachine StateMachine => _stateMachine;
+        
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        public SpriteRenderer SpriteRenderer => spriteRenderer;
         
         private Rigidbody2D _rb;
         public Rigidbody2D Rb => _rb;
@@ -88,6 +92,9 @@ namespace GamePlay.Player
             transform.Rotate(0, 180, 0);
         }
         
+        /// <summary>
+        /// 检查状态的替换由玩家本体负责，而不放入状态中
+        /// </summary>
         private void CheckState()
         {
             property.isGrounded = 

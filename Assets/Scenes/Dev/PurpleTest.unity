@@ -1602,6 +1602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tongueDistance: 8
   tongueSpeed: 40
+  retractSpeed: 100
   distanceJoint2D: {fileID: 1942500127}
   head: {fileID: 1713369368}
   entity: {fileID: 1942500128}
@@ -3271,7 +3272,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 3
+  m_Mass: 4
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 5
@@ -3366,7 +3367,7 @@ MonoBehaviour:
   head: {fileID: 1713369368}
   property:
     movementSpeed: 10
-    jumpForce: 16
+    jumpForce: 20
     amountOfJump: 1
     airDragMultiplier: 0.95
     variableJumpHeightMultiplier: 0.5
@@ -3375,7 +3376,7 @@ MonoBehaviour:
     groundCheckRadius: 0.3
     groundLayer:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 64
     movementInput: 0
     amountOfJumpLeft: 0
     facingDirection: 1
@@ -3386,6 +3387,7 @@ MonoBehaviour:
     canNormalJump: 0
     canMove: 1
     canFlip: 1
+  spriteRenderer: {fileID: 1942500122}
 --- !u!114 &1942500129
 MonoBehaviour:
   m_ObjectHideFlags: 0

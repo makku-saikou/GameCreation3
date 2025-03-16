@@ -56,6 +56,15 @@ namespace GamePlay.Player
                         direction.x = -1 + OnGroundDownLimit * OnGroundDownLimit;
                 }
             }
+            
+            Vector3 lineDirection = new Vector3(1 - OnGroundUpLimit * OnGroundUpLimit, OnGroundUpLimit);
+            Debug.DrawLine(playerHead.transform.position, playerHead.transform.position + lineDirection, Color.red);
+            lineDirection = new Vector3(-1 + OnGroundDownLimit * OnGroundDownLimit, -OnGroundDownLimit);
+            Debug.DrawLine(playerHead.transform.position, playerHead.transform.position + lineDirection, Color.red);
+            lineDirection = new Vector3(1 - OnGroundDownLimit * OnGroundDownLimit, -OnGroundDownLimit);
+            Debug.DrawLine(playerHead.transform.position, playerHead.transform.position + lineDirection, Color.red);
+            lineDirection = new Vector3(-1 + OnGroundUpLimit * OnGroundUpLimit, OnGroundUpLimit);
+            Debug.DrawLine(playerHead.transform.position, playerHead.transform.position + lineDirection, Color.red);
             return direction;
         }
         
