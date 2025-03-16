@@ -7,7 +7,6 @@
 // -------------------------------------------------
 
 using Common.FSM;
-using PurpleFlowerCore;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -19,18 +18,21 @@ namespace GamePlay.Player
         [SerializeField][Range(0,1)] private float OnGroundUpLimit;
         [SerializeField][Range(0,1)] private float OnGroundDownLimit;
         
-        private DirectionLimit _OnGroundLimit;
+        private DirectionLimit _onGroundLimit;
+        private DirectionLimit _onAirLimit;
         
         private void Start()
         {
-            _OnGroundLimit = OnGroundLimit;
-            CheckDirectionLimit(null, null);
+            _onGroundLimit = OnGroundLimit;
+            _onAirLimit = OnAirLimit;
+            
+            // CheckDirectionLimit(null, null);
             RegisterEvents();
         }
 
         private Vector3 OnGroundLimit(Vector3 direction)
         {
-            PFCLog.Debug(direction);
+            // PFCLog.Debug(direction);
 
             if (direction.y > 0)
             {
@@ -57,6 +59,11 @@ namespace GamePlay.Player
             return direction;
         }
         
+        private Vector3 OnAirLimit(Vector3 direction)
+        {
+            return direction;
+        }
+        
         /// <summary>
         /// 为了确保事件注册在玩家初始化之后，且由于我们不会使该组建失效，所以在Start中注册事件
         /// </summary>
@@ -65,11 +72,6 @@ namespace GamePlay.Player
             playerController.StateMachine.OnStateChanged += CheckDirectionLimit;
         }
         
-        // private void OnEnable()
-        // {
-        //     playerController.StateMachine.OnStateChanged += CheckDirectionLimit;
-        // }
-        //
         private void OnDisable()
         {
             playerController.StateMachine.OnStateChanged -= CheckDirectionLimit;
@@ -77,7 +79,12 @@ namespace GamePlay.Player
         
         private void CheckDirectionLimit(HState from, HState to)
         {
-            playerHead.DirectionLimit = _OnGroundLimit;
+            playerHead.DirectionLimit = to.Name switch
+            {
+                "OnGround" => _onGroundLimit,
+                "Air" => _onAirLimit,
+                _ => playerHead.DirectionLimit
+            };
         }
     }
 }

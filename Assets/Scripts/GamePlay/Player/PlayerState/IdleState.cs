@@ -21,7 +21,13 @@ namespace GamePlay.Player.PlayerState
             
         }
 
-        public IdleState(PlayerController player) : base(player)
+        // public IdleState(PlayerController player) : base(player)
+        // {
+        //     
+        // }
+
+
+        public IdleState(PlayerController player, string name) : base(player, name)
         {
         }
     }

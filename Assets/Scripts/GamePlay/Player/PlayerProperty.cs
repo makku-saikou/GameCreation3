@@ -44,13 +44,12 @@ namespace GamePlay.Player
         [RO] public bool isFacingRight = true;                 // 是否正面向右边
         [RO] public bool isWalking;                            // 是否在行走，动画参数
         [RO] public bool isGrounded;                           // 是否在地面上，由Physics2D判定
-        [RO] public bool isTouchingWall;                       // 是否贴墙，由Physics2D判定
+        // [RO] public bool isTouchingWall;                       // 是否贴墙，由Physics2D判定
         [RO] public bool isWallSliding;                        // 是否滑墙
-        [RO] public bool checkVariableJump;                    // 当成功跳跃时被激活，若跳跃期间松开空格，则会施加额外的向下的力
+        // [RO] public bool checkVariableJump;                    // 当成功跳跃时被激活，若跳跃期间松开空格，则会施加额外的向下的力
         [RO] public bool canNormalJump;                        // 是否可以进行普通跳跃
         [RO] public bool canMove = true;                       // 是否可以移动
         [RO] public bool canFlip = true;                       // 是否可以转向
-        [RO] public float jumpTimer;                           // 跳跃计时器，提供输入提前量，优化下一次跳跃的手感
         
         public void Init()
         {

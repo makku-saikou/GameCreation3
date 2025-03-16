@@ -21,8 +21,8 @@ namespace GamePlay.Player
         [SerializeField] private PlayerHead head;
         public PlayerHead Head => head;
 
-        [SerializeField] private PlayerProperty playerProperty;
-        public PlayerProperty Property => playerProperty;
+        [SerializeField] private PlayerProperty property;
+        public PlayerProperty Property => property;
 
         private HStateMachine _stateMachine;
         public HStateMachine StateMachine => _stateMachine;
@@ -38,6 +38,7 @@ namespace GamePlay.Player
 
         private void Update()
         {
+            CheckState();
             StateMachine.UpdateCallback(Time.deltaTime);
         }
         
@@ -52,10 +53,25 @@ namespace GamePlay.Player
         private void Init()
         {
             _rb = GetComponent<Rigidbody2D>();
-            playerProperty.Init();
-            PlayerStateBase playerStateBase = new PlayerStateBase(this);
-            // 注意这里的状态机和PFC的状态机名称类似，在这个项目里我们暂时使用Common。FSM的状态机
-            _stateMachine = new HStateMachine(playerStateBase);
+            property.Init();
+            
+            // 定义整个状态机
+            // 状态
+            OnGroundState onGroundState = new OnGroundState(this, "OnGround");
+            AirState airState = new AirState(this, "Air");
+            
+            // 转移
+            HTransition jump = new HTransition("Jump", onGroundState, airState);
+            jump.OnCheck += () => !property.isGrounded;
+            onGroundState.AddTransition(jump);
+            
+            HTransition land = new HTransition("Land", airState, onGroundState);
+            land.OnCheck += () => property.isGrounded;
+            airState.AddTransition(land);
+            
+            // 初始化状态机
+            _stateMachine = new HStateMachine(onGroundState);
+            _stateMachine.AddState(airState);
         }
 
         [Obsolete]
@@ -66,15 +82,21 @@ namespace GamePlay.Player
         
         public void Flip()
         {
-            if (playerProperty.isWallSliding || !playerProperty.canFlip) return;
-            playerProperty.facingDirection *= -1;
-            playerProperty.isFacingRight = !playerProperty.isFacingRight;
+            if (property.isWallSliding || !property.canFlip) return;
+            property.facingDirection *= -1;
+            property.isFacingRight = !property.isFacingRight;
             transform.Rotate(0, 180, 0);
+        }
+        
+        private void CheckState()
+        {
+            property.isGrounded = 
+                Physics2D.OverlapCircle(property.groundCheckPoint.position, property.groundCheckRadius, property.groundLayer);
         }
         
         private void OnDrawGizmos()
         {
-            Gizmos.DrawWireSphere(playerProperty.groundCheckPoint.position, playerProperty.groundCheckRadius);
+            Gizmos.DrawWireSphere(property.groundCheckPoint.position, property.groundCheckRadius);
         }
     }
 }

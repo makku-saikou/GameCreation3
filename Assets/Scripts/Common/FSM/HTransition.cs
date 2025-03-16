@@ -36,6 +36,13 @@
 			_to = toState;
 		}
 		
+		public HTransition(HState fromState, HState toState)
+		{
+			_name = "";
+			_from = fromState;
+			_to = toState;
+		}
+		
 		public bool TransitionCallback()
 		{
 			return OnTransition == null || OnTransition();

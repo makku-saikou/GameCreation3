@@ -4,8 +4,10 @@ using PurpleFlowerCore;
 
 namespace Common.FSM
 {
+	// 注意这里的状态机和PFC的状态机名称类似，在这个项目里我们暂时使用Common。FSM的状态机
 	public class HStateMachine : HState
 	{
+		public override string Name => "HStateMachine";
 		private HState _currentState; // 当前状态
 		private HState _defaultState; // 默认状态
 		private List<HState> _states; // 所有状态
@@ -69,7 +71,8 @@ namespace Common.FSM
 		{
 			return null;
 		}
-		
+
+
 		public override void EnterCallback (HState prev)
 		{
 			_currentState.EnterCallback (prev);
@@ -161,7 +164,7 @@ namespace Common.FSM
 					return;
 				}
 			}
-			_currentState.LateUpdateCallback (deltaTime);
+			_currentState.LateUpdateCallback(deltaTime);
 		}
 		
 		public override void FixedUpdateCallback()

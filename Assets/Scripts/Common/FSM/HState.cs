@@ -5,17 +5,16 @@ namespace Common.FSM
 	public abstract class HState 
 	{
 		protected string _name; // 状态名
-		protected string _tag; // 状态标签
+		// protected string _tag; // 状态标签
 		protected HStateMachine _parent; //当前状态的状态机
-		protected List<HTransition> _transitions; //状态过渡
+		protected List<HTransition> _transitions = new(); //状态过渡
+		public virtual string Name => _name;
 		
-		public string Name => _name;
-		
-		public string Tag 
-		{
-			get => _tag;
-			set => _tag = value;
-		}
+		// public string Tag 
+		// {
+		// 	get => _tag;
+		// 	set => _tag = value;
+		// }
 		
 		public HStateMachine Parent
 		{
@@ -36,12 +35,12 @@ namespace Common.FSM
 			_name = "";
 			_transitions = new List<HTransition>();
 		}
-		
+
 		public virtual void AddTransition(HTransition t)
 		{
 			if (t != null && !_transitions.Contains(t)) 
 			{
-				_transitions.Add (t);	
+				_transitions.Add(t);	
 			}
 		}
 
