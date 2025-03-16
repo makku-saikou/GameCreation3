@@ -64,6 +64,14 @@ namespace GamePlay.Player
             
         }
         
+        public void Flip()
+        {
+            if (playerProperty.isWallSliding || !playerProperty.canFlip) return;
+            playerProperty.facingDirection *= -1;
+            playerProperty.isFacingRight = !playerProperty.isFacingRight;
+            transform.Rotate(0, 180, 0);
+        }
+        
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(playerProperty.groundCheckPoint.position, playerProperty.groundCheckRadius);

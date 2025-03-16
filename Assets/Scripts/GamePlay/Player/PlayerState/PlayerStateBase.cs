@@ -18,12 +18,6 @@ namespace GamePlay.Player.PlayerState
         private PlayerProperty _p;
         private PlayerController _player;
         private Rigidbody2D _rb;
-        // public OnGround(string name, PlayerController player) : base(name)
-        // {
-        //     _player = player;
-        //     _p = player.Property;
-        //     _rb = player.Rb;
-        // }
 
         public PlayerStateBase(PlayerController player)
         {
@@ -70,10 +64,6 @@ namespace GamePlay.Player.PlayerState
 
         private void CheckMovementState()
         {
-            if ((_p.isFacingRight && _p.movementInput < 0) || 
-                (!_p.isFacingRight && _p.movementInput > 0)) 
-                Flip();
-            
             _p.isWalking = Math.Abs(_rb.velocity.x) > 0.01f; // rigidbody的速度在移动时会有一个极小的值，故为>0.01，其他小值也可，令人费解的bug
         }
         
@@ -130,14 +120,6 @@ namespace GamePlay.Player.PlayerState
             _p.amountOfJumpLeft--;
             _p.jumpTimer = 0;
             _p.checkVariableJump = true;
-        }
-
-        private void Flip()
-        {
-            if (_p.isWallSliding || !_p.canFlip) return;
-            _p.facingDirection *= -1;
-            _p.isFacingRight = !_p.isFacingRight;
-            _player.transform.Rotate(0, 180, 0);
         }
     }
 }

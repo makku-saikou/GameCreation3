@@ -2946,10 +2946,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0cf45fce03348fa9183e984cd1fdbfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
-  playerHead: {fileID: 0}
-  OnGroundUpLimit: 0
-  OnGroundDownLimit: 0
+  playerController: {fileID: 1942500128}
+  playerHead: {fileID: 1713369368}
+  OnGroundUpLimit: 0.6
+  OnGroundDownLimit: 0.2
 --- !u!1 &1718734344
 GameObject:
   m_ObjectHideFlags: 0
@@ -3182,6 +3182,7 @@ GameObject:
   - component: {fileID: 1942500125}
   - component: {fileID: 1942500127}
   - component: {fileID: 1942500128}
+  - component: {fileID: 1942500129}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3388,6 +3389,19 @@ MonoBehaviour:
     canMove: 1
     canFlip: 1
     jumpTimer: 0
+--- !u!114 &1942500129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942500121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c5e59809fa4da4896916a98fab9ced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 1942500128}
 --- !u!1 &2045994755
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@
 // Author : jianhao li
 // Date: 2025_03_15
 // File: PlayerHeadDirectionLimitProxy.cs
-// Description:
+// Description: 将玩家头部方向限制的逻辑从PlayerHead中分离出来，用状态机或其他事件控制
 // -------------------------------------------------
 
 using Common.FSM;
