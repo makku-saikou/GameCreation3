@@ -72,6 +72,7 @@ namespace GamePlay.Player.PlayerState
         
         private void CheckJumpState()
         {
+            // todo: 整理逻辑
             if (_p.isGrounded && _rb.velocity.y <= 0.01f) // 着陆时
             {
                 _p.amountOfJumpLeft = _p.amountOfJump;
@@ -93,19 +94,10 @@ namespace GamePlay.Player.PlayerState
         
         private void ApplyMovement()
         {
-            if (!_p.isGrounded && !_p.isWallSliding && _p.movementInput == 0)
-            {
-                // 当在空中且没有输入时，会受到空气阻力
-                var velocity = _rb.velocity;
-                velocity = new Vector2(velocity.x * _p.airDragMultiplier, velocity.y);
-                _rb.velocity = velocity;
-            }
-            else if (_p.canMove)
-            {
-                // 正常移动
-                if(_p.movementInput != 0)
-                    _rb.velocity = new Vector2(_p.movementSpeed * _p.movementInput, _rb.velocity.y);
-            }
+            if (!_p.canMove) return;
+            // 正常移动
+            if(_p.movementInput != 0)
+                _rb.velocity = new Vector2(_p.movementSpeed * _p.movementInput, _rb.velocity.y);
         }
         
         private void NormalJump()

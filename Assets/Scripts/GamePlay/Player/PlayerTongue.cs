@@ -7,6 +7,8 @@
 // -------------------------------------------------
 using System;
 using GamePlay.Item;
+using PurpleFlowerCore;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -27,7 +29,7 @@ namespace GamePlay.Player
         [SerializeField] private float retractSpeed;
         [SerializeField] private DistanceJoint2D distanceJoint2D;
         [SerializeField] private PlayerHead head;
-        [SerializeField] private PlayerController entity;
+        [SerializeField] private PlayerController playerController;
         private float _currentFlightDistance;
         [SerializeField]private TongueState _tongueState;
         private IConnectable _currentConnectableItem;
@@ -80,7 +82,7 @@ namespace GamePlay.Player
             }
             _currentFlightDistance += Time.deltaTime * tongueSpeed;
             transform.position += transform.right * (Time.deltaTime * tongueSpeed);
-            var res = Physics2D.OverlapCircle(transform.position, 0.1f);
+            var res = Physics2D.OverlapCircle(transform.position, 0.5f);
             if (res != null && res.CompareTag("Connectable"))
             {
                 _currentConnectableItem = res.GetComponent<IConnectable>();
@@ -89,19 +91,29 @@ namespace GamePlay.Player
                 transform.parent = null;
                 distanceJoint2D.enabled = true;
                 distanceJoint2D.connectedAnchor = transform.position;
+                playerController.Property.isConnecting = true;
+                // todo: 能量的计算移动到玩家子状态中
+                var p = playerController.Property;
+                p.connectAngle = Vector2.SignedAngle(Vector2.down,
+                    playerController.transform.position - transform.position);
+                p.power = playerController.Rb.velocity.SqrMagnitude() / p.s1 + p.s2 * Mathf.Abs(Mathf.Cos(Mathf.Deg2Rad * p.connectAngle));
             }
         }
         
         private void UpdateConnecting()
         {
             // todo: 判断目标是否可移动，之后要注意是否考虑质量
-            if(Vector3.SqrMagnitude(transform.position - entity.transform.position) < tongueDistance * tongueDistance)
+            if(Vector3.SqrMagnitude(transform.position - playerController.transform.position) < tongueDistance * tongueDistance)
             {
-                distanceJoint2D.distance = Vector3.Distance(transform.position, entity.transform.position);
+                distanceJoint2D.distance = Vector3.Distance(transform.position, playerController.transform.position);
             }else
             {
                 distanceJoint2D.distance = tongueDistance;
             }
+
+            playerController.Property.connectAngle = Vector2.SignedAngle(Vector2.down,
+                playerController.transform.position - transform.position);
+            PFCLog.Debug("Tongue", playerController.Property.connectAngle);
         }
         
         private void UpdateRetract()
@@ -124,13 +136,14 @@ namespace GamePlay.Player
             _tongueState = TongueState.Retracting;
             distanceJoint2D.enabled = false;
             _currentConnectableItem = null;
+            playerController.Property.isConnecting = false;
         }
 
         public void Interact()
         {
             if(_currentConnectableItem == null) return;
             if (_tongueState != TongueState.Connecting) return;
-            _currentConnectableItem.Interact(entity);
+            _currentConnectableItem.Interact(playerController);
             Retract();
         }
     }

@@ -9,7 +9,6 @@
 using System;
 using Common.FSM;
 using GamePlay.Player.PlayerState;
-using PurpleFlowerCore;
 using UnityEngine;
 
 // 考虑到玩家状态较多，各种子状态需要考虑有无连接或其他情况，舌头本身也有多种状态

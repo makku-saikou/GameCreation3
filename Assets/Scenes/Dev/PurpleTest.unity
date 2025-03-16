@@ -1600,12 +1600,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 840c76bbf42843a9a6c1dc1a287c3fd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tongueDistance: 8
+  tongueDistance: 10
   tongueSpeed: 40
   retractSpeed: 100
   distanceJoint2D: {fileID: 1942500127}
   head: {fileID: 1713369368}
-  entity: {fileID: 1942500128}
+  playerController: {fileID: 1942500128}
   _tongueState: 0
 --- !u!1 &905579451
 GameObject:
@@ -1935,6 +1935,10 @@ PrefabInstance:
     - target: {fileID: 5078644111219352843, guid: d8e1869ebb60de149a1b081319f5df23, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7048566745163314271, guid: d8e1869ebb60de149a1b081319f5df23, type: 3}
+      propertyPath: force
+      value: 160
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2773,6 +2777,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7048566745163314271, guid: d8e1869ebb60de149a1b081319f5df23, type: 3}
+      propertyPath: force
+      value: 160
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3133,6 +3141,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7048566745163314271, guid: d8e1869ebb60de149a1b081319f5df23, type: 3}
+      propertyPath: force
+      value: 160
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3387,6 +3399,8 @@ MonoBehaviour:
     canNormalJump: 0
     canMove: 1
     canFlip: 1
+    isConnecting: 0
+    connectAngle: 0
   spriteRenderer: {fileID: 1942500122}
 --- !u!114 &1942500129
 MonoBehaviour:
@@ -3747,6 +3761,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7048566745163314271, guid: d8e1869ebb60de149a1b081319f5df23, type: 3}
+      propertyPath: force
+      value: 160
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3803,6 +3821,10 @@ PrefabInstance:
     - target: {fileID: 5078644111219352843, guid: d8e1869ebb60de149a1b081319f5df23, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7048566745163314271, guid: d8e1869ebb60de149a1b081319f5df23, type: 3}
+      propertyPath: force
+      value: 160
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
