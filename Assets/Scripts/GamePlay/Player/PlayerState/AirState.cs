@@ -37,7 +37,7 @@ namespace GamePlay.Player.PlayerState
         {
             base.UpdateCallback(deltaTime);
             CheckInput();
-            ConnectCheckPower();
+            // ConnectCheckPower();
 
         }
         
@@ -45,6 +45,8 @@ namespace GamePlay.Player.PlayerState
         {
             base.FixedUpdateCallback();
             AppleMovement();
+            // DiminishPower();
+            // AddForce();
         }
 
         private void CheckInput()
@@ -55,7 +57,7 @@ namespace GamePlay.Player.PlayerState
             {
                 // todo: 解耦
                 _player.Head.RetractTongue();
-                NormalJump();
+                AirJump();
             }
         }
     
@@ -66,9 +68,17 @@ namespace GamePlay.Player.PlayerState
             {
                 if (!_p.isWallSliding && _p.movementInput != 0)
                 {
+                    // var velocity = _rb.velocity;
+                    // velocity = new Vector2(_p.movementSpeed * _p.movementInput, velocity.y);
+                    // _rb.velocity = velocity;
+                    _rb.AddForce(new Vector2(10 * _p.movementInput, 0), ForceMode2D.Force);
                     var velocity = _rb.velocity;
-                    velocity = new Vector2(_p.movementSpeed * _p.movementInput, velocity.y);
-                    _rb.velocity = velocity;
+                    if (Mathf.Abs(velocity.x) > 40)
+                    {
+                        velocity = new Vector2(10 * _p.movementInput, velocity.y);
+                        _rb.velocity = velocity;
+                    }
+                    
                 }
                 else if (_p.isWallSliding && _p.movementInput == 0)
                 {
@@ -80,13 +90,15 @@ namespace GamePlay.Player.PlayerState
             else
             {
                 // todo: 这仿狗勾的效果也太难做了
+                
+                // 能量法 - 解决正负问题
                 // float v = Mathf.Sqrt(_p.s1 * (_p.power - Mathf.Abs(Mathf.Cos(Mathf.Deg2Rad * _p.connectAngle)) * _p.s2));
                 // Debug.Assert(v >= 0);
                 // float vx = v * Mathf.Abs(Mathf.Cos(Mathf.Deg2Rad * _p.connectAngle));
                 // float vy = v * Mathf.Sin(Mathf.Deg2Rad * _p.connectAngle);
                 // PFCLog.Debug("AirState", _p.connectAngle, v, vx, vy);
                 // _rb.velocity = new Vector2(vx, vy);
-                // if(_p.movementInput != 0)
+                // if (_p.movementInput != 0)
                 // {
                 //     vx = _p.movementSpeed * _p.movementInput;
                 // }
@@ -95,13 +107,22 @@ namespace GamePlay.Player.PlayerState
                 //     vx = 0;
                 // }
                 
-                if(_p.movementInput != 0)
+                // 简单难受法
+                // if(_p.movementInput != 0)
+                // {
+                //     var velocity = _rb.velocity;
+                //     velocity = new Vector2(_p.movementSpeed * _p.movementInput, velocity.y);
+                //     _rb.velocity = velocity;
+                // }
+                
+                // Unity物理法
+                // temp
+                _player.Rb.drag = _p.movementInput == 0 ? 5 : 0;
+                if (_p.movementInput != 0)
                 {
-                    var velocity = _rb.velocity;
-                    velocity = new Vector2(_p.movementSpeed * _p.movementInput, velocity.y);
-                    _rb.velocity = velocity;
+                    _player.Rb.AddForce(new Vector2(50 * _p.movementInput, 0), ForceMode2D.Force);
                 }
-
+                
             }
         }
 
@@ -124,7 +145,25 @@ namespace GamePlay.Player.PlayerState
             _p.power = Mathf.Clamp(_p.power, Mathf.Abs(Mathf.Cos(Mathf.Deg2Rad * _p.connectAngle)) * _p.s2 + 1, _p.maxPower);
         }
         
-        private void NormalJump()
+        private void DiminishPower()
+        {
+            if(!_p.isConnecting) return;
+            if (_p.movementInput != 0) return;
+            _p.power -= Time.deltaTime * 10;
+            if (_p.power <= 0) _p.power = 0;
+            // _p.power = Mathf.Clamp(_p.power, Mathf.Abs(Mathf.Cos(Mathf.Deg2Rad * _p.connectAngle)) * _p.s2 + 1, _p.maxPower);
+        }
+        
+        private void DiminishVelocity()
+        {
+            if(!_p.isConnecting) return;
+            if (_p.movementInput != 0) return;
+            var velocity = _rb.velocity;
+            velocity = new Vector2(velocity.x * _p.airHangMultiplier, velocity.y);
+            _rb.velocity = velocity;
+        }
+        
+        private void AirJump()
         {
             // if (!_p.canNormalJump) return;
             

@@ -51,7 +51,7 @@ namespace GamePlay.Player
         }
 
         /// <summary>
-        /// 原则是，我们确保关于Player的逻辑模块都在Init之后初始化
+        /// 原则是，我们确保关于Player的逻辑模块都在PlayerController的Init之后初始化
         /// </summary>
         private void Init()
         {
@@ -78,10 +78,7 @@ namespace GamePlay.Player
         }
 
         [Obsolete]
-        private void Init(PlayerProperty property)
-        {
-            
-        }
+        private void Init(PlayerProperty property) { }
         
         public void Flip()
         {

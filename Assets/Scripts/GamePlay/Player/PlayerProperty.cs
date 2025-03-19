@@ -53,9 +53,9 @@ namespace GamePlay.Player
         [RO] public bool canFlip = true;                       // 是否可以转向
         
         [RO] public bool isConnecting;
-        [RO] public float connectAngle; // 连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负
+        [RO] public float connectAngle;                        // 连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负
         [RO] public float power;
-        [RO] public float maxPower = 50;
+        [RO] public float maxPower = 100;
         [RO] public float s1 = 2;
         [RO] public float s2 = 10;
         

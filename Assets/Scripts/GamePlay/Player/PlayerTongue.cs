@@ -93,6 +93,7 @@ namespace GamePlay.Player
                 distanceJoint2D.connectedAnchor = transform.position;
                 playerController.Property.isConnecting = true;
                 // todo: 能量的计算移动到玩家子状态中
+                playerController.Rb.gravityScale = 10;
                 var p = playerController.Property;
                 p.connectAngle = Vector2.SignedAngle(Vector2.down,
                     playerController.transform.position - transform.position);
@@ -137,6 +138,9 @@ namespace GamePlay.Player
             distanceJoint2D.enabled = false;
             _currentConnectableItem = null;
             playerController.Property.isConnecting = false;
+            
+            // temp
+            playerController.Rb.gravityScale = 5;
         }
 
         public void Interact()
