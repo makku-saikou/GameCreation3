@@ -13,25 +13,24 @@ MonoBehaviour:
   m_Name: PlayerProperty0
   m_EditorClassIdentifier: 
   movementSpeed: 10
-  jumpForce: 24
+  jumpForce: 20
   amountOfJump: 1
-  airHangDrag: 2
-  fallMultiplier: 0.95
-  variableJumpHeightMultiplier: 0.5
-  jumpTimerSet: 0.15
+  xMixSpeedInAir: 17
+  hangDrag: 2
   groundCheckRadius: 0.3
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  jumpTimerSet: 0.15
   movementInput: 0
-  amountOfJumpLeft: 0
+  amountOfJumpLeft: 1
   facingDirection: 1
   isFacingRight: 1
-  isWalking: 1
-  isGrounded: 0
+  isWalking: 0
+  isGrounded: 1
   isWallSliding: 0
-  canNormalJump: 0
+  canNormalJump: 1
   canMove: 1
   canFlip: 1
   isConnecting: 0
-  connectAngle: 53.93795
+  connectAngle: -10.30479

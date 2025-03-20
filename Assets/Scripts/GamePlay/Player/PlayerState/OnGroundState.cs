@@ -46,11 +46,11 @@ namespace GamePlay.Player.PlayerState
 
         private void CheckInput()
         {
-            _p.movementInput = Input.GetAxisRaw("Horizontal");
+            _p.MovementInput = Input.GetAxisRaw("Horizontal");
 
             if (Input.GetButtonDown("Jump"))
             {
-                if (_p.isGrounded || (_p.amountOfJumpLeft > 0))
+                if (_p.IsGrounded || (_p.AmountOfJumpLeft > 0))
                     NormalJump();
                 else
                     jumpTimer = _p.jumpTimerSet;
@@ -67,25 +67,25 @@ namespace GamePlay.Player.PlayerState
 
         private void CheckMovementState()
         {
-            _p.isWalking = Math.Abs(_rb.velocity.x) > 0.01f; // rigidbody的速度在移动时会有一个极小的值，故为>0.01，其他小值也可，令人费解的bug
+            _p.IsWalking = Math.Abs(_rb.velocity.x) > 0.01f; // rigidbody的速度在移动时会有一个极小的值，故为>0.01，其他小值也可，令人费解的bug
         }
         
         private void CheckJumpState()
         {
             // todo: 整理逻辑
-            if (_p.isGrounded && _rb.velocity.y <= 0.01f) // 着陆时
+            if (_p.IsGrounded && _rb.velocity.y <= 0.01f) // 着陆时
             {
-                _p.amountOfJumpLeft = _p.amountOfJump;
+                _p.AmountOfJumpLeft = _p.amountOfJump;
                 // _p.checkVariableJump = false;
             }
 
             // if (_p.isTouchingWall) _p.checkVariableJump = false;
 
-            _p.canNormalJump = _p.amountOfJumpLeft > 0;
+            _p.CanNormalJump = _p.AmountOfJumpLeft > 0;
             
             if (jumpTimer > 0)
             {
-                if (_p.isGrounded) 
+                if (_p.IsGrounded) 
                     NormalJump();
                 
                 jumpTimer -= Time.deltaTime;
@@ -94,19 +94,19 @@ namespace GamePlay.Player.PlayerState
         
         private void ApplyMovement()
         {
-            if (!_p.canMove) return;
+            if (!_p.CanMove) return;
             // 正常移动
-            if(_p.movementInput != 0)
-                _rb.velocity = new Vector2(_p.movementSpeed * _p.movementInput, _rb.velocity.y);
+            if(_p.MovementInput != 0)
+                _rb.velocity = new Vector2(_p.movementSpeed * _p.MovementInput, _rb.velocity.y);
         }
         
         private void NormalJump()
         {
-            if (!_p.canNormalJump) return;
+            if (!_p.CanNormalJump) return;
             
             _rb.velocity = new Vector2(_rb.velocity.x, _p.jumpForce);
             
-            _p.amountOfJumpLeft--;
+            _p.AmountOfJumpLeft--;
             jumpTimer = 0;
             // _p.checkVariableJump = true;
         }

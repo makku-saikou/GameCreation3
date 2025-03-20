@@ -44,7 +44,7 @@ namespace GamePlay.Player
                 if (direction.y > OnGroundUpLimit)
                 {
                     direction.y = OnGroundUpLimit;
-                    if(playerController.Property.isFacingRight)
+                    if(playerController.Property.IsFacingRight)
                         direction.x = 1 - OnGroundUpLimit * OnGroundUpLimit;
                     else
                         direction.x = -1 + OnGroundUpLimit * OnGroundUpLimit;
@@ -55,7 +55,7 @@ namespace GamePlay.Player
                 if (direction.y < -OnGroundDownLimit)
                 {
                     direction.y = -OnGroundDownLimit;
-                    if(playerController.Property.isFacingRight)
+                    if(playerController.Property.IsFacingRight)
                         direction.x = 1 - OnGroundDownLimit * OnGroundDownLimit;
                     else
                         direction.x = -1 + OnGroundDownLimit * OnGroundDownLimit;

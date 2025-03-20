@@ -90,7 +90,7 @@ namespace GamePlay.Player
                 transform.parent = null;
                 distanceJoint2D.enabled = true;
                 distanceJoint2D.connectedAnchor = transform.position;
-                playerController.Property.isConnecting = true;
+                playerController.Property.IsConnecting = true;
                 
             }
         }
@@ -106,7 +106,7 @@ namespace GamePlay.Player
                 distanceJoint2D.distance = tongueDistance;
             }
 
-            playerController.Property.connectAngle = Vector2.SignedAngle(Vector2.down,
+            playerController.Property.ConnectAngle = Vector2.SignedAngle(Vector2.down,
                 playerController.transform.position - transform.position);
             // PFCLog.Debug("Tongue", playerController.Property.connectAngle);
         }
@@ -131,7 +131,7 @@ namespace GamePlay.Player
             _tongueState = TongueState.Retracting;
             distanceJoint2D.enabled = false;
             _currentConnectableItem = null;
-            playerController.Property.isConnecting = false;
+            playerController.Property.IsConnecting = false;
 
         }
 

@@ -68,19 +68,19 @@ namespace GamePlay.Player
             
             // 转移
             HTransition jump = new HTransition("Jump", onGroundState, airState);
-            jump.OnCheck += () => !property.isGrounded;
-            onGroundState.AddTransition("Jump", airState, () => !property.isGrounded);
+            jump.OnCheck += () => !property.IsGrounded;
+            onGroundState.AddTransition("Jump", airState, () => !property.IsGrounded);
             
             HTransition land = new HTransition("Land", airState, onGroundState);
-            land.OnCheck += () => property.isGrounded;
+            land.OnCheck += () => property.IsGrounded;
             airState.AddTransition(land);
             
             HTransition connect = new HTransition("Connect", airState, hangState);
-            connect.OnCheck += () => property.isConnecting;
+            connect.OnCheck += () => property.IsConnecting;
             airState.AddTransition(connect);
             
             HTransition hangJump = new HTransition("HangJump", hangState, airState);
-            hangJump.OnCheck += () => !property.isConnecting;
+            hangJump.OnCheck += () => !property.IsConnecting;
             hangState.AddTransition(hangJump);
             
             // 初始化状态机
@@ -94,9 +94,9 @@ namespace GamePlay.Player
         
         public void Flip()
         {
-            if (property.isWallSliding || !property.canFlip) return;
-            property.facingDirection *= -1;
-            property.isFacingRight = !property.isFacingRight;
+            if (property.IsWallSliding || !property.CanFlip) return;
+            property.FacingDirection *= -1;
+            property.IsFacingRight = !property.IsFacingRight;
             transform.Rotate(0, 180, 0);
         }
         
@@ -105,7 +105,7 @@ namespace GamePlay.Player
         /// </summary>
         private void CheckState()
         {
-            property.isGrounded = 
+            property.IsGrounded = 
                 Physics2D.OverlapCircle(groundCheckPoint.position, property.groundCheckRadius, property.groundLayer);
         }
         

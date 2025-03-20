@@ -24,8 +24,8 @@ namespace GamePlay.Player
             // 什么奇怪的语法糖
             switch (direction.x)
             {
-                case > 0 when !playerController.Property.isFacingRight:
-                case < 0 when playerController.Property.isFacingRight:
+                case > 0 when !playerController.Property.IsFacingRight:
+                case < 0 when playerController.Property.IsFacingRight:
                     playerController.Flip();
                     break;
             }

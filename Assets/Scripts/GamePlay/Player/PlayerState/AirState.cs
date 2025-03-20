@@ -36,7 +36,7 @@ namespace GamePlay.Player.PlayerState
         public override void UpdateCallback(float deltaTime)
         {
             base.UpdateCallback(deltaTime);
-            _p.movementInput = Input.GetAxisRaw("Horizontal");
+            _p.MovementInput = Input.GetAxisRaw("Horizontal");
         }
         
         public override void FixedUpdateCallback()
@@ -47,13 +47,13 @@ namespace GamePlay.Player.PlayerState
             // var velocity = _rb.velocity;
             // velocity = new Vector2(_p.movementSpeed * _p.movementInput, velocity.y);
             // _rb.velocity = velocity;
-            if (_p.movementInput != 0)
+            if (_p.MovementInput != 0)
             {
-                _rb.AddForce(new Vector2(10 * _p.movementInput, 0), ForceMode2D.Force);
+                _rb.AddForce(new Vector2(10 * _p.MovementInput, 0), ForceMode2D.Force);
                 var velocity = _rb.velocity;
-                if (Mathf.Abs(velocity.x) > 30)
+                if (Mathf.Abs(velocity.x) > _p.xMixSpeedInAir)
                 {
-                    velocity = new Vector2(10 * _p.movementInput, velocity.y);
+                    velocity = new Vector2(Mathf.Sign(velocity.x) * _p.xMixSpeedInAir, velocity.y);
                     _rb.velocity = velocity;
                 }
             }
