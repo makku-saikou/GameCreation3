@@ -32,6 +32,8 @@ namespace GamePlay.Player
         
         private Rigidbody2D _rb;
         public Rigidbody2D Rb => _rb;
+        
+        [SerializeField]private Transform groundCheckPoint; // 地面检测点
 
         private void Awake()
         {
@@ -62,19 +64,29 @@ namespace GamePlay.Player
             // 状态
             OnGroundState onGroundState = new OnGroundState(this, "OnGround");
             AirState airState = new AirState(this, "Air");
+            HangState hangState = new HangState(this, "Hang");
             
             // 转移
             HTransition jump = new HTransition("Jump", onGroundState, airState);
             jump.OnCheck += () => !property.isGrounded;
-            onGroundState.AddTransition(jump);
+            onGroundState.AddTransition("Jump", airState, () => !property.isGrounded);
             
             HTransition land = new HTransition("Land", airState, onGroundState);
             land.OnCheck += () => property.isGrounded;
             airState.AddTransition(land);
             
+            HTransition connect = new HTransition("Connect", airState, hangState);
+            connect.OnCheck += () => property.isConnecting;
+            airState.AddTransition(connect);
+            
+            HTransition hangJump = new HTransition("HangJump", hangState, airState);
+            hangJump.OnCheck += () => !property.isConnecting;
+            hangState.AddTransition(hangJump);
+            
             // 初始化状态机
             _stateMachine = new HStateMachine(onGroundState);
             _stateMachine.AddState(airState);
+            _stateMachine.AddState(hangState);
         }
 
         [Obsolete]
@@ -94,12 +106,12 @@ namespace GamePlay.Player
         private void CheckState()
         {
             property.isGrounded = 
-                Physics2D.OverlapCircle(property.groundCheckPoint.position, property.groundCheckRadius, property.groundLayer);
+                Physics2D.OverlapCircle(groundCheckPoint.position, property.groundCheckRadius, property.groundLayer);
         }
         
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawWireSphere(property.groundCheckPoint.position, property.groundCheckRadius);
-        }
+        // private void OnDrawGizmos()
+        // {
+        //     Gizmos.DrawWireSphere(property.groundCheckPoint.position, property.groundCheckRadius);
+        // }
     }
 }

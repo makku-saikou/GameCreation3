@@ -26,8 +26,13 @@ namespace GamePlay.Player
             _onGroundLimit = OnGroundLimit;
             _onAirLimit = OnAirLimit;
             
-            // CheckDirectionLimit(null, null);
-            RegisterEvents();
+            // 为了确保事件注册在玩家初始化之后，且由于我们不会使该组建失效，所以在Start中注册事件
+            playerController.StateMachine.OnStateChanged += CheckDirectionLimit;
+        }
+        
+        private void OnDisable()
+        {
+            playerController.StateMachine.OnStateChanged -= CheckDirectionLimit;
         }
 
         private Vector3 OnGroundLimit(Vector3 direction)
@@ -71,19 +76,6 @@ namespace GamePlay.Player
         private Vector3 OnAirLimit(Vector3 direction)
         {
             return direction;
-        }
-        
-        /// <summary>
-        /// 为了确保事件注册在玩家初始化之后，且由于我们不会使该组建失效，所以在Start中注册事件
-        /// </summary>
-        private void RegisterEvents()
-        {
-            playerController.StateMachine.OnStateChanged += CheckDirectionLimit;
-        }
-        
-        private void OnDisable()
-        {
-            playerController.StateMachine.OnStateChanged -= CheckDirectionLimit;
         }
         
         private void CheckDirectionLimit(HState from, HState to)

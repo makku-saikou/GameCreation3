@@ -7,28 +7,12 @@
 // -------------------------------------------------
 
 using System;
-using Common.FSM;
 
 namespace GamePlay.Player.PlayerState
 {
     [Obsolete("暂时不引入子状态")]
     public class IdleState : PlayerStateBase
     {
-
-        public override void EnterCallback(HState prev)
-        {
-            base.EnterCallback(prev);
-            
-        }
-
-        // public IdleState(PlayerController player) : base(player)
-        // {
-        //     
-        // }
-
-
-        public IdleState(PlayerController player, string name) : base(player, name)
-        {
-        }
+        public IdleState(PlayerController player, string name) : base(player, name) { }
     }
 }

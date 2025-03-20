@@ -6,22 +6,16 @@
 // Description:
 // -------------------------------------------------
 
-using System;
+using PurpleFlowerCore;
 using PurpleFlowerCore.Utility;
 using UnityEngine;
 
 namespace GamePlay.Player
 {
-    [Serializable]
-    public class PlayerProperty
+    [CreateAssetMenu(fileName = "PlayerProperty", menuName = "Data/PlayerProperty")]
+    [Configurable]
+    public class PlayerProperty : ScriptableObject
     {
-        // private HStateMachine _stateMachine;
-        // public HStateMachine StateMachine => _stateMachine;
-        //
-        // public PlayerProperty(HStateMachine sm)
-        // {
-        //     _stateMachine = sm;
-        // }
         // todo: 属性分类,剥离部分属性
         [Header("BaseMovement")]
         public float movementSpeed = 10f;                   // 移动速度
@@ -29,16 +23,15 @@ namespace GamePlay.Player
         public int amountOfJump = 1;                        // 跳跃次数（可以连续几段跳）
 
         [Header("JumpOptimize")]
-        public float airHangMultiplier = 0.95f;             //  与物体连接时的空中阻尼
+        [Range(0,5)]public float airHangDrag = 2f;       //  悬挂且无输入时的空中阻尼
         public float fallMultiplier = 0.95f;                 // 下落时的空气阻力
         public float variableJumpHeightMultiplier = 0.5f;   // 提前松开空格，则会跳的更低
         public float jumpTimerSet = 0.15f;                  // 跳跃缓冲时间
         
         [Header("GroundCheck")]
-        public Transform groundCheckPoint;                  // 地面检测点
         public float groundCheckRadius = 0.3f;              // 地面检测圆半径
         public LayerMask groundLayer;                       // 地面Layer
-
+        
         [RO] public float movementInput;                       // 输入方向
         [RO] public int amountOfJumpLeft;                      // 剩余跳跃次数
         [RO] public int facingDirection = 1;                   // _isFacingRight的数值形式，方便计算
@@ -54,10 +47,10 @@ namespace GamePlay.Player
         
         [RO] public bool isConnecting;
         [RO] public float connectAngle;                        // 连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负
-        [RO] public float power;
-        [RO] public float maxPower = 100;
-        [RO] public float s1 = 2;
-        [RO] public float s2 = 10;
+        // [RO] public float power;
+        // [RO] public float maxPower = 100;
+        // [RO] public float s1 = 2;
+        // [RO] public float s2 = 10;
         
         public void Init()
         {

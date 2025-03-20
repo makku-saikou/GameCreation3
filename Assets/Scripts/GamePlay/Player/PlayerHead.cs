@@ -6,8 +6,6 @@
 // Description: 头部的控制逻辑,调用舌头的相关方法
 // -------------------------------------------------
 
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -25,7 +23,6 @@ namespace GamePlay.Player
         
         public bool canMove;
         
-
         private void Update()
         {
             UpdateDirection();

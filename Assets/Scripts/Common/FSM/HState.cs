@@ -44,6 +44,16 @@ namespace Common.FSM
 			}
 		}
 
+		public virtual void AddTransition(string name, HState to, LTransitionDelegate onCheck = null,
+			LTransitionDelegate onTransition = null)
+		{
+			HTransition t = new HTransition(name, this, to);
+			t.OnTransition += onTransition;
+			t.OnCheck += onCheck;
+			AddTransition(t);
+		}
+
+
 		public virtual void EnterCallback(HState prev)
 		{
 			

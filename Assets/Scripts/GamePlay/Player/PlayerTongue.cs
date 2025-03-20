@@ -8,7 +8,6 @@
 using System;
 using GamePlay.Item;
 using PurpleFlowerCore;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -92,12 +91,7 @@ namespace GamePlay.Player
                 distanceJoint2D.enabled = true;
                 distanceJoint2D.connectedAnchor = transform.position;
                 playerController.Property.isConnecting = true;
-                // todo: 能量的计算移动到玩家子状态中
-                playerController.Rb.gravityScale = 10;
-                var p = playerController.Property;
-                p.connectAngle = Vector2.SignedAngle(Vector2.down,
-                    playerController.transform.position - transform.position);
-                p.power = playerController.Rb.velocity.SqrMagnitude() / p.s1 + p.s2 * Mathf.Abs(Mathf.Cos(Mathf.Deg2Rad * p.connectAngle));
+                
             }
         }
         
@@ -114,7 +108,7 @@ namespace GamePlay.Player
 
             playerController.Property.connectAngle = Vector2.SignedAngle(Vector2.down,
                 playerController.transform.position - transform.position);
-            PFCLog.Debug("Tongue", playerController.Property.connectAngle);
+            // PFCLog.Debug("Tongue", playerController.Property.connectAngle);
         }
         
         private void UpdateRetract()
@@ -138,9 +132,7 @@ namespace GamePlay.Player
             distanceJoint2D.enabled = false;
             _currentConnectableItem = null;
             playerController.Property.isConnecting = false;
-            
-            // temp
-            playerController.Rb.gravityScale = 5;
+
         }
 
         public void Interact()
