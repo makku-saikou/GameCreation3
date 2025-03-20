@@ -108,7 +108,23 @@ namespace GamePlay.Player
             property.IsGrounded = 
                 Physics2D.OverlapCircle(groundCheckPoint.position, property.groundCheckRadius, property.groundLayer);
         }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Pillar"))
+            {
+                property.IsOnPillar = true;
+            }
+        }
         
+        private void OnCollisionExit2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Pillar"))
+            {
+                property.IsOnPillar = false;
+            }
+        }
+
         // private void OnDrawGizmos()
         // {
         //     Gizmos.DrawWireSphere(property.groundCheckPoint.position, property.groundCheckRadius);

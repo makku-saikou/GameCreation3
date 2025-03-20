@@ -70,27 +70,5 @@ namespace GamePlay.Player
         }
 
         #endregion
-        //
-        // #region Direction Limit
-        //
-        // public void AddDirectionLimit(string limitName, DirectionLimit directionLimit)
-        // {
-        //     _directionLimits[limitName] = directionLimit;
-        // }
-        //
-        // public void RemoveDirectionLimit(string limitName)
-        // {
-        //     _directionLimits.Remove(limitName);
-        // }
-        //
-        // public void SetDirectionLimit(string limitName)
-        // {
-        //     if (_directionLimits.ContainsKey(limitName))
-        //     {
-        //         _currentDirectionLimit = _directionLimits[limitName];
-        //     }
-        // }
-        //
-        // #endregion
     }
 }

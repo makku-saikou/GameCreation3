@@ -42,11 +42,6 @@ namespace GamePlay.Player.PlayerState
         public override void FixedUpdateCallback()
         {
             base.FixedUpdateCallback();
-            // if (!_p.isWallSliding && _p.movementInput != 0)
-            // {
-            // var velocity = _rb.velocity;
-            // velocity = new Vector2(_p.movementSpeed * _p.movementInput, velocity.y);
-            // _rb.velocity = velocity;
             if (_p.MovementInput != 0)
             {
                 _rb.AddForce(new Vector2(10 * _p.MovementInput, 0), ForceMode2D.Force);
@@ -57,13 +52,6 @@ namespace GamePlay.Player.PlayerState
                     _rb.velocity = velocity;
                 }
             }
-            // }
-            // else if (_p.isWallSliding && _p.movementInput == 0)
-            // {
-            //     var velocity = _rb.velocity;
-            //     velocity = new Vector2(velocity.x * _p.fallMultiplier, velocity.y);
-            //     _rb.velocity = velocity;
-            // }
         }
     }
 }

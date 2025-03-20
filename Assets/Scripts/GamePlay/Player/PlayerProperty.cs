@@ -15,11 +15,11 @@ namespace GamePlay.Player
     [Configurable]
     public class PlayerProperty : ScriptableObject
     {
-        // todo: 属性分类,剥离部分属性
         [Header("公共属性")]
         public float movementSpeed = 10f;                   // 移动速度
         public float jumpForce = 16f;                       // 跳跃力度
         public int amountOfJump = 1;                        // 跳跃次数（可以连续几段跳）
+        public float gravityScale = 5f;                     // 常规情况下重力缩放
 
         [Header("空中")]
         public float xMixSpeedInAir = 20f;                  // 空中水平最大移动速度
@@ -29,13 +29,14 @@ namespace GamePlay.Player
         [Header("悬挂")]
         [Range(0,5)]public float hangDrag = 2f;       //  悬挂且无输入时的空中阻尼
         public float hangSwayForce = 50f;                   // 悬挂时玩家输入的摇摆力
-        public float hangGravityScale = 12f;                // 悬挂时的重力
+        public float hangGravityScale = 12f;                // 悬挂时的重力缩放
         
         [Header("地面")]
         public float groundCheckRadius = 0.3f;              // 地面检测圆半径
         public LayerMask groundLayer;                       // 地面Layer
         public float jumpTimerSet = 0.15f;                  // 跳跃缓冲时间
         
+        // todo: 剥离玩家输入
         public float MovementInput { get; set; }               // 输入方向
         public int AmountOfJumpLeft { get; set; }              // 剩余跳跃次数
         public int FacingDirection { get; set; }                  // _isFacingRight的数值形式，方便计算
@@ -48,6 +49,7 @@ namespace GamePlay.Player
         public bool CanFlip { get; set; }                      // 是否可以转向
         public bool IsConnecting { get; set; }
         public float ConnectAngle { get; set; }                       // 连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负
+        public bool IsOnPillar { get; set; }                          // 是否在可攀爬的柱子前
         // [RO] public bool checkVariableJump;                    // 当成功跳跃时被激活，若跳跃期间松开空格，则会施加额外的向下的力
         // [RO] public bool isTouchingWall;                       // 是否贴墙，由Physics2D判定
         

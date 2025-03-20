@@ -6,7 +6,6 @@
 // Description:
 // -------------------------------------------------
 
-using System;
 using UnityEngine;
 
 namespace GamePlay.Player

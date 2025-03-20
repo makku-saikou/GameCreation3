@@ -55,7 +55,7 @@ namespace GamePlay.Player.PlayerState
         public override void ExitCallback(HState next)
         {
             base.ExitCallback(next);
-            _rb.gravityScale = 5;
+            _rb.gravityScale = _p.gravityScale;
             _player.Rb.drag = 0;
         }
 

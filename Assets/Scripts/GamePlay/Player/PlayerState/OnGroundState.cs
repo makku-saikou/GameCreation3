@@ -15,7 +15,7 @@ namespace GamePlay.Player.PlayerState
 {
     public class OnGroundState : PlayerStateBase
     {
-        private float jumpTimer; // 跳跃计时器，提供输入提前量，优化下一次跳跃的手感
+        private float _jumpTimer; // 跳跃计时器，提供输入提前量，优化下一次跳跃的手感
         
         public OnGroundState(PlayerController player, string name) : base(player, name) { }
         
@@ -53,7 +53,7 @@ namespace GamePlay.Player.PlayerState
                 if (_p.IsGrounded || (_p.AmountOfJumpLeft > 0))
                     NormalJump();
                 else
-                    jumpTimer = _p.jumpTimerSet;
+                    _jumpTimer = _p.jumpTimerSet;
             }
 
             // if (_p.checkVariableJump && !Input.GetButton("Jump"))
@@ -83,12 +83,12 @@ namespace GamePlay.Player.PlayerState
 
             _p.CanNormalJump = _p.AmountOfJumpLeft > 0;
             
-            if (jumpTimer > 0)
+            if (_jumpTimer > 0)
             {
                 if (_p.IsGrounded) 
                     NormalJump();
                 
-                jumpTimer -= Time.deltaTime;
+                _jumpTimer -= Time.deltaTime;
             }
         }
         
@@ -107,7 +107,7 @@ namespace GamePlay.Player.PlayerState
             _rb.velocity = new Vector2(_rb.velocity.x, _p.jumpForce);
             
             _p.AmountOfJumpLeft--;
-            jumpTimer = 0;
+            _jumpTimer = 0;
             // _p.checkVariableJump = true;
         }
     }
