@@ -81,7 +81,7 @@ namespace GamePlay.Player.PlayerState
 
             // if (_p.isTouchingWall) _p.checkVariableJump = false;
 
-            _p.CanNormalJump = _p.AmountOfJumpLeft > 0;
+            _p.CanJump = _p.AmountOfJumpLeft > 0;
             
             if (_jumpTimer > 0)
             {
@@ -102,7 +102,7 @@ namespace GamePlay.Player.PlayerState
         
         private void NormalJump()
         {
-            if (!_p.CanNormalJump) return;
+            if (!_p.CanJump) return;
             
             _rb.velocity = new Vector2(_rb.velocity.x, _p.jumpForce);
             

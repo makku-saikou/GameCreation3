@@ -95,7 +95,6 @@ namespace GamePlay.Player
         public void Flip()
         {
             if (property.IsWallSliding || !property.CanFlip) return;
-            property.FacingDirection *= -1;
             property.IsFacingRight = !property.IsFacingRight;
             transform.Rotate(0, 180, 0);
         }

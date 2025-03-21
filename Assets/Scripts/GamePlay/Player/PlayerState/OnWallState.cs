@@ -18,5 +18,17 @@ namespace GamePlay.Player.PlayerState
             base.EnterCallback(prev);
             _rb.gravityScale = 0;
         }
+
+        public override void ExitCallback(HState next)
+        {
+            base.ExitCallback(next);
+            _rb.gravityScale = _p.gravityScale;
+        }
+        
+        public override void FixedUpdateCallback()
+        {
+            base.FixedUpdateCallback();
+            _rb.velocity = new UnityEngine.Vector2(0, _rb.velocity.y);
+        }
     }
 }
