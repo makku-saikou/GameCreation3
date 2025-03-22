@@ -50,6 +50,7 @@ namespace GamePlay.Player
         public bool IsWalking { get; set; }                           // 是否在行走，动画参数
         public bool IsGrounded { get; set; }                          // 是否在地面上，由Physics2D判定
         public bool IsWallSliding { get; set; }                       // 是否在滑墙
+        public bool IsRightWall { get; set; }                         // 是否在右墙
         public bool CanJump { get; set; }                       // 是否可以进行普通跳跃
         public bool CanMove { get; set; }                      // 是否可以移动
         public bool CanFlip { get; set; }                      // 是否可以转向

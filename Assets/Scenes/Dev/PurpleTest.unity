@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 150750337}
   - component: {fileID: 150750336}
   - component: {fileID: 150750338}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Pillar
   m_TagString: Pillar
   m_Icon: {fileID: 0}
@@ -484,6 +484,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &387413474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 387413475}
+  m_Layer: 0
+  m_Name: WallCheck1
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &387413475
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387413474}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.39, y: -0.09, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1942500123}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &414794917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1888,6 +1919,37 @@ MonoBehaviour:
   MegText: {fileID: 596508857}
   BtnImage: {fileID: 580662264}
   BtnButton: {fileID: 580662263}
+--- !u!1 &1236758018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1236758019}
+  m_Layer: 0
+  m_Name: WallCheck2
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1236758019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236758018}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.33, y: -0.089999914, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1942500123}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1298445220
 GameObject:
   m_ObjectHideFlags: 0
@@ -3024,7 +3086,7 @@ GameObject:
   m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3132,6 +3194,8 @@ Transform:
   m_Children:
   - {fileID: 1713369366}
   - {fileID: 1909178460}
+  - {fileID: 387413475}
+  - {fileID: 1236758019}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1942500124
@@ -3242,6 +3306,8 @@ MonoBehaviour:
   property: {fileID: 11400000, guid: 2a5419c3c0f21e6489a8a4b9d2f1f532, type: 2}
   spriteRenderer: {fileID: 1942500122}
   groundCheckPoint: {fileID: 1909178460}
+  wallCheckPoint1: {fileID: 387413475}
+  wallCheckPoint2: {fileID: 1236758019}
 --- !u!114 &1942500129
 MonoBehaviour:
   m_ObjectHideFlags: 0

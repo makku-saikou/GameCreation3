@@ -33,7 +33,9 @@ namespace GamePlay.Player
         private Rigidbody2D _rb;
         public Rigidbody2D Rb => _rb;
         
-        [SerializeField]private Transform groundCheckPoint; // 地面检测点
+        [SerializeField] private Transform groundCheckPoint; // 地面检测点
+        [SerializeField] private Transform wallCheckPoint1; // 墙壁检测点
+        [SerializeField] private Transform wallCheckPoint2; // 墙壁检测点
 
         private void Awake()
         {
@@ -65,6 +67,7 @@ namespace GamePlay.Player
             OnGroundState onGroundState = new OnGroundState(this, "OnGround");
             AirState airState = new AirState(this, "Air");
             HangState hangState = new HangState(this, "Hang");
+            OnWallState onWallState = new OnWallState(this, "OnWall");
             
             // 转移
             HTransition jump = new HTransition("Jump", onGroundState, airState);
@@ -83,18 +86,28 @@ namespace GamePlay.Player
             hangJump.OnCheck += () => !property.IsConnecting;
             hangState.AddTransition(hangJump);
             
+            HTransition onWall = new HTransition("OnWall", airState, onWallState);
+            onWall.OnCheck += () => property.IsWallSliding;
+            airState.AddTransition(onWall);
+            
+            HTransition wallJump = new HTransition("WallJump", onWallState, airState);
+            wallJump.OnCheck += () => !property.IsWallSliding;
+            onWallState.AddTransition(wallJump);
+            
+            HTransition wallToGround = new HTransition("WallToGround", onWallState, onGroundState);
+            wallToGround.OnCheck += () => property.IsGrounded;
+            onWallState.AddTransition(wallToGround);
+            
             // 初始化状态机
             _stateMachine = new HStateMachine(onGroundState);
             _stateMachine.AddState(airState);
             _stateMachine.AddState(hangState);
+            _stateMachine.AddState(onWallState);
         }
-
-        [Obsolete]
-        private void Init(PlayerProperty property) { }
         
         public void Flip()
         {
-            if (property.IsWallSliding || !property.CanFlip) return;
+            if (!property.CanFlip) return;
             property.IsFacingRight = !property.IsFacingRight;
             transform.Rotate(0, 180, 0);
         }
@@ -106,6 +119,11 @@ namespace GamePlay.Player
         {
             property.IsGrounded = 
                 Physics2D.OverlapCircle(groundCheckPoint.position, property.groundCheckRadius, property.groundLayer);
+            bool rightWall =
+                Physics2D.OverlapCircle(wallCheckPoint2.position, property.wallCheckRadius, property.groundLayer);
+            property.IsRightWall = rightWall;
+            property.IsWallSliding = Physics2D.OverlapCircle(wallCheckPoint1.position, property.wallCheckRadius,
+                property.groundLayer) || rightWall;
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -123,10 +141,12 @@ namespace GamePlay.Player
                 property.IsOnPillar = false;
             }
         }
-
-        // private void OnDrawGizmos()
-        // {
-        //     Gizmos.DrawWireSphere(property.groundCheckPoint.position, property.groundCheckRadius);
-        // }
+        
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireSphere(groundCheckPoint.position, property.groundCheckRadius);
+            Gizmos.DrawWireSphere(wallCheckPoint1.position, property.wallCheckRadius);
+            Gizmos.DrawWireSphere(wallCheckPoint2.position, property.wallCheckRadius);
+        }
     }
 }

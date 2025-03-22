@@ -6,6 +6,7 @@
 // -------------------------------------------------
 
 using Common.FSM;
+using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
 {
@@ -28,7 +29,7 @@ namespace GamePlay.Player.PlayerState
         public override void FixedUpdateCallback()
         {
             base.FixedUpdateCallback();
-            _rb.velocity = new UnityEngine.Vector2(0, _rb.velocity.y);
+            _rb.velocity = new Vector2(0, -_p.wallSlideSpeed);
         }
     }
 }
