@@ -23,6 +23,7 @@ namespace GamePlay.Player
 
         [Header("空中")]
         public float xMixSpeedInAir = 20f;                  // 空中水平最大移动速度
+        public float xForceInAir = 10f;                     // 空中水平移动力度
         // public float fallMultiplier = 0.95f;                 // 下落时的空气阻力
         // public float variableJumpHeightMultiplier = 0.5f;   // 提前松开空格，则会跳的更低
         
@@ -44,6 +45,7 @@ namespace GamePlay.Player
         
         // todo: 剥离玩家输入
         public float MovementInput { get; set; }               // 输入方向
+        public bool JumpInput { get; set; }                     // 输入跳跃
         public int AmountOfJumpLeft { get; set; }              // 剩余跳跃次数
         public int FacingDirection => IsFacingRight ? 1 : -1;  // _isFacingRight的数值形式，方便计算
         public bool IsFacingRight { get; set; }                // 是否正面向右边

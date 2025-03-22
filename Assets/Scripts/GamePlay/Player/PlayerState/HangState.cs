@@ -31,9 +31,8 @@ namespace GamePlay.Player.PlayerState
         public override void UpdateCallback(float deltaTime)
         {
             base.UpdateCallback(deltaTime);
-            _p.MovementInput = Input.GetAxisRaw("Horizontal");
             
-            if(_p.IsConnecting && Input.GetButtonDown("Jump"))
+            if(_p.JumpInput)
             {
                 // todo: 解耦
                 _player.Head.RetractTongue();

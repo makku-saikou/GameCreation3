@@ -17,6 +17,7 @@ MonoBehaviour:
   amountOfJump: 1
   gravityScale: 5
   xMixSpeedInAir: 17
+  xForceInAir: 30
   hangDrag: 2
   hangSwayForce: 50
   hangGravityScale: 12

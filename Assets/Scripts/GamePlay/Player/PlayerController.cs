@@ -46,6 +46,7 @@ namespace GamePlay.Player
         private void Update()
         {
             CheckState();
+            InputCheck();
             StateMachine.UpdateCallback(Time.deltaTime);
         }
         
@@ -124,6 +125,13 @@ namespace GamePlay.Player
             property.IsRightWall = rightWall;
             property.IsWallSliding = Physics2D.OverlapCircle(wallCheckPoint1.position, property.wallCheckRadius,
                 property.groundLayer) || rightWall;
+        }
+
+        private void InputCheck()
+        {
+            property.MovementInput = Input.GetAxisRaw("Horizontal");
+            property.JumpInput = Input.GetButtonDown("Jump");
+            
         }
 
         private void OnCollisionEnter2D(Collision2D other)

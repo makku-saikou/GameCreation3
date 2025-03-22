@@ -13,6 +13,7 @@ using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
 {
+    // todo: 由于状态机的引入,需要删除原来无用逻辑
     public class OnGroundState : PlayerStateBase
     {
         private float _jumpTimer; // 跳跃计时器，提供输入提前量，优化下一次跳跃的手感
@@ -46,9 +47,7 @@ namespace GamePlay.Player.PlayerState
 
         private void CheckInput()
         {
-            _p.MovementInput = Input.GetAxisRaw("Horizontal");
-
-            if (Input.GetButtonDown("Jump"))
+            if (_p.JumpInput)
             {
                 if (_p.IsGrounded || (_p.AmountOfJumpLeft > 0))
                     NormalJump();
