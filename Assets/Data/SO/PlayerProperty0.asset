@@ -17,7 +17,7 @@ MonoBehaviour:
   amountOfJump: 1
   gravityScale: 5
   xMixSpeedInAir: 17
-  xForceInAir: 30
+  xForceInAir: 80
   hangDrag: 2
   hangSwayForce: 50
   hangGravityScale: 12
@@ -28,5 +28,6 @@ MonoBehaviour:
   jumpTimerSet: 0.15
   wallCheckRadius: 0.1
   wallSlideSpeed: 3
-  wallJumpForce: 10
-  wallJumpDirection: {x: 1, y: 1}
+  wallJumpForce: 120
+  wallJumpTimerSet: 0.15
+  wallJumpDirection: {x: 1, y: 1.5}
