@@ -38,14 +38,13 @@ namespace GamePlay.Player.PlayerState
             base.FixedUpdateCallback();
             if (_p.MovementInput != 0)
             {
-                // todo:在地面上顺着力跳时,手感不太对
                 _rb.AddForce(new Vector2(_p.xForceInAir * _p.MovementInput, 0), ForceMode2D.Force);
-                var velocity = _rb.velocity;
-                if (Mathf.Abs(velocity.x) > _p.xMixSpeedInAir)
-                {
-                    velocity = new Vector2(Mathf.Sign(velocity.x) * _p.xMixSpeedInAir, velocity.y);
-                    _rb.velocity = velocity;
-                }
+            }
+            var velocity = _rb.velocity;
+            if (Mathf.Abs(velocity.x) > _p.XMaxSpeed)
+            {
+                velocity = new Vector2(Mathf.Sign(velocity.x) * _p.XMaxSpeed, velocity.y);
+                _rb.velocity = velocity;
             }
         }
     }

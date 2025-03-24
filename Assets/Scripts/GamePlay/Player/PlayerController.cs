@@ -52,6 +52,7 @@ namespace GamePlay.Player
         private void FixedUpdate()
         {
             StateMachine.FixedUpdateCallback();
+            RecoverMaxSpeed();
         }
 
         /// <summary>
@@ -157,6 +158,12 @@ namespace GamePlay.Player
             {
                 property.IsOnPillar = false;
             }
+        }
+        
+        private void RecoverMaxSpeed()
+        {
+            property.XMaxSpeed = Mathf.Lerp(property.XMaxSpeed, property.commonXMaxSpeed,
+                property.xMaxSpeedRecoverScale);
         }
         
         private void OnDrawGizmos()

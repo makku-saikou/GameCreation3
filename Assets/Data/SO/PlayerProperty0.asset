@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2e05ae249e43c9bb10008c8f26e762, type: 3}
   m_Name: PlayerProperty0
   m_EditorClassIdentifier: 
-  movementSpeed: 10
   jumpForce: 20
   amountOfJump: 1
   gravityScale: 5
-  xMixSpeedInAir: 17
+  commonXMaxSpeed: 10
+  xMaxSpeedRecoverScale: 0.05
   xForceInAir: 80
   hangDrag: 2
   hangSwayForce: 50
   hangGravityScale: 12
+  onGroundSpeed: 10
   groundCheckRadius: 0.3
   groundLayer:
     serializedVersion: 2
@@ -31,3 +32,4 @@ MonoBehaviour:
   wallJumpForce: 140
   wallJumpTimerSet: 0.15
   wallJumpDirection: {x: 1, y: 1.5}
+  smashVelocity: 30

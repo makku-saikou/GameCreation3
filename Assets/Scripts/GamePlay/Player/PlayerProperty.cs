@@ -16,13 +16,13 @@ namespace GamePlay.Player
     public class PlayerProperty : ScriptableObject
     {
         [Header("公共属性")]
-        public float movementSpeed = 10f;                   // 移动速度
         public float jumpForce = 16f;                       // 跳跃力度
         public int amountOfJump = 1;                        // 跳跃次数（可以连续几段跳）
         public float gravityScale = 5f;                     // 常规情况下重力缩放
+        public float commonXMaxSpeed = 10f;                  // 常规情况下最大速度
+        public float xMaxSpeedRecoverScale = 0.1f;           // 最大速度恢复速度
 
         [Header("空中")]
-        public float xMixSpeedInAir = 20f;                  // 空中水平最大移动速度
         public float xForceInAir = 10f;                     // 空中水平移动力度
         // public float fallMultiplier = 0.95f;                 // 下落时的空气阻力
         // public float variableJumpHeightMultiplier = 0.5f;   // 提前松开空格，则会跳的更低
@@ -33,6 +33,7 @@ namespace GamePlay.Player
         public float hangGravityScale = 12f;                // 悬挂时的重力缩放
         
         [Header("地面")]
+        public float onGroundSpeed = 10f;                   // 地面移动速度
         public float groundCheckRadius = 0.3f;              // 地面检测圆半径
         public LayerMask groundLayer;                       // 地面Layer
         public float jumpTimerSet = 0.15f;                  // 跳跃缓冲时间
@@ -52,17 +53,18 @@ namespace GamePlay.Player
         public int AmountOfJumpLeft { get; set; }              // 剩余跳跃次数
         public int FacingDirection => IsFacingRight ? 1 : -1;  // _isFacingRight的数值形式，方便计算
         public bool IsFacingRight { get; set; }                // 是否正面向右边
-        public bool IsWalking { get; set; }                           // 是否在行走，动画参数
-        public bool IsGrounded { get; set; }                          // 是否在地面上，由Physics2D判定
-        public bool IsWallSliding { get; set; }                       // 是否在滑墙
-        public bool WallJumpFlag { get; set; }                        // 划墙跳后的延迟标记
-        public bool IsRightWall { get; set; }                         // 是否在右墙
+        public bool IsWalking { get; set; }                    // 是否在行走，动画参数
+        public bool IsGrounded { get; set; }                   // 是否在地面上，由Physics2D判定
+        public bool IsWallSliding { get; set; }                // 是否在滑墙
+        public bool WallJumpFlag { get; set; }                 // 划墙跳后的延迟标记
+        public bool IsRightWall { get; set; }                  // 是否在右墙
         public bool CanJump { get; set; }                       // 是否可以进行普通跳跃
         public bool CanMove { get; set; }                      // 是否可以移动
         public bool CanFlip { get; set; }                      // 是否可以转向
         public bool IsConnecting { get; set; }                 // 是否与物体连接
         public float ConnectAngle { get; set; }                // 悬挂时,连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负
         public bool IsOnPillar { get; set; }                   // 是否在可攀爬的柱子前
+        public float XMaxSpeed { get; set; }                    // 最大速度
         
         public float MovementInput { get; set; }               // 输入方向
         public bool JumpInput { get; set; }                     // 输入跳跃
@@ -77,6 +79,7 @@ namespace GamePlay.Player
             IsFacingRight = true;
             CanMove = true;
             CanFlip = true;
+            XMaxSpeed = commonXMaxSpeed;
         }
     }
 }
