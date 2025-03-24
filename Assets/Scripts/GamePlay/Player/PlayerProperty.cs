@@ -44,9 +44,11 @@ namespace GamePlay.Player
         public float wallJumpTimerSet = 0.15f;              // 滑墙跳跃缓冲时间
         [SerializeField]private Vector2 wallJumpDirection = new(1f, 1f); // 滑墙跳跃方向
         
+        [Header("下砸")]
+        public float smashVelocity = 30f;               // 下砸速度
+        
         // todo: 剥离玩家输入
-        public float MovementInput { get; set; }               // 输入方向
-        public bool JumpInput { get; set; }                     // 输入跳跃
+
         public int AmountOfJumpLeft { get; set; }              // 剩余跳跃次数
         public int FacingDirection => IsFacingRight ? 1 : -1;  // _isFacingRight的数值形式，方便计算
         public bool IsFacingRight { get; set; }                // 是否正面向右边
@@ -61,6 +63,10 @@ namespace GamePlay.Player
         public bool IsConnecting { get; set; }                 // 是否与物体连接
         public float ConnectAngle { get; set; }                // 悬挂时,连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负
         public bool IsOnPillar { get; set; }                   // 是否在可攀爬的柱子前
+        
+        public float MovementInput { get; set; }               // 输入方向
+        public bool JumpInput { get; set; }                     // 输入跳跃
+        public bool DownInput { get; set; }                    // 输入下砸
         public Vector2 WallJumpDirection => wallJumpDirection.normalized; // 滑墙跳跃方向
         // [RO] public bool checkVariableJump;                 // 当成功跳跃时被激活，若跳跃期间松开空格，则会施加额外的向下的力
         // [RO] public bool isTouchingWall;                    // 是否贴墙，由Physics2D判定

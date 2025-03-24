@@ -28,6 +28,6 @@ MonoBehaviour:
   jumpTimerSet: 0.15
   wallCheckRadius: 0.1
   wallSlideSpeed: 3
-  wallJumpForce: 120
+  wallJumpForce: 140
   wallJumpTimerSet: 0.15
   wallJumpDirection: {x: 1, y: 1.5}

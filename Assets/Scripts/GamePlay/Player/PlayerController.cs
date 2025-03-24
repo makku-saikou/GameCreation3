@@ -39,7 +39,6 @@ namespace GamePlay.Player
 
         private void Awake()
         {
-            // temp
             Init();
         }
 
@@ -69,8 +68,9 @@ namespace GamePlay.Player
             AirState airState = new AirState(this, "Air");
             HangState hangState = new HangState(this, "Hang");
             OnWallState onWallState = new OnWallState(this, "OnWall");
+            SmashState smashState = new SmashState(this, "Smash");
             
-            // 转移
+            // 转移 todo: 定义转移写法的修改
             HTransition jump = new HTransition("Jump", onGroundState, airState);
             jump.OnCheck += () => !property.IsGrounded;
             onGroundState.AddTransition("Jump", airState, () => !property.IsGrounded);
@@ -99,11 +99,20 @@ namespace GamePlay.Player
             wallToGround.OnCheck += () => property.IsGrounded;
             onWallState.AddTransition(wallToGround);
             
+            HTransition smash = new HTransition("Smash", airState, smashState);
+            smash.OnCheck += () => property.DownInput;
+            airState.AddTransition(smash);
+            
+            HTransition smashLand = new HTransition("SmashLand", smashState, onGroundState);
+            smashLand.OnCheck += () => property.IsGrounded;
+            smashState.AddTransition(smashLand);
+            
             // 初始化状态机
             _stateMachine = new HStateMachine(onGroundState);
             _stateMachine.AddState(airState);
             _stateMachine.AddState(hangState);
             _stateMachine.AddState(onWallState);
+            _stateMachine.AddState(smashState);
         }
         
         public void Flip()
@@ -131,7 +140,7 @@ namespace GamePlay.Player
         {
             property.MovementInput = Input.GetAxisRaw("Horizontal");
             property.JumpInput = Input.GetButtonDown("Jump");
-            
+            property.DownInput = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
         }
 
         private void OnCollisionEnter2D(Collision2D other)
