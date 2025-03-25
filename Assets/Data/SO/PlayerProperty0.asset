@@ -22,7 +22,8 @@ MonoBehaviour:
   hangSwayForce: 50
   hangGravityScale: 12
   onGroundSpeed: 10
-  groundCheckRadius: 0.3
+  groundCheckHeight: 0.34
+  groundCheckWidth: 2.48
   groundLayer:
     serializedVersion: 2
     m_Bits: 64

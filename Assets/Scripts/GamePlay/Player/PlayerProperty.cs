@@ -34,7 +34,8 @@ namespace GamePlay.Player
         
         [Header("地面")]
         public float onGroundSpeed = 10f;                   // 地面移动速度
-        public float groundCheckRadius = 0.3f;              // 地面检测圆半径
+        public float groundCheckHeight = 0.1f;              // 地面检测高度
+        public float groundCheckWidth = 0.5f;               // 地面检测宽度
         public LayerMask groundLayer;                       // 地面Layer
         public float jumpTimerSet = 0.15f;                  // 跳跃缓冲时间
         

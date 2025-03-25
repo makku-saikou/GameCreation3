@@ -135,7 +135,8 @@ namespace GamePlay.Player
         private void CheckState()
         {
             property.IsGrounded = 
-                Physics2D.OverlapCircle(groundCheckPoint.position, property.groundCheckRadius, property.groundLayer);
+                Physics2D.OverlapBox(groundCheckPoint.position, new Vector2(property.groundCheckWidth,
+                    property.groundCheckHeight), 0, property.groundLayer);
             bool rightWall =
                 Physics2D.OverlapCircle(wallCheckPoint2.position, property.wallCheckRadius, property.groundLayer);
             property.IsRightWall = rightWall;
@@ -174,7 +175,7 @@ namespace GamePlay.Player
         
         private void OnDrawGizmos()
         {
-            Gizmos.DrawWireSphere(groundCheckPoint.position, property.groundCheckRadius);
+            Gizmos.DrawWireCube(groundCheckPoint.position, new Vector3(property.groundCheckWidth, property.groundCheckHeight, 0));
             Gizmos.DrawWireSphere(wallCheckPoint1.position, property.wallCheckRadius);
             Gizmos.DrawWireSphere(wallCheckPoint2.position, property.wallCheckRadius);
         }
