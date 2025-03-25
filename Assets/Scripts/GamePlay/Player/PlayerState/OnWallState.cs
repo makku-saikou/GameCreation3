@@ -26,6 +26,9 @@ namespace GamePlay.Player.PlayerState
             {
                 _player.SpriteRenderer.sprite = sprite.Result;
             });
+            Vector2 vector = _rb.velocity;
+            vector.x = 0;
+            _rb.velocity = vector;
         }
 
         public override void ExitCallback(HState next)
@@ -57,8 +60,12 @@ namespace GamePlay.Player.PlayerState
         public override void FixedUpdateCallback()
         {
             base.FixedUpdateCallback();
-            if(!_p.WallJumpFlag)
-                _rb.velocity = new Vector2(0, -_p.wallSlideSpeed);
+            
+            // if(!_p.WallJumpFlag)
+            //     _rb.velocity = new Vector2(0, -_p.wallSlideSpeed);
+            Vector2 velocity = _rb.velocity;
+            velocity = Vector2.Lerp(velocity, new Vector2(0, -_p.wallSlideSpeed), _p.wallSpeedRecoverScale);
+            _rb.velocity = velocity;
         }
     }
 }

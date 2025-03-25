@@ -41,6 +41,7 @@ namespace GamePlay.Player
         [Header("滑墙")]
         public float wallCheckRadius = 0.5f;                // 检测贴墙距离
         public float wallSlideSpeed = 3f;                   // 滑墙速度
+        public float wallSpeedRecoverScale = 0.1f;          // 滑墙速度恢复速度
         public float wallJumpForce = 10f;                   // 滑墙跳跃力度
         public float wallJumpTimerSet = 0.15f;              // 滑墙跳跃缓冲时间
         [SerializeField]private Vector2 wallJumpDirection = new(1f, 1f); // 滑墙跳跃方向
