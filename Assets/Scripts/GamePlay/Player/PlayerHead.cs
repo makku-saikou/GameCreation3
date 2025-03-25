@@ -12,7 +12,6 @@ namespace GamePlay.Player
 {
     public delegate Vector3 DirectionLimit(Vector3 direction);
     
-    // TODO: 这个写法非常temp,之后我们要考虑InputSystem,如果玩家状态过多,考虑把PlayerController改成大状态机
     public class PlayerHead : MonoBehaviour
     {
         [SerializeField] private PlayerTongue playerTongue;

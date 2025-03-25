@@ -37,8 +37,6 @@ namespace GamePlay.Player
 
         private Vector3 OnGroundLimit(Vector3 direction)
         {
-            // PFCLog.Debug(direction);
-
             if (direction.y > 0)
             {
                 if (direction.y > OnGroundUpLimit)

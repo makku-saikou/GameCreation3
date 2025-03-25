@@ -2,7 +2,6 @@
 // Copyright@ makku-saikou
 // Author : jianhao li
 // Date: 2025_03_08
-// File: ConnectablePoint.cs
 // Description:
 // -------------------------------------------------
 
@@ -11,9 +10,12 @@ using UnityEngine;
 
 namespace GamePlay.Item
 {
-    public class ConnectablePoint : MonoBehaviour, IConnectable
+    public class TargetPoint : MonoBehaviour, ITarget
     {
         [SerializeField] private float force = 10;
+        public bool IsAdsorb => true;
+        public Vector3 AdsorbPosition => transform.position;
+
         public void Interact(PlayerController playerController)
         {
             Vector3 direction = transform.position - playerController.transform.position;

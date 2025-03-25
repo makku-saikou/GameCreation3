@@ -7,11 +7,14 @@
 // -------------------------------------------------
 
 using GamePlay.Player;
+using UnityEngine;
 
 namespace GamePlay.Item
 {
-    public interface IConnectable
+    public interface ITarget
     {
+        public bool IsAdsorb { get; }
+        public Vector3 AdsorbPosition { get; }
         public void Interact(PlayerController playerController);
     }
 }

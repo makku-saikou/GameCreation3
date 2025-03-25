@@ -9,6 +9,7 @@ using System;
 using GamePlay.Item;
 using PurpleFlowerCore;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GamePlay.Player
 {
@@ -31,7 +32,10 @@ namespace GamePlay.Player
         [SerializeField] private PlayerController playerController;
         private float _currentFlightDistance;
         [SerializeField]private TongueState _tongueState;
-        private IConnectable _currentConnectableItem;
+        private ITarget _currentTarget;
+        private Vector3 _targetPosition;
+        private Vector3 _tonguePosition;
+        [SerializeField] private Image targetImage;
 
         private void Start()
         {
@@ -59,7 +63,7 @@ namespace GamePlay.Player
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+            UpdateTarget();
             Debug.DrawLine(head.transform.position, tongueDistance * head.transform.right + head.transform.position, Color.red);
         }
         
@@ -84,7 +88,7 @@ namespace GamePlay.Player
             var res = Physics2D.OverlapCircle(transform.position, 0.5f);
             if (res != null && res.CompareTag("Connectable"))
             {
-                _currentConnectableItem = res.GetComponent<IConnectable>();
+                _currentTarget = res.GetComponent<ITarget>();
                 _tongueState = TongueState.Connecting;
                 head.canMove = false;
                 transform.parent = null;
@@ -130,17 +134,61 @@ namespace GamePlay.Player
             transform.localScale = Vector3.one; // temp
             _tongueState = TongueState.Retracting;
             distanceJoint2D.enabled = false;
-            _currentConnectableItem = null;
+            _currentTarget = null;
             playerController.Property.IsConnecting = false;
 
         }
 
         public void Interact()
         {
-            if(_currentConnectableItem == null) return;
+            if(_currentTarget == null) return;
             if (_tongueState != TongueState.Connecting) return;
-            _currentConnectableItem.Interact(playerController);
+            _currentTarget.Interact(playerController);
             Retract();
+        }
+
+        private void UpdateTarget()
+        {   
+            var hit = Physics2D.Raycast(transform.position, transform.right, tongueDistance);
+            _targetPosition = hit.point;
+            
+            _currentTarget = hit.collider != null ? hit.collider.GetComponent<ITarget>() : null;
+            
+            if (_currentTarget != null)
+            {
+                targetImage.gameObject.SetActive(true);
+                if(_currentTarget.IsAdsorb)
+                {
+                    targetImage.transform.position = Camera.main.WorldToScreenPoint(_currentTarget.AdsorbPosition);
+                }
+                else
+                {
+                    targetImage.transform.position = Camera.main.WorldToScreenPoint(_targetPosition);
+                }
+            }
+            else
+            {
+                targetImage.gameObject.SetActive(false);
+            }
+
+            // if (hit.collider != null)
+            // {
+            //     _currentTarget = hit.collider.GetComponent<ITarget>();
+            //     targetImage.gameObject.SetActive(true);
+            //     if(_currentTarget is { IsAdsorb: true })
+            //     {
+            //         targetImage.transform.position = Camera.main.WorldToScreenPoint(_currentTarget.AdsorbPosition);
+            //     }
+            //     else
+            //     {
+            //         targetImage.transform.position = Camera.main.WorldToScreenPoint(pos);
+            //     }
+            // }
+            // else
+            // {
+            //     _currentTarget = null;
+            //     targetImage.gameObject.SetActive(false);
+            // }
         }
     }
 }
