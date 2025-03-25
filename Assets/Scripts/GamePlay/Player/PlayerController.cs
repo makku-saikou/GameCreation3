@@ -1,4 +1,3 @@
-// -------------------------------------------------
 // Copyright@ makku-saikou
 // Author : jianhao li
 // Date: 2025_03_08
@@ -6,7 +5,6 @@
 // Description: 玩家角色主要控制逻辑
 // -------------------------------------------------
 
-using System;
 using Common.FSM;
 using GamePlay.Player.PlayerState;
 using UnityEngine;
@@ -20,6 +18,8 @@ namespace GamePlay.Player
     {
         [SerializeField] private PlayerHead head;
         public PlayerHead Head => head;
+        [SerializeField] private Transform entity;
+        public Transform Entity => entity;
 
         [SerializeField] private PlayerProperty property;
         public PlayerProperty Property => property;
@@ -120,7 +120,7 @@ namespace GamePlay.Player
         {
             if (!property.CanFlip) return;
             property.IsFacingRight = !property.IsFacingRight;
-            transform.Rotate(0, 180, 0);
+            Entity.Rotate(0, 180, 0);
         }
         
         /// <summary>

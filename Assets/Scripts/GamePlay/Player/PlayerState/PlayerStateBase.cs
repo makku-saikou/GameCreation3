@@ -23,10 +23,5 @@ namespace GamePlay.Player.PlayerState
             _p = player.Property;
             _rb = player.Rb;
         }
-
-        // protected PlayerStateBase(PlayerController player)
-        // {
-        //     
-        // }
     }
 }

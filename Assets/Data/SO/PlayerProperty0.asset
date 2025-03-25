@@ -28,7 +28,8 @@ MonoBehaviour:
     m_Bits: 64
   jumpTimerSet: 0.15
   wallCheckRadius: 0.1
-  wallSlideSpeed: 3
+  wallSlideSpeed: 4
+  wallSpeedRecoverScale: 0.15
   wallJumpForce: 140
   wallJumpTimerSet: 0.15
   wallJumpDirection: {x: 1, y: 1.5}
