@@ -89,12 +89,18 @@ namespace GamePlay.Player
             hangState.AddTransition(hangJump);
             
             HTransition onWall = new HTransition("OnWall", airState, onWallState);
-            onWall.OnCheck += () => property.IsWallSliding;
+            onWall.OnCheck += () => property.IsWallSliding && (property.IsRightWall && property.MovementInput >= 0.5f ||
+                                                               !property.IsRightWall && property.MovementInput <= -0.5f);
             airState.AddTransition(onWall);
             
             HTransition wallJump = new HTransition("WallJump", onWallState, airState);
             wallJump.OnCheck += () => !property.IsWallSliding;
             onWallState.AddTransition(wallJump);
+            
+            HTransition wallLeave = new HTransition("WallLeave", onWallState, airState);
+            wallLeave.OnCheck += () => property.IsWallSliding && (property.IsRightWall && property.MovementInput <= 0f ||
+                                                                 !property.IsRightWall && property.MovementInput >= 0f);
+            onWallState.AddTransition(wallLeave);
             
             HTransition wallToGround = new HTransition("WallToGround", onWallState, onGroundState);
             wallToGround.OnCheck += () => property.IsGrounded;
@@ -139,7 +145,7 @@ namespace GamePlay.Player
 
         private void InputCheck()
         {
-            property.MovementInput = Input.GetAxisRaw("Horizontal");
+            property.MovementInput = Input.GetAxis("Horizontal");
             property.JumpInput = Input.GetButtonDown("Jump");
             property.DownInput = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
         }

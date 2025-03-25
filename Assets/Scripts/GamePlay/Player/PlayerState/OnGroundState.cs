@@ -94,9 +94,11 @@ namespace GamePlay.Player.PlayerState
         private void ApplyMovement()
         {
             if (!_p.CanMove) return;
-            // 正常移动
-            if(_p.MovementInput != 0)
-                _rb.velocity = new Vector2(_p.onGroundSpeed * _p.MovementInput, _rb.velocity.y);
+            _rb.velocity = new Vector2(_p.onGroundSpeed * _p.MovementInput, _rb.velocity.y);
+            // else
+            // {
+            //     _rb.velocity = new Vector2(0, _rb.velocity.y);
+            // }
         }
         
         private void NormalJump()
