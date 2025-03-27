@@ -21,7 +21,6 @@ namespace GamePlay.Player
         Pushing,
         Retracting
     }
-    // todo: temp状态机，之后考虑使用统一的状态机模块
     public class PlayerTongue : MonoBehaviour
     {
         [SerializeField] private float tongueDistance = 8f;
@@ -31,15 +30,19 @@ namespace GamePlay.Player
         [SerializeField] private PlayerHead head;
         [SerializeField] private PlayerController playerController;
         private float _currentFlightDistance;
-        [SerializeField]private TongueState _tongueState;
         private ITarget _currentTarget;
+        [SerializeField]private TongueState _tongueState;
+        [SerializeField] private PlayerTonguePoint tonguePoint;  // todo: 没有发现舌尖作为单独物体的优势,尝试简化为坐标
         private Vector3 _targetPosition;
-        private Vector3 _tonguePosition;
         [SerializeField] private Image targetImage;
+        [SerializeField] private LineRenderer lineRenderer;
+        private float _connectTongueLength;
+
 
         private void Start()
         {
-            transform.position = head.TongueRoot.position;
+            tonguePoint.transform.position = transform.position;
+            _connectTongueLength = tongueDistance;
         }
 
         private void Update()
@@ -47,6 +50,7 @@ namespace GamePlay.Player
             switch (_tongueState)
             {
                 case TongueState.Idle:
+                    UpdateTarget();
                     break;
                 case TongueState.Launching:
                     UpdateLaunch();
@@ -58,85 +62,91 @@ namespace GamePlay.Player
                     UpdateRetract();
                     break;
                 case TongueState.Pushing:
-                    
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            UpdateTarget();
+            DrawTongue();
             Debug.DrawLine(head.transform.position, tongueDistance * head.transform.right + head.transform.position, Color.red);
         }
         
-        public void Launch(Vector3 position, Vector2 direction)
+        public void Launch(Vector2 direction)
         {
             if(_tongueState != TongueState.Idle) return;
+            targetImage.gameObject.SetActive(false);
+            head.canMove = false;
             _currentFlightDistance = 0;
-            transform.position = position;
-            transform.right = direction;
+            transform.right = direction; // temp
             _tongueState = TongueState.Launching;
+            tonguePoint.transform.parent = null;
         }
         
         private void UpdateLaunch()
         {
-            if (_currentFlightDistance >= tongueDistance)
+            PFCLog.Debug("Tongue", $"target: {_currentTarget}" );
+            Vector3 direction = _targetPosition - tonguePoint.transform.position;
+            direction.Normalize();
+            tonguePoint.transform.position += direction * (Time.deltaTime * tongueSpeed);
+            if(Vector3.SqrMagnitude(tonguePoint.transform.position - _targetPosition) < 0.05f)
             {
-                Retract();
-                return;
+                TryConnect();
             }
-            _currentFlightDistance += Time.deltaTime * tongueSpeed;
-            transform.position += transform.right * (Time.deltaTime * tongueSpeed);
-            var res = Physics2D.OverlapCircle(transform.position, 0.5f);
-            if (res != null && res.CompareTag("Connectable"))
-            {
-                _currentTarget = res.GetComponent<ITarget>();
-                _tongueState = TongueState.Connecting;
-                head.canMove = false;
-                transform.parent = null;
-                distanceJoint2D.enabled = true;
-                distanceJoint2D.connectedAnchor = transform.position;
-                playerController.Property.IsConnecting = true;
-                
-            }
+            // if(_currentTarget != null)
+            // {
+            //     var direction = TargetPosition - transform.position;
+            // }
+            // else
+            // {
+            //     if (_currentFlightDistance >= tongueDistance)
+            //     {
+            //         Retract();
+            //         return;
+            //     }
+            //     _currentFlightDistance += Time.deltaTime * tongueSpeed;
+            //     transform.position += transform.right * (Time.deltaTime * tongueSpeed);
+            //     var res = Physics2D.OverlapCircle(transform.position, 0.5f);
+            //     if (res != null && res.CompareTag("Connectable"))
+            //     {
+            //         _currentTarget = res.GetComponent<ITarget>();
+            //         Connect();
+            //         
+            //     }
+            // }
         }
         
         private void UpdateConnecting()
         {
-            // todo: 判断目标是否可移动，之后要注意是否考虑质量
-            if(Vector3.SqrMagnitude(transform.position - playerController.transform.position) < tongueDistance * tongueDistance)
+            if(_connectTongueLength >  tongueDistance)
             {
-                distanceJoint2D.distance = Vector3.Distance(transform.position, playerController.transform.position);
-            }else
-            {
-                distanceJoint2D.distance = tongueDistance;
+                _connectTongueLength = tongueDistance;
             }
 
+            distanceJoint2D.distance = _connectTongueLength;
+            
             playerController.Property.ConnectAngle = Vector2.SignedAngle(Vector2.down,
                 playerController.transform.position - transform.position);
-            // PFCLog.Debug("Tongue", playerController.Property.connectAngle);
         }
         
         private void UpdateRetract()
         {
-            if (Vector3.SqrMagnitude(transform.position - head.TongueRoot.position) < 0.05f)
+            if (Vector3.SqrMagnitude(tonguePoint.transform.position - transform.position) < 0.05f)
             {
                 _tongueState = TongueState.Idle;
-                transform.position = head.TongueRoot.position;
+                tonguePoint.transform.position = transform.position;
                 head.canMove = true;
+                tonguePoint.transform.parent = transform;
             }
-            Vector3 direction = head.TongueRoot.position - transform.position;
+            Vector3 direction = transform.position - tonguePoint.transform.position;
             direction.Normalize();
-            transform.position += direction.normalized * (Time.deltaTime * retractSpeed);
+            tonguePoint.transform.position += direction * (Time.deltaTime * retractSpeed);
         }
 
         public void Retract()
         {
-            transform.parent = head.transform;
-            transform.localScale = Vector3.one; // temp
             _tongueState = TongueState.Retracting;
             distanceJoint2D.enabled = false;
             _currentTarget = null;
             playerController.Property.IsConnecting = false;
-
         }
 
         public void Interact()
@@ -150,45 +160,51 @@ namespace GamePlay.Player
         private void UpdateTarget()
         {   
             var hit = Physics2D.Raycast(transform.position, transform.right, tongueDistance);
-            _targetPosition = hit.point;
-            
-            _currentTarget = hit.collider != null ? hit.collider.GetComponent<ITarget>() : null;
-            
-            if (_currentTarget != null)
+            if (hit.collider)
             {
-                targetImage.gameObject.SetActive(true);
-                if(_currentTarget.IsAdsorb)
+                _currentTarget = hit.collider.GetComponent<ITarget>();
+                if (_currentTarget != null)
                 {
-                    targetImage.transform.position = Camera.main.WorldToScreenPoint(_currentTarget.AdsorbPosition);
+                    if(_currentTarget.IsAdsorb)
+                        _targetPosition = _currentTarget.AdsorbPosition;
+                    else
+                        _targetPosition = hit.point;
+                    targetImage.gameObject.SetActive(true);
+                    targetImage.transform.position = Camera.main.WorldToScreenPoint(_targetPosition);
                 }
                 else
                 {
-                    targetImage.transform.position = Camera.main.WorldToScreenPoint(_targetPosition);
+                    targetImage.gameObject.SetActive(false);
+                    _targetPosition = hit.point;
                 }
             }
             else
             {
                 targetImage.gameObject.SetActive(false);
+                _currentTarget = null;
+                _targetPosition = transform.position + transform.right * tongueDistance;
             }
+        }
 
-            // if (hit.collider != null)
-            // {
-            //     _currentTarget = hit.collider.GetComponent<ITarget>();
-            //     targetImage.gameObject.SetActive(true);
-            //     if(_currentTarget is { IsAdsorb: true })
-            //     {
-            //         targetImage.transform.position = Camera.main.WorldToScreenPoint(_currentTarget.AdsorbPosition);
-            //     }
-            //     else
-            //     {
-            //         targetImage.transform.position = Camera.main.WorldToScreenPoint(pos);
-            //     }
-            // }
-            // else
-            // {
-            //     _currentTarget = null;
-            //     targetImage.gameObject.SetActive(false);
-            // }
+        private void TryConnect()
+        {
+            PFCLog.Debug("Tongue",$"TryConnect: {_currentTarget}");
+            if (_currentTarget == null)
+            {
+                Retract();
+                return;
+            }
+            _connectTongueLength = Vector3.Distance(playerController.transform.position, _targetPosition);
+            _tongueState = TongueState.Connecting;
+            distanceJoint2D.enabled = true;
+            distanceJoint2D.connectedAnchor = _targetPosition;
+            playerController.Property.IsConnecting = true;
+        }
+
+        private void DrawTongue()
+        {
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, tonguePoint.transform.position);
         }
     }
 }

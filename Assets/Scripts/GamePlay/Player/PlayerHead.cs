@@ -18,7 +18,6 @@ namespace GamePlay.Player
         [SerializeField] private Transform tongueRoot;
         [SerializeField] private PlayerController playerController;
         public DirectionLimit DirectionLimit;
-        public Transform TongueRoot => tongueRoot;
         
         public bool canMove;
         
@@ -55,7 +54,7 @@ namespace GamePlay.Player
 
         private void LaunchTongue()
         {
-            playerTongue.Launch(transform.position, transform.right);
+            playerTongue.Launch(transform.right);
         }
 
         public void RetractTongue()
