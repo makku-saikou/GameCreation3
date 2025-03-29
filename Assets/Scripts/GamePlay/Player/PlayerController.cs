@@ -14,6 +14,8 @@ using UnityEngine;
 // 现在的实现中,我们暂不考虑蹬墙或蹭墙,如果有,未来可以算作空中子状态
 namespace GamePlay.Player
 {
+    public delegate void PlayerFlap();
+    
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private PlayerHead head;
@@ -36,6 +38,8 @@ namespace GamePlay.Player
         [SerializeField]private Rigidbody2D rb;
         public Rigidbody2D Rb => rb;
         
+        public PlayerFlap PlayerFlap;
+        
         [SerializeField] private Transform groundCheckPoint; // 地面检测点
         [SerializeField] private Transform wallCheckPoint1; // 墙壁检测点
         [SerializeField] private Transform wallCheckPoint2; // 墙壁检测点
@@ -50,6 +54,7 @@ namespace GamePlay.Player
             CheckState();
             InputCheck();
             StateMachine.UpdateCallback(Time.deltaTime);
+            PlayerFlap?.Invoke();
         }
         
         private void FixedUpdate()
@@ -124,14 +129,6 @@ namespace GamePlay.Player
             _stateMachine.AddState(smashState);
         }
         
-        public void Flip()
-        {
-            if (!property.CanFlip) return;
-            property.IsFacingRight = !property.IsFacingRight;
-            Entity.Rotate(0, 180, 0);
-            head.transform.localScale = new Vector3(1, -1 * head.transform.localScale.y, 1);
-        }
-        
         /// <summary>
         /// 检查状态的替换由玩家本体负责，而不放入状态中
         /// </summary>
@@ -183,4 +180,5 @@ namespace GamePlay.Player
             Gizmos.DrawWireSphere(wallCheckPoint2.position, property.wallCheckRadius);
         }
     }
+    
 }
