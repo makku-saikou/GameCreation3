@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 2522039149253004541}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -707,8 +707,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 5553778798862907640}
   playerHead: {fileID: 3959717701253126937}
-  OnGroundUpLimit: 0.6
-  OnGroundDownLimit: 0.2
 --- !u!1 &8034755906072876687
 GameObject:
   m_ObjectHideFlags: 0

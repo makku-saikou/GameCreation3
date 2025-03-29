@@ -15,14 +15,14 @@ namespace GamePlay.Player
     {
         [SerializeField] private PlayerController playerController;
         [SerializeField] private PlayerHead playerHead;
-        [SerializeField][Range(0,1)] private float OnGroundUpLimit;
-        [SerializeField][Range(0,1)] private float OnGroundDownLimit;
+        private PlayerProperty _property;
         
         private DirectionLimit _onGroundLimit;
         private DirectionLimit _onAirLimit;
         
         private void Start()
         {
+            _property = playerController.Property;
             _onGroundLimit = OnGroundLimit;
             _onAirLimit = OnAirLimit;
             
@@ -39,24 +39,24 @@ namespace GamePlay.Player
         {
             if (direction.y > 0)
             {
-                if (direction.y > OnGroundUpLimit)
+                if (direction.y > _property.onGroundUpLimit)
                 {
-                    direction.y = OnGroundUpLimit;
+                    direction.y = _property.onGroundUpLimit;
                     if(playerController.Property.IsFacingRight)
-                        direction.x = 1 - OnGroundUpLimit * OnGroundUpLimit;
+                        direction.x = 1 - _property.onGroundUpLimit * _property.onGroundUpLimit;
                     else
-                        direction.x = -1 + OnGroundUpLimit * OnGroundUpLimit;
+                        direction.x = -1 + _property.onGroundUpLimit * _property.onGroundUpLimit;
                 }
             }
             else
             {
-                if (direction.y < -OnGroundDownLimit)
+                if (direction.y < -_property.onGroundDownLimit)
                 {
-                    direction.y = -OnGroundDownLimit;
+                    direction.y = -_property.onGroundDownLimit;
                     if(playerController.Property.IsFacingRight)
-                        direction.x = 1 - OnGroundDownLimit * OnGroundDownLimit;
+                        direction.x = 1 - _property.onGroundDownLimit * _property.onGroundDownLimit;
                     else
-                        direction.x = -1 + OnGroundDownLimit * OnGroundDownLimit;
+                        direction.x = -1 + _property.onGroundDownLimit * _property.onGroundDownLimit;
                 }
             }
             

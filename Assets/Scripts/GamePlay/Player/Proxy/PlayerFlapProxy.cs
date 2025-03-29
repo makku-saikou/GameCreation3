@@ -13,6 +13,7 @@ namespace GamePlay.Player
     public class PlayerFlapProxy : MonoBehaviour
     {
         [SerializeField] private PlayerController playerController;
+        
         private void Update()
         {
             // todo: 根据状态

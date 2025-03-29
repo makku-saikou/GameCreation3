@@ -55,6 +55,10 @@ namespace GamePlay.Player
         public float tongueSpeed = 40;
         public float retractSpeed = 100;
         public float minLength = 2;
+        
+        [Header("其他功能")]
+        [SerializeField][Range(0,1)] public float onGroundUpLimit = 0.2f;
+        [SerializeField][Range(0,1)] public float onGroundDownLimit = 0.6f;
 
         private Animator _animator;
         
