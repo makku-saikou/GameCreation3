@@ -24,11 +24,6 @@ namespace GamePlay.Player.PlayerState
         {
             base.EnterCallback(prev);
             PFCLog.Debug("Enter OnGround State");
-            AddressableModule addressableModule = new AddressableModule();
-            addressableModule.Load<Sprite>("Body0", sprite =>
-            {
-                _player.SpriteRenderer.sprite = sprite.Result;
-            });
         }
         
         public override void UpdateCallback(float deltaTime)

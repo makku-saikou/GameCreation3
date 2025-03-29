@@ -19,12 +19,6 @@ namespace GamePlay.Player.PlayerState
         {
             base.EnterCallback(prev);
             PFCLog.Debug("Enter Hang State");
-            AddressableModule addressableModule = new AddressableModule();
-            addressableModule.Load<Sprite>("Body0", sprite =>
-            {
-                _player.SpriteRenderer.sprite = sprite.Result;
-            });
-            
             _rb.gravityScale = _p.hangGravityScale;
         }
 

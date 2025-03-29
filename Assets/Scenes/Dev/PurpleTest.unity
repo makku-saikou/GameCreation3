@@ -1578,6 +1578,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1145292298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 696215044771975828, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+  m_PrefabInstance: {fileID: 508641522131164855}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1161986498
 GameObject:
   m_ObjectHideFlags: 0
@@ -2573,6 +2578,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8238423557046667480, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
   m_PrefabInstance: {fileID: 508641522131164855}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1942500129
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145292298}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6e09efa9775b2f04e8a5b1cbb3ac3794, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2045994755
 GameObject:
   m_ObjectHideFlags: 0
@@ -2987,7 +3013,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 696215044771975828, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1942500129}
   m_SourcePrefab: {fileID: 100100000, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
 --- !u!1001 &5792089704111238932
 PrefabInstance:

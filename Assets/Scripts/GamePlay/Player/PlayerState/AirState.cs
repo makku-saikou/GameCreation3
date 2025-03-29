@@ -20,11 +20,6 @@ namespace GamePlay.Player.PlayerState
         {
             base.EnterCallback(prev);
             PFCLog.Debug("Enter Air State");
-            AddressableModule addressableModule = new AddressableModule();
-            addressableModule.Load<Sprite>("Body1", sprite =>
-            {
-                _player.SpriteRenderer.sprite = sprite.Result;
-            });
         }
 
         public override void ExitCallback(HState next)

@@ -21,11 +21,7 @@ namespace GamePlay.Player.PlayerState
         {
             base.EnterCallback(prev);
             _rb.gravityScale = 0;
-            AddressableModule addressableModule = new AddressableModule();
-            addressableModule.Load<Sprite>("Body0", sprite =>
-            {
-                _player.SpriteRenderer.sprite = sprite.Result;
-            });
+
             Vector2 vector = _rb.velocity;
             vector.x = 0;
             _rb.velocity = vector;

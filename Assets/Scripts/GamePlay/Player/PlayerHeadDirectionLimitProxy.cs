@@ -60,14 +60,14 @@ namespace GamePlay.Player
                 }
             }
             
-            Vector3 lineDirection = new Vector3(1 - OnGroundUpLimit * OnGroundUpLimit, OnGroundUpLimit);
-            Debug.DrawLine(playerHead.transform.position, playerHead.transform.position + lineDirection, Color.red);
-            lineDirection = new Vector3(-1 + OnGroundDownLimit * OnGroundDownLimit, -OnGroundDownLimit);
-            Debug.DrawLine(playerHead.transform.position, playerHead.transform.position + lineDirection, Color.red);
-            lineDirection = new Vector3(1 - OnGroundDownLimit * OnGroundDownLimit, -OnGroundDownLimit);
-            Debug.DrawLine(playerHead.transform.position, playerHead.transform.position + lineDirection, Color.red);
-            lineDirection = new Vector3(-1 + OnGroundUpLimit * OnGroundUpLimit, OnGroundUpLimit);
-            Debug.DrawLine(playerHead.transform.position, playerHead.transform.position + lineDirection, Color.red);
+            // Vector3 lineDirection = new Vector3(1 - OnGroundUpLimit * OnGroundUpLimit, OnGroundUpLimit);
+            // Debug.DrawLine(playerHead.transform.position, playerHead.transform.position + lineDirection, Color.red);
+            // lineDirection = new Vector3(-1 + OnGroundDownLimit * OnGroundDownLimit, -OnGroundDownLimit);
+            // Debug.DrawLine(playerHead.transform.position, playerHead.transform.position + lineDirection, Color.red);
+            // lineDirection = new Vector3(1 - OnGroundDownLimit * OnGroundDownLimit, -OnGroundDownLimit);
+            // Debug.DrawLine(playerHead.transform.position, playerHead.transform.position + lineDirection, Color.red);
+            // lineDirection = new Vector3(-1 + OnGroundUpLimit * OnGroundUpLimit, OnGroundUpLimit);
+            // Debug.DrawLine(playerHead.transform.position, playerHead.transform.position + lineDirection, Color.red);
             return direction;
         }
         

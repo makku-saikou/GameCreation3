@@ -127,6 +127,7 @@ namespace GamePlay.Player
             if (!property.CanFlip) return;
             property.IsFacingRight = !property.IsFacingRight;
             Entity.Rotate(0, 180, 0);
+            head.transform.localScale = new Vector3(1, -1 * head.transform.localScale.y, 1);
         }
         
         /// <summary>

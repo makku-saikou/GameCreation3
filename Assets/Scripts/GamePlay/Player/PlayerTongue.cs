@@ -91,27 +91,6 @@ namespace GamePlay.Player
             {
                 TryConnect();
             }
-            // if(_currentTarget != null)
-            // {
-            //     var direction = TargetPosition - transform.position;
-            // }
-            // else
-            // {
-            //     if (_currentFlightDistance >= tongueDistance)
-            //     {
-            //         Retract();
-            //         return;
-            //     }
-            //     _currentFlightDistance += Time.deltaTime * tongueSpeed;
-            //     transform.position += transform.right * (Time.deltaTime * tongueSpeed);
-            //     var res = Physics2D.OverlapCircle(transform.position, 0.5f);
-            //     if (res != null && res.CompareTag("Connectable"))
-            //     {
-            //         _currentTarget = res.GetComponent<ITarget>();
-            //         Connect();
-            //         
-            //     }
-            // }
         }
         
         private void UpdateConnecting()
