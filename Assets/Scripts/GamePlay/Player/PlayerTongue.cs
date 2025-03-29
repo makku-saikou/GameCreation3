@@ -23,12 +23,10 @@ namespace GamePlay.Player
     }
     public class PlayerTongue : MonoBehaviour
     {
-        [SerializeField] private float tongueDistance = 8f;
-        [SerializeField] private float tongueSpeed;
-        [SerializeField] private float retractSpeed;
         [SerializeField] private DistanceJoint2D distanceJoint2D;
         [SerializeField] private PlayerHead head;
         [SerializeField] private PlayerController playerController;
+        private PlayerProperty _property;
         private float _currentFlightDistance;
         private ITarget _currentTarget;
         [SerializeField]private TongueState _tongueState;
@@ -41,8 +39,9 @@ namespace GamePlay.Player
 
         private void Start()
         {
+            _property = playerController.Property;
             tonguePoint.transform.position = transform.position;
-            _connectTongueLength = tongueDistance;
+            _connectTongueLength = _property.tongueDistance;
         }
 
         private void Update()
@@ -67,7 +66,7 @@ namespace GamePlay.Player
                     throw new ArgumentOutOfRangeException();
             }
             DrawTongue();
-            Debug.DrawLine(head.transform.position, tongueDistance * head.transform.right + head.transform.position, Color.red);
+            Debug.DrawLine(head.transform.position, _property.tongueDistance * head.transform.right + head.transform.position, Color.red);
         }
         
         public void Launch(Vector2 direction)
@@ -86,7 +85,7 @@ namespace GamePlay.Player
             PFCLog.Debug("Tongue", $"target: {_currentTarget}" );
             Vector3 direction = _targetPosition - tonguePoint.transform.position;
             direction.Normalize();
-            tonguePoint.transform.position += direction * (Time.deltaTime * tongueSpeed);
+            tonguePoint.transform.position += direction * (Time.deltaTime * _property.tongueSpeed);
             if(Vector3.SqrMagnitude(tonguePoint.transform.position - _targetPosition) < 0.05f)
             {
                 TryConnect();
@@ -95,9 +94,9 @@ namespace GamePlay.Player
         
         private void UpdateConnecting()
         {
-            if(_connectTongueLength >  tongueDistance)
+            if(_connectTongueLength >  _property.tongueDistance)
             {
-                _connectTongueLength = tongueDistance;
+                _connectTongueLength = _property.tongueDistance;
             }
 
             distanceJoint2D.distance = _connectTongueLength;
@@ -117,7 +116,7 @@ namespace GamePlay.Player
             }
             Vector3 direction = transform.position - tonguePoint.transform.position;
             direction.Normalize();
-            tonguePoint.transform.position += direction * (Time.deltaTime * retractSpeed);
+            tonguePoint.transform.position += direction * (Time.deltaTime * _property.retractSpeed);
         }
 
         public void Retract()
@@ -138,7 +137,7 @@ namespace GamePlay.Player
 
         private void UpdateTarget()
         {   
-            var hit = Physics2D.Raycast(transform.position, transform.right, tongueDistance);
+            var hit = Physics2D.Raycast(transform.position, transform.right, _property.tongueDistance);
             if (hit.collider)
             {
                 _currentTarget = hit.collider.GetComponent<ITarget>();
@@ -161,7 +160,7 @@ namespace GamePlay.Player
             {
                 targetImage.gameObject.SetActive(false);
                 _currentTarget = null;
-                _targetPosition = transform.position + transform.right * tongueDistance;
+                _targetPosition = transform.position + transform.right * _property.tongueDistance;
             }
         }
 

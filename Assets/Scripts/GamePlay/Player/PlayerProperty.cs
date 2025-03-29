@@ -50,6 +50,12 @@ namespace GamePlay.Player
         [Header("下砸")]
         public float smashVelocity = 30f;               // 下砸速度
         
+        [Header("舌头")]
+        public float tongueDistance = 8f;
+        public float tongueSpeed = 40;
+        public float retractSpeed = 100;
+        public float minLength = 2;
+        
         // todo: 剥离玩家输入
 
         public int AmountOfJumpLeft { get; set; }              // 剩余跳跃次数
