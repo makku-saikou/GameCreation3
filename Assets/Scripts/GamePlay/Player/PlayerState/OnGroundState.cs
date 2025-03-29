@@ -8,7 +8,6 @@
 using System;
 using Common.FSM;
 using PurpleFlowerCore;
-using PurpleFlowerCore.Resource;
 using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
@@ -24,6 +23,7 @@ namespace GamePlay.Player.PlayerState
         {
             base.EnterCallback(prev);
             PFCLog.Debug("Enter OnGround State");
+            
         }
         
         public override void UpdateCallback(float deltaTime)
@@ -49,14 +49,6 @@ namespace GamePlay.Player.PlayerState
                 else
                     _jumpTimer = _p.jumpTimerSet;
             }
-
-            // if (_p.checkVariableJump && !Input.GetButton("Jump"))
-            // {
-            //     _p.checkVariableJump = false;
-            //     var velocity = _rb.velocity;
-            //     velocity = new Vector2(velocity.x, velocity.y * _p.variableJumpHeightMultiplier);
-            //     _rb.velocity = velocity;
-            // }
         }
 
         private void CheckMovementState()
@@ -70,10 +62,7 @@ namespace GamePlay.Player.PlayerState
             if (_p.IsGrounded && _rb.velocity.y <= 0.01f) // 着陆时
             {
                 _p.AmountOfJumpLeft = _p.amountOfJump;
-                // _p.checkVariableJump = false;
             }
-
-            // if (_p.isTouchingWall) _p.checkVariableJump = false;
 
             _p.CanJump = _p.AmountOfJumpLeft > 0;
             
@@ -90,10 +79,6 @@ namespace GamePlay.Player.PlayerState
         {
             if (!_p.CanMove) return;
             _rb.velocity = new Vector2(_p.onGroundSpeed * _p.MovementInput, _rb.velocity.y);
-            // else
-            // {
-            //     _rb.velocity = new Vector2(0, _rb.velocity.y);
-            // }
         }
         
         private void NormalJump()
@@ -104,7 +89,6 @@ namespace GamePlay.Player.PlayerState
             
             _p.AmountOfJumpLeft--;
             _jumpTimer = 0;
-            // _p.checkVariableJump = true;
         }
     }
 }

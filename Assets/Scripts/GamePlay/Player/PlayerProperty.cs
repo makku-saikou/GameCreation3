@@ -55,13 +55,20 @@ namespace GamePlay.Player
         public float tongueSpeed = 40;
         public float retractSpeed = 100;
         public float minLength = 2;
+
+        private Animator _animator;
         
         // todo: 剥离玩家输入
 
         public int AmountOfJumpLeft { get; set; }              // 剩余跳跃次数
         public int FacingDirection => IsFacingRight ? 1 : -1;  // _isFacingRight的数值形式，方便计算
         public bool IsFacingRight { get; set; }                // 是否正面向右边
-        public bool IsWalking { get; set; }                    // 是否在行走，动画参数
+
+        public bool IsWalking
+        {
+            get => _animator.GetBool("Walking");
+            set => _animator.SetBool("Walking", value);
+        }
         public bool IsGrounded { get; set; }                   // 是否在地面上，由Physics2D判定
         public bool IsWallSliding { get; set; }                // 是否在滑墙
         public bool WallJumpFlag { get; set; }                 // 划墙跳后的延迟标记
@@ -81,13 +88,14 @@ namespace GamePlay.Player
         // [RO] public bool checkVariableJump;                 // 当成功跳跃时被激活，若跳跃期间松开空格，则会施加额外的向下的力
         // [RO] public bool isTouchingWall;                    // 是否贴墙，由Physics2D判定
         
-        public void Init()
+        public void Init(PlayerController player)
         {
             AmountOfJumpLeft = amountOfJump;
             IsFacingRight = true;
             CanMove = true;
             CanFlip = true;
             XMaxSpeed = commonXMaxSpeed;
+            _animator = player.Animator;
         }
     }
 }

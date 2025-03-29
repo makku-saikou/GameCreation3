@@ -29,9 +29,12 @@ namespace GamePlay.Player
         
         [SerializeField] private SpriteRenderer spriteRenderer;
         public SpriteRenderer SpriteRenderer => spriteRenderer;
+
+        [SerializeField] private Animator animator;
+        public Animator Animator => animator;
         
-        private Rigidbody2D _rb;
-        public Rigidbody2D Rb => _rb;
+        [SerializeField]private Rigidbody2D rb;
+        public Rigidbody2D Rb => rb;
         
         [SerializeField] private Transform groundCheckPoint; // 地面检测点
         [SerializeField] private Transform wallCheckPoint1; // 墙壁检测点
@@ -60,8 +63,7 @@ namespace GamePlay.Player
         /// </summary>
         private void Init()
         {
-            _rb = GetComponent<Rigidbody2D>();
-            property.Init();
+            property.Init(this);
             
             // 定义整个状态机
             // 状态
