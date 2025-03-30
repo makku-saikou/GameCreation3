@@ -16,7 +16,7 @@ MonoBehaviour:
   amountOfJump: 1
   gravityScale: 5
   commonXMaxSpeed: 10
-  xMaxSpeedRecoverScale: 0.03
+  xMaxSpeedRecoverScale: 0.01
   xForceInAir: 105
   hangDrag: 2
   hangSwayForce: 50
