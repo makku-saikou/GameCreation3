@@ -171,6 +171,8 @@ namespace GamePlay.Player
         {
             property.XMaxSpeed = Mathf.Lerp(property.XMaxSpeed, property.commonXMaxSpeed,
                 property.xMaxSpeedRecoverScale);
+            property.YMaxSpeed = Mathf.Lerp(property.YMaxSpeed, property.commonYMaxSpeed,
+                property.yMaxSpeedRecoverScale);
         }
         
         private void OnDrawGizmos()

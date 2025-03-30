@@ -36,9 +36,15 @@ namespace GamePlay.Player.PlayerState
                 _rb.AddForce(new Vector2(_p.xForceInAir * _p.MovementInput, 0), ForceMode2D.Force);
             }
             var velocity = _rb.velocity;
+            // todo: 最大限制优化
             if (Mathf.Abs(velocity.x) > _p.XMaxSpeed)
             {
                 velocity = new Vector2(Mathf.Sign(velocity.x) * _p.XMaxSpeed, velocity.y);
+                _rb.velocity = velocity;
+            }
+            if (Mathf.Abs(velocity.y) > _p.YMaxSpeed)
+            {
+                velocity = new Vector2(velocity.x, Mathf.Sign(velocity.y) * _p.YMaxSpeed);
                 _rb.velocity = velocity;
             }
         }

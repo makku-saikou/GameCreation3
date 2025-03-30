@@ -51,6 +51,7 @@ namespace GamePlay.Player.PlayerState
             _rb.gravityScale = _p.gravityScale;
             _player.Rb.drag = 0;
             _p.XMaxSpeed = Mathf.Abs(_p.XMaxSpeed);
+            _p.YMaxSpeed = Mathf.Abs(_p.YMaxSpeed);
         }
 
         private void HangJump()
