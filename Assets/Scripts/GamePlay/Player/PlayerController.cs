@@ -168,7 +168,7 @@ namespace GamePlay.Player
         private void InputCheck()
         {
             property.MovementInput = Input.GetAxis("Horizontal");
-            property.JumpInput = Input.GetButton("Jump");
+            property.JumpInput = Input.GetButtonDown("Jump");
             property.DownInput = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
             property.UpInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
         }
