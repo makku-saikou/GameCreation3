@@ -10,7 +10,6 @@ using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
 {
-    // 关于在柱子上的实现有待商榷，可以考虑不使用直接控制PlayerController，而是控制假玩家
     public class OnPillarState : PlayerStateBase
     {
         public OnPillarState(PlayerController player, string name) : base(player, name) { }
@@ -19,7 +18,24 @@ namespace GamePlay.Player.PlayerState
         {
             base.EnterCallback(prev);
             _rb.gravityScale = 0;
-            // _player.transform.position = 
+            _rb.velocity = Vector2.zero;
+        }
+
+        public override void FixedUpdateCallback()
+        {
+            base.FixedUpdateCallback();
+            if(_p.UpInput && _player.transform.position.y < _p.maxClimbHeight)
+            {
+                _rb.velocity = new Vector2(0, _p.climbSpeed);
+            }
+            else if(_p.DownInput)
+            {
+                _rb.velocity = new Vector2(0, -_p.climbSpeed);
+            }
+            else
+            {
+                _rb.velocity = new Vector2(_rb.velocity.x, 0);
+            }
         }
 
         public override void ExitCallback(HState next)

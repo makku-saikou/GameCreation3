@@ -11,7 +11,6 @@ using UnityEngine;
 
 // 考虑到玩家状态较多，各种子状态需要考虑有无连接或其他情况，舌头本身也有多种状态
 // 我们使用并行的两个状态机，一个用于玩家，一个用于舌头，两状态机之间的影响和数据传递通过独立拉出的玩家数据类实现
-// 现在的实现中,我们暂不考虑蹬墙或蹭墙,如果有,未来可以算作空中子状态
 namespace GamePlay.Player
 {
     public delegate void PlayerFlap();
@@ -77,6 +76,7 @@ namespace GamePlay.Player
             HangState hangState = new HangState(this, "Hang");
             OnWallState onWallState = new OnWallState(this, "OnWall");
             SmashState smashState = new SmashState(this, "Smash");
+            OnPillarState onPillarState = new OnPillarState(this, "OnPillar");
             
             // 转移 todo: 定义转移写法的修改
             HTransition jump = new HTransition("Jump", onGroundState, airState);
@@ -121,12 +121,33 @@ namespace GamePlay.Player
             smashLand.OnCheck += () => property.IsGrounded;
             smashState.AddTransition(smashLand);
             
+            HTransition climb = new HTransition("Climb", onGroundState, onPillarState);
+            climb.OnCheck += () => property.IsOnPillar && property.UpInput;
+            onGroundState.AddTransition(climb);
+            
+            HTransition climbLand = new HTransition("ClimbLand", onPillarState, onGroundState);
+            climbLand.OnCheck += () => property.IsOnPillar && property.DownInput && property.IsGrounded;
+            onPillarState.AddTransition(climbLand);
+            
+            HTransition climbJump = new HTransition("ClimbJump", onPillarState, airState);
+            climbJump.OnCheck += () => property.IsOnPillar && property.JumpInput;
+            onPillarState.AddTransition(climbJump);
+            
+            HTransition climbToHang = new HTransition("ClimbToHang", onPillarState, hangState);
+            climbToHang.OnCheck += () => property.IsOnPillar && property.IsConnecting;
+            onPillarState.AddTransition(climbToHang);
+            
+            HTransition airClimb = new HTransition("AirClimb", airState, onPillarState);
+            airClimb.OnCheck += () => property.IsOnPillar && property.UpInput;
+            airState.AddTransition(airClimb);
+            
             // 初始化状态机
             _stateMachine = new HStateMachine(onGroundState);
             _stateMachine.AddState(airState);
             _stateMachine.AddState(hangState);
             _stateMachine.AddState(onWallState);
             _stateMachine.AddState(smashState);
+            _stateMachine.AddState(onPillarState);
         }
         
         /// <summary>
@@ -147,11 +168,12 @@ namespace GamePlay.Player
         private void InputCheck()
         {
             property.MovementInput = Input.GetAxis("Horizontal");
-            property.JumpInput = Input.GetButtonDown("Jump");
-            property.DownInput = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
+            property.JumpInput = Input.GetButton("Jump");
+            property.DownInput = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+            property.UpInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.CompareTag("Pillar"))
             {
@@ -159,7 +181,7 @@ namespace GamePlay.Player
             }
         }
         
-        private void OnCollisionExit2D(Collision2D other)
+        private void OnTriggerExit2D(Collider2D other)
         {
             if (other.gameObject.CompareTag("Pillar"))
             {
