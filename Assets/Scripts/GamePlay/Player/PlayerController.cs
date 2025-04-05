@@ -6,6 +6,7 @@
 // -------------------------------------------------
 
 using Common.FSM;
+using GamePlay.Player.PlayerInput;
 using GamePlay.Player.PlayerState;
 using UnityEngine;
 
@@ -39,6 +40,9 @@ namespace GamePlay.Player
         
         public PlayerFlap PlayerFlap;
         
+        private PlayerInputBase _input;
+        public PlayerInputBase Input => _input;
+        
         [SerializeField] private Transform groundCheckPoint; // 地面检测点
         [SerializeField] private Transform wallCheckPoint1; // 墙壁检测点
         [SerializeField] private Transform wallCheckPoint2; // 墙壁检测点
@@ -51,7 +55,6 @@ namespace GamePlay.Player
         private void Update()
         {
             CheckState();
-            InputCheck();
             StateMachine.UpdateCallback(Time.deltaTime);
             PlayerFlap?.Invoke();
         }
@@ -68,6 +71,9 @@ namespace GamePlay.Player
         private void Init()
         {
             property.Init(this);
+            
+            //todo:
+            _input = new PlayerInput_Legacy();
             
             // 定义整个状态机
             // 状态
@@ -96,8 +102,8 @@ namespace GamePlay.Player
             hangState.AddTransition(hangJump);
             
             HTransition onWall = new HTransition("OnWall", airState, onWallState);
-            onWall.OnCheck += () => property.IsWallSliding && (property.IsRightWall && property.MovementInput >= 0.5f ||
-                                                               !property.IsRightWall && property.MovementInput <= -0.5f);
+            onWall.OnCheck += () => property.IsWallSliding && (property.IsRightWall && Input.MovementInput >= 0.5f ||
+                                                               !property.IsRightWall && Input.MovementInput <= -0.5f);
             airState.AddTransition(onWall);
             
             HTransition wallJump = new HTransition("WallJump", onWallState, airState);
@@ -105,8 +111,8 @@ namespace GamePlay.Player
             onWallState.AddTransition(wallJump);
             
             HTransition wallLeave = new HTransition("WallLeave", onWallState, airState);
-            wallLeave.OnCheck += () => property.IsWallSliding && (property.IsRightWall && property.MovementInput <= 0f ||
-                                                                 !property.IsRightWall && property.MovementInput >= 0f);
+            wallLeave.OnCheck += () => property.IsWallSliding && (property.IsRightWall && Input.MovementInput <= 0f ||
+                                                                 !property.IsRightWall && Input.MovementInput >= 0f);
             onWallState.AddTransition(wallLeave);
             
             HTransition wallToGround = new HTransition("WallToGround", onWallState, onGroundState);
@@ -114,7 +120,7 @@ namespace GamePlay.Player
             onWallState.AddTransition(wallToGround);
             
             HTransition smash = new HTransition("Smash", airState, smashState);
-            smash.OnCheck += () => property.DownInput;
+            smash.OnCheck += () => Input.DownInput;
             airState.AddTransition(smash);
             
             HTransition smashLand = new HTransition("SmashLand", smashState, onGroundState);
@@ -122,15 +128,15 @@ namespace GamePlay.Player
             smashState.AddTransition(smashLand);
             
             HTransition climb = new HTransition("Climb", onGroundState, onPillarState);
-            climb.OnCheck += () => property.IsOnPillar && property.UpInput;
+            climb.OnCheck += () => property.IsOnPillar && Input.UpInput;
             onGroundState.AddTransition(climb);
             
             HTransition climbLand = new HTransition("ClimbLand", onPillarState, onGroundState);
-            climbLand.OnCheck += () => property.IsOnPillar && property.DownInput && property.IsGrounded;
+            climbLand.OnCheck += () => property.IsOnPillar && Input.DownInput && property.IsGrounded;
             onPillarState.AddTransition(climbLand);
             
             HTransition climbJump = new HTransition("ClimbJump", onPillarState, airState);
-            climbJump.OnCheck += () => property.IsOnPillar && property.JumpInput;
+            climbJump.OnCheck += () => property.IsOnPillar && Input.JumpInputDown;
             onPillarState.AddTransition(climbJump);
             
             HTransition climbToHang = new HTransition("ClimbToHang", onPillarState, hangState);
@@ -138,7 +144,7 @@ namespace GamePlay.Player
             onPillarState.AddTransition(climbToHang);
             
             HTransition airClimb = new HTransition("AirClimb", airState, onPillarState);
-            airClimb.OnCheck += () => property.IsOnPillar && property.UpInput;
+            airClimb.OnCheck += () => property.IsOnPillar && Input.UpInput;
             airState.AddTransition(airClimb);
             
             // 初始化状态机
@@ -163,14 +169,6 @@ namespace GamePlay.Player
             property.IsRightWall = rightWall;
             property.IsWallSliding = Physics2D.OverlapCircle(wallCheckPoint1.position, property.wallCheckRadius,
                 property.groundLayer) || rightWall;
-        }
-
-        private void InputCheck()
-        {
-            property.MovementInput = Input.GetAxis("Horizontal");
-            property.JumpInput = Input.GetButtonDown("Jump");
-            property.DownInput = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
-            property.UpInput = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
         }
 
         private void OnTriggerEnter2D(Collider2D other)

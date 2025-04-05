@@ -20,6 +20,7 @@ MonoBehaviour:
   xMaxSpeedRecoverScale: 0.01
   yMaxSpeedRecoverScale: 0.05
   xForceInAir: 200
+  variableJumpForce: 0.95
   hangDrag: 2
   hangSwayForce: 50
   hangGravityScale: 12
@@ -33,13 +34,14 @@ MonoBehaviour:
   wallCheckRadius: 0.1
   wallSlideSpeed: 4
   wallSpeedRecoverScale: 0.15
-  wallJumpForce: 140
+  wallJumpForce: 160
   wallJumpTimerSet: 0.15
-  wallJumpDirection: {x: 1, y: 1.5}
+  wallJumpDirection: {x: 1, y: 1.4}
   smashVelocity: 30
   tongueDistance: 8
   tongueSpeed: 40
   retractSpeed: 100
   minLength: 2
+  climbSpeed: 5
   onGroundUpLimit: 0.2
   onGroundDownLimit: 0.6

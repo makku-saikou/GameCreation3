@@ -5,9 +5,9 @@
 // Description:
 // -------------------------------------------------
 
+using System;
 using Common.FSM;
 using PurpleFlowerCore;
-using PurpleFlowerCore.Resource;
 using PurpleFlowerCore.Utility;
 using UnityEngine;
 
@@ -20,35 +20,35 @@ namespace GamePlay.Player.PlayerState
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
-            _rb.gravityScale = 0;
+            Rb.gravityScale = 0;
 
-            Vector2 vector = _rb.velocity;
+            Vector2 vector = Rb.velocity;
             vector.x = 0;
-            _rb.velocity = vector;
+            Rb.velocity = vector;
         }
 
         public override void ExitCallback(HState next)
         {
             base.ExitCallback(next);
-            _rb.gravityScale = _p.gravityScale;
+            Rb.gravityScale = P.gravityScale;
         }
 
         public override void UpdateCallback(float deltaTime)
         {
             base.UpdateCallback(deltaTime);
-            if (_p.JumpInput)
+            if (Input.JumpInputDown)
             {
                 PFCLog.Debug("Wall Jump");
-                Vector2 direction = _p.WallJumpDirection;
-                if (_p.IsRightWall)
+                Vector2 direction = P.WallJumpDirection;
+                if (P.IsRightWall)
                 {
                     direction.x = -direction.x;
                 }
-                _rb.AddForce(direction * _p.wallJumpForce, ForceMode2D.Impulse);
-                _p.WallJumpFlag = true;
-                DelayUtility.Delay(_p.wallJumpTimerSet, () =>
+                Rb.AddForce(direction * P.wallJumpForce, ForceMode2D.Impulse);
+                P.WallJumpFlag = true;
+                DelayUtility.Delay(P.wallJumpTimerSet, () =>
                 {
-                    _p.WallJumpFlag = false;
+                    P.WallJumpFlag = false;
                 });
             }
         }
@@ -57,9 +57,9 @@ namespace GamePlay.Player.PlayerState
         {
             base.FixedUpdateCallback();
             
-            Vector2 velocity = _rb.velocity;
-            velocity = Vector2.Lerp(velocity, new Vector2(0, -_p.wallSlideSpeed), _p.wallSpeedRecoverScale);
-            _rb.velocity = velocity;
+            Vector2 velocity = Rb.velocity;
+            velocity = Vector2.Lerp(velocity, new Vector2(0, -P.wallSlideSpeed), P.wallSpeedRecoverScale);
+            Rb.velocity = velocity;
         }
     }
 }

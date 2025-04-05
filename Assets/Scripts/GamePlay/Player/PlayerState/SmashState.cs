@@ -16,7 +16,7 @@ namespace GamePlay.Player.PlayerState
         public override void FixedUpdateCallback()
         {
             base.FixedUpdateCallback();
-            _rb.velocity = new Vector2(0, -_p.smashVelocity);
+            Rb.velocity = new Vector2(0, -P.smashVelocity);
         }
     }
 }

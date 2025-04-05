@@ -17,31 +17,31 @@ namespace GamePlay.Player.PlayerState
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
-            _rb.gravityScale = 0;
-            _rb.velocity = Vector2.zero;
+            Rb.gravityScale = 0;
+            Rb.velocity = Vector2.zero;
         }
 
         public override void FixedUpdateCallback()
         {
             base.FixedUpdateCallback();
-            if(_p.UpInput && _player.transform.position.y < _p.maxClimbHeight)
+            if(Input.UpInput && Player.transform.position.y < P.maxClimbHeight)
             {
-                _rb.velocity = new Vector2(0, _p.climbSpeed);
+                Rb.velocity = new Vector2(0, P.climbSpeed);
             }
-            else if(_p.DownInput)
+            else if(Input.DownInput)
             {
-                _rb.velocity = new Vector2(0, -_p.climbSpeed);
+                Rb.velocity = new Vector2(0, -P.climbSpeed);
             }
             else
             {
-                _rb.velocity = new Vector2(_rb.velocity.x, 0);
+                Rb.velocity = new Vector2(Rb.velocity.x, 0);
             }
         }
 
         public override void ExitCallback(HState next)
         {
             base.ExitCallback(next);
-            _rb.gravityScale = _p.gravityScale;
+            Rb.gravityScale = P.gravityScale;
         }
     }
 }

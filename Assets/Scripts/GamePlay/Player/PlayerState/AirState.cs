@@ -7,7 +7,6 @@
 
 using Common.FSM;
 using PurpleFlowerCore;
-using PurpleFlowerCore.Resource;
 using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
@@ -31,22 +30,28 @@ namespace GamePlay.Player.PlayerState
         public override void FixedUpdateCallback()
         {
             base.FixedUpdateCallback();
-            if (_p.MovementInput != 0)
+            
+            if (Input.MovementInput != 0)
             {
-                _rb.AddForce(new Vector2(_p.xForceInAir * _p.MovementInput, 0), ForceMode2D.Force);
+                Rb.AddForce(new Vector2(P.xForceInAir * Input.MovementInput, 0), ForceMode2D.Force);
             }
-            var velocity = _rb.velocity;
-            // todo: 最大限制优化
-            if (Mathf.Abs(velocity.x) > _p.XMaxSpeed)
+            var velocity = Rb.velocity;
+            
+            if (Mathf.Abs(velocity.x) > P.XMaxSpeed)
             {
-                velocity = new Vector2(Mathf.Sign(velocity.x) * _p.XMaxSpeed, velocity.y);
-                _rb.velocity = velocity;
+                velocity = new Vector2(Mathf.Sign(velocity.x) * P.XMaxSpeed, velocity.y);
             }
-            if (Mathf.Abs(velocity.y) > _p.YMaxSpeed)
+            if (Mathf.Abs(velocity.y) > P.YMaxSpeed)
             {
-                velocity = new Vector2(velocity.x, Mathf.Sign(velocity.y) * _p.YMaxSpeed);
-                _rb.velocity = velocity;
+                velocity = new Vector2(velocity.x, Mathf.Sign(velocity.y) * P.YMaxSpeed);
             }
+            if (!Input.JumpInput)
+            {
+                velocity = new Vector2(velocity.x, velocity.y - P.variableJumpForce);
+            }
+            Rb.velocity = velocity;
         }
+        
+        
     }
 }

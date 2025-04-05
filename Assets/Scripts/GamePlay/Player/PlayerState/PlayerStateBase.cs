@@ -7,21 +7,24 @@
 // -------------------------------------------------
 
 using Common.FSM;
+using GamePlay.Player.PlayerInput;
 using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
 {
     public abstract class PlayerStateBase : HState
     {
-        protected PlayerProperty _p;
-        protected PlayerController _player;
-        protected Rigidbody2D _rb;
+        protected PlayerProperty P;
+        protected PlayerController Player;
+        protected Rigidbody2D Rb;
+        protected PlayerInputBase Input;
 
         public PlayerStateBase(PlayerController player, string name) : base(name)
         {
-            _player = player;
-            _p = player.Property;
-            _rb = player.Rb;
+            Player = player;
+            P = player.Property;
+            Rb = player.Rb;
+            Input = player.Input;
         }
     }
 }

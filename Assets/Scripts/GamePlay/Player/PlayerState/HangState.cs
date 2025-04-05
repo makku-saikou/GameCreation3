@@ -19,17 +19,17 @@ namespace GamePlay.Player.PlayerState
         {
             base.EnterCallback(prev);
             PFCLog.Debug("Enter Hang State");
-            _rb.gravityScale = _p.hangGravityScale;
+            Rb.gravityScale = P.hangGravityScale;
         }
 
         public override void UpdateCallback(float deltaTime)
         {
             base.UpdateCallback(deltaTime);
-            
-            if(_p.JumpInput)
+
+            if (Input.JumpInputDown)
             {
                 // todo: 解耦
-                _player.Head.RetractTongue();
+                Player.Head.RetractTongue();
                 HangJump();
             }
         }
@@ -38,25 +38,25 @@ namespace GamePlay.Player.PlayerState
         {
             base.FixedUpdateCallback();
                 
-            _player.Rb.drag = _p.MovementInput == 0 ? _p.hangDrag : 0;
-            if (_p.MovementInput != 0)
+            Player.Rb.drag = Input.MovementInput == 0 ? P.hangDrag : 0;
+            if (Input.MovementInput != 0)
             {
-                _player.Rb.AddForce(new Vector2(_p.hangSwayForce * _p.MovementInput, 0), ForceMode2D.Force);
+                Player.Rb.AddForce(new Vector2(P.hangSwayForce * Input.MovementInput, 0), ForceMode2D.Force);
             }
         }
 
         public override void ExitCallback(HState next)
         {
             base.ExitCallback(next);
-            _rb.gravityScale = _p.gravityScale;
-            _player.Rb.drag = 0;
-            _p.XMaxSpeed = Mathf.Abs(_p.XMaxSpeed);
-            _p.YMaxSpeed = Mathf.Abs(_p.YMaxSpeed);
+            Rb.gravityScale = P.gravityScale;
+            Player.Rb.drag = 0;
+            P.XMaxSpeed = Mathf.Abs(P.XMaxSpeed);
+            P.YMaxSpeed = Mathf.Abs(P.YMaxSpeed);
         }
 
         private void HangJump()
         {
-            _rb.velocity += new Vector2(0, _p.jumpForce);
+            Rb.velocity += new Vector2(0, P.jumpForce);
         }
     }
 }

@@ -42,33 +42,33 @@ namespace GamePlay.Player.PlayerState
 
         private void CheckInput()
         {
-            if (_p.JumpInput)
+            if (Input.JumpInputDown)
             {
-                if (_p.IsGrounded || (_p.AmountOfJumpLeft > 0))
+                if (P.IsGrounded || (P.AmountOfJumpLeft > 0))
                     NormalJump();
                 else
-                    _jumpTimer = _p.jumpTimerSet;
+                    _jumpTimer = P.jumpTimerSet;
             }
         }
 
         private void CheckMovementState()
         {
-            _p.IsWalking = Math.Abs(_rb.velocity.x) > 0.01f; // rigidbody的速度在移动时会有一个极小的值，故为>0.01，其他小值也可，令人费解的bug
+            P.IsWalking = Math.Abs(Rb.velocity.x) > 0.01f; // rigidbody的速度在移动时会有一个极小的值，故为>0.01，其他小值也可，令人费解的bug
         }
         
         private void CheckJumpState()
         {
             // todo: 整理逻辑
-            if (_p.IsGrounded && _rb.velocity.y <= 0.01f) // 着陆时
+            if (P.IsGrounded && Rb.velocity.y <= 0.01f) // 着陆时
             {
-                _p.AmountOfJumpLeft = _p.amountOfJump;
+                P.AmountOfJumpLeft = P.amountOfJump;
             }
 
-            _p.CanJump = _p.AmountOfJumpLeft > 0;
+            P.CanJump = P.AmountOfJumpLeft > 0;
             
             if (_jumpTimer > 0)
             {
-                if (_p.IsGrounded) 
+                if (P.IsGrounded) 
                     NormalJump();
                 
                 _jumpTimer -= Time.deltaTime;
@@ -77,17 +77,17 @@ namespace GamePlay.Player.PlayerState
         
         private void ApplyMovement()
         {
-            if (!_p.CanMove) return;
-            _rb.velocity = new Vector2(_p.onGroundSpeed * _p.MovementInput, _rb.velocity.y);
+            if (!P.CanMove) return;
+            Rb.velocity = new Vector2(P.onGroundSpeed * Input.MovementInput, Rb.velocity.y);
         }
         
         private void NormalJump()
         {
-            if (!_p.CanJump) return;
+            if (!P.CanJump) return;
             
-            _rb.velocity = new Vector2(_rb.velocity.x, _p.jumpForce);
+            Rb.velocity = new Vector2(Rb.velocity.x, P.jumpForce);
             
-            _p.AmountOfJumpLeft--;
+            P.AmountOfJumpLeft--;
             _jumpTimer = 0;
         }
     }

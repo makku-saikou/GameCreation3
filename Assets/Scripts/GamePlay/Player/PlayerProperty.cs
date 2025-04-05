@@ -27,7 +27,7 @@ namespace GamePlay.Player
         [Header("空中")]
         public float xForceInAir = 10f;                     // 空中水平移动力度
         // public float fallMultiplier = 0.95f;                 // 下落时的空气阻力
-        // public float variableJumpHeightMultiplier = 0.5f;   // 提前松开空格，则会跳的更低
+        public float variableJumpForce = 0.95f;   // 提前松开空格，则会跳的更低
         
         [Header("悬挂")]
         [Range(0,5)]public float hangDrag = 2f;       //  悬挂且无输入时的空中阻尼
@@ -92,10 +92,7 @@ namespace GamePlay.Player
         public float YMaxSpeed { get; set; }                    // 最大速度
         
         // todo: 剥离玩家输入
-        public float MovementInput { get; set; }               // 输入方向
-        public bool JumpInput { get; set; }                     // 输入跳跃
-        public bool DownInput { get; set; }                    // 输入下砸
-        public bool UpInput { get; set; }                     // 输入上
+
         public Vector2 WallJumpDirection => wallJumpDirection.normalized; // 滑墙跳跃方向
         // [RO] public bool checkVariableJump;                 // 当成功跳跃时被激活，若跳跃期间松开空格，则会施加额外的向下的力
         // [RO] public bool isTouchingWall;                    // 是否贴墙，由Physics2D判定
