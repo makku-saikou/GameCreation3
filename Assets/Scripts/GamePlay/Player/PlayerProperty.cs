@@ -72,19 +72,49 @@ namespace GamePlay.Player
         public int FacingDirection => IsFacingRight ? 1 : -1;  // _isFacingRight的数值形式，方便计算
         public bool IsFacingRight { get; set; }                // 是否正面向右边
 
+        private bool _isWalking;
         public bool IsWalking
         {
-            get => _animator.GetBool("Walking");
-            set => _animator.SetBool("Walking", value);
+            get => _isWalking;
+            set
+            {
+                if(_isWalking == value) return;
+                _isWalking = value;
+                _animator.SetBool("Walking", value);
+            }
         }
-        public bool IsGrounded { get; set; }                   // 是否在地面上，由Physics2D判定
+
+        // 是否在地面上，由Physics2D判定
+        private bool _isGrounded;
+        public bool IsGrounded
+        {
+            get => _isGrounded;
+            set
+            {
+                if(_isGrounded == value) return;
+                _isGrounded = value;
+                _animator.SetBool("Ground", value);
+            }
+        }
+
+        // 是否与物体连接
+        private bool _isConnecting;
+        public bool IsConnecting
+        {
+            get => _isConnecting;
+            set
+            {
+                if(_isConnecting == value) return;
+                _isConnecting = value;
+                _animator.SetBool("Connecting", value);
+            }
+        }
         public bool IsWallSliding { get; set; }                // 是否在滑墙
         public bool WallJumpFlag { get; set; }                 // 划墙跳后的延迟标记
         public bool IsRightWall { get; set; }                  // 是否在右墙
         public bool CanJump { get; set; }                       // 是否可以进行普通跳跃
         public bool CanMove { get; set; }                      // 是否可以移动
         public bool CanFlip { get; set; }                      // 是否可以转向
-        public bool IsConnecting { get; set; }                 // 是否与物体连接
         public float ConnectAngle { get; set; }                // 悬挂时,连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负
         public bool IsOnPillar { get; set; }                   // 是否在可攀爬的柱子前
         public float maxClimbHeight { get; set; }                 // 最大攀爬高度

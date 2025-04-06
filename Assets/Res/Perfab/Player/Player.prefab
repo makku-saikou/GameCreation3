@@ -723,7 +723,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTongue: {fileID: 5445178873793561151}
   tongueRoot: {fileID: 140825107737555479}
-  playerController: {fileID: 0}
+  playerController: {fileID: 5553778798862907640}
+  spriteRenderer: {fileID: 7217829328899958769}
   canMove: 1
 --- !u!114 &5333001339523546377
 MonoBehaviour:

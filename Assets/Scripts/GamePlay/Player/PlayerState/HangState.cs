@@ -15,13 +15,26 @@ namespace GamePlay.Player.PlayerState
     public class HangState : PlayerStateBase
     {
         public HangState(PlayerController player, string name) : base(player, name) { }
+
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
             PFCLog.Debug("Enter Hang State");
             Rb.gravityScale = P.hangGravityScale;
+            Player.Head.SetShow(false);
         }
 
+        
+        public override void ExitCallback(HState next)
+        {
+            base.ExitCallback(next);
+            Rb.gravityScale = P.gravityScale;
+            Player.Rb.drag = 0;
+            P.XMaxSpeed = Mathf.Abs(P.XMaxSpeed);
+            P.YMaxSpeed = Mathf.Abs(P.YMaxSpeed);
+            Player.Head.SetShow(true);
+        }
+        
         public override void UpdateCallback(float deltaTime)
         {
             base.UpdateCallback(deltaTime);
@@ -44,16 +57,7 @@ namespace GamePlay.Player.PlayerState
                 Player.Rb.AddForce(new Vector2(P.hangSwayForce * Input.MovementInput, 0), ForceMode2D.Force);
             }
         }
-
-        public override void ExitCallback(HState next)
-        {
-            base.ExitCallback(next);
-            Rb.gravityScale = P.gravityScale;
-            Player.Rb.drag = 0;
-            P.XMaxSpeed = Mathf.Abs(P.XMaxSpeed);
-            P.YMaxSpeed = Mathf.Abs(P.YMaxSpeed);
-        }
-
+        
         private void HangJump()
         {
             Rb.velocity += new Vector2(0, P.jumpForce);

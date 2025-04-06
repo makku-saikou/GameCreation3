@@ -19,12 +19,14 @@ namespace GamePlay.Player.PlayerState
         {
             base.EnterCallback(prev);
             PFCLog.Debug("Enter Air State");
+            Player.Head.SetShow(false);
         }
 
         public override void ExitCallback(HState next)
         {
             base.ExitCallback(next);
             PFCLog.Debug("Exit Air State");
+            Player.Head.SetShow(true);
         }
         
         public override void FixedUpdateCallback()
@@ -51,7 +53,5 @@ namespace GamePlay.Player.PlayerState
             }
             Rb.velocity = velocity;
         }
-        
-        
     }
 }

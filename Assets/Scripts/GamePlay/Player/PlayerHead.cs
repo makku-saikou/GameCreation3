@@ -17,6 +17,7 @@ namespace GamePlay.Player
         [SerializeField] private PlayerTongue playerTongue;
         [SerializeField] private Transform tongueRoot;
         [SerializeField] private PlayerController playerController;
+        [SerializeField] private SpriteRenderer spriteRenderer;
         public DirectionLimit DirectionLimit;
         
         public bool canMove;
@@ -68,5 +69,11 @@ namespace GamePlay.Player
         }
 
         #endregion
+
+        public void SetShow(bool show)
+        {
+            spriteRenderer.enabled = show;
+        }
+
     }
 }
