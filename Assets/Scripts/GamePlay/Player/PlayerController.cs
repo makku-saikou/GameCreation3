@@ -102,8 +102,9 @@ namespace GamePlay.Player
             hangState.AddTransition(hangJump);
             
             HTransition onWall = new HTransition("OnWall", airState, onWallState);
-            onWall.OnCheck += () => property.IsWallSliding && (property.IsRightWall && Input.MovementInput >= 0.5f ||
-                                                               !property.IsRightWall && Input.MovementInput <= -0.5f);
+            // onWall.OnCheck += () => property.IsWallSliding && (property.IsRightWall && Input.MovementInput >= 0.5f ||
+            //                                                    !property.IsRightWall && Input.MovementInput <= -0.5f);
+            onWall.OnCheck += () => property.IsWallSliding && !property.WallJumpFlag;
             airState.AddTransition(onWall);
             
             HTransition wallJump = new HTransition("WallJump", onWallState, airState);
@@ -111,8 +112,8 @@ namespace GamePlay.Player
             onWallState.AddTransition(wallJump);
             
             HTransition wallLeave = new HTransition("WallLeave", onWallState, airState);
-            wallLeave.OnCheck += () => property.IsWallSliding && (property.IsRightWall && Input.MovementInput <= 0f ||
-                                                                 !property.IsRightWall && Input.MovementInput >= 0f);
+            wallLeave.OnCheck += () => property.IsWallSliding && (property.IsRightWall && Input.MovementInput < -0.5f ||
+                                                                 !property.IsRightWall && Input.MovementInput > 0.5f);
             onWallState.AddTransition(wallLeave);
             
             HTransition wallToGround = new HTransition("WallToGround", onWallState, onGroundState);
@@ -202,5 +203,4 @@ namespace GamePlay.Player
             Gizmos.DrawWireSphere(wallCheckPoint2.position, property.wallCheckRadius);
         }
     }
-    
 }

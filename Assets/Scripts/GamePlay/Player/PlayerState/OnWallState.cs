@@ -29,6 +29,7 @@ namespace GamePlay.Player.PlayerState
         public override void ExitCallback(HState next)
         {
             base.ExitCallback(next);
+            ResetTimer();
             Rb.gravityScale = P.gravityScale;
         }
 
@@ -44,11 +45,7 @@ namespace GamePlay.Player.PlayerState
                     direction.x = -direction.x;
                 }
                 Rb.AddForce(direction * P.wallJumpForce, ForceMode2D.Impulse);
-                P.WallJumpFlag = true;
-                DelayUtility.Delay(P.wallJumpTimerSet, () =>
-                {
-                    P.WallJumpFlag = false;
-                });
+                ResetTimer();
             }
         }
 
@@ -57,8 +54,15 @@ namespace GamePlay.Player.PlayerState
             base.FixedUpdateCallback();
             
             Vector2 velocity = Rb.velocity;
+            // velocity = Vector2.Lerp(velocity, new Vector2(0, 0), P.wallSpeedRecoverScale);
             velocity = Vector2.Lerp(velocity, new Vector2(0, -P.wallSlideSpeed), P.wallSpeedRecoverScale);
             Rb.velocity = velocity;
+        }
+
+        private void ResetTimer()
+        {
+            P.WallJumpFlag = true;
+            DelayUtility.Delay(P.wallJumpTimerSet, () => { P.WallJumpFlag = false; });
         }
     }
 }
