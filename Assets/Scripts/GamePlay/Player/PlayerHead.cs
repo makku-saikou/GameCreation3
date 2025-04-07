@@ -6,6 +6,7 @@
 // Description: 头部的控制逻辑,调用舌头的相关方法
 // -------------------------------------------------
 
+using System;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -19,9 +20,12 @@ namespace GamePlay.Player
         [SerializeField] private PlayerController playerController;
         [SerializeField] private SpriteRenderer spriteRenderer;
         public DirectionLimit DirectionLimit;
-        
-        public bool canMove;
-        
+        private PlayerProperty _property;
+        private void Start()
+        {
+            _property = playerController.Property;
+        }
+
         private void Update()
         {
             UpdateDirection();
@@ -41,7 +45,7 @@ namespace GamePlay.Player
 
         private void UpdateDirection()
         {
-            if (!canMove) return;
+            if (!_property.HeadCanMove) return;
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var direction = mousePos - transform.position;
             direction.z = 0;
@@ -55,6 +59,7 @@ namespace GamePlay.Player
 
         private void LaunchTongue()
         {
+            if (!_property.HeadCanLaunch) return;
             playerTongue.Launch(transform.right);
         }
 

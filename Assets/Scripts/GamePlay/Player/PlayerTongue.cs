@@ -73,7 +73,7 @@ namespace GamePlay.Player
         {
             if(_tongueState != TongueState.Idle) return;
             targetImage.gameObject.SetActive(false);
-            head.canMove = false;
+            _property.HeadCanMove = false;
             _currentFlightDistance = 0;
             transform.right = direction; // temp
             _tongueState = TongueState.Launching;
@@ -101,8 +101,9 @@ namespace GamePlay.Player
 
             distanceJoint2D.distance = _connectTongueLength;
             
-            playerController.Property.ConnectAngle = Vector2.SignedAngle(Vector2.down,
-                playerController.transform.position - transform.position);
+            // playerController.Property.ConnectAngle = Vector2.SignedAngle(Vector2.down,
+            //     playerController.transform.position - transform.position);
+            // playerController.Property.ConnectDirection = (playerController.transform.position - transform.position).normalized;
         }
         
         private void UpdateRetract()
@@ -111,7 +112,7 @@ namespace GamePlay.Player
             {
                 _tongueState = TongueState.Idle;
                 tonguePoint.transform.position = transform.position;
-                head.canMove = true;
+                _property.HeadCanMove = true;
                 tonguePoint.transform.parent = transform;
             }
             Vector3 direction = transform.position - tonguePoint.transform.position;
@@ -177,6 +178,7 @@ namespace GamePlay.Player
             distanceJoint2D.enabled = true;
             distanceJoint2D.connectedAnchor = _targetPosition;
             playerController.Property.IsConnecting = true;
+            _property.HangPoint = _targetPosition;
         }
 
         private void DrawTongue()

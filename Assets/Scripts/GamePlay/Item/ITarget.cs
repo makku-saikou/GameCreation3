@@ -2,7 +2,6 @@
 // Copyright@ makku-saikou
 // Author : jianhao li
 // Date: 2025_03_08
-// File: IConnectable.cs
 // Description:
 // -------------------------------------------------
 

@@ -2,24 +2,26 @@
 // Copyright@ makku-saikou
 // Author : jianhao li
 // Date: 2025_03_16
-// File: PlayerFlapProxy.cs
 // Description:
 // -------------------------------------------------
 
-using System;
 using Common.FSM;
 using UnityEngine;
 
 namespace GamePlay.Player
 {
+    //todo: 将翻转功能代理出来的可行性
     public class PlayerFlapProxy : MonoBehaviour
     {
         [SerializeField] private PlayerController player;
+        private PlayerProperty _property;
         private PlayerFlap _onGround;
         private PlayerFlap _air;
+        private PlayerFlap _wall;
 
         private void Start()
         {
+            _property = player.Property;
             _onGround = () =>
             {
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -37,6 +39,17 @@ namespace GamePlay.Player
             };
 
             _air = () => { };
+
+            _wall = () =>
+            {
+                switch (_property.IsFacingRight)
+                {
+                    case false when _property.IsRightWall:
+                    case true when !_property.IsRightWall:
+                        Flip();
+                        break;
+                }
+            };
             
              player.StateMachine.OnStateChanged += CheckFlap;
         }
@@ -52,6 +65,7 @@ namespace GamePlay.Player
             {
                 "OnGround" => _onGround,
                 "Air" => _air,
+                "OnWall" => _wall,
                 _ => player.PlayerFlap
             };
         }

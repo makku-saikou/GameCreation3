@@ -109,17 +109,36 @@ namespace GamePlay.Player
                 _animator.SetBool("Connecting", value);
             }
         }
-        public bool IsWallSliding { get; set; }                // 是否在滑墙
+
+        // 是否在滑墙
+        private bool _isWallSliding;
+        public bool IsWallSliding
+        {
+            get => _isWallSliding;
+            set
+            {
+                if(_isWallSliding == value) return;
+                _isWallSliding = value;
+                _animator.SetBool("Wall", value);
+            }
+        }
         public bool WallJumpFlag { get; set; }                 // 划墙跳后的延迟标记
         public bool IsRightWall { get; set; }                  // 是否在右墙
         public bool CanJump { get; set; }                       // 是否可以进行普通跳跃
         public bool CanMove { get; set; }                      // 是否可以移动
         public bool CanFlip { get; set; }                      // 是否可以转向
-        public float ConnectAngle { get; set; }                // 悬挂时,连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负
+        // public float ConnectAngle { get; set; }                // 悬挂时,连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负
+        // public Vector3 ConnectDirection { get; set; }                // 悬挂时,连接点与玩家的连线
+        public Vector3 HangPoint { get; set; }                  // 悬挂点
+
         public bool IsOnPillar { get; set; }                   // 是否在可攀爬的柱子前
         public float maxClimbHeight { get; set; }                 // 最大攀爬高度
         public float XMaxSpeed { get; set; }                    // 最大速度
         public float YMaxSpeed { get; set; }                    // 最大速度
+
+        public bool HeadCanMove { get; set; }
+        public bool HeadCanLaunch { get; set; }
+
         
         // todo: 剥离玩家输入
 
@@ -133,6 +152,8 @@ namespace GamePlay.Player
             IsFacingRight = true;
             CanMove = true;
             CanFlip = true;
+            HeadCanMove = true;
+            HeadCanLaunch = true;
             XMaxSpeed = commonXMaxSpeed;
             YMaxSpeed = commonYMaxSpeed;
             _animator = player.Animator;

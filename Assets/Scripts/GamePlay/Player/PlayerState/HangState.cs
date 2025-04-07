@@ -7,7 +7,6 @@
 
 using Common.FSM;
 using PurpleFlowerCore;
-using PurpleFlowerCore.Resource;
 using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
@@ -33,6 +32,8 @@ namespace GamePlay.Player.PlayerState
             P.XMaxSpeed = Mathf.Abs(P.XMaxSpeed);
             P.YMaxSpeed = Mathf.Abs(P.YMaxSpeed);
             Player.Head.SetShow(true);
+            
+            Player.transform.right = Vector2.right;
         }
         
         public override void UpdateCallback(float deltaTime)
@@ -50,17 +51,30 @@ namespace GamePlay.Player.PlayerState
         public override void FixedUpdateCallback()
         {
             base.FixedUpdateCallback();
-                
-            Player.Rb.drag = Input.MovementInput == 0 ? P.hangDrag : 0;
-            if (Input.MovementInput != 0)
-            {
-                Player.Rb.AddForce(new Vector2(P.hangSwayForce * Input.MovementInput, 0), ForceMode2D.Force);
-            }
+            
+            BodyDirection();
+            Move();
         }
         
         private void HangJump()
         {
             Rb.velocity += new Vector2(0, P.jumpForce);
+        }
+
+        private void BodyDirection()
+        {
+            var direction = P.HangPoint - Player.transform.position;
+            direction.Normalize();
+            Player.transform.up = direction;
+        }
+
+        private void Move()
+        {
+            Player.Rb.drag = Input.MovementInput == 0 ? P.hangDrag : 0;
+            if (Input.MovementInput != 0)
+            {
+                Player.Rb.AddForce(new Vector2(P.hangSwayForce * Input.MovementInput, 0), ForceMode2D.Force);
+            }
         }
     }
 }

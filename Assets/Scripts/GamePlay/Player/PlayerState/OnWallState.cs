@@ -24,6 +24,9 @@ namespace GamePlay.Player.PlayerState
             Vector2 vector = Rb.velocity;
             vector.x = 0;
             Rb.velocity = vector;
+            
+            Player.Head.SetShow(false);
+            P.HeadCanLaunch = false;
         }
 
         public override void ExitCallback(HState next)
@@ -31,6 +34,8 @@ namespace GamePlay.Player.PlayerState
             base.ExitCallback(next);
             ResetTimer();
             Rb.gravityScale = P.gravityScale;
+            
+            Player.Head.SetShow(true);
         }
 
         public override void UpdateCallback(float deltaTime)
@@ -62,6 +67,7 @@ namespace GamePlay.Player.PlayerState
         private void ResetTimer()
         {
             P.WallJumpFlag = true;
+            P.HeadCanLaunch = true;
             DelayUtility.Delay(P.wallJumpTimerSet, () => { P.WallJumpFlag = false; });
         }
     }

@@ -42,7 +42,6 @@ namespace GamePlay.Player
         
         private PlayerInputBase _input;
         public PlayerInputBase Input => _input;
-        
         [SerializeField] private Transform groundCheckPoint; // 地面检测点
         [SerializeField] private Transform wallCheckPoint1; // 墙壁检测点
         [SerializeField] private Transform wallCheckPoint2; // 墙壁检测点
