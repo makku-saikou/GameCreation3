@@ -14,7 +14,7 @@ namespace GamePlay.Item.OneWayPlatform
 		{
 			if (!other.gameObject.CompareTag("Player")) return;
 			var player = other.gameObject.GetComponent<PlayerController>();
-			if (player && player.StateMachine.CurrentState.Name == "Smash")
+			if (player && player.CurrentStateName == "Smash")
 				isSmashing = true;
 		}
 

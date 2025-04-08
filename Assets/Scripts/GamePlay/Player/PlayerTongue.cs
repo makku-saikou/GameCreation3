@@ -25,7 +25,7 @@ namespace GamePlay.Player
     {
         [SerializeField] private DistanceJoint2D distanceJoint2D;
         [SerializeField] private PlayerHead head;
-        [SerializeField] private PlayerController playerController;
+        [SerializeField] private PlayerController player;
         private PlayerProperty _property;
         private float _currentFlightDistance;
         private ITarget _currentTarget;
@@ -34,11 +34,15 @@ namespace GamePlay.Player
         private Vector3 _targetPosition;
         [SerializeField] private Image targetImage;
         [SerializeField] private LineRenderer lineRenderer;
+        [SerializeField] private Transform root0;
+        [SerializeField] private Transform root1;
+        
         
         private void Start()
         {
-            _property = playerController.Property;
+            _property = player.Property;
             tonguePoint.transform.position = transform.position;
+            transform.position = root0.position;
         }
 
         private void Update()
@@ -63,6 +67,7 @@ namespace GamePlay.Player
                     throw new ArgumentOutOfRangeException();
             }
             DrawTongue();
+            ChangeRootPos();
             Debug.DrawLine(head.transform.position, _property.tongueMaxLength * head.transform.right + head.transform.position, Color.red);
         }
         
@@ -75,6 +80,7 @@ namespace GamePlay.Player
             transform.right = direction; // temp
             _tongueState = TongueState.Launching;
             tonguePoint.transform.parent = null;
+            lineRenderer.enabled = true;
         }
         
         private void UpdateLaunch()
@@ -118,6 +124,7 @@ namespace GamePlay.Player
                 tonguePoint.transform.position = transform.position;
                 _property.HeadCanMove = true;
                 tonguePoint.transform.parent = transform;
+                lineRenderer.enabled = false;
             }
             Vector3 direction = transform.position - tonguePoint.transform.position;
             direction.Normalize();
@@ -129,14 +136,14 @@ namespace GamePlay.Player
             _tongueState = TongueState.Retracting;
             distanceJoint2D.enabled = false;
             _currentTarget = null;
-            playerController.Property.IsConnecting = false;
+            player.Property.IsConnecting = false;
         }
 
         public void Interact()
         {
             if(_currentTarget == null) return;
             if (_tongueState != TongueState.Connecting) return;
-            _currentTarget.Interact(playerController);
+            _currentTarget.Interact(player);
             Retract();
         }
 
@@ -177,11 +184,11 @@ namespace GamePlay.Player
                 Retract();
                 return;
             }
-            _property.CurrentTongueLength = Vector3.Distance(playerController.transform.position, _targetPosition);
+            _property.CurrentTongueLength = Vector3.Distance(player.transform.position, _targetPosition);
             _tongueState = TongueState.Connecting;
             distanceJoint2D.enabled = true;
             distanceJoint2D.connectedAnchor = _targetPosition;
-            playerController.Property.IsConnecting = true;
+            player.Property.IsConnecting = true;
             _property.HangPoint = _targetPosition;
         }
 
@@ -189,6 +196,14 @@ namespace GamePlay.Player
         {
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, tonguePoint.transform.position);
+        }
+
+        private void ChangeRootPos()
+        {
+            if (player.CurrentStateName == "Hang")
+                transform.position = root1.position;
+            else
+                transform.position = root0.position;
         }
     }
 }
