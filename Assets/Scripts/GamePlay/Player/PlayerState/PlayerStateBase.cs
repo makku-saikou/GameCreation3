@@ -14,7 +14,7 @@ namespace GamePlay.Player.PlayerState
 {
     public abstract class PlayerStateBase : HState
     {
-        protected PlayerProperty P;
+        protected PlayerProperty Property;
         protected PlayerController Player;
         protected Rigidbody2D Rb;
         protected PlayerInputBase Input;
@@ -22,7 +22,7 @@ namespace GamePlay.Player.PlayerState
         public PlayerStateBase(PlayerController player, string name) : base(name)
         {
             Player = player;
-            P = player.Property;
+            Property = player.Property;
             Rb = player.Rb;
             Input = player.Input;
         }

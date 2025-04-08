@@ -35,21 +35,21 @@ namespace GamePlay.Player.PlayerState
             
             if (Input.MovementInput != 0)
             {
-                Rb.AddForce(new Vector2(P.xForceInAir * Input.MovementInput, 0), ForceMode2D.Force);
+                Rb.AddForce(new Vector2(Property.xForceInAir * Input.MovementInput, 0), ForceMode2D.Force);
             }
             var velocity = Rb.velocity;
             
-            if (Mathf.Abs(velocity.x) > P.XMaxSpeed)
+            if (Mathf.Abs(velocity.x) > Property.XMaxSpeed)
             {
-                velocity = new Vector2(Mathf.Sign(velocity.x) * P.XMaxSpeed, velocity.y);
+                velocity = new Vector2(Mathf.Sign(velocity.x) * Property.XMaxSpeed, velocity.y);
             }
-            if (Mathf.Abs(velocity.y) > P.YMaxSpeed)
+            if (Mathf.Abs(velocity.y) > Property.YMaxSpeed)
             {
-                velocity = new Vector2(velocity.x, Mathf.Sign(velocity.y) * P.YMaxSpeed);
+                velocity = new Vector2(velocity.x, Mathf.Sign(velocity.y) * Property.YMaxSpeed);
             }
             if (!Input.JumpInput)
             {
-                velocity = new Vector2(velocity.x, velocity.y - P.variableJumpForce);
+                velocity = new Vector2(velocity.x, velocity.y - Property.variableJumpForce);
             }
             Rb.velocity = velocity;
         }

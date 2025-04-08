@@ -44,31 +44,31 @@ namespace GamePlay.Player.PlayerState
         {
             if (Input.JumpInputDown)
             {
-                if (P.IsGrounded || (P.AmountOfJumpLeft > 0))
+                if (Property.IsGrounded || (Property.AmountOfJumpLeft > 0))
                     NormalJump();
                 else
-                    _jumpTimer = P.jumpTimerSet;
+                    _jumpTimer = Property.jumpTimerSet;
             }
         }
 
         private void CheckMovementState()
         {
-            P.IsWalking = Math.Abs(Rb.velocity.x) > 0.01f; // rigidbody的速度在移动时会有一个极小的值，故为>0.01，其他小值也可，令人费解的bug
+            Property.IsWalking = Math.Abs(Rb.velocity.x) > 0.01f; // rigidbody的速度在移动时会有一个极小的值，故为>0.01，其他小值也可，令人费解的bug
         }
         
         private void CheckJumpState()
         {
             // todo: 整理逻辑
-            if (P.IsGrounded && Rb.velocity.y <= 0.01f) // 着陆时
+            if (Property.IsGrounded && Rb.velocity.y <= 0.01f) // 着陆时
             {
-                P.AmountOfJumpLeft = P.amountOfJump;
+                Property.AmountOfJumpLeft = Property.amountOfJump;
             }
 
-            P.CanJump = P.AmountOfJumpLeft > 0;
+            Property.CanJump = Property.AmountOfJumpLeft > 0;
             
             if (_jumpTimer > 0)
             {
-                if (P.IsGrounded) 
+                if (Property.IsGrounded) 
                     NormalJump();
                 
                 _jumpTimer -= Time.deltaTime;
@@ -77,17 +77,17 @@ namespace GamePlay.Player.PlayerState
         
         private void ApplyMovement()
         {
-            if (!P.CanMove) return;
-            Rb.velocity = new Vector2(P.onGroundSpeed * Input.MovementInput, Rb.velocity.y);
+            if (!Property.CanMove) return;
+            Rb.velocity = new Vector2(Property.onGroundSpeed * Input.MovementInput, Rb.velocity.y);
         }
         
         private void NormalJump()
         {
-            if (!P.CanJump) return;
+            if (!Property.CanJump) return;
             
-            Rb.velocity = new Vector2(Rb.velocity.x, P.jumpForce);
+            Rb.velocity = new Vector2(Rb.velocity.x, Property.jumpForce);
             
-            P.AmountOfJumpLeft--;
+            Property.AmountOfJumpLeft--;
             _jumpTimer = 0;
         }
     }

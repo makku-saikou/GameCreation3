@@ -282,11 +282,11 @@ DistanceJoint2D:
   m_ConnectedRigidBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_BreakAction: 3
+  m_BreakAction: 0
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 1
+  m_AutoConfigureDistance: 0
   m_Distance: 1.4920754
   m_MaxDistanceOnly: 0
 --- !u!114 &5553778798862907640
@@ -725,7 +725,6 @@ MonoBehaviour:
   tongueRoot: {fileID: 140825107737555479}
   playerController: {fileID: 5553778798862907640}
   spriteRenderer: {fileID: 7217829328899958769}
-  canMove: 1
 --- !u!114 &5333001339523546377
 MonoBehaviour:
   m_ObjectHideFlags: 0

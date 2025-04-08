@@ -26,14 +26,14 @@ namespace GamePlay.Player.PlayerState
             Rb.velocity = vector;
             
             Player.Head.SetShow(false);
-            P.HeadCanLaunch = false;
+            Property.HeadCanLaunch = false;
         }
 
         public override void ExitCallback(HState next)
         {
             base.ExitCallback(next);
             ResetTimer();
-            Rb.gravityScale = P.gravityScale;
+            Rb.gravityScale = Property.gravityScale;
             
             Player.Head.SetShow(true);
         }
@@ -44,12 +44,12 @@ namespace GamePlay.Player.PlayerState
             if (Input.JumpInputDown)
             {
                 PFCLog.Debug("Wall Jump");
-                Vector2 direction = P.WallJumpDirection;
-                if (P.IsRightWall)
+                Vector2 direction = Property.WallJumpDirection;
+                if (Property.IsRightWall)
                 {
                     direction.x = -direction.x;
                 }
-                Rb.AddForce(direction * P.wallJumpForce, ForceMode2D.Impulse);
+                Rb.AddForce(direction * Property.wallJumpForce, ForceMode2D.Impulse);
                 ResetTimer();
             }
         }
@@ -60,15 +60,15 @@ namespace GamePlay.Player.PlayerState
             
             Vector2 velocity = Rb.velocity;
             // velocity = Vector2.Lerp(velocity, new Vector2(0, 0), P.wallSpeedRecoverScale);
-            velocity = Vector2.Lerp(velocity, new Vector2(0, -P.wallSlideSpeed), P.wallSpeedRecoverScale);
+            velocity = Vector2.Lerp(velocity, new Vector2(0, -Property.wallSlideSpeed), Property.wallSpeedRecoverScale);
             Rb.velocity = velocity;
         }
 
         private void ResetTimer()
         {
-            P.WallJumpFlag = true;
-            P.HeadCanLaunch = true;
-            DelayUtility.Delay(P.wallJumpTimerSet, () => { P.WallJumpFlag = false; });
+            Property.WallJumpFlag = true;
+            Property.HeadCanLaunch = true;
+            DelayUtility.Delay(Property.wallJumpTimerSet, () => { Property.WallJumpFlag = false; });
         }
     }
 }

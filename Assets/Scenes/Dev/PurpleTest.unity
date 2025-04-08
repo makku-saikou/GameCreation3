@@ -2867,6 +2867,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5209331376776052768, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: m_BreakAction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209331376776052768, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: m_MaxDistanceOnly
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209331376776052768, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: m_AutoConfigureDistance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5445178873793561151, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
       propertyPath: targetImage
       value: 

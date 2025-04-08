@@ -24,13 +24,13 @@ namespace GamePlay.Player.PlayerState
         public override void FixedUpdateCallback()
         {
             base.FixedUpdateCallback();
-            if(Input.UpInput && Player.transform.position.y < P.maxClimbHeight)
+            if(Input.UpInput && Player.transform.position.y < Property.maxClimbHeight)
             {
-                Rb.velocity = new Vector2(0, P.climbSpeed);
+                Rb.velocity = new Vector2(0, Property.climbSpeed);
             }
             else if(Input.DownInput)
             {
-                Rb.velocity = new Vector2(0, -P.climbSpeed);
+                Rb.velocity = new Vector2(0, -Property.climbSpeed);
             }
             else
             {
@@ -41,7 +41,7 @@ namespace GamePlay.Player.PlayerState
         public override void ExitCallback(HState next)
         {
             base.ExitCallback(next);
-            Rb.gravityScale = P.gravityScale;
+            Rb.gravityScale = Property.gravityScale;
         }
     }
 }

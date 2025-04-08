@@ -11,6 +11,10 @@ using UnityEngine;
 
 namespace GamePlay.Player
 {
+    /// <summary>
+    /// 玩家属性的配置类和数据类，我们使用字段配置数据，使用属性缓存和传递信息
+    /// 同时，我们使用属性来封装和控制动画的播放
+    /// </summary>
     [CreateAssetMenu(fileName = "PlayerProperty", menuName = "Data/PlayerProperty")]
     [Configurable]
     public class PlayerProperty : ScriptableObject
@@ -30,9 +34,10 @@ namespace GamePlay.Player
         public float variableJumpForce = 0.95f;   // 提前松开空格，则会跳的更低
         
         [Header("悬挂")]
-        [Range(0,5)]public float hangDrag = 2f;       //  悬挂且无输入时的空中阻尼
+        [Range(0,5)]public float hangDrag = 2f;             //  悬挂且无输入时的空中阻尼
         public float hangSwayForce = 50f;                   // 悬挂时玩家输入的摇摆力
         public float hangGravityScale = 12f;                // 悬挂时的重力缩放
+        public float tongueLengthChangeSpeed = 1f;          // 舌头长度变化速度
         
         [Header("地面")]
         public float onGroundSpeed = 10f;                   // 地面移动速度
@@ -53,10 +58,10 @@ namespace GamePlay.Player
         public float smashVelocity = 30f;               // 下砸速度
         
         [Header("舌头")]
-        public float tongueDistance = 8f;
         public float tongueSpeed = 40;
         public float retractSpeed = 100;
-        public float minLength = 2;
+        public float tongueMaxLength = 8f;
+        public float tongueMinLength = 2;
         
         [Header("攀爬")]
         public float climbSpeed = 5f;                       // 攀爬速度
@@ -127,21 +132,17 @@ namespace GamePlay.Player
         public bool CanJump { get; set; }                       // 是否可以进行普通跳跃
         public bool CanMove { get; set; }                      // 是否可以移动
         public bool CanFlip { get; set; }                      // 是否可以转向
-        // public float ConnectAngle { get; set; }                // 悬挂时,连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负
-        // public Vector3 ConnectDirection { get; set; }                // 悬挂时,连接点与玩家的连线
+        // public float ConnectAngle { get; set; }             // 悬挂时,连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负
+        // public Vector3 ConnectDirection { get; set; }        // 悬挂时,连接点与玩家的连线
         public Vector3 HangPoint { get; set; }                  // 悬挂点
-
         public bool IsOnPillar { get; set; }                   // 是否在可攀爬的柱子前
-        public float maxClimbHeight { get; set; }                 // 最大攀爬高度
-        public float XMaxSpeed { get; set; }                    // 最大速度
+        public float maxClimbHeight { get; set; }              // 最大攀爬高度
+        public float XMaxSpeed { get; set; }                   // 最大速度
         public float YMaxSpeed { get; set; }                    // 最大速度
-
         public bool HeadCanMove { get; set; }
         public bool HeadCanLaunch { get; set; }
-
+        public float CurrentTongueLength { get; set; }       // 舌头当前长度
         
-        // todo: 剥离玩家输入
-
         public Vector2 WallJumpDirection => wallJumpDirection.normalized; // 滑墙跳跃方向
         // [RO] public bool checkVariableJump;                 // 当成功跳跃时被激活，若跳跃期间松开空格，则会施加额外的向下的力
         // [RO] public bool isTouchingWall;                    // 是否贴墙，由Physics2D判定

@@ -34,14 +34,11 @@ namespace GamePlay.Player
         private Vector3 _targetPosition;
         [SerializeField] private Image targetImage;
         [SerializeField] private LineRenderer lineRenderer;
-        private float _connectTongueLength;
-
-
+        
         private void Start()
         {
             _property = playerController.Property;
             tonguePoint.transform.position = transform.position;
-            _connectTongueLength = _property.tongueDistance;
         }
 
         private void Update()
@@ -66,7 +63,7 @@ namespace GamePlay.Player
                     throw new ArgumentOutOfRangeException();
             }
             DrawTongue();
-            Debug.DrawLine(head.transform.position, _property.tongueDistance * head.transform.right + head.transform.position, Color.red);
+            Debug.DrawLine(head.transform.position, _property.tongueMaxLength * head.transform.right + head.transform.position, Color.red);
         }
         
         public void Launch(Vector2 direction)
@@ -94,12 +91,19 @@ namespace GamePlay.Player
         
         private void UpdateConnecting()
         {
-            if(_connectTongueLength >  _property.tongueDistance)
+            if(_property.CurrentTongueLength >  _property.tongueMaxLength)
             {
-                _connectTongueLength = _property.tongueDistance;
+                _property.CurrentTongueLength = _property.tongueMaxLength;
             }
-
-            distanceJoint2D.distance = _connectTongueLength;
+            else if(_property.CurrentTongueLength < _property.tongueMinLength)
+            {
+                _property.CurrentTongueLength = _property.tongueMinLength;
+            }
+            if(!Mathf.Approximately(distanceJoint2D.distance, _property.CurrentTongueLength))
+            {
+                distanceJoint2D.distance = _property.CurrentTongueLength;
+            }
+            // PFCLog.Debug("PlayerTongue", $"CurrentTongueLength: {_property.CurrentTongueLength}");
             
             // playerController.Property.ConnectAngle = Vector2.SignedAngle(Vector2.down,
             //     playerController.transform.position - transform.position);
@@ -138,7 +142,7 @@ namespace GamePlay.Player
 
         private void UpdateTarget()
         {   
-            var hit = Physics2D.Raycast(transform.position, transform.right, _property.tongueDistance);
+            var hit = Physics2D.Raycast(transform.position, transform.right, _property.tongueMaxLength);
             if (hit.collider)
             {
                 _currentTarget = hit.collider.GetComponent<ITarget>();
@@ -161,7 +165,7 @@ namespace GamePlay.Player
             {
                 targetImage.gameObject.SetActive(false);
                 _currentTarget = null;
-                _targetPosition = transform.position + transform.right * _property.tongueDistance;
+                _targetPosition = transform.position + transform.right * _property.tongueMaxLength;
             }
         }
 
@@ -173,7 +177,7 @@ namespace GamePlay.Player
                 Retract();
                 return;
             }
-            _connectTongueLength = Vector3.Distance(playerController.transform.position, _targetPosition);
+            _property.CurrentTongueLength = Vector3.Distance(playerController.transform.position, _targetPosition);
             _tongueState = TongueState.Connecting;
             distanceJoint2D.enabled = true;
             distanceJoint2D.connectedAnchor = _targetPosition;

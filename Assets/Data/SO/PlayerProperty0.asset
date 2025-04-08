@@ -24,6 +24,7 @@ MonoBehaviour:
   hangDrag: 2
   hangSwayForce: 50
   hangGravityScale: 12
+  tongueLengthChangeSpeed: 5
   onGroundSpeed: 10
   groundCheckHeight: 0.34
   groundCheckWidth: 2.48
@@ -38,10 +39,10 @@ MonoBehaviour:
   wallJumpTimerSet: 0.15
   wallJumpDirection: {x: 1, y: 1.4}
   smashVelocity: 30
-  tongueDistance: 8
   tongueSpeed: 40
   retractSpeed: 100
-  minLength: 2
+  tongueMaxLength: 8
+  tongueMinLength: 4
   climbSpeed: 5
   onGroundUpLimit: 0.2
   onGroundDownLimit: 0.6
