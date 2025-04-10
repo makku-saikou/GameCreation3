@@ -22,7 +22,7 @@ MonoBehaviour:
   xForceInAir: 200
   variableJumpForce: 0.95
   hangDrag: 2
-  hangSwayForce: 50
+  hangSwayForce: 100
   hangGravityScale: 12
   tongueLengthChangeSpeed: 5
   onGroundSpeed: 10
