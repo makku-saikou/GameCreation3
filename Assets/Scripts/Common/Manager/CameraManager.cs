@@ -6,12 +6,11 @@
 // Description:
 // -------------------------------------------------
 
-using System;
 using UnityEngine;
 
-namespace GamePlay.GamePlayCamera
+namespace Common.Manager
 {
-    public class CameraController : MonoBehaviour
+    public class CameraManager : MonoBehaviour
     {
         [SerializeField] private Transform target;
 

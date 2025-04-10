@@ -79,6 +79,5 @@ namespace GamePlay.Player
         {
             spriteRenderer.enabled = show;
         }
-
     }
 }

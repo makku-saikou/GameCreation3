@@ -6,6 +6,7 @@
 // Description: 舌头相关控制逻辑
 // -------------------------------------------------
 using System;
+using System.Collections.Generic;
 using GamePlay.Item;
 using PurpleFlowerCore;
 using UnityEngine;
@@ -36,13 +37,18 @@ namespace GamePlay.Player
         [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private Transform root0;
         [SerializeField] private Transform root1;
-        
+        [SerializeField] private List<LayerMask> layers;
+        private int _layerBit;
         
         private void Start()
         {
             _property = player.Property;
             tonguePoint.transform.position = transform.position;
             transform.position = root0.position;
+            foreach (var layer in layers)
+            {
+                _layerBit |= layer;
+            }
         }
 
         private void Update()
@@ -149,7 +155,8 @@ namespace GamePlay.Player
 
         private void UpdateTarget()
         {   
-            var hit = Physics2D.Raycast(transform.position, transform.right, _property.tongueMaxLength);
+            
+            var hit = Physics2D.Raycast(transform.position, transform.right, _property.tongueMaxLength, _layerBit);
             if (hit.collider)
             {
                 _currentTarget = hit.collider.GetComponent<ITarget>();
