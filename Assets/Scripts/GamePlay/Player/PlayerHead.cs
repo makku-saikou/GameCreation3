@@ -51,7 +51,8 @@ namespace GamePlay.Player
             direction.Normalize();
             if(DirectionLimit != null)
                 direction = DirectionLimit(direction); // 确保此处输入的方向是归一化的
-            transform.right = Vector3.Lerp(transform.right, direction, 0.1f);
+            // transform.right = Vector3.Lerp(transform.right, direction, 0.1f);
+            transform.right = direction;
         }
 
         #region Tongue
