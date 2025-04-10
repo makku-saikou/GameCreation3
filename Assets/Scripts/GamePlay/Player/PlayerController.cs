@@ -35,7 +35,7 @@ namespace GamePlay.Player
         [SerializeField] private Animator animator;
         public Animator Animator => animator;
         
-        [SerializeField]private Rigidbody2D rb;
+        [SerializeField] private Rigidbody2D rb;
         public Rigidbody2D Rb => rb;
         
         public PlayerFlap PlayerFlap;
