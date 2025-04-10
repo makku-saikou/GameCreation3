@@ -43,6 +43,11 @@ MonoBehaviour:
   retractSpeed: 100
   tongueMaxLength: 7
   tongueMinLength: 3
+  targetLayers:
+  - serializedVersion: 2
+    m_Bits: 128
+  - serializedVersion: 2
+    m_Bits: 64
   climbSpeed: 5
   onGroundUpLimit: 0.2
   onGroundDownLimit: 0.6

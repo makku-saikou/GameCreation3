@@ -6,6 +6,8 @@
 // Description:
 // -------------------------------------------------
 
+using System.Collections.Generic;
+using Common.Attribute;
 using PurpleFlowerCore;
 using UnityEngine;
 
@@ -20,62 +22,63 @@ namespace GamePlay.Player
     public class PlayerProperty : ScriptableObject
     {
         [Header("公共属性")]
-        public float jumpForce = 16f;                       // 跳跃力度
-        public int amountOfJump = 1;                        // 跳跃次数（可以连续几段跳）
-        public float gravityScale = 5f;                     // 常规情况下重力缩放
-        public float commonXMaxSpeed = 10f;                  // 常规情况下最大速度
-        public float commonYMaxSpeed = 10f;                  // 常规情况下最大速度
-        public float xMaxSpeedRecoverScale = 0.01f;           // x最大速度恢复速度
-        public float yMaxSpeedRecoverScale = 0.01f;           // y最大速度恢复速度
+        [Comment("常规情况跳跃力度")]public float jumpForce = 20f; 
+        [Comment("跳跃次数（可以连续几段跳）")]public int amountOfJump = 1;                        
+        [Comment("常规情况下重力缩放")]public float gravityScale = 5f;                     
+        [Comment("常规情况下最大速度")]public float commonXMaxSpeed = 10f;                 
+        [Comment("常规情况下最大速度")]public float commonYMaxSpeed = 60f;                 
+        [Comment("x最大速度插值恢复比率")]public float xMaxSpeedRecoverScale = 0.01f;         
+        [Comment("y最大速度插值恢复比率")]public float yMaxSpeedRecoverScale = 0.05f;         
 
         [Header("空中")]
-        public float xForceInAir = 10f;                     // 空中水平移动力度
-        // public float fallMultiplier = 0.95f;                 // 下落时的空气阻力
-        public float variableJumpForce = 0.95f;   // 提前松开空格，则会跳的更低
+        [Comment("空中水平移动力度")]public float xForceInAir = 200f;                     
+        // public float fallMultiplier = 0.95f;             // 下落时的空气阻力
+        [Comment("提前松开空格，则会跳的更低")]public float variableJumpForce = 0.95f;             
         
         [Header("悬挂")]
-        [Range(0,5)]public float hangDrag = 2f;             //  悬挂且无输入时的空中阻尼
-        public float hangSwayForce = 50f;                   // 悬挂时玩家输入的摇摆力
-        public float hangGravityScale = 12f;                // 悬挂时的重力缩放
-        public float tongueLengthChangeSpeed = 1f;          // 舌头长度变化速度
+        [Comment("悬挂且无输入时的空中阻尼")][Range(0,5)]public float hangDrag = 2f;             
+        [Comment("悬挂时玩家输入的摇摆力")]public float hangSwayForce = 100f;                   
+        [Comment("悬挂时的重力缩放")]public float hangGravityScale = 12f;                
+        [Comment("ws时舌头长度变化速度")]public float tongueLengthChangeSpeed = 1f;          
         
         [Header("地面")]
-        public float onGroundSpeed = 10f;                   // 地面移动速度
-        public float groundCheckHeight = 0.1f;              // 地面检测高度
-        public float groundCheckWidth = 0.5f;               // 地面检测宽度
-        public LayerMask groundLayer;                       // 地面Layer
-        public float jumpTimerSet = 0.15f;                  // 跳跃缓冲时间
+        [Comment("地面移动速度")]public float onGroundSpeed = 10f;                   
+        [Comment("地面检测高度")]public float groundCheckHeight = 0.1f;              
+        [Comment("地面检测宽度")]public float groundCheckWidth = 0.5f;               
+        [Comment("地面Layer")]public LayerMask groundLayer;                       
+        [Comment("跳跃缓冲时间")]public float jumpTimerSet = 0.15f;                  
         
-        [Header("滑墙")]
-        public float wallCheckRadius = 0.5f;                // 检测贴墙距离
-        public float wallSlideSpeed = 3f;                   // 滑墙速度
-        public float wallSpeedRecoverScale = 0.1f;          // 滑墙速度恢复速度
-        public float wallJumpForce = 10f;                   // 滑墙跳跃力度
-        public float wallJumpTimerSet = 0.15f;              // 滑墙跳跃缓冲时间
-        [SerializeField]private Vector2 wallJumpDirection = new(1f, 1f); // 滑墙跳跃方向
+        [Header("扒墙")]
+        [Comment("检测贴墙距离")]public float wallCheckRadius = 0.1f;                
+        [Comment("滑墙速度")]public float wallSlideSpeed = 3f;                   
+        [Comment("滑墙速度插值恢复比率")]public float wallSpeedRecoverScale = 0.15f;          
+        [Comment("蹬墙跳跃力度")]public float wallJumpForce = 120f;                   
+        [Comment("蹬墙跳跃缓冲时间，在该时间内不会再次进入扒墙状态")]public float wallJumpTimerSet = 0.15f;              
+        [Comment("蹬墙跳跃方向")][SerializeField]private Vector2 wallJumpDirection = new(1f, 1f);
         
         [Header("下砸")]
-        public float smashVelocity = 30f;               // 下砸速度
+        [Comment("下砸下降速度")]public float smashVelocity = 30f;                   
         
         [Header("舌头")]
-        public float tongueSpeed = 40;
-        public float retractSpeed = 100;
-        public float tongueMaxLength = 8f;
-        public float tongueMinLength = 2;
+        [Comment("舌头发射速度")]public float tongueSpeed = 40;
+        [Comment("舌头回到嘴的速度")]public float retractSpeed = 100;
+        [Comment("舌头最大长度,影响射程和悬挂时的最大长度")]public float tongueMaxLength = 7f;
+        [Comment("舌头最小长度,影响时的最小长度")]public float tongueMinLength = 2;
+        [Comment("舌头可以碰撞到的layer")] public List<LayerMask> targetLayers;
         
         [Header("攀爬")]
-        public float climbSpeed = 5f;                       // 攀爬速度
+        [Comment("攀爬速度")]public float climbSpeed = 5f;                       
         
         [Header("其他功能")]
-        [SerializeField][Range(0,1)] public float onGroundUpLimit = 0.2f;
-        [SerializeField][Range(0,1)] public float onGroundDownLimit = 0.6f;
+        [Comment("地面上时最大抬头角度")][SerializeField] public float onGroundUpLimit = 0.2f;
+        [Comment("地面上时最大低头角度")][SerializeField] public float onGroundDownLimit = 0.6f;
 
         private Animator _animator;
         
         // 分类
-        public int AmountOfJumpLeft { get; set; }              // 剩余跳跃次数
-        public int FacingDirection => IsFacingRight ? 1 : -1;  // _isFacingRight的数值形式，方便计算
-        public bool IsFacingRight { get; set; }                // 是否正面向右边
+        public int AmountOfJumpLeft { get; set; }           // 剩余跳跃次数
+        public int FacingDirection => IsFacingRight ? 1 : -1;// _isFacingRight的数值形式，方便计算
+        public bool IsFacingRight { get; set; }             // 是否正面向右边
 
         private bool _isWalking;
         public bool IsWalking

@@ -37,7 +37,6 @@ namespace GamePlay.Player
         [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private Transform root0;
         [SerializeField] private Transform root1;
-        [SerializeField] private List<LayerMask> layers;
         private int _layerBit;
         
         private void Start()
@@ -45,6 +44,7 @@ namespace GamePlay.Player
             _property = player.Property;
             tonguePoint.transform.position = transform.position;
             transform.position = root0.position;
+            var layers = _property.targetLayers;
             foreach (var layer in layers)
             {
                 _layerBit |= layer;
