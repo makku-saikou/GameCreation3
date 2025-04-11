@@ -27,7 +27,7 @@ MonoBehaviour:
   tongueLengthChangeSpeed: 5
   onGroundSpeed: 10
   groundCheckHeight: 0.34
-  groundCheckWidth: 2.23
+  groundCheckWidth: 2.1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -36,7 +36,7 @@ MonoBehaviour:
   wallSlideSpeed: 0
   wallSpeedRecoverScale: 0.15
   wallJumpForce: 120
-  wallJumpTimerSet: 0.15
+  wallJumpTimerSet: 0.3
   wallJumpDirection: {x: 1, y: 1.4}
   smashVelocity: 30
   tongueSpeed: 40

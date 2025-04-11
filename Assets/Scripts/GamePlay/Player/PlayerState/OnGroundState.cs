@@ -89,6 +89,8 @@ namespace GamePlay.Player.PlayerState
             
             Property.AmountOfJumpLeft--;
             _jumpTimer = 0;
+            
+            Property.ResetWallJumpTimer();
         }
     }
 }

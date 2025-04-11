@@ -37,3 +37,11 @@ MonoBehaviour:
     command:
       m_PersistentCalls:
         m_Calls: []
+  - name: "\u8725\u8734Sprite"
+    commandType: 3
+    color: {r: 1, g: 0.6563247, b: 0, a: 1}
+    lineBreak: 0
+    commandParam: "Assets/Res/Sprite/Player/\u5C0F\u8725\u8734\u66F4\u65B0"
+    command:
+      m_PersistentCalls:
+        m_Calls: []

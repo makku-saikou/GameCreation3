@@ -15,6 +15,7 @@ namespace GamePlay.Player
     {
         [SerializeField] private PlayerController player;
         private PlayerProperty _property;
+        private Rigidbody2D _rb;
         private PlayerFlap _onGround;
         private PlayerFlap _air;
         private PlayerFlap _wall;
@@ -23,6 +24,7 @@ namespace GamePlay.Player
         private void Start()
         {
             _property = player.Property;
+            _rb = player.Rb;
             _onGround = () =>
             {
                 if (_property.IsLaunching || _property.IsRetracting || _property.IsConnecting) return;
@@ -40,7 +42,16 @@ namespace GamePlay.Player
                 }
             };
 
-            _air = () => { };
+            _air = () =>
+            {
+                switch (_rb.velocity.x)
+                {
+                    case > 0 when !_property.IsFacingRight:
+                    case < 0 when _property.IsFacingRight:
+                        Flip();
+                        break;
+                }
+            };
 
             _wall = () =>
             {
@@ -78,9 +89,9 @@ namespace GamePlay.Player
                 _ => player.PlayerFlap
             };
         }
-        
-        
-        public void Flip()
+
+
+        private void Flip()
         {
             if (!player.Property.CanFlip) return;
             player.Property.IsFacingRight = !player.Property.IsFacingRight;

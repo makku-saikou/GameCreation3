@@ -9,6 +9,7 @@
 using System.Collections.Generic;
 using Common.Attribute;
 using PurpleFlowerCore;
+using PurpleFlowerCore.Utility;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -127,7 +128,16 @@ namespace GamePlay.Player
             {
                 if(_isWallSliding == value) return;
                 _isWallSliding = value;
-                _animator.SetBool("Wall", value);
+                if(!value)
+                    _animator.SetBool("Wall", false);
+                else
+                {
+                    DelayUtility.Delay(0.02f, () =>
+                    {
+                        if (_isWallSliding)
+                            _animator.SetBool("Wall", true);
+                    });
+                }
             }
         }
         
@@ -185,6 +195,12 @@ namespace GamePlay.Player
             XMaxSpeed = commonXMaxSpeed;
             YMaxSpeed = commonYMaxSpeed;
             _animator = player.Animator;
+        }
+
+        public void ResetWallJumpTimer()
+        {
+            WallJumpFlag = true;
+            DelayUtility.Delay(wallJumpTimerSet, () => { WallJumpFlag = false; });
         }
     }
 }

@@ -7,7 +7,6 @@
 
 using Common.FSM;
 using PurpleFlowerCore;
-using PurpleFlowerCore.Utility;
 using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
@@ -32,10 +31,11 @@ namespace GamePlay.Player.PlayerState
         public override void ExitCallback(HState next)
         {
             base.ExitCallback(next);
-            ResetTimer();
+            Property.ResetWallJumpTimer();
             Rb.gravityScale = Property.gravityScale;
             
             Player.Head.SetShow(true);
+            Property.HeadCanLaunch = true;
         }
 
         public override void UpdateCallback(float deltaTime)
@@ -50,7 +50,7 @@ namespace GamePlay.Player.PlayerState
                     direction.x = -direction.x;
                 }
                 Rb.AddForce(direction * Property.wallJumpForce, ForceMode2D.Impulse);
-                ResetTimer();
+                Property.ResetWallJumpTimer();
             }
         }
 
@@ -62,13 +62,6 @@ namespace GamePlay.Player.PlayerState
             // velocity = Vector2.Lerp(velocity, new Vector2(0, 0), P.wallSpeedRecoverScale);
             velocity = Vector2.Lerp(velocity, new Vector2(0, -Property.wallSlideSpeed), Property.wallSpeedRecoverScale);
             Rb.velocity = velocity;
-        }
-
-        private void ResetTimer()
-        {
-            Property.WallJumpFlag = true;
-            Property.HeadCanLaunch = true;
-            DelayUtility.Delay(Property.wallJumpTimerSet, () => { Property.WallJumpFlag = false; });
         }
     }
 }
