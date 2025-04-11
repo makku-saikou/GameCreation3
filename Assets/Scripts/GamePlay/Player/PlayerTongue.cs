@@ -146,6 +146,7 @@ namespace GamePlay.Player
             _currentTarget = null;
             player.Property.IsConnecting = false;
             _property.IsRetracting = true;
+            _property.IsLaunching = false;
         }
 
         public void Interact()
