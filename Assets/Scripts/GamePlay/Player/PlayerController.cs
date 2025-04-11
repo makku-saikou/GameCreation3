@@ -60,6 +60,11 @@ namespace GamePlay.Player
             StateMachine.UpdateCallback(Time.deltaTime);
         }
 
+        private void LateUpdate()
+        {
+            PlayerFlap?.Invoke();
+        }
+
         private void FixedUpdate()
         {
             StateMachine.FixedUpdateCallback();
@@ -105,7 +110,7 @@ namespace GamePlay.Player
             HTransition onWall = new HTransition("OnWall", airState, onWallState);
             // onWall.OnCheck += () => property.IsWallSliding && (property.IsRightWall && Input.MovementInput >= 0.5f ||
             //                                                    !property.IsRightWall && Input.MovementInput <= -0.5f);
-            onWall.OnCheck += () => property.IsWallSliding && !property.WallJumpFlag;
+            onWall.OnCheck += () => property.IsWallSliding && !property.OnWallFlag;
             airState.AddTransition(onWall);
             
             HTransition wallJump = new HTransition("WallJump", onWallState, airState);

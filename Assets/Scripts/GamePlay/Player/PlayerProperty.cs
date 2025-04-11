@@ -130,7 +130,7 @@ namespace GamePlay.Player
                 _isWallSliding = value;
                 if(!value)
                     _animator.SetBool("Wall", false);
-                else
+                else 
                 {
                     DelayUtility.Delay(0.02f, () =>
                     {
@@ -164,7 +164,18 @@ namespace GamePlay.Player
                 // _animator.SetBool("Retract", value);
             }
         }
-        public bool WallJumpFlag { get; set; }                 // 划墙跳后的延迟标记
+        // 划墙跳后的延迟标记
+        private bool _onOnWallFlag;
+        public bool OnWallFlag
+        {
+            get => _onOnWallFlag;
+            set
+            {
+                if (_onOnWallFlag == value) return;
+                _onOnWallFlag = value;
+                _animator.SetBool("OnWallFlag", value);
+            }
+        }                 
         public bool IsRightWall { get; set; }                  // 是否在右墙
         public bool CanJump { get; set; }                       // 是否可以进行普通跳跃
         public bool CanMove { get; set; }                      // 是否可以移动
@@ -199,8 +210,8 @@ namespace GamePlay.Player
 
         public void ResetWallJumpTimer()
         {
-            WallJumpFlag = true;
-            DelayUtility.Delay(wallJumpTimerSet, () => { WallJumpFlag = false; });
+            OnWallFlag = true;
+            DelayUtility.Delay(wallJumpTimerSet, () => { OnWallFlag = false; });
         }
     }
 }
