@@ -87,6 +87,7 @@ namespace GamePlay.Player
             _tongueState = TongueState.Launching;
             tonguePoint.transform.parent = null;
             lineRenderer.enabled = true;
+            _property.IsLaunching = true;
         }
         
         private void UpdateLaunch()
@@ -131,6 +132,7 @@ namespace GamePlay.Player
                 _property.HeadCanMove = true;
                 tonguePoint.transform.parent = transform;
                 lineRenderer.enabled = false;
+                _property.IsRetracting = false;
             }
             Vector3 direction = transform.position - tonguePoint.transform.position;
             direction.Normalize();
@@ -143,6 +145,7 @@ namespace GamePlay.Player
             distanceJoint2D.enabled = false;
             _currentTarget = null;
             player.Property.IsConnecting = false;
+            _property.IsRetracting = true;
         }
 
         public void Interact()
@@ -186,6 +189,7 @@ namespace GamePlay.Player
         private void TryConnect()
         {
             PFCLog.Debug("Tongue",$"TryConnect: {_currentTarget}");
+            _property.IsLaunching = false;
             if (_currentTarget == null)
             {
                 Retract();

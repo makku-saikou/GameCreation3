@@ -6,27 +6,17 @@
 // Description:
 // -------------------------------------------------
 
-using GamePlay.Player;
+using Cinemachine;
 using UnityEngine;
 
 namespace Common.Manager
 {
     public class CameraManager : MonoBehaviour
     {
-        private Transform _target;
-        private PlayerProperty _property;
-
+        [SerializeField] private CinemachineVirtualCamera virtualCamera;
         private void Start()
         {
-            _target = GameManager.Instance.Player.transform;
-            _property = GameManager.Instance.Player.Property;
-        }
-
-        private void Update()
-        {
-            if (_target == null) return;
-            Vector3 pos = new Vector3(_target.position.x, _target.position.y, transform.position.z);
-
+            virtualCamera.Follow = GameManager.Instance.Player.transform;
         }
     }
 }

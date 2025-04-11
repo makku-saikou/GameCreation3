@@ -130,6 +130,30 @@ namespace GamePlay.Player
                 _animator.SetBool("Wall", value);
             }
         }
+        
+        private bool _isLaunching;
+        public bool IsLaunching
+        {
+            get => _isLaunching;
+            set
+            {
+                if (_isLaunching == value) return;
+                _isLaunching = value;
+                // _animator.SetBool("Launch", value);
+            }
+        }
+        
+        private bool _isRetracting;
+        public bool IsRetracting
+        {
+            get => _isRetracting;
+            set
+            {
+                if (_isRetracting == value) return;
+                _isRetracting = value;
+                // _animator.SetBool("Retract", value);
+            }
+        }
         public bool WallJumpFlag { get; set; }                 // 划墙跳后的延迟标记
         public bool IsRightWall { get; set; }                  // 是否在右墙
         public bool CanJump { get; set; }                       // 是否可以进行普通跳跃

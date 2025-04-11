@@ -18,12 +18,14 @@ namespace GamePlay.Player
         private PlayerFlap _onGround;
         private PlayerFlap _air;
         private PlayerFlap _wall;
+        private PlayerFlap _hang;
 
         private void Start()
         {
             _property = player.Property;
             _onGround = () =>
             {
+                if (_property.IsLaunching || _property.IsRetracting || _property.IsConnecting) return;
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3 direction = mousePosition - transform.position;
                 direction.z = 0;
@@ -50,6 +52,12 @@ namespace GamePlay.Player
                         break;
                 }
             };
+
+            _hang = () =>
+            {
+                if (!_property.IsFacingRight)
+                    Flip();
+            };
             
              player.StateMachine.OnStateChanged += CheckFlap;
         }
@@ -66,6 +74,7 @@ namespace GamePlay.Player
                 "OnGround" => _onGround,
                 "Air" => _air,
                 "OnWall" => _wall,
+                "Hang" => _hang,
                 _ => player.PlayerFlap
             };
         }
