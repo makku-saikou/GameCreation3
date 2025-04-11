@@ -6,18 +6,27 @@
 // Description:
 // -------------------------------------------------
 
+using GamePlay.Player;
 using UnityEngine;
 
 namespace Common.Manager
 {
     public class CameraManager : MonoBehaviour
     {
-        [SerializeField] private Transform target;
+        private Transform _target;
+        private PlayerProperty _property;
+
+        private void Start()
+        {
+            _target = GameManager.Instance.Player.transform;
+            _property = GameManager.Instance.Player.Property;
+        }
 
         private void Update()
         {
-            if (target == null) return;
-            transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
+            if (_target == null) return;
+            Vector3 pos = new Vector3(_target.position.x, _target.position.y, transform.position.z);
+
         }
     }
 }
