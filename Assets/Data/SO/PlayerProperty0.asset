@@ -25,6 +25,7 @@ MonoBehaviour:
   hangSwayForce: 100
   hangGravityScale: 12
   tongueLengthChangeSpeed: 5
+  launchDragScale: 0.3
   onGroundSpeed: 10
   groundCheckHeight: 0.34
   groundCheckWidth: 2.1
@@ -41,7 +42,7 @@ MonoBehaviour:
   smashVelocity: 30
   tongueSpeed: 40
   retractSpeed: 100
-  tongueMaxLength: 7
+  tongueMaxLength: 8
   tongueMinLength: 3
   targetLayers:
   - serializedVersion: 2

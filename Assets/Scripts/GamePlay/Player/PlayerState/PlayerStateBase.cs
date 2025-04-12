@@ -18,6 +18,7 @@ namespace GamePlay.Player.PlayerState
         protected PlayerController Player;
         protected Rigidbody2D Rb;
         protected PlayerInputBase Input;
+        protected PlayerTongue Tongue;
 
         public PlayerStateBase(PlayerController player, string name) : base(name)
         {
@@ -25,6 +26,7 @@ namespace GamePlay.Player.PlayerState
             Property = player.Property;
             Rb = player.Rb;
             Input = player.Input;
+            Tongue = player.Head.Tongue;
         }
     }
 }
