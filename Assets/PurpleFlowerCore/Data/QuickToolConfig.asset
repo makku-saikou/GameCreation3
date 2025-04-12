@@ -45,3 +45,11 @@ MonoBehaviour:
     command:
       m_PersistentCalls:
         m_Calls: []
+  - name: "\u9884\u5236\u4F53\u6587\u4EF6\u5939"
+    commandType: 3
+    color: {r: 0, g: 0.9696946, b: 1, a: 1}
+    lineBreak: 0
+    commandParam: Assets/Res/Perfab/Common
+    command:
+      m_PersistentCalls:
+        m_Calls: []

@@ -31,18 +31,24 @@ namespace GamePlay.Player
         private float _currentFlightDistance;
         private ITarget _currentTarget;
         [SerializeField]private TongueState _tongueState;
-        [SerializeField] private PlayerTonguePoint tonguePoint;  // todo: 没有发现舌尖作为单独物体的优势,尝试简化为坐标
+        [SerializeField] private Transform tonguePoint;  // todo: 没有发现舌尖作为单独物体的优势,尝试简化为坐标
+        public Transform TonguePoint => tonguePoint;
         private Vector3 _targetPosition;
         [SerializeField] private Image targetImage;
-        [SerializeField] private LineRenderer lineRenderer;
+        // [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private Transform root0;
+        public Transform Root0 => root0;
         [SerializeField] private Transform root1;
+        public Transform Root1 => root1;
+        public event Action OnTongueLaunch;
+        public event Action OnTongueIdle;
+        
         private int _layerBit;
         
         private void Start()
         {
             _property = player.Property;
-            tonguePoint.transform.position = transform.position;
+            tonguePoint.position = transform.position;
             transform.position = root0.position;
             var layers = _property.targetLayers;
             foreach (var layer in layers)
@@ -72,7 +78,7 @@ namespace GamePlay.Player
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            DrawTongue();
+            // DrawTongue();
             ChangeRootPos();
             Debug.DrawLine(head.transform.position, _property.tongueMaxLength * head.transform.right + head.transform.position, Color.red);
         }
@@ -85,18 +91,19 @@ namespace GamePlay.Player
             _currentFlightDistance = 0;
             transform.right = direction; // temp
             _tongueState = TongueState.Launching;
-            tonguePoint.transform.parent = null;
-            lineRenderer.enabled = true;
+            tonguePoint.parent = null;
+            // lineRenderer.enabled = true;
             _property.IsLaunching = true;
+            OnTongueLaunch?.Invoke();
         }
         
         private void UpdateLaunch()
         {
-            PFCLog.Debug("Tongue", $"target: {_currentTarget}" );
-            Vector3 direction = _targetPosition - tonguePoint.transform.position;
+            // PFCLog.Debug("Tongue", $"target: {_currentTarget}" );
+            Vector3 direction = _targetPosition - tonguePoint.position;
             direction.Normalize();
-            tonguePoint.transform.position += direction * (Time.deltaTime * _property.tongueSpeed);
-            if(Vector3.SqrMagnitude(tonguePoint.transform.position - _targetPosition) < 0.05f)
+            tonguePoint.position += direction * (Time.deltaTime * _property.tongueSpeed);
+            if(Vector3.SqrMagnitude(tonguePoint.position - _targetPosition) < 0.05f)
             {
                 TryConnect();
             }
@@ -125,18 +132,19 @@ namespace GamePlay.Player
         
         private void UpdateRetract()
         {
-            if (Vector3.SqrMagnitude(tonguePoint.transform.position - transform.position) < 0.05f)
+            if (Vector3.SqrMagnitude(tonguePoint.position - transform.position) < 0.05f)
             {
                 _tongueState = TongueState.Idle;
-                tonguePoint.transform.position = transform.position;
+                tonguePoint.position = transform.position;
                 _property.HeadCanMove = true;
-                tonguePoint.transform.parent = transform;
-                lineRenderer.enabled = false;
+                tonguePoint.parent = transform;
+                // lineRenderer.enabled = false;
                 _property.IsRetracting = false;
+                OnTongueIdle?.Invoke();
             }
-            Vector3 direction = transform.position - tonguePoint.transform.position;
+            Vector3 direction = transform.position - tonguePoint.position;
             direction.Normalize();
-            tonguePoint.transform.position += direction * (Time.deltaTime * _property.retractSpeed);
+            tonguePoint.position += direction * (Time.deltaTime * _property.retractSpeed);
         }
 
         public void Retract()
@@ -204,11 +212,11 @@ namespace GamePlay.Player
             _property.HangPoint = _targetPosition;
         }
 
-        private void DrawTongue()
-        {
-            lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, tonguePoint.transform.position);
-        }
+        // private void DrawTongue()
+        // {
+        //     lineRenderer.SetPosition(0, transform.position);
+        //     lineRenderer.SetPosition(1, tonguePoint.transform.position);
+        // }
 
         private void ChangeRootPos()
         {

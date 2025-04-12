@@ -14,7 +14,8 @@ namespace GamePlay.Player
     
     public class PlayerHead : MonoBehaviour
     {
-        [SerializeField] private PlayerTongue playerTongue;
+        [SerializeField] private PlayerTongue tongue;
+        public PlayerTongue Tongue => tongue;
         [SerializeField] private Transform tongueRoot;
         [SerializeField] private PlayerController playerController;
         [SerializeField] private SpriteRenderer spriteRenderer;
@@ -60,17 +61,17 @@ namespace GamePlay.Player
         private void LaunchTongue()
         {
             if (!_property.HeadCanLaunch) return;
-            playerTongue.Launch(transform.right);
+            tongue.Launch(transform.right);
         }
 
         public void RetractTongue()
         {
-            playerTongue.Retract();
+            tongue.Retract();
         }
 
         private void InteractTongue()
         {
-            playerTongue.Interact();
+            tongue.Interact();
         }
 
         #endregion

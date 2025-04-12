@@ -20,6 +20,8 @@ namespace GamePlay.Player.PlayerState
             base.EnterCallback(prev);
             PFCLog.Debug("Enter Air State");
             Player.Head.SetShow(false);
+            Tongue.OnTongueLaunch += LaunchingSpeed;
+            Tongue.OnTongueIdle += RecoverGravity;
         }
 
         public override void ExitCallback(HState next)
@@ -27,13 +29,29 @@ namespace GamePlay.Player.PlayerState
             base.ExitCallback(next);
             PFCLog.Debug("Exit Air State");
             Player.Head.SetShow(true);
+            Tongue.OnTongueLaunch -= LaunchingSpeed;
+            Tongue.OnTongueIdle -= RecoverGravity;
+            RecoverGravity();
+        }
+
+        private void LaunchingSpeed()
+        {
+            var v = Rb.velocity;
+            v *= Property.launchDragScale;
+            Rb.velocity = v;
+            Rb.gravityScale = 0;
+        }
+        
+        private void RecoverGravity()
+        {
+            Rb.gravityScale = Property.gravityScale;
         }
         
         public override void FixedUpdateCallback()
         {
             base.FixedUpdateCallback();
             
-            if (Input.MovementInput != 0)
+            if (Input.MovementInput != 0 && !Property.IsLaunching)
             {
                 Rb.AddForce(new Vector2(Property.xForceInAir * Input.MovementInput, 0), ForceMode2D.Force);
             }
@@ -47,7 +65,7 @@ namespace GamePlay.Player.PlayerState
             {
                 velocity = new Vector2(velocity.x, Mathf.Sign(velocity.y) * Property.YMaxSpeed);
             }
-            if (!Input.JumpInput)
+            if (!Input.JumpInput || velocity.y < 0)
             {
                 velocity = new Vector2(velocity.x, velocity.y - Property.variableJumpForce);
             }

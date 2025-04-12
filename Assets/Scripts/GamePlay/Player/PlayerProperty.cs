@@ -40,7 +40,8 @@ namespace GamePlay.Player
         [Comment("悬挂且无输入时的空中阻尼")][Range(0,5)]public float hangDrag = 2f;             
         [Comment("悬挂时玩家输入的摇摆力")]public float hangSwayForce = 100f;                   
         [Comment("悬挂时的重力缩放")]public float hangGravityScale = 12f;                
-        [Comment("ws时舌头长度变化速度")]public float tongueLengthChangeSpeed = 1f;          
+        [Comment("ws时舌头长度变化速度")]public float tongueLengthChangeSpeed = 1f;
+        [Comment("发射时玩家悬停速度缩放")]public float launchDragScale = 0.3f;
         
         [Header("地面")]
         [Comment("地面移动速度")]public float onGroundSpeed = 10f;                   
