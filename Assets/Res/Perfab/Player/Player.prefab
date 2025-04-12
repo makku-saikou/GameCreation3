@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 7158330813806190610}
   - component: {fileID: 5445178873793561151}
   - component: {fileID: 7804328635795968733}
+  - component: {fileID: 7319745776143481094}
   m_Layer: 0
   m_Name: Tongue
   m_TagString: Untagged
@@ -80,7 +81,7 @@ MonoBehaviour:
   head: {fileID: 3959717701253126937}
   player: {fileID: 5553778798862907640}
   _tongueState: 0
-  tonguePoint: {fileID: 3888394591384123533}
+  tonguePoint: {fileID: 140825107737555479}
   targetImage: {fileID: 0}
   lineRenderer: {fileID: 7804328635795968733}
   root0: {fileID: 1463593771889573033}
@@ -189,6 +190,37 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &7319745776143481094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310538680078435254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3b22dc931c40bfa0ae1c0b5ddbec91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tongue: {fileID: 0}
+  _lineRenderer: {fileID: 0}
+  percision: 40
+  straightenLineSpeed: 5
+  ropeAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  StartWaveSize: 2
+  ropeProgressionCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ropeProgressionSpeed: 1
+  isGrappling: 1
 --- !u!1 &696215044771975828
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,7 +460,6 @@ GameObject:
   m_Component:
   - component: {fileID: 140825107737555479}
   - component: {fileID: 2671588610722738337}
-  - component: {fileID: 3888394591384123533}
   m_Layer: 0
   m_Name: TonguePoint
   m_TagString: Untagged
@@ -503,19 +534,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3888394591384123533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 712084061048558591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1110d351fb234d10a20dac7288bbf12d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTongue: {fileID: 5445178873793561151}
 --- !u!1 &3348656230827474929
 GameObject:
   m_ObjectHideFlags: 0
