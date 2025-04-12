@@ -41,6 +41,7 @@ namespace GamePlay.Player
         [SerializeField] private Transform root1;
         public Transform Root1 => root1;
         public event Action OnTongueLaunch;
+        public event Action OnTongueIdle;
         
         private int _layerBit;
         
@@ -139,6 +140,7 @@ namespace GamePlay.Player
                 tonguePoint.parent = transform;
                 // lineRenderer.enabled = false;
                 _property.IsRetracting = false;
+                OnTongueIdle?.Invoke();
             }
             Vector3 direction = transform.position - tonguePoint.position;
             direction.Normalize();
