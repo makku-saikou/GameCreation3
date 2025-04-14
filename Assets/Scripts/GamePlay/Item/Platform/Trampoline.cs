@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GamePlay.Item
+namespace GamePlay.Item.Platform
 {
 	public class Trampoline : MonoBehaviour
 	{
@@ -8,13 +8,9 @@ namespace GamePlay.Item
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
-			if (other.CompareTag("Player"))
+			if (other.CompareTag("Player") && other.TryGetComponent(out Rigidbody2D rb))
 			{
-				var rb = other.GetComponent<Rigidbody2D>();
-				if (rb)
-				{
-					rb.velocity = new Vector2(rb.velocity.x, bounceForce);
-				}
+				rb.velocity = new Vector2(rb.velocity.x, bounceForce);
 			}
 		}
 	}

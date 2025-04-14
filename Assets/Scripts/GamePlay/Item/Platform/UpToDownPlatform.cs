@@ -2,7 +2,7 @@
 using GamePlay.Player;
 using UnityEngine;
 
-namespace GamePlay.Item.OneWayPlatform
+namespace GamePlay.Item.Platform
 {
 	public class UpToDownPlatform : MonoBehaviour
 	{

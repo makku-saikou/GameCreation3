@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace GamePlay.Item
+namespace GamePlay.Item.Platform
 {
 	public class BreakablePlatform : MonoBehaviour
 	{
