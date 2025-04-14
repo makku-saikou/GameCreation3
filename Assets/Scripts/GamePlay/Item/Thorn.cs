@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Manager;
 using UnityEngine;
 
 namespace GamePlay.Item
@@ -9,7 +10,7 @@ namespace GamePlay.Item
 		{
 			if (other.CompareTag("Player"))
 			{
-				// player die
+				GameManager.Instance.PlayerToTmpCheckPoint();
 			}
 		}
 	}

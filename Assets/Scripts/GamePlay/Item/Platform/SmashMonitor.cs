@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace GamePlay.Item.OneWayPlatform
+namespace GamePlay.Item.Platform
 {
 	public class SmashMonitor : MonoBehaviour
 	{
