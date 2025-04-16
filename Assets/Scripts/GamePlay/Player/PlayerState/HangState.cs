@@ -59,7 +59,7 @@ namespace GamePlay.Player.PlayerState
         
         private void HangJump()
         {
-            Rb.velocity += new Vector2(0, Property.jumpForce);
+            Rb.velocity += new Vector2(0, Property.hangJumpForce);
         }
 
         private void BodyDirection()
