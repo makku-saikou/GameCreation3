@@ -14,8 +14,8 @@ namespace GamePlay.Player
 
         [Header("Rope Animation Settings:")]
         [SerializeField] private AnimationCurve ropeAnimationCurve;
-        [SerializeField] private AnimationCurve waveSizeAnimationCurve;
-        // [Range(0.01f, 4)] [SerializeField] private float StartWaveSize = 2;
+        [SerializeField] private AnimationCurve waveSizeMultiplyAnimationCurve;
+        [Range(0.01f, 4)] [SerializeField] private float startWaveSize = 4;
         private float _waveSize;
 
         [Header("Rope Progression:")]
@@ -49,7 +49,7 @@ namespace GamePlay.Player
         private void Init()
         {
             _moveTime = 0;
-            // _waveSize = StartWaveSize;
+            _waveSize = startWaveSize;
             
             _lineRenderer.positionCount = percision;
             for (int i = 0; i < percision; i++)
@@ -98,15 +98,15 @@ namespace GamePlay.Player
             //         DrawRopeNoWaves();
             //     }
             // }
-            _waveSize = waveSizeAnimationCurve.Evaluate(tongue.CurrentFlightFilled);
-            if (_waveSize >= 0)
+            if (_waveSize > 0)
             {
-                // _waveSize -= Time.deltaTime * straightenLineSpeed;
+                _waveSize -= Time.deltaTime * straightenLineSpeed;
+                // if(_lineRenderer.positionCount != percision) { _lineRenderer.positionCount = percision; }
                 DrawRopeWaves();
             }
             else
             {
-                // _waveSize = 0;
+                _waveSize = 0;
                 if (_lineRenderer.positionCount != 2) { _lineRenderer.positionCount = 2; }
             
                 DrawRopeNoWaves();
@@ -118,7 +118,8 @@ namespace GamePlay.Player
             for (int i = 0; i < percision; i++)
             {
                 float delta = i / (percision - 1f);
-                Vector2 offset = Vector2.Perpendicular(tongue.transform.right).normalized * (ropeAnimationCurve.Evaluate(delta) * _waveSize);
+                var theWaveSize = _waveSize * waveSizeMultiplyAnimationCurve.Evaluate(_moveTime);
+                Vector2 offset = Vector2.Perpendicular(tongue.transform.right).normalized * (ropeAnimationCurve.Evaluate(delta) * theWaveSize);
                 Vector2 targetPosition = Vector2.Lerp(tongue.transform.position, tongue.TonguePoint.position, delta) + offset;
                 Vector2 currentPosition = Vector2.Lerp(tongue.transform.position, targetPosition, ropeProgressionCurve.Evaluate(_moveTime) * ropeProgressionSpeed);
             

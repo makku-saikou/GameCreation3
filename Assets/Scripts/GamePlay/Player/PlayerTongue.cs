@@ -45,31 +45,21 @@ namespace GamePlay.Player
         
         private int _layerBit;
 
-        /// <summary>
-        /// 保证在0~1
-        /// </summary>
-        public float CurrentFlightFilled
-        {
-            get
-            {
-                if(_tongueState == TongueState.Launching)
-                {
-                    return Vector3.SqrMagnitude(tonguePoint.position - transform.position) / _property.tongueMaxLength;
-                }
-                
-                if(_tongueState == TongueState.Retracting)
-                {
-                    return Vector3.SqrMagnitude(tonguePoint.position - transform.position) / _property.tongueMaxLength;
-                }
-
-                if(_tongueState == TongueState.Connecting)
-                {
-                    return 1;
-                }
-
-                return 0;
-            }
-        }
+        // /// <summary>
+        // /// 保证在0~1
+        // /// </summary>
+        // public float CurrentFlightFilled
+        // {
+        //     get
+        //     {
+        //         if(_tongueState is TongueState.Launching or TongueState.Retracting)
+        //         {
+        //             return Vector3.SqrMagnitude(tonguePoint.position - transform.position) / _property.tongueMaxLength;
+        //         }
+        //
+        //         return 1;
+        //     }
+        // }
 
         private void Start()
         {
