@@ -37,7 +37,7 @@ namespace GamePlay.Player
         [Comment("提前松开空格，则会跳的更低")]public float variableJumpForce = 0.95f;             
         
         [Header("悬挂")]
-        [Comment("悬挂且无输入时的空中阻尼")][Range(0,5)]public float hangDrag = 2f;             
+        [Comment("悬挂且无输入时的空中阻尼")]public float hangDrag = 2f;             
         [Comment("悬挂时玩家输入的摇摆力")]public float hangSwayForce = 100f;                   
         [Comment("悬挂时的重力缩放")]public float hangGravityScale = 12f;                
         [Comment("ws时舌头长度变化速度")]public float tongueLengthChangeSpeed = 1f;
