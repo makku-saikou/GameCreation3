@@ -53,3 +53,11 @@ MonoBehaviour:
     command:
       m_PersistentCalls:
         m_Calls: []
+  - name: level1
+    commandType: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    lineBreak: 0
+    commandParam: Assets/Scenes/Dev/level1.unity
+    command:
+      m_PersistentCalls:
+        m_Calls: []

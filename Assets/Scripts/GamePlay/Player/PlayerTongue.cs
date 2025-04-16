@@ -28,7 +28,7 @@ namespace GamePlay.Player
         [SerializeField] private PlayerHead head;
         [SerializeField] private PlayerController player;
         private PlayerProperty _property;
-        private float _currentFlightDistance;
+        // private float _currentFlightDistance;
         private ITarget _currentTarget;
         [SerializeField]private TongueState _tongueState;
         [SerializeField] private Transform tonguePoint;  // todo: 没有发现舌尖作为单独物体的优势,尝试简化为坐标
@@ -44,7 +44,33 @@ namespace GamePlay.Player
         public event Action OnTongueIdle;
         
         private int _layerBit;
-        
+
+        /// <summary>
+        /// 保证在0~1
+        /// </summary>
+        public float CurrentFlightFilled
+        {
+            get
+            {
+                if(_tongueState == TongueState.Launching)
+                {
+                    return Vector3.SqrMagnitude(tonguePoint.position - transform.position) / _property.tongueMaxLength;
+                }
+                
+                if(_tongueState == TongueState.Retracting)
+                {
+                    return Vector3.SqrMagnitude(tonguePoint.position - transform.position) / _property.tongueMaxLength;
+                }
+
+                if(_tongueState == TongueState.Connecting)
+                {
+                    return 1;
+                }
+
+                return 0;
+            }
+        }
+
         private void Start()
         {
             _property = player.Property;
@@ -88,7 +114,7 @@ namespace GamePlay.Player
             if(_tongueState != TongueState.Idle) return;
             targetImage.gameObject.SetActive(false);
             _property.HeadCanMove = false;
-            _currentFlightDistance = 0;
+            // _currentFlightDistance = 0;
             transform.right = direction; // temp
             _tongueState = TongueState.Launching;
             tonguePoint.parent = null;
@@ -103,6 +129,7 @@ namespace GamePlay.Player
             Vector3 direction = _targetPosition - tonguePoint.position;
             direction.Normalize();
             tonguePoint.position += direction * (Time.deltaTime * _property.tongueSpeed);
+            // _currentFlightDistance += Time.deltaTime * _property.tongueSpeed;
             if(Vector3.SqrMagnitude(tonguePoint.position - _targetPosition) < 0.05f)
             {
                 TryConnect();
@@ -155,6 +182,7 @@ namespace GamePlay.Player
             player.Property.IsConnecting = false;
             _property.IsRetracting = true;
             _property.IsLaunching = false;
+            // _currentFlightDistance = 0;
         }
 
         public void Interact()

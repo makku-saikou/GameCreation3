@@ -1541,6 +1541,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 874838184081386832, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: waveSizeAnimationCurve.m_PostInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 874838184081386832, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: waveSizeAnimationCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 874838184081386832, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: waveSizeAnimationCurve.m_Curve.Array.data[1].time
+      value: 0.5151174
+      objectReference: {fileID: 0}
+    - target: {fileID: 874838184081386832, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: waveSizeAnimationCurve.m_Curve.Array.data[2].time
+      value: 1.0000275
+      objectReference: {fileID: 0}
+    - target: {fileID: 874838184081386832, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: waveSizeAnimationCurve.m_Curve.Array.data[1].value
+      value: 3.9334311
+      objectReference: {fileID: 0}
+    - target: {fileID: 874838184081386832, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: waveSizeAnimationCurve.m_Curve.Array.data[2].value
+      value: -0.023378983
+      objectReference: {fileID: 0}
+    - target: {fileID: 874838184081386832, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: waveSizeAnimationCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 874838184081386832, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: waveSizeAnimationCurve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5445178873793561151, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
       propertyPath: targetImage
       value: 

@@ -14,7 +14,8 @@ namespace GamePlay.Player
 
         [Header("Rope Animation Settings:")]
         [SerializeField] private AnimationCurve ropeAnimationCurve;
-        [Range(0.01f, 4)] [SerializeField] private float StartWaveSize = 2;
+        [SerializeField] private AnimationCurve waveSizeAnimationCurve;
+        // [Range(0.01f, 4)] [SerializeField] private float StartWaveSize = 2;
         private float _waveSize;
 
         [Header("Rope Progression:")]
@@ -47,9 +48,8 @@ namespace GamePlay.Player
         
         private void Init()
         {
-            Debug.Log(1);
             _moveTime = 0;
-            _waveSize = StartWaveSize;
+            // _waveSize = StartWaveSize;
             
             _lineRenderer.positionCount = percision;
             for (int i = 0; i < percision; i++)
@@ -98,16 +98,15 @@ namespace GamePlay.Player
             //         DrawRopeNoWaves();
             //     }
             // }
-            
-            if (_waveSize > 0)
+            _waveSize = waveSizeAnimationCurve.Evaluate(tongue.CurrentFlightFilled);
+            if (_waveSize >= 0)
             {
-                _waveSize -= Time.deltaTime * straightenLineSpeed;
+                // _waveSize -= Time.deltaTime * straightenLineSpeed;
                 DrawRopeWaves();
             }
             else
             {
-                _waveSize = 0;
-            
+                // _waveSize = 0;
                 if (_lineRenderer.positionCount != 2) { _lineRenderer.positionCount = 2; }
             
                 DrawRopeNoWaves();

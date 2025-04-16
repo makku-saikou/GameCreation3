@@ -65,7 +65,7 @@ namespace GamePlay.Player
         [Header("舌头")]
         [Comment("舌头发射速度")]public float tongueSpeed = 40;
         [Comment("舌头回到嘴的速度")]public float retractSpeed = 100;
-        [Comment("舌头最大长度,影响射程和悬挂时的最大长度")]public float tongueMaxLength = 7f;
+        [Comment("舌头最大长度,影响射程和悬挂时的最大长度")]public float tongueMaxLength = 8f;
         [Comment("舌头最小长度,影响时的最小长度")]public float tongueMinLength = 2;
         [Comment("舌头可以碰撞到的layer")] public List<LayerMask> targetLayers;
         
