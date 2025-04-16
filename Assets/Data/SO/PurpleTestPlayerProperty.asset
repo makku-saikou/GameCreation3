@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b2e05ae249e43c9bb10008c8f26e762, type: 3}
-  m_Name: PlayerProperty0
+  m_Name: PurpleTestPlayerProperty
   m_EditorClassIdentifier: 
   jumpForce: 20
   amountOfJump: 1

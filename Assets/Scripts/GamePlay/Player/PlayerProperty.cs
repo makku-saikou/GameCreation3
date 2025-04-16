@@ -19,7 +19,7 @@ namespace GamePlay.Player
     /// 同时，我们使用属性来封装和控制动画的播放
     /// </summary>
     [CreateAssetMenu(fileName = "PlayerProperty", menuName = "Data/PlayerProperty")]
-    [Configurable]
+    [Configurable("Player")]
     public class PlayerProperty : ScriptableObject
     {
         [Header("公共属性")]
@@ -55,7 +55,7 @@ namespace GamePlay.Player
         [Comment("检测贴墙距离")]public float wallCheckRadius = 0.1f;                
         [Comment("滑墙速度")]public float wallSlideSpeed = 3f;                   
         [Comment("滑墙速度插值恢复比率")]public float wallSpeedRecoverScale = 0.15f;          
-        [Comment("蹬墙跳跃力度")]public float wallJumpForce = 120f;                   
+        [Comment("蹬墙跳跃力度")]public float wallJumpForce = 120f;                    
         [Comment("蹬墙跳跃缓冲时间，在该时间内不会再次进入扒墙状态")]public float wallJumpTimerSet = 0.15f;              
         [Comment("蹬墙跳跃方向")][SerializeField]private Vector2 wallJumpDirection = new(1f, 1f);
         

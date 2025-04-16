@@ -20,16 +20,18 @@ namespace GamePlay.Player.PlayerState
             base.EnterCallback(prev);
             PFCLog.Debug("Enter Hang State");
             Rb.gravityScale = Property.hangGravityScale;
+            // todo: 解耦
             Player.Head.SetShow(false);
         }
         
         public override void ExitCallback(HState next)
         {
             base.ExitCallback(next);
+            PFCLog.Debug("Exit Hang State");
             Rb.gravityScale = Property.gravityScale;
             Player.Rb.drag = 0;
-            Property.XMaxSpeed = Mathf.Abs(Property.XMaxSpeed);
-            Property.YMaxSpeed = Mathf.Abs(Property.YMaxSpeed);
+            Property.XMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.x), Property.XMaxSpeed);
+            Property.YMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.y), Property.YMaxSpeed);
             Player.Head.SetShow(true);
             
             Player.transform.right = Vector2.right;
