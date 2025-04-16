@@ -49,6 +49,7 @@ namespace GamePlay.Player
         [Comment("地面检测宽度")]public float groundCheckWidth = 0.5f;               
         [Comment("地面Layer")]public LayerMask groundLayer;                       
         [Comment("跳跃缓冲时间")]public float jumpTimerSet = 0.15f;                  
+        [Comment("跳跃后在一定时间内按跳跃可以跳的更高")] public float jumpBufferTime = 0.5f;
         
         [Header("扒墙")]
         [Comment("检测贴墙距离")]public float wallCheckRadius = 0.1f;                
@@ -178,7 +179,8 @@ namespace GamePlay.Player
             }
         }                 
         public bool IsRightWall { get; set; }                  // 是否在右墙
-        public bool CanJump { get; set; }                       // 是否可以进行普通跳跃
+        public bool CanJump { get; set; }                      // 是否可以进行普通跳跃
+        public bool JumpBufferFlag { get; set; }               // 是否可以进行更高跳跃 
         public bool CanMove { get; set; }                      // 是否可以移动
         public bool CanFlip { get; set; }                      // 是否可以转向
         // public float ConnectAngle { get; set; }             // 悬挂时,连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负

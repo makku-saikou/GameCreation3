@@ -65,7 +65,7 @@ namespace GamePlay.Player.PlayerState
             {
                 velocity = new Vector2(velocity.x, Mathf.Sign(velocity.y) * Property.YMaxSpeed);
             }
-            if (!Input.JumpInput || velocity.y < 0)
+            if (!Input.JumpInput || velocity.y < 0 || !Property.JumpBufferFlag)
             {
                 velocity = new Vector2(velocity.x, velocity.y - Property.variableJumpForce);
             }

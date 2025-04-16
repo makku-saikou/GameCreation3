@@ -8,6 +8,7 @@
 using System;
 using Common.FSM;
 using PurpleFlowerCore;
+using PurpleFlowerCore.Utility;
 using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
@@ -91,6 +92,12 @@ namespace GamePlay.Player.PlayerState
             _jumpTimer = 0;
             
             Property.ResetWallJumpTimer();
+
+            Property.JumpBufferFlag = true;
+            DelayUtility.Delay(Property.jumpBufferTime, () =>
+            {
+                Property.JumpBufferFlag = false;
+            });
         }
     }
 }
