@@ -1558,6 +1558,10 @@ PrefabInstance:
       value: 1.0000275
       objectReference: {fileID: 0}
     - target: {fileID: 874838184081386832, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: waveSizeAnimationCurve.m_Curve.Array.data[0].value
+      value: 0.0186642
+      objectReference: {fileID: 0}
+    - target: {fileID: 874838184081386832, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
       propertyPath: waveSizeAnimationCurve.m_Curve.Array.data[1].value
       value: 3.9334311
       objectReference: {fileID: 0}
