@@ -26,11 +26,11 @@ namespace GamePlay.Player.PlayerState
             base.FixedUpdateCallback();
             if(Input.UpInput && Player.transform.position.y < Property.maxClimbHeight)
             {
-                Rb.velocity = new Vector2(0, Property.climbSpeed);
+                Rb.velocity = new Vector2(0, Property.climbPileSpeed);
             }
             else if(Input.DownInput)
             {
-                Rb.velocity = new Vector2(0, -Property.climbSpeed);
+                Rb.velocity = new Vector2(0, -Property.climbPileSpeed);
             }
             else
             {

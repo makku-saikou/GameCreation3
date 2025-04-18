@@ -70,8 +70,11 @@ namespace GamePlay.Player
         [Comment("舌头最小长度,影响时的最小长度")]public float tongueMinLength = 2;
         [Comment("舌头可以碰撞到的layer")] public List<LayerMask> targetLayers;
         
-        [Header("攀爬")]
-        [Comment("攀爬速度")]public float climbSpeed = 5f;                       
+        [Header("爬杆")]
+        [Comment("爬杆攀爬速度")]public float climbPileSpeed = 5f;                       
+        
+        [Header("爬背景墙")]
+        [Comment("爬背景墙速度")]public float climbBackgroundSpeed = 10f;
         
         [Header("其他功能")]
         [Comment("地面上时最大抬头角度")][SerializeField] public float onGroundUpLimit = 0.2f;
