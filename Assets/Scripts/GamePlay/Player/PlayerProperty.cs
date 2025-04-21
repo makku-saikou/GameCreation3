@@ -191,6 +191,7 @@ namespace GamePlay.Player
         // public Vector3 ConnectDirection { get; set; }        // 悬挂时,连接点与玩家的连线
         public Vector3 HangPoint { get; set; }                  // 悬挂点
         public bool IsOnPillar { get; set; }                   // 是否在可攀爬的柱子前
+        public bool IsOnColorBlock { get; set; }               // 是否在色块前
         public float maxClimbHeight { get; set; }              // 最大攀爬高度
         public float XMaxSpeed { get; set; }                   // 最大速度
         public float YMaxSpeed { get; set; }                    // 最大速度

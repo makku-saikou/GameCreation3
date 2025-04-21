@@ -8,7 +8,7 @@
 using GamePlay.Player;
 using UnityEngine;
 
-namespace GamePlay.Item
+namespace GamePlay.Item.Target
 {
     public interface ITarget
     {
