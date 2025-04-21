@@ -190,9 +190,23 @@ namespace GamePlay.Player
         // public float ConnectAngle { get; set; }             // 悬挂时,连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负
         // public Vector3 ConnectDirection { get; set; }        // 悬挂时,连接点与玩家的连线
         public Vector3 HangPoint { get; set; }                  // 悬挂点
-        public bool IsOnPillar { get; set; }                   // 是否在可攀爬的柱子前
-        public bool IsOnColorBlock { get; set; }               // 是否在色块前
-        public float maxClimbHeight { get; set; }              // 最大攀爬高度
+        public bool CanOnPillar { get; set; }                   // 是否在可攀爬的柱子前
+        public bool IsOnPillar { get; set; }                    // 是否正在爬柱子
+        public bool CanOnColorBlock { get; set; }               // 是否在色块前
+
+        // 是否正在色块背景上爬
+        private bool _isOnColorBlock;
+        public bool IsOnColorBlock
+        {
+            get => _isOnColorBlock;
+            set
+            {
+                if (_isOnColorBlock == value) return;
+                _isOnColorBlock = value;
+                _animator.SetBool("OnBackground", value);
+            }
+        }
+        public float MaxClimbHeight { get; set; }              // 最大攀爬高度
         public float XMaxSpeed { get; set; }                   // 最大速度
         public float YMaxSpeed { get; set; }                    // 最大速度
         public bool HeadCanMove { get; set; }

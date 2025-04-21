@@ -24,7 +24,7 @@ namespace GamePlay.Player.PlayerState
         public override void FixedUpdateCallback()
         {
             base.FixedUpdateCallback();
-            if(Input.UpInput && Player.transform.position.y < Property.maxClimbHeight)
+            if(Input.UpInput && Player.transform.position.y < Property.MaxClimbHeight)
             {
                 Rb.velocity = new Vector2(0, Property.climbPileSpeed);
             }

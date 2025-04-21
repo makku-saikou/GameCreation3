@@ -17,7 +17,7 @@ namespace GamePlay.Item
             if (other.CompareTag("Player"))
             {
                 var player = other.GetComponent<PlayerController>();
-                player.Property.IsOnColorBlock = true;
+                player.Property.CanOnColorBlock = true;
             }
         }
 
@@ -26,7 +26,7 @@ namespace GamePlay.Item
             if (other.CompareTag("Player"))
             {
                 var player = other.GetComponent<PlayerController>();
-                player.Property.IsOnColorBlock = false;
+                player.Property.CanOnColorBlock = false;
             }
         }
     }

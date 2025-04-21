@@ -22,6 +22,7 @@ namespace GamePlay.Player.PlayerState
             Player.Head.SetShow(false);
             Rb.gravityScale = 0;
             Rb.velocity = Vector2.zero;
+            Property.IsOnColorBlock = true;
         }
 
         public override void FixedUpdateCallback()
@@ -42,6 +43,7 @@ namespace GamePlay.Player.PlayerState
             Player.Head.SetShow(true);
             Rb.gravityScale = Property.gravityScale;
             Player.transform.up = Vector2.up;
+            Property.IsOnColorBlock = false;
         }
     }
 }

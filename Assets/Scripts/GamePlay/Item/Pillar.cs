@@ -21,8 +21,8 @@ namespace GamePlay.Item
             if (other.CompareTag("Player"))
             {
                 var player = other.GetComponent<PlayerController>();
-                player.Property.IsOnPillar = true;
-                player.Property.maxClimbHeight = highestPoint.position.y;
+                player.Property.CanOnPillar = true;
+                player.Property.MaxClimbHeight = highestPoint.position.y;
             }
         }
 
@@ -31,7 +31,7 @@ namespace GamePlay.Item
             if (other.CompareTag("Player"))
             {
                 var player = other.GetComponent<PlayerController>();
-                player.Property.IsOnPillar = false;
+                player.Property.CanOnPillar = false;
             }
         }
     }

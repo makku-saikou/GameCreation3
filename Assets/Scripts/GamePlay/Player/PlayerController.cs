@@ -88,6 +88,7 @@ namespace GamePlay.Player
             OnWallState onWallState = new OnWallState(this, "OnWall");
             SmashState smashState = new SmashState(this, "Smash");
             OnPillarState onPillarState = new OnPillarState(this, "OnPillar");
+            OnBackgroundState onBackgroundState = new OnBackgroundState(this, "OnBackgroundState");
             
             // 转移 todo: 定义转移写法的修改
             HTransition jump = new HTransition("Jump", onGroundState, airState);
@@ -134,24 +135,32 @@ namespace GamePlay.Player
             smashState.AddTransition(smashLand);
             
             HTransition climb = new HTransition("Climb", onGroundState, onPillarState);
-            climb.OnCheck += () => property.IsOnPillar && Input.UpInput;
+            climb.OnCheck += () => property.CanOnPillar && Input.UpInput;
             onGroundState.AddTransition(climb);
             
             HTransition climbLand = new HTransition("ClimbLand", onPillarState, onGroundState);
-            climbLand.OnCheck += () => property.IsOnPillar && Input.DownInput && property.IsGrounded;
+            climbLand.OnCheck += () => property.CanOnPillar && Input.DownInput && property.IsGrounded;
             onPillarState.AddTransition(climbLand);
             
             HTransition climbJump = new HTransition("ClimbJump", onPillarState, airState);
-            climbJump.OnCheck += () => property.IsOnPillar && Input.JumpInputDown;
+            climbJump.OnCheck += () => property.CanOnPillar && Input.JumpInputDown;
             onPillarState.AddTransition(climbJump);
             
             HTransition climbToHang = new HTransition("ClimbToHang", onPillarState, hangState);
-            climbToHang.OnCheck += () => property.IsOnPillar && property.IsConnecting;
+            climbToHang.OnCheck += () => property.CanOnPillar && property.IsConnecting;
             onPillarState.AddTransition(climbToHang);
             
             HTransition airClimb = new HTransition("AirClimb", airState, onPillarState);
-            airClimb.OnCheck += () => property.IsOnPillar && Input.UpInput;
+            airClimb.OnCheck += () => property.CanOnPillar && Input.UpInput;
             airState.AddTransition(airClimb);
+            
+            HTransition airToBackground = new HTransition("AirToBackground", airState, onBackgroundState);
+            airToBackground.OnCheck += () => property.CanOnColorBlock && Input.UpInput;
+            airState.AddTransition(airToBackground);
+            
+            HTransition backgroundToAir = new HTransition("BackgroundToAir", onBackgroundState, airState);
+            backgroundToAir.OnCheck += () => !property.CanOnColorBlock;
+            onBackgroundState.AddTransition(backgroundToAir);
             
             // 初始化状态机
             _stateMachine = new HStateMachine(onGroundState);
@@ -177,21 +186,21 @@ namespace GamePlay.Player
                 property.groundLayer) || rightWall;
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.gameObject.CompareTag("Pillar"))
-            {
-                property.IsOnPillar = true;
-            }
-        }
-        
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            if (other.gameObject.CompareTag("Pillar"))
-            {
-                property.IsOnPillar = false;
-            }
-        }
+        // private void OnTriggerEnter2D(Collider2D other)
+        // {
+        //     if (other.gameObject.CompareTag("Pillar"))
+        //     {
+        //         property.IsOnPillar = true;
+        //     }
+        // }
+        //
+        // private void OnTriggerExit2D(Collider2D other)
+        // {
+        //     if (other.gameObject.CompareTag("Pillar"))
+        //     {
+        //         property.IsOnPillar = false;
+        //     }
+        // }
         
         private void RecoverMaxSpeed()
         {
