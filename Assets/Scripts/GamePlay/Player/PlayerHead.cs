@@ -52,7 +52,7 @@ namespace GamePlay.Player
             direction.Normalize();
             if(DirectionLimit != null)
                 direction = DirectionLimit(direction); // 确保此处输入的方向是归一化的
-            // transform.right = Vector3.Lerp(transform.right, direction, 0.1f);
+            // transform.right = Vector3.Lerp(transform.right, direction, 0.1f); 如果插值，落地时头部的转向会有错误
             transform.right = direction;
         }
 

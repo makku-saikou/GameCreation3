@@ -5,7 +5,6 @@
 // Description: 玩家角色主要控制逻辑
 // -------------------------------------------------
 
-using System;
 using Common.FSM;
 using GamePlay.Player.PlayerInput;
 using GamePlay.Player.PlayerState;
@@ -198,22 +197,6 @@ namespace GamePlay.Player
             property.IsWallSliding = Physics2D.OverlapCircle(wallCheckPoint1.position, property.wallCheckRadius,
                 property.groundLayer) || rightWall;
         }
-
-        // private void OnTriggerEnter2D(Collider2D other)
-        // {
-        //     if (other.gameObject.CompareTag("Pillar"))
-        //     {
-        //         property.IsOnPillar = true;
-        //     }
-        // }
-        //
-        // private void OnTriggerExit2D(Collider2D other)
-        // {
-        //     if (other.gameObject.CompareTag("Pillar"))
-        //     {
-        //         property.IsOnPillar = false;
-        //     }
-        // }
         
         private void RecoverMaxSpeed()
         {

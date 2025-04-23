@@ -158,6 +158,7 @@ namespace GamePlay.Player
             {
                 if (_isLaunching == value) return;
                 _isLaunching = value;
+                // todo: 发射时的表现
                 // _animator.SetBool("Launch", value);
             }
         }

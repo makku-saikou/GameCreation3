@@ -27,14 +27,12 @@ namespace GamePlay.Player
         [SerializeField] private PlayerHead head;
         [SerializeField] private PlayerController player;
         private PlayerProperty _property;
-        // private float _currentFlightDistance;
         private ITarget _currentTarget;
         [SerializeField]private ETongueState tongueState;
         [SerializeField] private Transform tonguePoint;  // todo: 没有发现舌尖作为单独物体的优势
         public Transform TonguePoint => tonguePoint;
         private Vector3 _targetPosition;
         [SerializeField] private Image targetImage;
-        // [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private Transform root0;
         public Transform Root0 => root0;
         [SerializeField] private Transform root1;
@@ -77,7 +75,6 @@ namespace GamePlay.Player
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            // DrawTongue();
             ChangeRootPos();
             Debug.DrawLine(head.transform.position, _property.tongueMaxLength * head.transform.right + head.transform.position, Color.red);
         }
@@ -87,18 +84,15 @@ namespace GamePlay.Player
             if(tongueState != ETongueState.Idle) return;
             targetImage.gameObject.SetActive(false);
             _property.HeadCanMove = false;
-            // _currentFlightDistance = 0;
             transform.right = direction; // temp
             tongueState = ETongueState.Launching;
             tonguePoint.parent = null;
-            // lineRenderer.enabled = true;
             _property.IsLaunching = true;
             OnTongueLaunch?.Invoke();
         }
         
         private void UpdateLaunch()
         {
-            // PFCLog.Debug("Tongue", $"target: {_currentTarget}" );
             Vector3 direction = _targetPosition - tonguePoint.position;
             direction.Normalize();
             tonguePoint.position += direction * (Time.deltaTime * _property.tongueSpeed);
@@ -212,12 +206,6 @@ namespace GamePlay.Player
             player.Property.IsConnecting = true;
             _property.HangPoint = _targetPosition;
         }
-
-        // private void DrawTongue()
-        // {
-        //     lineRenderer.SetPosition(0, transform.position);
-        //     lineRenderer.SetPosition(1, tonguePoint.transform.position);
-        // }
 
         private void ChangeRootPos()
         {
