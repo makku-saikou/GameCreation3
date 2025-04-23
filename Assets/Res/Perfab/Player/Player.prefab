@@ -78,7 +78,7 @@ MonoBehaviour:
   distanceJoint2D: {fileID: 5209331376776052768}
   head: {fileID: 3959717701253126937}
   player: {fileID: 5553778798862907640}
-  _tongueState: 0
+  tongueState: 0
   tonguePoint: {fileID: 140825107737555479}
   targetImage: {fileID: 0}
   root0: {fileID: 1463593771889573033}
@@ -504,8 +504,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tongue: {fileID: 5445178873793561151}
-  _lineRenderer: {fileID: 3517248687459407483}
-  percision: 40
+  lineRenderer: {fileID: 3517248687459407483}
+  precision: 40
   straightenLineSpeed: 20
   ropeAnimationCurve:
     serializedVersion: 2
@@ -626,7 +626,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   ropeProgressionSpeed: 20
-  isGrappling: 1
 --- !u!120 &3517248687459407483
 LineRenderer:
   serializedVersion: 2
