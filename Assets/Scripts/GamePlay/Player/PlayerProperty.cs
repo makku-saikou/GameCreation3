@@ -6,6 +6,7 @@
 // Description:
 // -------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using Common.Attribute;
 using PurpleFlowerCore;
@@ -82,6 +83,8 @@ namespace GamePlay.Player
 
         private Animator _animator;
         
+        
+        // todo: 剥离非配置的运行时信息
         // 分类
         public int AmountOfJumpLeft { get; set; }           // 剩余跳跃次数
         public int FacingDirection => IsFacingRight ? 1 : -1;// _isFacingRight的数值形式，方便计算
@@ -193,6 +196,21 @@ namespace GamePlay.Player
         public bool CanOnPillar { get; set; }                   // 是否在可攀爬的柱子前
         public bool IsOnPillar { get; set; }                    // 是否正在爬柱子
         public bool CanOnColorBlock { get; set; }               // 是否在色块前
+        
+        private EPlayerColor _currentColor;
+
+        public EPlayerColor CurrentColor
+        {
+            get => _currentColor;
+            set
+            {
+                if (_currentColor == value) return;
+                _currentColor = value;
+                OnColorChanged?.Invoke();
+            }
+        }
+        public event Action OnColorChanged;
+
 
         // 是否正在色块背景上爬
         private bool _isOnColorBlock;

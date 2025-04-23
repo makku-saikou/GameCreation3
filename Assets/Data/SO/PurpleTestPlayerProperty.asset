@@ -51,6 +51,7 @@ MonoBehaviour:
     m_Bits: 128
   - serializedVersion: 2
     m_Bits: 64
-  climbSpeed: 5
+  climbPileSpeed: 5
+  climbBackgroundSpeed: 10
   onGroundUpLimit: 0.2
   onGroundDownLimit: 0.6

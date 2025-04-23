@@ -6,8 +6,6 @@
 // Description: 舌头相关控制逻辑
 // -------------------------------------------------
 using System;
-using System.Collections.Generic;
-using GamePlay.Item;
 using GamePlay.Item.Target;
 using PurpleFlowerCore;
 using UnityEngine;
@@ -15,7 +13,7 @@ using UnityEngine.UI;
 
 namespace GamePlay.Player
 {
-    public enum TongueState
+    public enum ETongueState
     {
         Idle,
         Launching,
@@ -31,8 +29,8 @@ namespace GamePlay.Player
         private PlayerProperty _property;
         // private float _currentFlightDistance;
         private ITarget _currentTarget;
-        [SerializeField]private TongueState _tongueState;
-        [SerializeField] private Transform tonguePoint;  // todo: 没有发现舌尖作为单独物体的优势,尝试简化为坐标
+        [SerializeField]private ETongueState tongueState;
+        [SerializeField] private Transform tonguePoint;  // todo: 没有发现舌尖作为单独物体的优势
         public Transform TonguePoint => tonguePoint;
         private Vector3 _targetPosition;
         [SerializeField] private Image targetImage;
@@ -45,22 +43,6 @@ namespace GamePlay.Player
         public event Action OnTongueIdle;
         
         private int _layerBit;
-
-        // /// <summary>
-        // /// 保证在0~1
-        // /// </summary>
-        // public float CurrentFlightFilled
-        // {
-        //     get
-        //     {
-        //         if(_tongueState is TongueState.Launching or TongueState.Retracting)
-        //         {
-        //             return Vector3.SqrMagnitude(tonguePoint.position - transform.position) / _property.tongueMaxLength;
-        //         }
-        //
-        //         return 1;
-        //     }
-        // }
 
         private void Start()
         {
@@ -76,21 +58,21 @@ namespace GamePlay.Player
 
         private void Update()
         {
-            switch (_tongueState)
+            switch (tongueState)
             {
-                case TongueState.Idle:
+                case ETongueState.Idle:
                     UpdateTarget();
                     break;
-                case TongueState.Launching:
+                case ETongueState.Launching:
                     UpdateLaunch();
                     break;
-                case TongueState.Connecting:
+                case ETongueState.Connecting:
                     UpdateConnecting();
                     break;
-                case TongueState.Retracting:
+                case ETongueState.Retracting:
                     UpdateRetract();
                     break;
-                case TongueState.Pushing:
+                case ETongueState.Pushing:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -102,12 +84,12 @@ namespace GamePlay.Player
         
         public void Launch(Vector2 direction)
         {
-            if(_tongueState != TongueState.Idle) return;
+            if(tongueState != ETongueState.Idle) return;
             targetImage.gameObject.SetActive(false);
             _property.HeadCanMove = false;
             // _currentFlightDistance = 0;
             transform.right = direction; // temp
-            _tongueState = TongueState.Launching;
+            tongueState = ETongueState.Launching;
             tonguePoint.parent = null;
             // lineRenderer.enabled = true;
             _property.IsLaunching = true;
@@ -152,7 +134,7 @@ namespace GamePlay.Player
         {
             if (Vector3.SqrMagnitude(tonguePoint.position - transform.position) < 0.05f)
             {
-                _tongueState = TongueState.Idle;
+                tongueState = ETongueState.Idle;
                 tonguePoint.position = transform.position;
                 _property.HeadCanMove = true;
                 tonguePoint.parent = transform;
@@ -167,7 +149,7 @@ namespace GamePlay.Player
 
         public void Retract()
         {
-            _tongueState = TongueState.Retracting;
+            tongueState = ETongueState.Retracting;
             distanceJoint2D.enabled = false;
             _currentTarget = null;
             player.Property.IsConnecting = false;
@@ -179,7 +161,7 @@ namespace GamePlay.Player
         public void Interact()
         {
             if(_currentTarget == null) return;
-            if (_tongueState != TongueState.Connecting) return;
+            if (tongueState != ETongueState.Connecting) return;
             _currentTarget.Interact(player);
             Retract();
         }
@@ -224,7 +206,7 @@ namespace GamePlay.Player
                 return;
             }
             _property.CurrentTongueLength = Vector3.Distance(player.transform.position, _targetPosition);
-            _tongueState = TongueState.Connecting;
+            tongueState = ETongueState.Connecting;
             distanceJoint2D.enabled = true;
             distanceJoint2D.connectedAnchor = _targetPosition;
             player.Property.IsConnecting = true;

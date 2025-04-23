@@ -5,9 +5,11 @@
 // Description: 玩家角色主要控制逻辑
 // -------------------------------------------------
 
+using System;
 using Common.FSM;
 using GamePlay.Player.PlayerInput;
 using GamePlay.Player.PlayerState;
+using PurpleFlowerCore;
 using UnityEngine;
 
 // 考虑到玩家状态较多，各种子状态需要考虑有无连接或其他情况，舌头本身也有多种状态
@@ -173,6 +175,13 @@ namespace GamePlay.Player
             _stateMachine.AddState(onWallState);
             _stateMachine.AddState(smashState);
             _stateMachine.AddState(onPillarState);
+            
+#if UNITY_EDITOR
+        DebugSystem.AddCommand("Player/Color/Orange", () => { property.CurrentColor = EPlayerColor.Orange;});
+        DebugSystem.AddCommand("Player/Color/Green", () => { property.CurrentColor = EPlayerColor.Green;});
+        DebugSystem.AddCommand("Player/Color/Red", () => { property.CurrentColor = EPlayerColor.Red;});
+        DebugSystem.AddCommand("Player/Color/Blue", () => { property.CurrentColor = EPlayerColor.Blue;});
+#endif
         }
         
         /// <summary>
@@ -220,5 +229,13 @@ namespace GamePlay.Player
             Gizmos.DrawWireSphere(wallCheckPoint1.position, property.wallCheckRadius);
             Gizmos.DrawWireSphere(wallCheckPoint2.position, property.wallCheckRadius);
         }
+    }
+
+    public enum EPlayerColor
+    {
+        Orange = 0,
+        Green = 1,
+        Red = 2,
+        Blue = 3
     }
 }
