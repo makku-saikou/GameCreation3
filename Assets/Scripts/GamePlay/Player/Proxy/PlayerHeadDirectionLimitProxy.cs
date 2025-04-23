@@ -18,14 +18,15 @@ namespace GamePlay.Player
         private PlayerProperty _property;
         
         private DirectionLimit _onGroundLimit;
-        private DirectionLimit _onAirLimit;
+        private DirectionLimit _onBackgroundLimit;
+        private DirectionLimit _none;
         
         private void Start()
         {
             _property = playerController.Property;
             _onGroundLimit = OnGroundLimit;
-            _onAirLimit = OnAirLimit;
-            
+            _none = direction => direction;
+
             // 为了确保事件注册在玩家初始化之后，且由于我们不会使该组建失效，所以在Start中注册事件
             playerController.StateMachine.OnStateChanged += CheckDirectionLimit;
         }
@@ -59,6 +60,8 @@ namespace GamePlay.Player
                         direction.x = -1 + _property.onGroundDownLimit * _property.onGroundDownLimit;
                 }
             }
+
+            _onBackgroundLimit = _ => playerController.transform.up;
             
             // Vector3 lineDirection = new Vector3(1 - OnGroundUpLimit * OnGroundUpLimit, OnGroundUpLimit);
             // Debug.DrawLine(playerHead.transform.position, playerHead.transform.position + lineDirection, Color.red);
@@ -71,18 +74,13 @@ namespace GamePlay.Player
             return direction;
         }
         
-        private Vector3 OnAirLimit(Vector3 direction)
-        {
-            return direction;
-        }
-        
         private void CheckDirectionLimit(HState from, HState to)
         {
             playerHead.DirectionLimit = to.Name switch
             {
                 "OnGround" => _onGroundLimit,
-                "Air" => _onAirLimit,
-                _ => playerHead.DirectionLimit
+                "OnBackground" => _onBackgroundLimit,
+                _ => _none
             };
         }
     }

@@ -88,7 +88,7 @@ namespace GamePlay.Player
             OnWallState onWallState = new OnWallState(this, "OnWall");
             SmashState smashState = new SmashState(this, "Smash");
             OnPillarState onPillarState = new OnPillarState(this, "OnPillar");
-            OnBackgroundState onBackgroundState = new OnBackgroundState(this, "OnBackgroundState");
+            OnBackgroundState onBackgroundState = new OnBackgroundState(this, "OnBackground");
             
             // 转移 todo: 定义转移写法的修改
             HTransition jump = new HTransition("Jump", onGroundState, airState);
@@ -161,6 +161,10 @@ namespace GamePlay.Player
             HTransition backgroundToAir = new HTransition("BackgroundToAir", onBackgroundState, airState);
             backgroundToAir.OnCheck += () => !property.CanOnColorBlock;
             onBackgroundState.AddTransition(backgroundToAir);
+            
+            HTransition groundToBackground = new HTransition("GroundToBackground", onBackgroundState, onBackgroundState);
+            groundToBackground.OnCheck += () => property.CanOnColorBlock && Input.UpInput;
+            onGroundState.AddTransition(groundToBackground);
             
             // 初始化状态机
             _stateMachine = new HStateMachine(onGroundState);

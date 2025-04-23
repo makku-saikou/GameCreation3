@@ -19,7 +19,8 @@ namespace GamePlay.Player
         private PlayerFlap _onGround;
         private PlayerFlap _air;
         private PlayerFlap _wall;
-        private PlayerFlap _hang;
+        private PlayerFlap _alwaysRight;
+        private PlayerFlap _none;
 
         private void Start()
         {
@@ -64,11 +65,13 @@ namespace GamePlay.Player
                 }
             };
 
-            _hang = () =>
+            _alwaysRight = () =>
             {
                 if (!_property.IsFacingRight)
                     Flip();
             };
+
+            _none = () => { };
             
              player.StateMachine.OnStateChanged += CheckFlap;
         }
@@ -85,8 +88,9 @@ namespace GamePlay.Player
                 "OnGround" => _onGround,
                 "Air" => _air,
                 "OnWall" => _wall,
-                "Hang" => _hang,
-                _ => player.PlayerFlap
+                "Hang" => _alwaysRight,
+                "OnBackground" => _alwaysRight,
+                _ => _none
             };
         }
 
