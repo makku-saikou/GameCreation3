@@ -33,7 +33,7 @@ MonoBehaviour:
     commandType: 0
     color: {r: 1, g: 1, b: 1, a: 1}
     lineBreak: 1
-    commandParam: Assets/Scenes/Dev/level0.unity
+    commandParam: Assets/Scenes/Dev/levels/level0.unity
     command:
       m_PersistentCalls:
         m_Calls: []
@@ -57,7 +57,7 @@ MonoBehaviour:
     commandType: 0
     color: {r: 1, g: 1, b: 1, a: 1}
     lineBreak: 0
-    commandParam: Assets/Scenes/Dev/level1.unity
+    commandParam: Assets/Scenes/Dev/levels/level1.unity
     command:
       m_PersistentCalls:
         m_Calls: []
