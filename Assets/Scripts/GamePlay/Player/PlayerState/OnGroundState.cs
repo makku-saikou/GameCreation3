@@ -48,7 +48,7 @@ namespace GamePlay.Player.PlayerState
                 if (Property.IsGrounded || (Property.AmountOfJumpLeft > 0))
                     NormalJump();
                 else
-                    _jumpTimer = Property.jumpTimerSet;
+                    _jumpTimer = Config.jumpTimerSet;
             }
         }
 
@@ -62,7 +62,7 @@ namespace GamePlay.Player.PlayerState
             // todo: 整理逻辑
             if (Property.IsGrounded && Rb.velocity.y <= 0.01f) // 着陆时
             {
-                Property.AmountOfJumpLeft = Property.amountOfJump;
+                Property.AmountOfJumpLeft = Config.amountOfJump;
             }
 
             Property.CanJump = Property.AmountOfJumpLeft > 0;
@@ -79,14 +79,14 @@ namespace GamePlay.Player.PlayerState
         private void ApplyMovement()
         {
             if (!Property.CanMove) return;
-            Rb.velocity = new Vector2(Property.onGroundSpeed * Input.MovementInput, Rb.velocity.y);
+            Rb.velocity = new Vector2(Config.onGroundSpeed * Input.MovementInput, Rb.velocity.y);
         }
         
         private void NormalJump()
         {
             if (!Property.CanJump) return;
             
-            Rb.velocity = new Vector2(Rb.velocity.x, Property.jumpForce);
+            Rb.velocity = new Vector2(Rb.velocity.x, Config.jumpForce);
             
             Property.AmountOfJumpLeft--;
             _jumpTimer = 0;
@@ -94,7 +94,7 @@ namespace GamePlay.Player.PlayerState
             Property.ResetWallJumpTimer();
 
             Property.JumpBufferFlag = true;
-            DelayUtility.Delay(Property.jumpBufferTime, () =>
+            DelayUtility.Delay(Config.jumpBufferTime, () =>
             {
                 Property.JumpBufferFlag = false;
             });

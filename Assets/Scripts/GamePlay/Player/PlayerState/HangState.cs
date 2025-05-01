@@ -19,7 +19,7 @@ namespace GamePlay.Player.PlayerState
         {
             base.EnterCallback(prev);
             PFCLog.Debug("Enter Hang State");
-            Rb.gravityScale = Property.hangGravityScale;
+            Rb.gravityScale = Config.hangGravityScale;
             // todo: 解耦
             Player.Head.SetShow(false);
         }
@@ -28,7 +28,7 @@ namespace GamePlay.Player.PlayerState
         {
             base.ExitCallback(next);
             PFCLog.Debug("Exit Hang State");
-            Rb.gravityScale = Property.gravityScale;
+            Rb.gravityScale = Config.gravityScale;
             Player.Rb.drag = 0;
             Property.XMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.x), Property.XMaxSpeed);
             Property.YMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.y), Property.YMaxSpeed);
@@ -59,7 +59,7 @@ namespace GamePlay.Player.PlayerState
         
         private void HangJump()
         {
-            Rb.velocity += new Vector2(0, Property.hangJumpForce);
+            Rb.velocity += new Vector2(0, Config.hangJumpForce);
         }
 
         private void BodyDirection()
@@ -71,10 +71,10 @@ namespace GamePlay.Player.PlayerState
 
         private void Move()
         {
-            Player.Rb.drag = Input.MovementInput == 0 ? Property.hangDrag : 0;
+            Player.Rb.drag = Input.MovementInput == 0 ? Config.hangDrag : 0;
             if (Input.MovementInput != 0)
             {
-                Player.Rb.AddForce(new Vector2(Property.hangSwayForce * Input.MovementInput, 0), ForceMode2D.Force);
+                Player.Rb.AddForce(new Vector2(Config.hangSwayForce * Input.MovementInput, 0), ForceMode2D.Force);
             }
         }
 
@@ -82,11 +82,11 @@ namespace GamePlay.Player.PlayerState
         {
             if (Input.UpInput)
             {
-                Property.CurrentTongueLength -= Property.tongueLengthChangeSpeed * Time.deltaTime;
+                Property.CurrentTongueLength -= Config.tongueLengthChangeSpeed * Time.deltaTime;
             }
             else if (Input.DownInput)
             {
-                Property.CurrentTongueLength += Property.tongueLengthChangeSpeed * Time.deltaTime;
+                Property.CurrentTongueLength += Config.tongueLengthChangeSpeed * Time.deltaTime;
             }
         }
     }

@@ -31,7 +31,7 @@ namespace GamePlay.Player.PlayerState
             var direction = Input.DirectionInput;
             if (direction != Vector2.zero)
             {
-                Rb.velocity = new Vector2(direction.x * Property.climbBackgroundSpeed, direction.y * Property.climbBackgroundSpeed);
+                Rb.velocity = new Vector2(direction.x * Config.climbBackgroundSpeed, direction.y * Config.climbBackgroundSpeed);
             }
             Player.transform.up = direction;
         }
@@ -41,7 +41,7 @@ namespace GamePlay.Player.PlayerState
             base.ExitCallback(next);
             PFCLog.Debug("Exit OnBackground State");
             Player.Head.SetShow(true);
-            Rb.gravityScale = Property.gravityScale;
+            Rb.gravityScale = Config.gravityScale;
             Player.transform.up = Vector2.up;
             Property.IsOnColorBlock = false;
         }

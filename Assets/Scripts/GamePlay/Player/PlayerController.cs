@@ -24,8 +24,11 @@ namespace GamePlay.Player
         [SerializeField] private Transform entity;
         public Transform Entity => entity;
 
-        [SerializeField] private PlayerProperty property;
+        private PlayerProperty property;
         public PlayerProperty Property => property;
+
+        [SerializeField] private PlayerConfig config;
+        public PlayerConfig Config => config;
 
         private HStateMachine _stateMachine;
         public HStateMachine StateMachine => _stateMachine;
@@ -201,28 +204,28 @@ namespace GamePlay.Player
         private void CheckState()
         {
             property.IsGrounded =
-                Physics2D.OverlapBox(groundCheckPoint.position, new Vector2(property.groundCheckWidth,
-                    property.groundCheckHeight), 0, property.groundLayer);
+                Physics2D.OverlapBox(groundCheckPoint.position, new Vector2(Config.groundCheckWidth,
+                    Config.groundCheckHeight), 0, Config.groundLayer);
             bool rightWall =
-                Physics2D.OverlapCircle(wallCheckPoint2.position, property.wallCheckRadius, property.groundLayer);
+                Physics2D.OverlapCircle(wallCheckPoint2.position, Config.wallCheckRadius, Config.groundLayer);
             property.IsRightWall = rightWall;
-            property.IsWallSliding = Physics2D.OverlapCircle(wallCheckPoint1.position, property.wallCheckRadius,
-                property.groundLayer) || rightWall;
+            property.IsWallSliding = Physics2D.OverlapCircle(wallCheckPoint1.position, Config.wallCheckRadius,
+                Config.groundLayer) || rightWall;
         }
 
         private void RecoverMaxSpeed()
         {
-            property.XMaxSpeed = Mathf.Lerp(property.XMaxSpeed, property.commonXMaxSpeed,
-                property.xMaxSpeedRecoverScale);
-            property.YMaxSpeed = Mathf.Lerp(property.YMaxSpeed, property.commonYMaxSpeed,
-                property.yMaxSpeedRecoverScale);
+            property.XMaxSpeed = Mathf.Lerp(property.XMaxSpeed, Config.commonXMaxSpeed,
+                Config.xMaxSpeedRecoverScale);
+            property.YMaxSpeed = Mathf.Lerp(property.YMaxSpeed, Config.commonYMaxSpeed,
+                Config.yMaxSpeedRecoverScale);
         }
 
         private void OnDrawGizmos()
         {
-            Gizmos.DrawWireCube(groundCheckPoint.position, new Vector3(property.groundCheckWidth, property.groundCheckHeight, 0));
-            Gizmos.DrawWireSphere(wallCheckPoint1.position, property.wallCheckRadius);
-            Gizmos.DrawWireSphere(wallCheckPoint2.position, property.wallCheckRadius);
+            Gizmos.DrawWireCube(groundCheckPoint.position, new Vector3(Config.groundCheckWidth, Config.groundCheckHeight, 0));
+            Gizmos.DrawWireSphere(wallCheckPoint1.position, Config.wallCheckRadius);
+            Gizmos.DrawWireSphere(wallCheckPoint2.position, Config.wallCheckRadius);
         }
     }
 

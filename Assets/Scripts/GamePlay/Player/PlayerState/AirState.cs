@@ -37,14 +37,14 @@ namespace GamePlay.Player.PlayerState
         private void LaunchingSpeed()
         {
             var v = Rb.velocity;
-            v *= Property.launchDragScale;
+            v *= Config.launchDragScale;
             Rb.velocity = v;
             Rb.gravityScale = 0;
         }
         
         private void RecoverGravity()
         {
-            Rb.gravityScale = Property.gravityScale;
+            Rb.gravityScale = Config.gravityScale;
         }
         
         public override void FixedUpdateCallback()
@@ -53,7 +53,7 @@ namespace GamePlay.Player.PlayerState
             
             if (Input.MovementInput != 0 && !Property.IsLaunching)
             {
-                Rb.AddForce(new Vector2(Property.xForceInAir * Input.MovementInput, 0), ForceMode2D.Force);
+                Rb.AddForce(new Vector2(Config.xForceInAir * Input.MovementInput, 0), ForceMode2D.Force);
             }
             var velocity = Rb.velocity;
             
@@ -67,7 +67,7 @@ namespace GamePlay.Player.PlayerState
             }
             if (!Input.JumpInput || velocity.y < 0 || !Property.JumpBufferFlag)
             {
-                velocity = new Vector2(velocity.x, velocity.y - Property.variableJumpForce);
+                velocity = new Vector2(velocity.x, velocity.y - Config.variableJumpForce);
             }
             Rb.velocity = velocity;
         }
