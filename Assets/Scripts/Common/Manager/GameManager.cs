@@ -5,6 +5,7 @@
 // Description:
 // -------------------------------------------------
 
+using System;
 using GamePlay.Player;
 using Hmxs.Toolkit;
 using UnityEngine;
@@ -16,18 +17,25 @@ namespace Common.Manager
         [SerializeField] private PlayerController player;
         public PlayerController Player => player;
 
-        [SerializeField] private Transform checkPoint = Instance.transform;
+        [SerializeField] private Transform checkPoint;
         public Transform CheckPoint
         {
             get => checkPoint;
             set => checkPoint = value;
         }
 
-        [SerializeField] private Transform tmpCheckPoint = Instance.transform;
+        [SerializeField] private Transform tmpCheckPoint;
         public Transform TmpCheckPoint
         {
             get => tmpCheckPoint;
             set => tmpCheckPoint = value;
+        }
+
+        private void Start()
+        {
+            // todo: 这里的checkPoint和tmpCheckPoint应该是从场景中获取的
+            CheckPoint = Instance.transform;
+            tmpCheckPoint = Instance.transform;
         }
 
         public void PlayerDie()
