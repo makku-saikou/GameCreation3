@@ -29,7 +29,7 @@ namespace GamePlay.Player.PlayerState
         public override void FixedUpdateCallback()
         {
             base.FixedUpdateCallback();
-            Rb.velocity = new Vector2(0, -Property.smashVelocity);
+            Rb.velocity = new Vector2(0, -Config.smashVelocity);
         }
     }
 }

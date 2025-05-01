@@ -23,14 +23,14 @@ namespace GamePlay.Item
 			_spriteRenderer ??= GetComponent<SpriteRenderer>();
 			_boxCollider ??= GetComponent<BoxCollider2D>();
 
-			if (_spriteRenderer == null || _boxCollider == null)
+			if (!_spriteRenderer || !_boxCollider)
 			{
 				Debug.LogError("SpriteRenderer or BoxCollider2D not found!");
 				return;
 			}
 
 			var bounds = _spriteRenderer.bounds;
-			_boxCollider.size = bounds.size;
+			_boxCollider.size = bounds.size / _spriteRenderer.transform.lossyScale.x;
 		}
 	}
 }

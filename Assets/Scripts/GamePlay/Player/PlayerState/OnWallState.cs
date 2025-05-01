@@ -32,7 +32,7 @@ namespace GamePlay.Player.PlayerState
         {
             base.ExitCallback(next);
             Property.ResetWallJumpTimer();
-            Rb.gravityScale = Property.gravityScale;
+            Rb.gravityScale = Config.gravityScale;
             
             Player.Head.SetShow(true);
             Property.HeadCanLaunch = true;
@@ -49,7 +49,7 @@ namespace GamePlay.Player.PlayerState
                 {
                     direction.x = -direction.x;
                 }
-                Rb.AddForce(direction * Property.wallJumpForce, ForceMode2D.Impulse);
+                Rb.AddForce(direction * Config.wallJumpForce, ForceMode2D.Impulse);
                 Property.ResetWallJumpTimer();
             }
         }
@@ -60,7 +60,7 @@ namespace GamePlay.Player.PlayerState
             
             Vector2 velocity = Rb.velocity;
             // velocity = Vector2.Lerp(velocity, new Vector2(0, 0), P.wallSpeedRecoverScale);
-            velocity = Vector2.Lerp(velocity, new Vector2(0, -Property.wallSlideSpeed), Property.wallSpeedRecoverScale);
+            velocity = Vector2.Lerp(velocity, new Vector2(0, -Config.wallSlideSpeed), Config.wallSpeedRecoverScale);
             Rb.velocity = velocity;
         }
     }

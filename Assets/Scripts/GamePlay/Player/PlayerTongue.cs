@@ -27,6 +27,7 @@ namespace GamePlay.Player
         [SerializeField] private PlayerHead head;
         [SerializeField] private PlayerController player;
         private PlayerProperty _property;
+        private PlayerConfig _config;
         private ITarget _currentTarget;
         [SerializeField]private ETongueState tongueState;
         [SerializeField] private Transform tonguePoint;  // todo: 没有发现舌尖作为单独物体的优势
@@ -45,9 +46,10 @@ namespace GamePlay.Player
         private void Start()
         {
             _property = player.Property;
+            _config = player.Config;
             tonguePoint.position = transform.position;
             transform.position = root0.position;
-            var layers = _property.targetLayers;
+            var layers = _config.targetLayers;
             foreach (var layer in layers)
             {
                 _layerBit |= layer;
@@ -76,7 +78,7 @@ namespace GamePlay.Player
                     throw new ArgumentOutOfRangeException();
             }
             ChangeRootPos();
-            Debug.DrawLine(head.transform.position, _property.tongueMaxLength * head.transform.right + head.transform.position, Color.red);
+            Debug.DrawLine(head.transform.position, _config.tongueMaxLength * head.transform.right + head.transform.position, Color.red);
         }
         
         public void Launch(Vector2 direction)
@@ -95,7 +97,7 @@ namespace GamePlay.Player
         {
             Vector3 direction = _targetPosition - tonguePoint.position;
             direction.Normalize();
-            tonguePoint.position += direction * (Time.deltaTime * _property.tongueSpeed);
+            tonguePoint.position += direction * (Time.deltaTime * _config.tongueSpeed);
             // _currentFlightDistance += Time.deltaTime * _property.tongueSpeed;
             if(Vector3.SqrMagnitude(tonguePoint.position - _targetPosition) < 0.05f)
             {
@@ -105,13 +107,13 @@ namespace GamePlay.Player
         
         private void UpdateConnecting()
         {
-            if(_property.CurrentTongueLength >  _property.tongueMaxLength)
+            if(_property.CurrentTongueLength >  _config.tongueMaxLength)
             {
-                _property.CurrentTongueLength = _property.tongueMaxLength;
+                _property.CurrentTongueLength = _config.tongueMaxLength;
             }
-            else if(_property.CurrentTongueLength < _property.tongueMinLength)
+            else if(_property.CurrentTongueLength < _config.tongueMinLength)
             {
-                _property.CurrentTongueLength = _property.tongueMinLength;
+                _property.CurrentTongueLength = _config.tongueMinLength;
             }
             if(!Mathf.Approximately(distanceJoint2D.distance, _property.CurrentTongueLength))
             {
@@ -138,7 +140,7 @@ namespace GamePlay.Player
             }
             Vector3 direction = transform.position - tonguePoint.position;
             direction.Normalize();
-            tonguePoint.position += direction * (Time.deltaTime * _property.retractSpeed);
+            tonguePoint.position += direction * (Time.deltaTime * _config.retractSpeed);
         }
 
         public void Retract()
@@ -163,7 +165,7 @@ namespace GamePlay.Player
         private void UpdateTarget()
         {   
             
-            var hit = Physics2D.Raycast(transform.position, transform.right, _property.tongueMaxLength, _layerBit);
+            var hit = Physics2D.Raycast(transform.position, transform.right, _config.tongueMaxLength, _layerBit);
             if (hit.collider)
             {
                 _currentTarget = hit.collider.GetComponent<ITarget>();
@@ -186,7 +188,7 @@ namespace GamePlay.Player
             {
                 targetImage.gameObject.SetActive(false);
                 _currentTarget = null;
-                _targetPosition = transform.position + transform.right * _property.tongueMaxLength;
+                _targetPosition = transform.position + transform.right * _config.tongueMaxLength;
             }
         }
 

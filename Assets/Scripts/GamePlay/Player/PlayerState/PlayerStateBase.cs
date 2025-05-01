@@ -15,6 +15,8 @@ namespace GamePlay.Player.PlayerState
     public abstract class PlayerStateBase : HState
     {
         protected PlayerProperty Property;
+        protected PlayerHead Head;
+        protected PlayerConfig Config;
         protected PlayerController Player;
         protected Rigidbody2D Rb;
         protected PlayerInputBase Input;
@@ -27,6 +29,8 @@ namespace GamePlay.Player.PlayerState
             Rb = player.Rb;
             Input = player.Input;
             Tongue = player.Head.Tongue;
+            Config = player.Config;
+            Head = player.Head;
         }
     }
 }

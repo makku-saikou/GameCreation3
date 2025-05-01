@@ -277,7 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   head: {fileID: 3959717701253126937}
   entity: {fileID: 5654363637517419355}
-  property: {fileID: 11400000, guid: 2a5419c3c0f21e6489a8a4b9d2f1f532, type: 2}
+  config: {fileID: 11400000, guid: 2a5419c3c0f21e6489a8a4b9d2f1f532, type: 2}
   spriteRenderer: {fileID: 6740037977774092997}
   animator: {fileID: 4466951446267338716}
   rb: {fileID: 5388819421085346460}
@@ -666,7 +666,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -754365059
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: -1
   m_Positions:
   - {x: 1, y: 0, z: 0}
@@ -803,7 +803,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -754365059
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 95b9ee16a8ff80d4a86d5dc1e38031b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -945,7 +945,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -754365059
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 7e4f3db3462fdc4449606921337742ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

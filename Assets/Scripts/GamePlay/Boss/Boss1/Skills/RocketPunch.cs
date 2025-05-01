@@ -20,7 +20,6 @@ namespace GamePlay.Boss.Boss1.Skills
 			var rocketPunch = Object.Instantiate(_rocketPunchPrefab.Value);
 			rocketPunch.transform.position = transform.position;
 			rocketPunch.transform.rotation = transform.rotation;
-
 			_startTime = Time.time;
 		}
 
