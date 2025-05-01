@@ -16,13 +16,12 @@ namespace GamePlay.Player.PlayerState
     // todo: 由于状态机的引入,需要删除原来无用逻辑
     public class OnGroundState : PlayerStateBase
     {
-        private float _jumpTimer; // 跳跃计时器，提供输入提前量，优化下一次跳跃的手感
-        
         public OnGroundState(PlayerController player, string name) : base(player, name) { }
         
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
+            
             PFCLog.Debug("Enter OnGround State");
             
         }
@@ -47,8 +46,6 @@ namespace GamePlay.Player.PlayerState
             {
                 if (Property.IsGrounded || (Property.AmountOfJumpLeft > 0))
                     NormalJump();
-                else
-                    _jumpTimer = Config.jumpTimerSet;
             }
         }
 
@@ -64,15 +61,11 @@ namespace GamePlay.Player.PlayerState
             {
                 Property.AmountOfJumpLeft = Config.amountOfJump;
             }
-
             Property.CanJump = Property.AmountOfJumpLeft > 0;
-            
-            if (_jumpTimer > 0)
+            if (Property.PreJumpBufferFlag)
             {
-                if (Property.IsGrounded) 
-                    NormalJump();
-                
-                _jumpTimer -= Time.deltaTime;
+                Property.PreJumpBufferFlag = false;
+                NormalJump();
             }
         }
         
@@ -85,19 +78,10 @@ namespace GamePlay.Player.PlayerState
         private void NormalJump()
         {
             if (!Property.CanJump) return;
-            
             Rb.velocity = new Vector2(Rb.velocity.x, Config.jumpForce);
-            
             Property.AmountOfJumpLeft--;
-            _jumpTimer = 0;
-            
             Property.ResetWallJumpTimer();
-
-            Property.JumpBufferFlag = true;
-            DelayUtility.Delay(Config.jumpBufferTime, () =>
-            {
-                Property.JumpBufferFlag = false;
-            });
+            Property.ResetJumpBufferFlag();
         }
     }
 }

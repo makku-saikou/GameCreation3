@@ -6,11 +6,11 @@
 // Description:
 // -------------------------------------------------
 
-using System;
 using System.Collections.Generic;
 using Common.Attribute;
+using Common.Manager;
 using PurpleFlowerCore;
-using PurpleFlowerCore.Utility;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -35,6 +35,7 @@ namespace GamePlay.Player
         [Comment("空中水平移动力度")]public float xForceInAir = 200f;                     
         // public float fallMultiplier = 0.95f;             // 下落时的空气阻力
         [Comment("提前松开空格，则会跳的更低")]public float variableJumpForce = 0.95f;             
+        [Comment("预跳跃缓冲，详细问DZY")]public float preJumpBufferTime = 1f;
         
         [Header("悬挂")]
         [Comment("悬挂且无输入时的空中阻尼")]public float hangDrag = 2f;             
@@ -79,5 +80,17 @@ namespace GamePlay.Player
         [Header("其他功能")]
         [Comment("地面上时最大抬头角度")][SerializeField] public float onGroundUpLimit = 0.2f;
         [Comment("地面上时最大低头角度")][SerializeField] public float onGroundDownLimit = 0.6f;
+#if UNITY_EDITOR
+        public bool IsPlayerConfig => this == GameManager.Instance?.Player.Config;
+        [ShowIf("@!IsPlayerConfig && UnityEditor.EditorApplication.isPlaying")]
+        [GUIColor(1f, 0f, 0f)]
+        [InfoBox("此配置不是当前玩家的配置！", InfoMessageType.Error)]
+        [ShowIf("@!IsPlayerConfig&& UnityEditor.EditorApplication.isPlaying")]
+        [Button]
+        public void ChangePlayerCurrentConfigToThis()
+        {
+            GameManager.Instance.Player.Config = this;
+        }
+#endif
     }
 }

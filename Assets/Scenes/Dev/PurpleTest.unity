@@ -1580,6 +1580,10 @@ PrefabInstance:
       propertyPath: property
       value: 
       objectReference: {fileID: 11400000, guid: df1076fadbe5e7f4e92c3f12c586963a, type: 2}
+    - target: {fileID: 5553778798862907640, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: cameraPoint
+      value: 
+      objectReference: {fileID: 1403943455}
     - target: {fileID: 8238423557046667480, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.06

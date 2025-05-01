@@ -6,6 +6,7 @@
 // -------------------------------------------------
 
 using System;
+using Common.Manager;
 using PurpleFlowerCore.Utility;
 using UnityEngine;
 
@@ -158,6 +159,7 @@ namespace GamePlay.Player
                 Animator.SetBool("OnBackground", value);
             }
         }
+        public bool PreJumpBufferFlag { get; set; }          // 在地面时直接进行跳跃
         public float MaxClimbHeight { get; set; }              // 最大攀爬高度
         public float XMaxSpeed { get; set; }                   // 最大速度
         public float YMaxSpeed { get; set; }                    // 最大速度
@@ -188,6 +190,18 @@ namespace GamePlay.Player
         {
             OnWallFlag = true;
             DelayUtility.Delay(Config.wallJumpTimerSet, () => { OnWallFlag = false; });
+        }
+        
+        public void ResetPreJumpBufferFlag()
+        {
+            PreJumpBufferFlag = true;
+            DelayUtility.Delay(Config.preJumpBufferTime, () => { PreJumpBufferFlag = false; });
+        }
+        
+        public void ResetJumpBufferFlag()
+        {
+            JumpBufferFlag = true;
+            DelayUtility.Delay(Config.jumpBufferTime, () => { JumpBufferFlag = false; });
         }
     }
 }

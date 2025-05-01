@@ -41,7 +41,14 @@ namespace GamePlay.Player.PlayerState
             Rb.velocity = v;
             Rb.gravityScale = 0;
         }
-        
+
+        public override void UpdateCallback(float deltaTime)
+        {
+            base.UpdateCallback(deltaTime);
+            if(Input.JumpInputDown)
+                Property.ResetPreJumpBufferFlag();
+        }
+
         private void RecoverGravity()
         {
             Rb.gravityScale = Config.gravityScale;

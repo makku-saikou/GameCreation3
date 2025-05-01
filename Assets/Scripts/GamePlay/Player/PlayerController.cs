@@ -28,7 +28,11 @@ namespace GamePlay.Player
         public PlayerProperty Property => property;
 
         [SerializeField] private PlayerConfig config;
-        public PlayerConfig Config => config;
+        public PlayerConfig Config
+        {
+            get => config;
+            set => config  = value;
+        }
 
         private HStateMachine _stateMachine;
         public HStateMachine StateMachine => _stateMachine;
