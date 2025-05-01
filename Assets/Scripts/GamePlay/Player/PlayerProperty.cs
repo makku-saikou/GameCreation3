@@ -235,6 +235,8 @@ namespace GamePlay.Player
         public Vector2 WallJumpDirection => wallJumpDirection.normalized; // 滑墙跳跃方向
         // [RO] public bool checkVariableJump;                 // 当成功跳跃时被激活，若跳跃期间松开空格，则会施加额外的向下的力
         // [RO] public bool isTouchingWall;                    // 是否贴墙，由Physics2D判定
+
+        public bool IsInCannon { get; set; } // 是否在炮筒里
         
         public void Init(PlayerController player)
         {
