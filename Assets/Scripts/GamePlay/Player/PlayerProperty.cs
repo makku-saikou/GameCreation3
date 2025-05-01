@@ -169,8 +169,8 @@ namespace GamePlay.Player
         // [RO] public bool isTouchingWall;                    // 是否贴墙，由Physics2D判定
 
         public bool IsInCannon { get; set; } // 是否在炮筒里
-        
-        public void Init(PlayerController player)
+
+        public PlayerProperty(PlayerController player)
         {
             _player = player;
             AmountOfJumpLeft = Config.amountOfJump;

@@ -79,9 +79,8 @@ namespace GamePlay.Player
         /// </summary>
         private void Init()
         {
-            property.Init(this);
-            
             //todo:
+            property = new(this);
             _input = new PlayerInput_Legacy();
             
             // 定义整个状态机
