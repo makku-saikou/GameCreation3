@@ -34,7 +34,7 @@ namespace GamePlay.Player.PlayerState
             Property.YMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.y), Property.YMaxSpeed);
             Player.Head.SetShow(true);
             
-            Player.transform.right = Vector2.right;
+            Player.Entity.transform.right = Vector2.right;
         }
         
         public override void UpdateCallback(float deltaTime)
@@ -66,7 +66,7 @@ namespace GamePlay.Player.PlayerState
         {
             var direction = Property.HangPoint - Player.transform.position;
             direction.Normalize();
-            Player.transform.up = direction;
+            Player.Entity.transform.up = direction;
         }
 
         private void Move()

@@ -16,8 +16,7 @@ using UnityEngine;
 namespace GamePlay.Player
 {
     /// <summary>
-    /// 玩家属性的配置类和数据类，我们使用字段配置数据，使用属性缓存和传递信息
-    /// 同时，我们使用属性来封装和控制动画的播放
+    /// 玩家属性的配置类和数据类，我们使用字段配置数
     /// </summary>
     [CreateAssetMenu(fileName = "PlayerProperty", menuName = "Data/PlayerProperty")]
     [Configurable("Player")]

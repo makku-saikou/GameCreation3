@@ -16,7 +16,7 @@ namespace Common.Manager
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
         private void Start()
         {
-            virtualCamera.Follow = GameManager.Instance.Player.transform;
+            virtualCamera.Follow = GameManager.Instance.Player.CameraPoint.transform;
         }
     }
 }
