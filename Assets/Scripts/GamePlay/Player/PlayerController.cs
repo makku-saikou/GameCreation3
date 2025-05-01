@@ -90,7 +90,9 @@ namespace GamePlay.Player
             SmashState smashState = new SmashState(this, "Smash");
             OnPillarState onPillarState = new OnPillarState(this, "OnPillar");
             OnBackgroundState onBackgroundState = new OnBackgroundState(this, "OnBackground");
-            // InCannonState inCannonState = new InCannonState(this, "InCannon");
+            InCannonState inCannonState = new InCannonState(this, "InCannon");
+            
+            _stateMachine = new HStateMachine(onGroundState);
 
             // 转移 todo: 定义转移写法的修改
             HTransition jump = new HTransition("Jump", onGroundState, airState);
@@ -169,22 +171,21 @@ namespace GamePlay.Player
             onGroundState.AddTransition(groundToBackground);
 
 
-            // HTransition inCannonToAir = new HTransition("InCannonToAir", inCannonState, airState);
-            // inCannonToAir.OnCheck += () => !property.IsInCannon;
-            // inCannonState.AddTransition(inCannonToAir);
+            HTransition inCannonToAir = new HTransition("InCannonToAir", inCannonState, airState);
+            inCannonToAir.OnCheck += () => !property.IsInCannon;
+            inCannonState.AddTransition(inCannonToAir);
 
-            // HTransition anyToInCannon = new HTransition("AnyToInCannon", airState, inCannonState);
-            // anyToInCannon.OnCheck += () => property.IsInCannon;
-            // _stateMachine.AddAnyState(anyToInCannon);
+            HTransition anyToInCannon = new HTransition("AnyToInCannon",null, inCannonState);
+            anyToInCannon.OnCheck += () => property.IsInCannon;
+            _stateMachine.AddAnyState(anyToInCannon);
 
             // 初始化状态机
-            _stateMachine = new HStateMachine(onGroundState);
             _stateMachine.AddState(airState);
             _stateMachine.AddState(hangState);
             _stateMachine.AddState(onWallState);
             _stateMachine.AddState(smashState);
             _stateMachine.AddState(onPillarState);
-            // _stateMachine.AddState(inCannonState);
+            _stateMachine.AddState(inCannonState);
 
 #if UNITY_EDITOR
         DebugSystem.AddCommand("Player/Color/Orange", () => { property.CurrentColor = EPlayerColor.Orange;});
