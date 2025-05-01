@@ -31,9 +31,9 @@ namespace GamePlay.Item
             player.Property.OnColorChanged -= OnPlayerColorChanged;
         }
 
-        private void OnPlayerColorChanged()
+        private void OnPlayerColorChanged(EPlayerColor from, EPlayerColor to)
         {
-            PFCLog.Debug("ColorBlock", "Player's color changed");
+            PFCLog.Debug("ColorBlock", "Player's color changed from {0} to {1}", from, to);
         }
     }
 }

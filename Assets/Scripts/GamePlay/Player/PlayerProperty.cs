@@ -139,11 +139,12 @@ namespace GamePlay.Player
             set
             {
                 if (_currentColor == value) return;
+                var oldColor = _currentColor;
                 _currentColor = value;
-                OnColorChanged?.Invoke();
+                OnColorChanged?.Invoke(oldColor, _currentColor);
             }
         }
-        public event Action OnColorChanged;
+        public event Action<EPlayerColor, EPlayerColor> OnColorChanged;
 
         // 是否正在色块背景上爬
         private bool _isOnColorBlock;
