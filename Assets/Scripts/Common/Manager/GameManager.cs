@@ -16,14 +16,14 @@ namespace Common.Manager
         [SerializeField] private PlayerController player;
         public PlayerController Player => player;
 
-        [SerializeField] private Transform checkPoint;
+        [SerializeField] private Transform checkPoint = Instance.transform;
         public Transform CheckPoint
         {
             get => checkPoint;
             set => checkPoint = value;
         }
 
-        [SerializeField] private Transform tmpCheckPoint;
+        [SerializeField] private Transform tmpCheckPoint = Instance.transform;
         public Transform TmpCheckPoint
         {
             get => tmpCheckPoint;
@@ -33,15 +33,15 @@ namespace Common.Manager
         public void PlayerDie()
         {
             // TODO: 播放死亡动画，禁用角色输入
-            Timer.Register(2f, () => PlayerToCheckPoint(checkPoint.position));
+            Timer.Register(2f, () => PlayerReset(checkPoint.position));
         }
 
         public void PlayerToTmpCheckPoint()
         {
-            Timer.Register(0.5f, () => PlayerToCheckPoint(tmpCheckPoint.position));
+            Timer.Register(0.5f, () => PlayerReset(tmpCheckPoint.position));
         }
 
-        private void PlayerToCheckPoint(Vector3 position)
+        private void PlayerReset(Vector3 position)
         {
             player.transform.position = position;
             player.Rb.velocity = Vector2.zero;
