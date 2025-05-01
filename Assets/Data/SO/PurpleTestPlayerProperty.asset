@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PurpleTestPlayerProperty
   m_EditorClassIdentifier: 
   jumpForce: 20
-  amountOfJump: 1
+  amountOfJump: 999
   gravityScale: 5
-  commonXMaxSpeed: 10
-  commonYMaxSpeed: 60
+  commonXMaxSpeed: 15
+  commonYMaxSpeed: 40
   xMaxSpeedRecoverScale: 0.01
   yMaxSpeedRecoverScale: 0.05
   xForceInAir: 200
@@ -24,8 +24,8 @@ MonoBehaviour:
   hangDrag: 2
   hangSwayForce: 100
   hangGravityScale: 12
-  tongueLengthChangeSpeed: 5
-  launchDragScale: 0.3
+  tongueLengthChangeSpeed: 8
+  launchDragScale: 0.9
   hangJumpForce: 0
   onGroundSpeed: 10
   groundCheckHeight: 0.34
