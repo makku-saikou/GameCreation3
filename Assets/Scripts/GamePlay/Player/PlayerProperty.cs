@@ -13,7 +13,7 @@ namespace GamePlay.Player
 {
     public class PlayerProperty
     {
-        private PlayerController _player;
+        private readonly PlayerController _player;
         private Animator Animator => _player.Animator;
         private Rigidbody2D Rb => _player.Rb;
         private PlayerConfig Config => _player.Config;

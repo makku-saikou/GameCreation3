@@ -14,8 +14,8 @@ namespace GamePlay.Player
     public class PlayerFlapProxy : MonoBehaviour
     {
         [SerializeField] private PlayerController player;
-        private PlayerProperty _property;
-        private Rigidbody2D _rb;
+        private PlayerProperty Property => player.Property;
+        private Rigidbody2D Rb => player.Rb;
         private PlayerFlap _onGround;
         private PlayerFlap _air;
         private PlayerFlap _wall;
@@ -24,11 +24,9 @@ namespace GamePlay.Player
 
         private void Start()
         {
-            _property = player.Property;
-            _rb = player.Rb;
             _onGround = () =>
             {
-                if (_property.IsLaunching || _property.IsRetracting || _property.IsConnecting) return;
+                if (Property.IsLaunching || Property.IsRetracting || Property.IsConnecting) return;
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3 direction = mousePosition - transform.position;
                 direction.z = 0;
@@ -45,10 +43,10 @@ namespace GamePlay.Player
 
             _air = () =>
             {
-                switch (_rb.velocity.x)
+                switch (Rb.velocity.x)
                 {
-                    case > 0 when !_property.IsFacingRight:
-                    case < 0 when _property.IsFacingRight:
+                    case > 0 when !Property.IsFacingRight:
+                    case < 0 when Property.IsFacingRight:
                         Flip();
                         break;
                 }
@@ -56,10 +54,10 @@ namespace GamePlay.Player
 
             _wall = () =>
             {
-                switch (_property.IsFacingRight)
+                switch (Property.IsFacingRight)
                 {
-                    case false when _property.IsRightWall:
-                    case true when !_property.IsRightWall:
+                    case false when Property.IsRightWall:
+                    case true when !Property.IsRightWall:
                         Flip();
                         break;
                 }
@@ -67,7 +65,7 @@ namespace GamePlay.Player
 
             _alwaysRight = () =>
             {
-                if (!_property.IsFacingRight)
+                if (!Property.IsFacingRight)
                     Flip();
             };
 

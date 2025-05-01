@@ -14,9 +14,9 @@ namespace GamePlay.Player
     public class PlayerHeadDirectionLimitProxy : MonoBehaviour
     {
         [SerializeField] private PlayerController playerController;
-        [SerializeField] private PlayerHead playerHead;
-        private PlayerProperty _property;
-        private PlayerConfig _config;
+        private PlayerHead PlayerHead => playerController.Head;
+        private PlayerProperty Property => playerController.Property;
+        private PlayerConfig Config => playerController.Config;
         
         private DirectionLimit _onGroundLimit;
         private DirectionLimit _onBackgroundLimit;
@@ -24,8 +24,6 @@ namespace GamePlay.Player
         
         private void Start()
         {
-            _property = playerController.Property;
-            _config = playerController.Config;
             _onGroundLimit = OnGroundLimit;
             _none = direction => direction;
 
@@ -42,24 +40,24 @@ namespace GamePlay.Player
         {
             if (direction.y > 0)
             {
-                if (direction.y > _config.onGroundUpLimit)
+                if (direction.y > Config.onGroundUpLimit)
                 {
-                    direction.y = _config.onGroundUpLimit;
+                    direction.y = Config.onGroundUpLimit;
                     if(playerController.Property.IsFacingRight)
-                        direction.x = 1 - _config.onGroundUpLimit * _config.onGroundUpLimit;
+                        direction.x = 1 - Config.onGroundUpLimit * Config.onGroundUpLimit;
                     else
-                        direction.x = -1 + _config.onGroundUpLimit * _config.onGroundUpLimit;
+                        direction.x = -1 + Config.onGroundUpLimit * Config.onGroundUpLimit;
                 }
             }
             else
             {
-                if (direction.y < -_config.onGroundDownLimit)
+                if (direction.y < -Config.onGroundDownLimit)
                 {
-                    direction.y = -_config.onGroundDownLimit;
+                    direction.y = -Config.onGroundDownLimit;
                     if(playerController.Property.IsFacingRight)
-                        direction.x = 1 - _config.onGroundDownLimit * _config.onGroundDownLimit;
+                        direction.x = 1 - Config.onGroundDownLimit * Config.onGroundDownLimit;
                     else
-                        direction.x = -1 + _config.onGroundDownLimit * _config.onGroundDownLimit;
+                        direction.x = -1 + Config.onGroundDownLimit * Config.onGroundDownLimit;
                 }
             }
 
@@ -78,7 +76,7 @@ namespace GamePlay.Player
         
         private void CheckDirectionLimit(HState from, HState to)
         {
-            playerHead.DirectionLimit = to.Name switch
+            PlayerHead.DirectionLimit = to.Name switch
             {
                 "OnGround" => _onGroundLimit,
                 "OnBackground" => _onBackgroundLimit,

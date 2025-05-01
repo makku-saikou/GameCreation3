@@ -77,7 +77,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceJoint2D: {fileID: 5209331376776052768}
   head: {fileID: 3959717701253126937}
-  player: {fileID: 5553778798862907640}
   tongueState: 0
   tonguePoint: {fileID: 140825107737555479}
   targetImage: {fileID: 0}
@@ -972,7 +971,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tongue: {fileID: 5445178873793561151}
   tongueRoot: {fileID: 140825107737555479}
-  playerController: {fileID: 5553778798862907640}
+  player: {fileID: 5553778798862907640}
   spriteRenderer: {fileID: 7217829328899958769}
 --- !u!114 &5333001339523546377
 MonoBehaviour:
@@ -987,7 +986,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 5553778798862907640}
-  playerHead: {fileID: 3959717701253126937}
 --- !u!1 &8034755906072876687
 GameObject:
   m_ObjectHideFlags: 0

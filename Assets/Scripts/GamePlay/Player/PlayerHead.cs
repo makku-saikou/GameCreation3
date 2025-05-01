@@ -17,14 +17,11 @@ namespace GamePlay.Player
         [SerializeField] private PlayerTongue tongue;
         public PlayerTongue Tongue => tongue;
         [SerializeField] private Transform tongueRoot;
-        [SerializeField] private PlayerController playerController;
+        [SerializeField] private PlayerController player;
+        public PlayerController Player => player;
         [SerializeField] private SpriteRenderer spriteRenderer;
         public DirectionLimit DirectionLimit;
-        private PlayerProperty _property;
-        private void Start()
-        {
-            _property = playerController.Property;
-        }
+        private PlayerProperty Property => player.Property;
 
         private void Update()
         {
@@ -45,7 +42,7 @@ namespace GamePlay.Player
 
         private void UpdateDirection()
         {
-            if (!_property.HeadCanMove) return;
+            if (!Property.HeadCanMove) return;
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var direction = mousePos - transform.position;
             direction.z = 0;
@@ -60,7 +57,7 @@ namespace GamePlay.Player
 
         private void LaunchTongue()
         {
-            if (!_property.HeadCanLaunch) return;
+            if (!Property.HeadCanLaunch) return;
             tongue.Launch(transform.right);
         }
 
