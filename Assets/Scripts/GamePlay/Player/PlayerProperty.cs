@@ -119,18 +119,32 @@ namespace GamePlay.Player
                 _onOnWallFlag = value;
                 Animator.SetBool("OnWallFlag", value);
             }
-        }                 
+        }       
+        
+        // 悬挂时，当前舌头与竖直方向的夹角，-90~90,玩家在右边时为正
+        private float _currentHongAngle;
+        public float CurrentHongAngle                              
+        {
+            get => _currentHongAngle;
+            set
+            {
+                _currentHongAngle = value;
+                var progress = _currentHongAngle / 90f * 0.5f + 0.5f;
+                Animator.Play( "Hang", 0, progress);
+            }
+        }
+        
         public bool IsRightWall { get; set; }                  // 是否在右墙
         public bool CanJump { get; set; }                      // 是否可以进行普通跳跃
         public bool JumpBufferFlag { get; set; }               // 是否可以进行更高跳跃 
         public bool CanMove { get; set; }                      // 是否可以移动
         public bool CanFlip { get; set; }                      // 是否可以转向
         // public float ConnectAngle { get; set; }             // 悬挂时,连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负
-        // public Vector3 ConnectDirection { get; set; }        // 悬挂时,连接点与玩家的连线
-        public Vector3 HangPoint { get; set; }                  // 悬挂点
-        public bool CanOnPillar { get; set; }                   // 是否在可攀爬的柱子前
-        public bool IsOnPillar { get; set; }                    // 是否正在爬柱子
-        public bool CanOnColorBlock { get; set; }               // 是否在色块前
+        // public Vector3 ConnectDirection { get; set; }       // 悬挂时,连接点与玩家的连线
+        public Vector3 HangPoint { get; set; }                 // 悬挂点
+        public bool CanOnPillar { get; set; }                  // 是否在可攀爬的柱子前
+        public bool IsOnPillar { get; set; }                   // 是否正在爬柱子
+        public bool CanOnColorBlock { get; set; }              // 是否在色块前
         
         private EPlayerColor _currentColor;
 
