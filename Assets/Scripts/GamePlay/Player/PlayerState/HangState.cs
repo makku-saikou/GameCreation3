@@ -14,7 +14,7 @@ namespace GamePlay.Player.PlayerState
     public class HangState : PlayerStateBase
     {
         public HangState(PlayerController player, string name) : base(player, name) { }
-
+        
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
@@ -77,6 +77,11 @@ namespace GamePlay.Player.PlayerState
                 Player.Rb.AddForce(new Vector2(Config.hangSwayForce * Input.MovementInput, 0), ForceMode2D.Force);
             }
         }
+        
+        // private void Animate()
+        // {
+        //     var progress = Property.CurrentHongAngle / 90f * 0.5f + 0.5f;
+        // }
 
         private void ChangeTongueLength()
         {

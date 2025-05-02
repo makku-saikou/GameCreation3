@@ -118,9 +118,9 @@ namespace GamePlay.Player
                 distanceJoint2D.distance = Property.CurrentTongueLength;
             }
             // PFCLog.Debug("PlayerTongue", $"CurrentTongueLength: {_property.CurrentTongueLength}");
-            
-            // playerController.Property.ConnectAngle = Vector2.SignedAngle(Vector2.down,
-            //     playerController.transform.position - transform.position);
+
+            Property.CurrentHongAngle = Vector2.SignedAngle(Vector2.down,
+                Player.Entity.transform.position - tonguePoint.position);
             // playerController.Property.ConnectDirection = (playerController.transform.position - transform.position).normalized;
         }
         
