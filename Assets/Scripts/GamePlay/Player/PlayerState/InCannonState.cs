@@ -1,5 +1,7 @@
 ﻿using Common.FSM;
+using Hmxs.Toolkit;
 using PurpleFlowerCore;
+using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
 {
@@ -7,11 +9,16 @@ namespace GamePlay.Player.PlayerState
 	{
 		public InCannonState(PlayerController player, string name) : base(player, name) { }
 
+		private float _gravityScale;
+
 		public override void EnterCallback(HState prev)
 		{
 			base.EnterCallback(prev);
 			PFCLog.Debug("Enter InCannon State");
 			Player.Entity.gameObject.SetActive(false);
+			Player.Rb.velocity = Vector2.zero;
+			_gravityScale = Player.Rb.gravityScale;
+			Player.Rb.gravityScale = 0;
 		}
 
 		public override void ExitCallback(HState next)
@@ -19,6 +26,11 @@ namespace GamePlay.Player.PlayerState
 			base.ExitCallback(next);
 			PFCLog.Debug("Exit InCannon State");
 			Player.Entity.gameObject.SetActive(true);
+			Timer.Register(1f, () =>
+			{
+				if (Player.Rb.gravityScale == 0)
+					Player.Rb.gravityScale = _gravityScale;
+			});
 		}
 	}
 }
