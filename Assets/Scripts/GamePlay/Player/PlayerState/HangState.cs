@@ -34,7 +34,7 @@ namespace GamePlay.Player.PlayerState
             Property.YMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.y), Property.YMaxSpeed);
             Player.Head.SetShow(true);
             
-            Player.Entity.transform.right = Vector2.right;
+            Player.Entity.transform.right = Property.FacingDirection * Vector2.right;
         }
         
         public override void UpdateCallback(float deltaTime)
@@ -78,11 +78,6 @@ namespace GamePlay.Player.PlayerState
             }
         }
         
-        // private void Animate()
-        // {
-        //     var progress = Property.CurrentHongAngle / 90f * 0.5f + 0.5f;
-        // }
-
         private void ChangeTongueLength()
         {
             if (Input.UpInput)

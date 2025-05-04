@@ -21,6 +21,8 @@ namespace GamePlay.Player
         private PlayerFlap _wall;
         private PlayerFlap _alwaysRight;
         private PlayerFlap _none;
+        private PlayerFlap _keep;
+        private bool _rightBuffer;
 
         private void Start()
         {
@@ -70,6 +72,14 @@ namespace GamePlay.Player
             };
 
             _none = () => { };
+
+            _keep = () =>
+            {
+                if (_rightBuffer && !Property.IsFacingRight)
+                    Flip();
+                else if (!_rightBuffer && Property.IsFacingRight)
+                    Flip();
+            };
             
              player.StateMachine.OnStateChanged += CheckFlap;
         }
@@ -81,12 +91,16 @@ namespace GamePlay.Player
         
         private void CheckFlap(HState from, HState to)
         {
+            if(to.Name == "Hang")
+            {
+                _rightBuffer = player.Head.Tongue.TonguePoint.position.x > player.transform.position.x;
+            }
             player.PlayerFlap = to.Name switch
             {
                 "OnGround" => _onGround,
                 "Air" => _air,
                 "OnWall" => _wall,
-                "Hang" => _alwaysRight,
+                "Hang" => _none,
                 "OnBackground" => _alwaysRight,
                 _ => _none
             };
@@ -96,9 +110,12 @@ namespace GamePlay.Player
         private void Flip()
         {
             if (!player.Property.CanFlip) return;
+            Debug.Log("Flip");
             player.Property.IsFacingRight = !player.Property.IsFacingRight;
             player.Entity.Rotate(0, 180, 0);
+            // player.Entity.localScale = new Vector3(-1 * player.Entity.localScale.x, player.Entity.localScale.y, player.Entity.localScale.z);
             player.Head.transform.localScale = new Vector3(1, -1 * player.Head.transform.localScale.y, 1);
+            // player.Head.transform.localScale = new Vector3(-1 * player.Head.transform.localScale.x, -1 *player.Head.transform.localScale.y, player.Head.transform.localScale.z);
         }
     }
 }
