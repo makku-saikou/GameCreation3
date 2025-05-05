@@ -87,6 +87,7 @@ namespace GamePlay.Player
         {
             //todo:
             property = new(this);
+            property.OnColorChanged += ChangeColor;
             _input = new PlayerInput_Legacy();
             
             // 定义整个状态机
@@ -231,6 +232,26 @@ namespace GamePlay.Player
             Gizmos.DrawWireCube(groundCheckPoint.position, new Vector3(Config.groundCheckWidth, Config.groundCheckHeight, 0));
             Gizmos.DrawWireSphere(wallCheckPoint1.position, Config.wallCheckRadius);
             Gizmos.DrawWireSphere(wallCheckPoint2.position, Config.wallCheckRadius);
+        }
+
+        private void ChangeColor(EPlayerColor from, EPlayerColor to)
+        {
+            if (spriteRenderer == null) return;
+            switch (to)
+            {
+                case EPlayerColor.Orange:
+                    spriteRenderer.color = Color.white;
+                    break;
+                case EPlayerColor.Green:
+                    spriteRenderer.color = Color.green;
+                    break;
+                case EPlayerColor.Red:
+                    spriteRenderer.color = Color.red;
+                    break;
+                case EPlayerColor.Blue:
+                    spriteRenderer.color = Color.blue;
+                    break;
+            }
         }
     }
 

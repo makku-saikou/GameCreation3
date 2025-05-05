@@ -33,8 +33,6 @@ namespace GamePlay.Player.PlayerState
             Property.XMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.x), Property.XMaxSpeed);
             Property.YMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.y), Property.YMaxSpeed);
             Player.Head.SetShow(true);
-            
-            Player.Entity.transform.right = Vector2.right;
         }
         
         public override void UpdateCallback(float deltaTime)
@@ -67,6 +65,8 @@ namespace GamePlay.Player.PlayerState
             var direction = Property.HangPoint - Player.transform.position;
             direction.Normalize();
             Player.Entity.transform.up = direction;
+            // var faceRight = Property.IsFacingRight;
+            // Player.Entity.transform.localScale = new Vector3(faceRight ? -1 : 1, 1, 1);
         }
 
         private void Move()
@@ -78,11 +78,6 @@ namespace GamePlay.Player.PlayerState
             }
         }
         
-        // private void Animate()
-        // {
-        //     var progress = Property.CurrentHongAngle / 90f * 0.5f + 0.5f;
-        // }
-
         private void ChangeTongueLength()
         {
             if (Input.UpInput)
