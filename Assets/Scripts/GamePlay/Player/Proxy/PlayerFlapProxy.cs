@@ -95,12 +95,16 @@ namespace GamePlay.Player
             {
                 _rightBuffer = player.Head.Tongue.TonguePoint.position.x > player.transform.position.x;
             }
+            if (to.Name == "OnGround" || to.Name == "OnWall")
+            {
+                ResetTransform();
+            }
             player.PlayerFlap = to.Name switch
             {
                 "OnGround" => _onGround,
                 "Air" => _air,
                 "OnWall" => _wall,
-                "Hang" => _none,
+                "Hang" => _keep,
                 "OnBackground" => _alwaysRight,
                 _ => _none
             };
@@ -112,10 +116,16 @@ namespace GamePlay.Player
             if (!player.Property.CanFlip) return;
             Debug.Log("Flip");
             player.Property.IsFacingRight = !player.Property.IsFacingRight;
-            player.Entity.Rotate(0, 180, 0);
-            // player.Entity.localScale = new Vector3(-1 * player.Entity.localScale.x, player.Entity.localScale.y, player.Entity.localScale.z);
-            player.Head.transform.localScale = new Vector3(1, -1 * player.Head.transform.localScale.y, 1);
+            // player.Entity.Rotate(0, 180, 0);
+            player.Entity.localScale = new Vector3(-1 * player.Entity.localScale.x, player.Entity.localScale.y, player.Entity.localScale.z);
+            player.Head.transform.localScale = new Vector3(-1 * player.Head.transform.localScale.x, -1 * player.Head.transform.localScale.y, 1);
             // player.Head.transform.localScale = new Vector3(-1 * player.Head.transform.localScale.x, -1 *player.Head.transform.localScale.y, player.Head.transform.localScale.z);
+        }
+
+        private void ResetTransform()
+        {
+            player.Entity.rotation = Quaternion.identity;
+            player.Entity.localScale = new Vector3(Property.FacingDirection, 1, 1);
         }
     }
 }

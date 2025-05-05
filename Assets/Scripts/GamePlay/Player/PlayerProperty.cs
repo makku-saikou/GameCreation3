@@ -129,7 +129,9 @@ namespace GamePlay.Player
             set
             {
                 _currentHongAngle = value;
-                var progress = _currentHongAngle / 90f * 0.5f + 0.5f;
+                // var progress = _currentHongAngle / 90f * 0.5f + 0.5f;
+                var clamp = Mathf.Clamp(_currentHongAngle, -90, 90);
+                float progress = FacingDirection * clamp / 91f * 0.5f + 0.5f;
                 Animator.Play( "Hang", 0, progress);
             }
         }

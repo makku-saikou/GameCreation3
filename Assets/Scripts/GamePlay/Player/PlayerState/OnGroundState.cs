@@ -20,8 +20,10 @@ namespace GamePlay.Player.PlayerState
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
-            
+
             PFCLog.Debug("Enter OnGround State");
+            
+
             
         }
         
