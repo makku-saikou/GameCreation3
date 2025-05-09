@@ -84,10 +84,10 @@ namespace GamePlay.Player
              player.StateMachine.OnStateChanged += CheckFlap;
         }
         
-        private void OnDisable()
-        {
-            player.StateMachine.OnStateChanged -= CheckFlap;
-        }
+        // private void OnDisable()
+        // {
+        //     player.StatMeachine.OnStateChanged -= CheckFlap;
+        // }
         
         private void CheckFlap(HState from, HState to)
         {

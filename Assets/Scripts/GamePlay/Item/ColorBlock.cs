@@ -5,8 +5,9 @@
 // Description:
 // -------------------------------------------------
 
+using System;
+using Common.Manager;
 using GamePlay.Player;
-using PurpleFlowerCore;
 using UnityEngine;
 
 namespace GamePlay.Item
@@ -14,13 +15,37 @@ namespace GamePlay.Item
     public class ColorBlock : MonoBehaviour
     {
         [SerializeField] private EPlayerColor color = EPlayerColor.Orange;
-        
+        [SerializeField] private Collider2D collider2D;
+        [SerializeField] private SpriteRenderer spriteRenderer;
+
+        private void Start()
+        {
+            GameManager.Instance.Player.Property.OnColorChanged += OnPlayerColorChanged;
+            switch (color)
+            {
+                case EPlayerColor.Orange:
+                    spriteRenderer.color = Color.yellow;
+                    break;
+                case EPlayerColor.Green:
+                    spriteRenderer.color = Color.green;
+                    break;
+                case EPlayerColor.Red:
+                    spriteRenderer.color = Color.red;
+                    break;
+                case EPlayerColor.Blue:
+                    spriteRenderer.color = Color.blue;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.CompareTag("Player")) return;
             var player = other.GetComponent<PlayerController>();
-            player.Property.CanOnColorBlock = player.Property.CurrentColor == color;
-            player.Property.OnColorChanged += OnPlayerColorChanged;
+            // player.Property.CanOnColorBlock = player.Property.CurrentColor == color;
+            player.Property.CanOnColorBlock = true;
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -28,12 +53,11 @@ namespace GamePlay.Item
             if (!other.CompareTag("Player")) return;
             var player = other.GetComponent<PlayerController>();
             player.Property.CanOnColorBlock = false;
-            player.Property.OnColorChanged -= OnPlayerColorChanged;
         }
 
         private void OnPlayerColorChanged(EPlayerColor from, EPlayerColor to)
         {
-            PFCLog.Debug("ColorBlock", "Player's color changed from {0} to {1}", from, to);
+            collider2D.isTrigger = to == color;
         }
     }
 }

@@ -7,6 +7,7 @@
 // -------------------------------------------------
 
 using Common.FSM;
+using PurpleFlowerCore;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -31,10 +32,10 @@ namespace GamePlay.Player
             playerController.StateMachine.OnStateChanged += CheckDirectionLimit;
         }
         
-        private void OnDisable()
-        {
-            playerController.StateMachine.OnStateChanged -= CheckDirectionLimit;
-        }
+        // private void OnDisable()
+        // {
+        //     playerController.StateMachine.OnStateChanged -= CheckDirectionLimit;
+        // }
 
         private Vector3 OnGroundLimit(Vector3 direction)
         {
@@ -76,6 +77,7 @@ namespace GamePlay.Player
         
         private void CheckDirectionLimit(HState from, HState to)
         {
+            PFCLog.Debug("HeadDirectionProxy",to.Name);
             PlayerHead.DirectionLimit = to.Name switch
             {
                 "OnGround" => _onGroundLimit,
