@@ -38,6 +38,7 @@ namespace GamePlay.Item
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            collider2D.isTrigger = GameManager.Instance.Player.Property.CurrentColor == color;
         }
 
         private void OnTriggerEnter2D(Collider2D other)

@@ -62,7 +62,7 @@ namespace GamePlay.Player
                 }
             }
 
-            _onBackgroundLimit = _ => playerController.transform.up;
+            _onBackgroundLimit = _ => playerController.Entity.up;
             
             // Vector3 lineDirection = new Vector3(1 - OnGroundUpLimit * OnGroundUpLimit, OnGroundUpLimit);
             // Debug.DrawLine(playerHead.transform.position, playerHead.transform.position + lineDirection, Color.red);

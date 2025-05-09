@@ -35,9 +35,8 @@ namespace GamePlay.Player
         private Vector3 _targetPosition;
         [SerializeField] private Image targetImage;
         [SerializeField] private Transform root0;
-        public Transform Root0 => root0;
         [SerializeField] private Transform root1;
-        public Transform Root1 => root1;
+        [SerializeField] private Transform root2;
         public event Action OnTongueLaunch;
         public event Action OnTongueIdle;
         
@@ -209,10 +208,12 @@ namespace GamePlay.Player
 
         private void ChangeRootPos()
         {
-            if (Player.CurrentStateName == "Hang")
-                transform.position = root1.position;
-            else
-                transform.position = root0.position;
+            transform.position = Player.CurrentStateName switch
+            {
+                "Hang" => root1.position,
+                "OnBackground" => root2.position,
+                _ => root0.position
+            };
         }
     }
 }

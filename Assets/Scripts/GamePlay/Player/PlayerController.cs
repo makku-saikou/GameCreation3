@@ -176,7 +176,7 @@ namespace GamePlay.Player
             onBackgroundState.AddTransition(backgroundToAir);
 
             HTransition groundToBackground = new HTransition("GroundToBackground", onBackgroundState, onBackgroundState);
-            groundToBackground.OnCheck += () => property.CanOnColorBlock && Input.UpInput;
+            groundToBackground.OnCheck += () => property.CanOnColorBlock;
             onGroundState.AddTransition(groundToBackground);
 
 

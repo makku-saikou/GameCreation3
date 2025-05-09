@@ -16,6 +16,18 @@ namespace GamePlay.Player.PlayerInput
         public override bool JumpInput => Input.GetButton("Jump");
         public override bool DownInput => Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
         public override bool UpInput => Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
-        public override Vector2 DirectionInput => new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        public override Vector2 DirectionInput
+        {
+            get
+            {
+                if(Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
+                {
+                    return Vector2.zero;
+                }
+
+                return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+            }
+        }
     }
 }

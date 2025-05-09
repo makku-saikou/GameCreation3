@@ -23,7 +23,7 @@ namespace GamePlay.Player
 
         private void ChangeColliderShape(HState from, HState to)
         {
-            if (to.Name == "Hang")
+            if (to.Name == "Hang" || to.Name == "OnPillar")
             {
                 collider0.enabled = false;
                 collider1.enabled = true;
