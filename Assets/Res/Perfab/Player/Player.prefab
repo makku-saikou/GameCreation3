@@ -82,6 +82,7 @@ MonoBehaviour:
   targetImage: {fileID: 0}
   root0: {fileID: 1463593771889573033}
   root1: {fileID: 1736917141130917297}
+  root2: {fileID: 2379234591070049607}
 --- !u!1 &696215044771975828
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +775,7 @@ GameObject:
   - component: {fileID: 4466951446267338716}
   m_Layer: 0
   m_Name: Entity
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -794,6 +795,7 @@ Transform:
   m_Children:
   - {fileID: 1133277246151447945}
   - {fileID: 1736917141130917297}
+  - {fileID: 2379234591070049607}
   m_Father: {fileID: 8238423557046667480}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6740037977774092997
@@ -869,6 +871,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &5259559927759709224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2379234591070049607}
+  m_Layer: 0
+  m_Name: TongueRoot2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2379234591070049607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5259559927759709224}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.25, y: 1.18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5654363637517419355}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5415473038718605202
 GameObject:
   m_ObjectHideFlags: 0
