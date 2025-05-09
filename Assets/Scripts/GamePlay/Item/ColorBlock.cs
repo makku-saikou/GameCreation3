@@ -8,6 +8,7 @@
 using System;
 using Common.Manager;
 using GamePlay.Player;
+using PurpleFlowerCore;
 using UnityEngine;
 
 namespace GamePlay.Item
@@ -47,6 +48,7 @@ namespace GamePlay.Item
             var player = other.GetComponent<PlayerController>();
             // player.Property.CanOnColorBlock = player.Property.CurrentColor == color;
             player.Property.CanOnColorBlock = true;
+            player.Property.OnColorChanged += OnPlayerColorChangedInThis;
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -54,11 +56,17 @@ namespace GamePlay.Item
             if (!other.CompareTag("Player")) return;
             var player = other.GetComponent<PlayerController>();
             player.Property.CanOnColorBlock = false;
+            player.Property.OnColorChanged -= OnPlayerColorChangedInThis;
         }
 
         private void OnPlayerColorChanged(EPlayerColor from, EPlayerColor to)
         {
             collider2D.isTrigger = to == color;
+        }
+        
+        private void OnPlayerColorChangedInThis(EPlayerColor from, EPlayerColor to)
+        {
+            PFCLog.Debug("ColorBlock", $"player color {to.ToString()}");
         }
     }
 }
