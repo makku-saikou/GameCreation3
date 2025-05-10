@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b2e05ae249e43c9bb10008c8f26e762, type: 3}
+  m_Name: Gu0kkeTest 1
+  m_EditorClassIdentifier: 
+  jumpForce: 20
+  amountOfJump: 1
+  gravityScale: 5
+  commonXMaxSpeed: 18
+  commonYMaxSpeed: 38
+  xMaxSpeedRecoverScale: 0.01
+  yMaxSpeedRecoverScale: 0.05
+  xForceInAir: 200
+  variableJumpForce: 0.95
+  preJumpBufferTime: 1
+  hangDrag: 2
+  hangSwayForce: 80
+  hangGravityScale: 12
+  tongueLengthChangeSpeed: 6
+  launchDragScale: 0.3
+  hangJumpForce: 10
+  onGroundSpeed: 15
+  groundCheckHeight: 0.34
+  groundCheckWidth: 2.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  jumpTimerSet: 0.15
+  jumpBufferTime: 0.5
+  wallCheckRadius: 0.1
+  wallSlideSpeed: 0
+  wallSpeedRecoverScale: 0.15
+  wallJumpForce: 150
+  wallJumpTimerSet: 0.3
+  wallJumpDirection: {x: 1, y: 1.4}
+  smashVelocity: 30
+  tongueSpeed: 40
+  retractSpeed: 100
+  tongueMaxLength: 10
+  tongueMinLength: 3
+  targetLayers:
+  - serializedVersion: 2
+    m_Bits: 128
+  - serializedVersion: 2
+    m_Bits: 64
+  climbPileSpeed: 5
+  climbBackgroundSpeed: 10
+  onGroundUpLimit: 0.2
+  onGroundDownLimit: 0.6
