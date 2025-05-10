@@ -31,22 +31,15 @@ namespace Common.Manager
             set => tmpCheckPoint = value;
         }
 
-        private void Start()
-        {
-            // todo: 这里的checkPoint和tmpCheckPoint应该是从场景中获取的
-            CheckPoint = Instance.transform;
-            tmpCheckPoint = Instance.transform;
-        }
-
         public void PlayerDie()
         {
             // TODO: 播放死亡动画，禁用角色输入
-            Timer.Register(2f, () => PlayerReset(checkPoint.position));
+            Timer.Register(2f, () => PlayerReset(CheckPoint.position));
         }
 
         public void PlayerToTmpCheckPoint()
         {
-            Timer.Register(0.5f, () => PlayerReset(tmpCheckPoint.position));
+            Timer.Register(0.5f, () => PlayerReset(TmpCheckPoint.position));
         }
 
         private void PlayerReset(Vector3 position)
