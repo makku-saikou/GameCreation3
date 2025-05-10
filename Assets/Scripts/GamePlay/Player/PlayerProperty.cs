@@ -6,12 +6,12 @@
 // -------------------------------------------------
 
 using System;
-using Common.Manager;
 using PurpleFlowerCore.Utility;
 using UnityEngine;
 
 namespace GamePlay.Player
 {
+    // 虽然玩家属性越来越屎，但我懒得系统设计 :(
     public class PlayerProperty
     {
         private readonly PlayerController _player;
@@ -198,6 +198,30 @@ namespace GamePlay.Player
             CanFlip = true;
             HeadCanMove = true;
             HeadCanLaunch = true;
+            XMaxSpeed = Config.commonXMaxSpeed;
+            YMaxSpeed = Config.commonYMaxSpeed;
+        }
+
+        public void Update()
+        {
+            
+        }
+
+        public void FixedUpdate()
+        {
+            RecoverMaxSpeed();
+        }
+        
+        private void RecoverMaxSpeed()
+        {
+            XMaxSpeed = Mathf.Lerp(XMaxSpeed, Config.commonXMaxSpeed,
+                Config.xMaxSpeedRecoverScale);
+            YMaxSpeed = Mathf.Lerp(YMaxSpeed, Config.commonYMaxSpeed,
+                Config.yMaxSpeedRecoverScale);
+        }
+
+        public void ResetMaxSpeed()
+        {
             XMaxSpeed = Config.commonXMaxSpeed;
             YMaxSpeed = Config.commonYMaxSpeed;
         }

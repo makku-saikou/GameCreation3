@@ -21,6 +21,7 @@ namespace GamePlay.Player.PlayerState
         protected Rigidbody2D Rb => Player.Rb;
         protected PlayerInputBase Input => Player.Input;
         protected PlayerTongue Tongue => Player.Head.Tongue;
+        protected Transform Entity => Player.Entity;
         public PlayerStateBase(PlayerController player, string name) : base(name)
         {
             Player = player;

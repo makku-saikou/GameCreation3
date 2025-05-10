@@ -67,6 +67,7 @@ namespace GamePlay.Player
             PlayerFlap?.Invoke();
             CheckState();
             StateMachine.UpdateCallback(Time.deltaTime);
+            property.Update();
         }
 
         private void LateUpdate()
@@ -77,7 +78,7 @@ namespace GamePlay.Player
         private void FixedUpdate()
         {
             StateMachine.FixedUpdateCallback();
-            RecoverMaxSpeed();
+            property.FixedUpdate();
         }
 
         /// <summary>
@@ -217,14 +218,6 @@ namespace GamePlay.Player
             property.IsRightWall = rightWall;
             property.IsWallSliding = Physics2D.OverlapCircle(wallCheckPoint1.position, Config.wallCheckRadius,
                 Config.groundLayer) || rightWall;
-        }
-
-        private void RecoverMaxSpeed()
-        {
-            property.XMaxSpeed = Mathf.Lerp(property.XMaxSpeed, Config.commonXMaxSpeed,
-                Config.xMaxSpeedRecoverScale);
-            property.YMaxSpeed = Mathf.Lerp(property.YMaxSpeed, Config.commonYMaxSpeed,
-                Config.yMaxSpeedRecoverScale);
         }
 
         private void OnDrawGizmos()

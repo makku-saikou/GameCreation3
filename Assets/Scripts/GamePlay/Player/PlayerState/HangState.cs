@@ -33,6 +33,13 @@ namespace GamePlay.Player.PlayerState
             Property.XMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.x), Property.XMaxSpeed);
             Property.YMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.y), Property.YMaxSpeed);
             Player.Head.SetShow(true);
+            
+            // 补偿力
+            var direction = Player.Entity.right;
+            if (Property.CurrentHongAngle <0) direction = -direction;
+            float compensating = Config.hangForceCompensate * Mathf.Abs(Property.CurrentHongAngle) / 90;
+            Rb.AddForce(direction * compensating, ForceMode2D.Impulse);
+            PFCLog.Debug("HangState",$"Compensating Force: {compensating} Direction: {direction}");
         }
         
         public override void UpdateCallback(float deltaTime)

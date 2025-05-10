@@ -12,7 +12,6 @@ using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
 {
-    // todo: 由于状态机的引入,需要删除原来无用逻辑
     public class OnGroundState : PlayerStateBase
     {
         public OnGroundState(PlayerController player, string name) : base(player, name) { }
@@ -22,9 +21,7 @@ namespace GamePlay.Player.PlayerState
             base.EnterCallback(prev);
 
             PFCLog.Debug("Enter OnGround State");
-            
-
-            
+            Property.ResetMaxSpeed();
         }
         
         public override void UpdateCallback(float deltaTime)

@@ -44,6 +44,8 @@ namespace GamePlay.Player
         [Comment("ws时舌头长度变化速度")]public float tongueLengthChangeSpeed = 1f;
         [Comment("发射时玩家悬停速度缩放")]public float launchDragScale = 0.3f;
         [Comment("悬挂时的跳跃力度")]public float hangJumpForce = 20f;
+        [Comment("退出悬挂补偿力，方向为切线，与水平面角度为90，补偿力为0，角度为0，力为该值")]
+        public float hangForceCompensate = 10f;
         
         [Header("地面")]
         [Comment("地面移动速度")]public float onGroundSpeed = 10f;                   
