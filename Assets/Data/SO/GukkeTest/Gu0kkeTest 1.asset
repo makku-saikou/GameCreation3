@@ -39,7 +39,7 @@ MonoBehaviour:
   wallCheckRadius: 0.1
   wallSlideSpeed: 0
   wallSpeedRecoverScale: 0.15
-  wallJumpForce: 120
+  wallJumpForce: 150
   wallJumpTimerSet: 0.3
   wallJumpDirection: {x: 1, y: 1.4}
   smashVelocity: 30
