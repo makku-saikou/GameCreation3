@@ -43,10 +43,11 @@ namespace Common.Manager
             var velocity = Player.Rb.velocity;
             var maxVelocity = new Vector2(Player.Config.commonXMaxSpeed, Player.Config.commonYMaxSpeed);
             var targetSize = CameraSize.x + (CameraSize.y - CameraSize.x) * (velocity.magnitude / maxVelocity.magnitude);
-            targetSize = Mathf.Clamp(targetSize, CameraSize.x, CameraSize.y);
             var currentSize = virtualCamera.m_Lens.OrthographicSize;
-            if (currentSize > CameraSizeThreshold) _sizeFreezeCounter = CameraSizeFreezeTime;
+
+            if (targetSize > CameraSizeThreshold && currentSize > CameraSizeThreshold) _sizeFreezeCounter = CameraSizeFreezeTime;
             if (velocity.magnitude < PlayerSpeedThreshold && Mathf.Abs(currentSize - CameraSize.x) < 0.1) return;
+
             virtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(currentSize, targetSize, Time.deltaTime * LerpSpeed);
         }
     }
