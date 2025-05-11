@@ -26,7 +26,7 @@ namespace GamePlay.Player
         [Comment("常规情况跳跃力度")]public float jumpForce = 20f; 
         [Comment("跳跃次数（可以连续几段跳）")]public int amountOfJump = 1;                        
         [Comment("常规情况下重力缩放")]public float gravityScale = 5f;                     
-        [Comment("常规情况下最大速度")]public float commonXMaxSpeed = 10f;                 
+        [Comment("常规情况下最大速度")]public float commonXMaxSpeed = 10f;
         [Comment("常规情况下最大速度")]public float commonYMaxSpeed = 60f;                 
         [Comment("x最大速度插值恢复比率")]public float xMaxSpeedRecoverScale = 0.01f;         
         [Comment("y最大速度插值恢复比率")]public float yMaxSpeedRecoverScale = 0.05f;         
@@ -82,6 +82,9 @@ namespace GamePlay.Player
         [Header("相机设置")]
         [Comment("相机大小范围")] [MinMaxSlider(10, 50, true)] public Vector2 cameraSize = new Vector2(16, 25);
         [Comment("相机大小变化速度")] public float lerpSpeed = 1f;
+        [Comment("相机大小阈值")] public float cameraSizeThreshold = 20f;
+        [Comment("相机大小冻结时间")] public float cameraSizeFreezeTime = 1f;
+        [Comment("玩家速度导致相机变化的阈值")] public float playerSpeedThreshold = 10f;
 
         [Header("其他功能")]
         [Comment("地面上时最大抬头角度")][SerializeField] public float onGroundUpLimit = 0.2f;
