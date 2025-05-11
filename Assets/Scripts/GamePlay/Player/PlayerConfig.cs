@@ -78,7 +78,11 @@ namespace GamePlay.Player
         
         [Header("爬背景墙")]
         [Comment("爬背景墙速度")]public float climbBackgroundSpeed = 10f;
-        
+
+        [Header("相机设置")]
+        [Comment("相机大小范围")] [MinMaxSlider(10, 50, true)] public Vector2 cameraSize = new Vector2(16, 25);
+        [Comment("相机大小变化速度")] public float lerpSpeed = 1f;
+
         [Header("其他功能")]
         [Comment("地面上时最大抬头角度")][SerializeField] public float onGroundUpLimit = 0.2f;
         [Comment("地面上时最大低头角度")][SerializeField] public float onGroundDownLimit = 0.6f;

@@ -17,26 +17,24 @@ namespace Common.Manager
     public class CameraManager : MonoBehaviour
     {
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
-        [SerializeField] [MinMaxSlider(10, 50)] private Vector2 cameraSize = new Vector2(16, 25);
-        [SerializeField] private float lerpSpeed = 1f;
 
-        private PlayerController _player;
-        private Vector2 _maxVelocity;
+        private static PlayerController Player => GameManager.Instance.Player;
+        private static Vector2 CameraSize => Player.Config.cameraSize;
+        private static float LerpSpeed => Player.Config.lerpSpeed;
 
         private void Start()
         {
             virtualCamera.Follow = GameManager.Instance.Player.CameraPoint.transform;
-            _player = GameManager.Instance.Player;
-            _maxVelocity = new Vector2(_player.Config.commonXMaxSpeed, _player.Config.commonYMaxSpeed);
         }
 
         private void Update()
         {
-            var velocity = _player.Rb.velocity;
-            var targetSize = cameraSize.x + (cameraSize.y - cameraSize.x) * (velocity.magnitude / _maxVelocity.magnitude);
-            targetSize = Mathf.Clamp(targetSize, cameraSize.x, cameraSize.y);
+            var maxVelocity = new Vector2(Player.Config.commonXMaxSpeed, Player.Config.commonYMaxSpeed);
+            var velocity = Player.Rb.velocity;
+            var targetSize = CameraSize.x + (CameraSize.y - CameraSize.x) * (velocity.magnitude / maxVelocity.magnitude);
+            targetSize = Mathf.Clamp(targetSize, CameraSize.x, CameraSize.y);
             var currentSize = virtualCamera.m_Lens.OrthographicSize;
-            virtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(currentSize, targetSize, Time.deltaTime * lerpSpeed);
+            virtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(currentSize, targetSize, Time.deltaTime * LerpSpeed);
         }
     }
 }
