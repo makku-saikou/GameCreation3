@@ -22,7 +22,7 @@ namespace GamePlay.Item
             {
                 var player = other.GetComponent<PlayerController>();
                 player.Property.CanOnPillar = true;
-                player.Property.MaxClimbHeight = highestPoint.position.y;
+                player.Property.MaxClimbHeight = new Vector2(highestPoint.position.x, highestPoint.position.y);
             }
         }
 

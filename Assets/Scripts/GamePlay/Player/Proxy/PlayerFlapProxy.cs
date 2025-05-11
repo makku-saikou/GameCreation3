@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace GamePlay.Player
 {
-    //todo: 将翻转功能代理出来的可行性
+    //todo: 需要重新评估一下某些功能放在Proxy里是否比直接放在状态里更易维护，目前什么机制放在Proxy里，什么机制放在状态里是混淆的
     public class PlayerFlapProxy : MonoBehaviour
     {
         [SerializeField] private PlayerController player;
@@ -95,10 +95,6 @@ namespace GamePlay.Player
             {
                 _rightBuffer = player.Head.Tongue.TonguePoint.position.x > player.transform.position.x;
             }
-            if (to.Name == "OnGround" || to.Name == "OnWall")
-            {
-                ResetTransform();
-            }
             player.PlayerFlap = to.Name switch
             {
                 "OnGround" => _onGround,
@@ -120,12 +116,6 @@ namespace GamePlay.Player
             player.Entity.localScale = new Vector3(-1 * player.Entity.localScale.x, player.Entity.localScale.y, player.Entity.localScale.z);
             player.Head.transform.localScale = new Vector3(-1 * player.Head.transform.localScale.x, -1 * player.Head.transform.localScale.y, 1);
             // player.Head.transform.localScale = new Vector3(-1 * player.Head.transform.localScale.x, -1 *player.Head.transform.localScale.y, player.Head.transform.localScale.z);
-        }
-
-        private void ResetTransform()
-        {
-            player.Entity.rotation = Quaternion.identity;
-            player.Entity.localScale = new Vector3(Property.FacingDirection, 1, 1);
         }
     }
 }

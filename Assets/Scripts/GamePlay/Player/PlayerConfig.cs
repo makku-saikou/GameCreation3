@@ -74,7 +74,9 @@ namespace GamePlay.Player
         [Comment("舌头可以碰撞到的layer")] public List<LayerMask> targetLayers;
         
         [Header("爬杆")]
-        [Comment("爬杆攀爬速度")]public float climbPileSpeed = 5f;                       
+        [Comment("爬杆攀爬速度")]public float climbPileSpeed = 5f;
+        [Comment("爬杆跳跃力度")]public float climbJumpForce = 100f;
+        [Comment("爬杆跳跃方向")]public Vector2 climbJumpDirection = new(1f, 1f);
         
         [Header("爬背景墙")]
         [Comment("爬背景墙速度")]public float climbBackgroundSpeed = 10f;

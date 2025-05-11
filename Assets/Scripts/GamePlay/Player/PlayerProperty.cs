@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace GamePlay.Player
 {
-    // 虽然玩家属性越来越屎，但我懒得系统设计 :(
+    // todo: 虽然玩家属性越来越屎，但我懒得系统设计 :(
     public class PlayerProperty
     {
         private readonly PlayerController _player;
@@ -136,6 +136,19 @@ namespace GamePlay.Player
             }
         }
         
+        // 是否在
+        private bool _isClimbing;
+        public bool IsClimbing
+        {
+            get => _isClimbing;
+            set
+            {
+                if (_isClimbing == value) return;
+                _isClimbing = value;
+                Animator.SetBool("Climb", value);
+            }
+        }
+        
         public bool IsRightWall { get; set; }                  // 是否在右墙
         public bool CanJump { get; set; }                      // 是否可以进行普通跳跃
         public bool JumpBufferFlag { get; set; }               // 是否可以进行更高跳跃 
@@ -176,7 +189,7 @@ namespace GamePlay.Player
             }
         }
         public bool PreJumpBufferFlag { get; set; }          // 在地面时直接进行跳跃
-        public float MaxClimbHeight { get; set; }              // 最大攀爬高度
+        public Vector2 MaxClimbHeight { get; set; }              // 攀爬最高点
         public float XMaxSpeed { get; set; }                   // 最大速度
         public float YMaxSpeed { get; set; }                    // 最大速度
         public bool HeadCanMove { get; set; }

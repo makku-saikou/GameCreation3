@@ -26,6 +26,8 @@ namespace GamePlay.Player.PlayerState
             
             Player.Head.SetShow(false);
             Property.HeadCanLaunch = false;
+
+            Player.ResetTransform();
         }
 
         public override void ExitCallback(HState next)

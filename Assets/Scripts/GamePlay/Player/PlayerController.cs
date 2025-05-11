@@ -153,15 +153,15 @@ namespace GamePlay.Player
             onGroundState.AddTransition(climb);
 
             HTransition climbLand = new HTransition("ClimbLand", onPillarState, onGroundState);
-            climbLand.OnCheck += () => property.CanOnPillar && Input.DownInput && property.IsGrounded;
+            climbLand.OnCheck += () => Input.DownInput && property.IsGrounded;
             onPillarState.AddTransition(climbLand);
 
             HTransition climbJump = new HTransition("ClimbJump", onPillarState, airState);
-            climbJump.OnCheck += () => property.CanOnPillar && Input.JumpInputDown;
+            climbJump.OnCheck += () => Input.JumpInputDown;
             onPillarState.AddTransition(climbJump);
 
             HTransition climbToHang = new HTransition("ClimbToHang", onPillarState, hangState);
-            climbToHang.OnCheck += () => property.CanOnPillar && property.IsConnecting;
+            climbToHang.OnCheck += () => property.IsConnecting;
             onPillarState.AddTransition(climbToHang);
 
             HTransition airClimb = new HTransition("AirClimb", airState, onPillarState);
@@ -245,6 +245,12 @@ namespace GamePlay.Player
                     spriteRenderer.color = Color.blue;
                     break;
             }
+        }
+        
+        public void ResetTransform()
+        {
+            Entity.rotation = Quaternion.identity;
+            Entity.localScale = new Vector3(Property.FacingDirection, 1, 1);
         }
     }
 

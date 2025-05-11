@@ -21,12 +21,14 @@ MonoBehaviour:
   yMaxSpeedRecoverScale: 0.05
   xForceInAir: 200
   variableJumpForce: 0.95
+  preJumpBufferTime: 1
   hangDrag: 2
   hangSwayForce: 80
   hangGravityScale: 12
   tongueLengthChangeSpeed: 6
   launchDragScale: 0.3
   hangJumpForce: 10
+  hangForceCompensate: 10
   onGroundSpeed: 15
   groundCheckHeight: 0.34
   groundCheckWidth: 2.1
@@ -51,6 +53,7 @@ MonoBehaviour:
     m_Bits: 128
   - serializedVersion: 2
     m_Bits: 64
-  climbSpeed: 5
+  climbPileSpeed: 5
+  climbBackgroundSpeed: 10
   onGroundUpLimit: 0.2
   onGroundDownLimit: 0.6
