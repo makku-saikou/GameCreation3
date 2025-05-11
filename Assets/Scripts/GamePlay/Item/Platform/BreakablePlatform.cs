@@ -10,36 +10,34 @@ namespace GamePlay.Item.Platform
 		[SerializeField] private float recoverDelay = 3;
 		[SerializeField] [ReadOnly] private bool isBroken;
 
-		private SpriteRenderer _spriteRenderer;
-		private Collider2D _collider;
+		[SerializeField] private SpriteRenderer spriteRenderer;
+		[SerializeField] private Collider2D col;
 
 		private void Start()
 		{
-			_spriteRenderer = GetComponent<SpriteRenderer>();
-			_collider = GetComponent<Collider2D>();
+			spriteRenderer ??= GetComponent<SpriteRenderer>();
+			col ??= GetComponent<Collider2D>();
 		}
 
-		private void OnCollisionEnter2D(Collision2D other)
+		private void OnTriggerEnter2D(Collider2D other)
 		{
-			if (other.gameObject.CompareTag("Player") && !isBroken)
-			{
-				isBroken = true;
-				Invoke(nameof(Break), breakDelay);
-				Invoke(nameof(Recover), breakDelay + recoverDelay);
-			}
+			if (!other.CompareTag("Player") || isBroken) return;
+			isBroken = true;
+			Invoke(nameof(Break), breakDelay);
+			Invoke(nameof(Recover), breakDelay + recoverDelay);
 		}
 
 		private void Recover()
 		{
-			_spriteRenderer.enabled = true;
-			_collider.enabled = true;
+			spriteRenderer.enabled = true;
+			col.enabled = true;
 			isBroken = false;
 		}
 
 		private void Break()
 		{
-			_spriteRenderer.enabled = false;
-			_collider.enabled = false;
+			spriteRenderer.enabled = false;
+			col.enabled = false;
 		}
 	}
 }
