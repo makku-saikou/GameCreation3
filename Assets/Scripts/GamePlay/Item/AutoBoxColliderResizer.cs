@@ -14,22 +14,29 @@ namespace GamePlay.Item
 
 		private void Start()
 		{
-			spriteRenderer ??= GetComponent<SpriteRenderer>();
-			boxCollider ??= GetComponent<BoxCollider2D>();
+			if (!spriteRenderer) spriteRenderer = GetComponent<SpriteRenderer>();
+			if (!boxCollider) boxCollider = GetComponent<BoxCollider2D>();
 			ColliderResize();
 		}
 
 		[Button]
 		private void ColliderResize()
 		{
-			spriteRenderer ??= GetComponent<SpriteRenderer>();
-			boxCollider ??= GetComponent<BoxCollider2D>();
+			if (!spriteRenderer) spriteRenderer = GetComponent<SpriteRenderer>();
+			if (!boxCollider) boxCollider = GetComponent<BoxCollider2D>();
 
-			if (!spriteRenderer || !boxCollider)
+			bool note = false;
+			if (!spriteRenderer)
 			{
-				Debug.LogError("SpriteRenderer or BoxCollider2D not found!");
-				return;
+				Debug.LogError("SpriteRenderer not found!");
+				note = true;
 			}
+			if (!boxCollider)
+			{
+				Debug.LogError("BoxCollider2D not found!");
+				note = true;
+			}
+			if (note) return;
 
 			var bounds = spriteRenderer.bounds;
 			boxCollider.size = (Vector2)(bounds.size / spriteRenderer.transform.lossyScale.x) + sizeAdjust;
