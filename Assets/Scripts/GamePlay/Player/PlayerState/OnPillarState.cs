@@ -19,12 +19,26 @@ namespace GamePlay.Player.PlayerState
             base.EnterCallback(prev);
             Rb.gravityScale = 0;
             Rb.velocity = Vector2.zero;
+            Player.Head.SetShow(false);
+            Player.transform.position = new Vector3(Property.MaxClimbHeight.x,
+                Player.transform.position.y, Player.transform.position.z);
+            Property.IsClimbing = true;
+            Player.ResetTransform();
+        }
+        
+        public override void ExitCallback(HState next)
+        {
+            base.ExitCallback(next);
+            Rb.gravityScale = Config.gravityScale;
+            Player.Head.SetShow(true);
+            ClimbJump();
+            Property.IsClimbing = false;
         }
 
         public override void FixedUpdateCallback()
         {
             base.FixedUpdateCallback();
-            if(Input.UpInput && Player.transform.position.y < Property.MaxClimbHeight)
+            if(Input.UpInput && Player.transform.position.y < Property.MaxClimbHeight.y)
             {
                 Rb.velocity = new Vector2(0, Config.climbPileSpeed);
             }
@@ -38,10 +52,16 @@ namespace GamePlay.Player.PlayerState
             }
         }
 
-        public override void ExitCallback(HState next)
+        private void ClimbJump()
         {
-            base.ExitCallback(next);
-            Rb.gravityScale = Config.gravityScale;
+            if(Input.DownInput) return;
+            Vector2 direction = Config.climbJumpDirection;
+            if(Input.MovementInput == 0)
+                direction = Vector2.up;
+            else if (Input.MovementInput < 0)
+                direction = new Vector2(-direction.x, direction.y);
+            
+            Rb.AddForce(direction * Config.climbJumpForce, ForceMode2D.Impulse);
         }
     }
 }

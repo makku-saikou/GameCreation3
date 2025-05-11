@@ -22,6 +22,7 @@ namespace GamePlay.Player.PlayerState
 
             PFCLog.Debug("Enter OnGround State");
             Property.ResetMaxSpeed();
+            Player.ResetTransform();
         }
         
         public override void UpdateCallback(float deltaTime)
