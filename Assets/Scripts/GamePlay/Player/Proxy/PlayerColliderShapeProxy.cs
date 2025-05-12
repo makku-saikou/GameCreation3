@@ -10,6 +10,7 @@ using UnityEngine;
 
 namespace GamePlay.Player
 {
+    // todo:考虑将碰撞体移到Entity上，但由于历史遗留问题，许多组件都通过碰撞体获得玩家引用，暂不做此操作
     public class PlayerColliderShapeProxy : MonoBehaviour
     {
         [SerializeField] private PlayerController player;
