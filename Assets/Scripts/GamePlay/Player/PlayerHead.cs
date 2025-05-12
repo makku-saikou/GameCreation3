@@ -6,6 +6,7 @@
 // Description: 头部的控制逻辑,调用舌头的相关方法
 // -------------------------------------------------
 
+using System;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -22,6 +23,15 @@ namespace GamePlay.Player
         [SerializeField] private SpriteRenderer spriteRenderer;
         public DirectionLimit DirectionLimit;
         private PlayerProperty Property => player.Property;
+
+        private void Start()
+        {
+            player.StateMachine.OnStateChanged += (from, to) =>
+            {
+                if(tongue.TongueState == ETongueState.Launching && to.Name != "Hang")
+                    tongue.Retract();
+            };
+        }
 
         private void Update()
         {

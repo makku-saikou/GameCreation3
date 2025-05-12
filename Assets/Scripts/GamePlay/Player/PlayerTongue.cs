@@ -28,19 +28,21 @@ namespace GamePlay.Player
         private PlayerController Player => head.Player;
         private PlayerProperty Property => Player.Property;
         private PlayerConfig Config => Player.Config;
-        private ITarget _currentTarget;
         [SerializeField]private ETongueState tongueState;
+        public ETongueState TongueState => tongueState;
         [SerializeField] private Transform tonguePoint;
         public Transform TonguePoint => tonguePoint;
+        
+        // todo: UI管理
         [SerializeField] private Image targetImage;
         [SerializeField] private Transform root0;
         [SerializeField] private Transform root1;
         [SerializeField] private Transform root2;
         public event Action OnTongueLaunch;
         public event Action OnTongueIdle;
-        
         private int _layerBit;
 
+        private ITarget _currentTarget;
         private Vector3 _targetPosition;
         public Vector3 TargetPosition
         {
