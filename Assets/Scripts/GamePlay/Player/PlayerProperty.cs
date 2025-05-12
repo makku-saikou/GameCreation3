@@ -156,7 +156,7 @@ namespace GamePlay.Player
         public bool CanFlip { get; set; }                      // 是否可以转向
         // public float ConnectAngle { get; set; }             // 悬挂时,连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负
         // public Vector3 ConnectDirection { get; set; }       // 悬挂时,连接点与玩家的连线
-        public Vector3 HangPoint { get; set; }                 // 悬挂点
+        public Vector3 HangPoint => _player.Head.Tongue.TargetPosition;
         public bool CanOnPillar { get; set; }                  // 是否在可攀爬的柱子前
         public bool IsOnPillar { get; set; }                   // 是否正在爬柱子
         public bool CanOnColorBlock { get; set; }              // 是否在色块前

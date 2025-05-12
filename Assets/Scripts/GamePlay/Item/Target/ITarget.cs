@@ -15,5 +15,6 @@ namespace GamePlay.Item.Target
         public bool IsAdsorb { get; }
         public Vector3 AdsorbPosition { get; }
         public void Interact(PlayerController playerController);
+        public Transform Root { get; }
     }
 }

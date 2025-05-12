@@ -15,6 +15,7 @@ namespace GamePlay.Item.Target
         [SerializeField] private float force = 10;
         public bool IsAdsorb => true;
         public Vector3 AdsorbPosition => transform.position;
+        public Transform Root => transform;
 
         public void Interact(PlayerController playerController)
         {

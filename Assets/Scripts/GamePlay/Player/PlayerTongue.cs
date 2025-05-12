@@ -30,9 +30,8 @@ namespace GamePlay.Player
         private PlayerConfig Config => Player.Config;
         private ITarget _currentTarget;
         [SerializeField]private ETongueState tongueState;
-        [SerializeField] private Transform tonguePoint;  // todo: 没有发现舌尖作为单独物体的优势
+        [SerializeField] private Transform tonguePoint;
         public Transform TonguePoint => tonguePoint;
-        private Vector3 _targetPosition;
         [SerializeField] private Image targetImage;
         [SerializeField] private Transform root0;
         [SerializeField] private Transform root1;
@@ -41,6 +40,17 @@ namespace GamePlay.Player
         public event Action OnTongueIdle;
         
         private int _layerBit;
+
+        private Vector3 _targetPosition;
+        public Vector3 TargetPosition
+        {
+            get
+            {
+                if (_currentTarget is { IsAdsorb: true })
+                    return _currentTarget.AdsorbPosition;
+                return _targetPosition;
+            }
+        }
 
         private void Start()
         {
@@ -92,11 +102,10 @@ namespace GamePlay.Player
         
         private void UpdateLaunch()
         {
-            Vector3 direction = _targetPosition - tonguePoint.position;
+            Vector3 direction = TargetPosition - tonguePoint.position;
             direction.Normalize();
             tonguePoint.position += direction * (Time.deltaTime * Config.tongueSpeed);
-            // _currentFlightDistance += Time.deltaTime * _property.tongueSpeed;
-            if(Vector3.SqrMagnitude(tonguePoint.position - _targetPosition) < 0.05f)
+            if(Vector3.SqrMagnitude(tonguePoint.position - TargetPosition) < 0.05f)
             {
                 TryConnect();
             }
@@ -116,11 +125,11 @@ namespace GamePlay.Player
             {
                 distanceJoint2D.distance = Property.CurrentTongueLength;
             }
-            // PFCLog.Debug("PlayerTongue", $"CurrentTongueLength: {_property.CurrentTongueLength}");
 
+            distanceJoint2D.connectedAnchor = TargetPosition;
+            
             Property.CurrentHongAngle = Vector2.SignedAngle(Vector2.down,
                 Player.Entity.transform.position - tonguePoint.position);
-            // playerController.Property.ConnectDirection = (playerController.transform.position - transform.position).normalized;
         }
         
         private void UpdateRetract()
@@ -148,6 +157,7 @@ namespace GamePlay.Player
             Player.Property.IsConnecting = false;
             Property.IsRetracting = true;
             Property.IsLaunching = false;
+            tonguePoint.parent = null;
             // _currentFlightDistance = 0;
         }
 
@@ -198,12 +208,14 @@ namespace GamePlay.Player
                 Retract();
                 return;
             }
-            Property.CurrentTongueLength = Vector3.Distance(Player.transform.position, _targetPosition);
+            if(_currentTarget != null)
+                tonguePoint.parent = _currentTarget.Root;
+            Property.CurrentTongueLength = Vector3.Distance(Player.transform.position, TargetPosition);
             tongueState = ETongueState.Connecting;
             distanceJoint2D.enabled = true;
-            distanceJoint2D.connectedAnchor = _targetPosition;
+            distanceJoint2D.connectedAnchor = TargetPosition;
             Player.Property.IsConnecting = true;
-            Property.HangPoint = _targetPosition;
+            // Property.HangPoint = TargetPosition;
         }
 
         private void ChangeRootPos()
