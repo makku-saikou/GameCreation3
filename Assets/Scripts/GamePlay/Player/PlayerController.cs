@@ -213,11 +213,13 @@ namespace GamePlay.Player
             property.IsGrounded =
                 Physics2D.OverlapBox(groundCheckPoint.position, new Vector2(Config.groundCheckWidth,
                     Config.groundCheckHeight), 0, Config.groundLayer);
-            bool rightWall =
-                Physics2D.OverlapCircle(wallCheckPoint2.position, Config.wallCheckRadius, Config.groundLayer);
+            
+            var rightOverlap = Physics2D.OverlapCircle(wallCheckPoint2.position, Config.wallCheckRadius, Config.groundLayer);
+            bool rightWall = rightOverlap != null && rightOverlap.CompareTag("Wall");
             property.IsRightWall = rightWall;
-            property.IsWallSliding = Physics2D.OverlapCircle(wallCheckPoint1.position, Config.wallCheckRadius,
-                Config.groundLayer) || rightWall;
+            var leftOverlap = Physics2D.OverlapCircle(wallCheckPoint1.position, Config.wallCheckRadius, Config.groundLayer);
+            bool leftWall = leftOverlap != null && leftOverlap.CompareTag("Wall");
+            property.IsWallSliding = rightWall || leftWall;
         }
 
         private void OnDrawGizmos()
