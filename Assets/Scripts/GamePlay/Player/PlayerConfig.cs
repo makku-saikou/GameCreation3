@@ -66,12 +66,14 @@ namespace GamePlay.Player
         [Header("下砸")]
         [Comment("下砸下降速度")]public float smashVelocity = 30f;                   
         
-        [Header("舌头")]
+        [Header("头和舌头")]
         [Comment("舌头发射速度")]public float tongueSpeed = 40;
         [Comment("舌头回到嘴的速度")]public float retractSpeed = 100;
         [Comment("舌头最大长度,影响射程和悬挂时的最大长度")]public float tongueMaxLength = 8f;
         [Comment("舌头最小长度,影响时的最小长度")]public float tongueMinLength = 2;
         [Comment("舌头可以碰撞到的layer")] public List<LayerMask> targetLayers;
+        [Comment("张嘴速度")][Range(0,0.1f)] public float openMouthSpeed = 0.05f;
+        [Comment("闭嘴速度")][Range(0,0.1f)] public float closeMouthSpeed = 0.05f;
         
         [Header("爬杆")]
         [Comment("爬杆攀爬速度")]public float climbPileSpeed = 5f;

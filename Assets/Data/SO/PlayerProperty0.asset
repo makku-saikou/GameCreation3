@@ -53,7 +53,16 @@ MonoBehaviour:
     m_Bits: 128
   - serializedVersion: 2
     m_Bits: 64
+  openMouthSpeed: 0.0802
+  closeMouthSpeed: 0.0811
   climbPileSpeed: 5
+  climbJumpForce: 100
+  climbJumpDirection: {x: 1, y: 1}
   climbBackgroundSpeed: 10
+  cameraSize: {x: 16, y: 25}
+  lerpSpeed: 1
+  cameraSizeThreshold: 20
+  cameraSizeFreezeTime: 1
+  playerSpeedThreshold: 10
   onGroundUpLimit: 0.2
   onGroundDownLimit: 0.6

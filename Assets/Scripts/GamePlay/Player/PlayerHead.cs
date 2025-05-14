@@ -7,6 +7,7 @@
 // -------------------------------------------------
 
 using System;
+using PurpleFlowerCore;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -17,19 +18,34 @@ namespace GamePlay.Player
     {
         [SerializeField] private PlayerTongue tongue;
         public PlayerTongue Tongue => tongue;
-        [SerializeField] private Transform tongueRoot;
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private Animator animator;
         [SerializeField] private PlayerController player;
         public PlayerController Player => player;
-        [SerializeField] private SpriteRenderer spriteRenderer;
-        public DirectionLimit DirectionLimit;
         private PlayerProperty Property => player.Property;
+        private PlayerConfig Config => player.Config;
+        public DirectionLimit DirectionLimit;
+        private float _currentMouthOpen;
+        private float _targetMouthOpen;
 
         private void Start()
         {
             player.StateMachine.OnStateChanged += (from, to) =>
             {
                 if(tongue.TongueState == ETongueState.Launching && to.Name != "Hang")
-                    tongue.Retract();
+                    RetractTongue();
+            };
+            
+            tongue.OnTongueLaunch += () =>
+            {
+                _targetMouthOpen = 1;
+                PFCLog.Debug("Head","Tongue Launch");
+            };
+            
+            tongue.OnTongueRetract += () =>
+            {
+                _targetMouthOpen = 0;
+                PFCLog.Debug("Head","Tongue Retract");
             };
         }
 
@@ -50,6 +66,11 @@ namespace GamePlay.Player
             }
         }
 
+        private void FixedUpdate()
+        {
+            UpdateAni();
+        }
+
         private void UpdateDirection()
         {
             if (!Property.HeadCanMove) return;
@@ -57,10 +78,19 @@ namespace GamePlay.Player
             var direction = mousePos - transform.position;
             direction.z = 0;
             direction.Normalize();
-            if(DirectionLimit != null)
+            if (DirectionLimit != null)
                 direction = DirectionLimit(direction); // 确保此处输入的方向是归一化的
             // transform.right = Vector3.Lerp(transform.right, direction, 0.1f); 如果插值，落地时头部的转向会有错误
             transform.right = direction;
+        }
+
+        private void UpdateAni()
+        {
+            if(Mathf.Approximately(_targetMouthOpen, 1))
+                _currentMouthOpen = Mathf.MoveTowards(_currentMouthOpen, _targetMouthOpen, Config.openMouthSpeed);
+            else if(Mathf.Approximately(_targetMouthOpen, 0))
+                _currentMouthOpen = Mathf.MoveTowards(_currentMouthOpen, _targetMouthOpen, Config.closeMouthSpeed);
+            animator.Play("Head_Close", 0, _currentMouthOpen);
         }
 
         #region Tongue

@@ -40,6 +40,7 @@ namespace GamePlay.Player
         [SerializeField] private Transform root2;
         public event Action OnTongueLaunch;
         public event Action OnTongueIdle;
+        public event Action OnTongueRetract;
         private int _layerBit;
 
         private ITarget _currentTarget;
@@ -153,6 +154,7 @@ namespace GamePlay.Player
 
         public void Retract()
         {
+            OnTongueRetract?.Invoke();
             tongueState = ETongueState.Retracting;
             distanceJoint2D.enabled = false;
             _currentTarget = null;
