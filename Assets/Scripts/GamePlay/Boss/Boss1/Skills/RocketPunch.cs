@@ -1,5 +1,7 @@
 ﻿using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
+using Common.Manager;
+using GamePlay.Player;
 using UnityEngine;
 
 namespace GamePlay.Boss.Boss1.Skills
@@ -12,14 +14,15 @@ namespace GamePlay.Boss.Boss1.Skills
 
 		private float _startTime;
 
+		private static PlayerController Player => GameManager.Instance.Player;
+
 		public override void OnStart()
 		{
 			if (!_rocketPunchPrefab.Value)
 				Debug.LogError("RocketPunch prefab is not assigned.");
 
 			var rocketPunch = Object.Instantiate(_rocketPunchPrefab.Value);
-			rocketPunch.transform.position = transform.position;
-			rocketPunch.transform.rotation = transform.rotation;
+			rocketPunch.transform.position = new Vector3(0, Player.transform.position.y, 0);
 			_startTime = Time.time;
 		}
 
