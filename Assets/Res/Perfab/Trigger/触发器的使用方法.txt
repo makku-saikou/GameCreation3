@@ -1,0 +1,7 @@
+PressurePlate: 压板式触发器，当玩家踩在上面时触发
+使用之前需要绑定触发的对象
+
+Track Container: 触发对象，移动轨道
+被触发时: 脚本上的Target对象（默认为空子物体Target）会不断朝着EndPoint移动
+未被触发时: Target对象会不断朝着StartPoint移动
+使用时: 将想要被移动的物体设置为Target的子物体，或者将其引用为Track脚本上的Target对象即可
