@@ -39,9 +39,9 @@ MonoBehaviour:
   jumpBufferTime: 0.5
   wallCheckRadius: 0.1
   wallSlideSpeed: 0
-  wallSpeedRecoverScale: 0.15
-  wallJumpForce: 150
-  wallJumpTimerSet: 0.3
+  wallSpeedRecoverScale: 0.125
+  wallJumpForce: 220
+  wallJumpTimerSet: 0.2
   wallJumpDirection: {x: 1, y: 1.4}
   smashVelocity: 30
   tongueSpeed: 40
