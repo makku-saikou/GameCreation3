@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2e05ae249e43c9bb10008c8f26e762, type: 3}
   m_Name: Gu0kkeTest 1
   m_EditorClassIdentifier: 
-  jumpForce: 20
+  jumpForce: 25
   amountOfJump: 1
-  gravityScale: 5
+  gravityScale: 8
   commonXMaxSpeed: 18
   commonYMaxSpeed: 38
   xMaxSpeedRecoverScale: 0.01
@@ -23,11 +23,12 @@ MonoBehaviour:
   variableJumpForce: 0.95
   preJumpBufferTime: 1
   hangDrag: 2
-  hangSwayForce: 80
+  hangSwayForce: 100
   hangGravityScale: 12
   tongueLengthChangeSpeed: 6
   launchDragScale: 0.3
   hangJumpForce: 10
+  hangForceCompensate: 10
   onGroundSpeed: 15
   groundCheckHeight: 0.34
   groundCheckWidth: 2.1
