@@ -18,12 +18,16 @@ namespace GamePlay.Player.PlayerState
         {
             base.EnterCallback(prev);
             Player.Head.SetShow(false);
+            Property.HeadCanLaunch = false;
+
         }
         
         public override void ExitCallback(HState next)
         {
             base.ExitCallback(next);
             Player.Head.SetShow(true);
+            Property.HeadCanLaunch = true;
+
         }
 
         public override void FixedUpdateCallback()
