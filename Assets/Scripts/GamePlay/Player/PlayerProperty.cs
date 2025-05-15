@@ -63,24 +63,28 @@ namespace GamePlay.Player
         }
 
         // 是否在滑墙
-        private bool _isWallSliding;
-        public bool IsWallSliding
+        // private bool _isOnWall;
+        public bool IsNearWall { get; set; }
+        
+        private bool _isOnWall;
+        public bool IsOnWall
         {
-            get => _isWallSliding;
+            get => _isOnWall;
             set
             {
-                if(_isWallSliding == value) return;
-                _isWallSliding = value;
-                if(!value)
-                    Animator.SetBool("Wall", false);
-                else 
-                {
-                    DelayUtility.Delay(0.02f, () =>
-                    {
-                        if (_isWallSliding)
-                            Animator.SetBool("Wall", true);
-                    });
-                }
+                if(_isOnWall == value) return;
+                _isOnWall = value;
+                Animator.SetBool("Wall", value);
+                // if(!value)
+                //     Animator.SetBool("Wall", false);
+                // else 
+                // {
+                //     DelayUtility.Delay(0.02f, () =>
+                //     {
+                //         if (_isOnWall)
+                //             Animator.SetBool("Wall", true);
+                //     });
+                // }
             }
         }
         
@@ -119,7 +123,7 @@ namespace GamePlay.Player
                 _onOnWallFlag = value;
                 Animator.SetBool("OnWallFlag", value);
             }
-        }       
+        }
         
         // 悬挂时，当前舌头与竖直方向的夹角，-90~90,玩家在右边时为正
         private float _currentHongAngle;

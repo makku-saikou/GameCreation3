@@ -124,16 +124,16 @@ namespace GamePlay.Player
             HTransition onWall = new HTransition("OnWall", airState, onWallState);
             // onWall.OnCheck += () => property.IsWallSliding && (property.IsRightWall && Input.MovementInput >= 0.5f ||
             //                                                    !property.IsRightWall && Input.MovementInput <= -0.5f);
-            onWall.OnCheck += () => property.IsWallSliding && !property.OnWallFlag;
+            onWall.OnCheck += () => property.IsNearWall && !property.OnWallFlag;
             airState.AddTransition(onWall);
 
             HTransition wallJump = new HTransition("WallJump", onWallState, airState);
-            wallJump.OnCheck += () => !property.IsWallSliding;
+            wallJump.OnCheck += () => !property.IsNearWall;
             onWallState.AddTransition(wallJump);
 
             HTransition wallLeave = new HTransition("WallLeave", onWallState, airState);
-            wallLeave.OnCheck += () => property.IsWallSliding && (property.IsRightWall && Input.MovementInput < -0.5f ||
-                                                                 !property.IsRightWall && Input.MovementInput > 0.5f);
+            wallLeave.OnCheck += () => property.IsNearWall && (property.IsRightWall && Input.MovementInput < -0.1f ||
+                                                                 !property.IsRightWall && Input.MovementInput > 0.1f);
             onWallState.AddTransition(wallLeave);
 
             HTransition wallToGround = new HTransition("WallToGround", onWallState, onGroundState);
@@ -219,7 +219,7 @@ namespace GamePlay.Player
             property.IsRightWall = rightWall;
             var leftOverlap = Physics2D.OverlapCircle(wallCheckPoint1.position, Config.wallCheckRadius, Config.groundLayer);
             bool leftWall = leftOverlap != null && leftOverlap.CompareTag("Wall");
-            property.IsWallSliding = rightWall || leftWall;
+            property.IsNearWall = rightWall || leftWall;
         }
 
         private void OnDrawGizmos()

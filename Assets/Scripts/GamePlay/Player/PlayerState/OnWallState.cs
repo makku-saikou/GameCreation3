@@ -28,6 +28,7 @@ namespace GamePlay.Player.PlayerState
             Property.HeadCanLaunch = false;
 
             Player.ResetTransform();
+            Property.IsOnWall = true;
         }
 
         public override void ExitCallback(HState next)
@@ -38,6 +39,7 @@ namespace GamePlay.Player.PlayerState
             
             Player.Head.SetShow(true);
             Property.HeadCanLaunch = true;
+            Property.IsOnWall = false;
         }
 
         public override void UpdateCallback(float deltaTime)
