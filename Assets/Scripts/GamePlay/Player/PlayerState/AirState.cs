@@ -48,10 +48,9 @@ namespace GamePlay.Player.PlayerState
             Rb.velocity = v;
             Rb.gravityScale = 0;
             
-            var headRight = Player.Head.transform.right;
-            Entity.right = Player.Head.transform.right;
-            Player.Head.transform.right = headRight;
-            Player.Head.SetShow(true);
+            Entity.up = Player.Head.transform.right;
+            Player.Head.transform.right = Entity.up;
+            // Player.Head.SetShow(true);
             Property.IsAirLaunching = true;
         }
         
@@ -60,7 +59,7 @@ namespace GamePlay.Player.PlayerState
             Rb.gravityScale = Config.gravityScale;
             
             Player.ResetTransform();
-            Player.Head.SetShow(false);
+            // Player.Head.SetShow(false);
             Property.IsAirLaunching = false;
         }
         

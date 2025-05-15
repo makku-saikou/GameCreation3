@@ -226,6 +226,7 @@ namespace GamePlay.Player
         {
             transform.position = Player.CurrentStateName switch
             {
+                "Air" => root1.position,
                 "Hang" => root1.position,
                 "OnBackground" => root2.position,
                 _ => root0.position

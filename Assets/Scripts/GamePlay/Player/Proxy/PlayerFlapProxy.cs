@@ -16,6 +16,7 @@ namespace GamePlay.Player
         [SerializeField] private PlayerController player;
         private PlayerProperty Property => player.Property;
         private PlayerTongue Tongue => player.Head.Tongue;
+        private Transform Entity => player.Entity;
         private Rigidbody2D Rb => player.Rb;
         private PlayerFlap _onGround;
         private PlayerFlap _air;
@@ -58,9 +59,9 @@ namespace GamePlay.Player
                 }
                 else
                 {
-                    if(Property.IsFacingRight && Tongue.transform.right.x < 0)
+                    if(Property.IsFacingRight && Entity.up.x < 0)
                         Flip();
-                    else if(!Property.IsFacingRight && Tongue.transform.right.x > 0)
+                    else if(!Property.IsFacingRight && Entity.up.x > 0)
                         Flip();
                 }
 
