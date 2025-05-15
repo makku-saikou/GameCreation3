@@ -64,7 +64,7 @@ namespace GamePlay.Player
 
         private void Update()
         {
-            PlayerFlap?.Invoke();
+            // PlayerFlap?.Invoke();
             CheckState();
             StateMachine.UpdateCallback(Time.deltaTime);
             property.Update();

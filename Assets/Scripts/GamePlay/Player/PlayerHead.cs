@@ -52,6 +52,7 @@ namespace GamePlay.Player
         private void Update()
         {
             UpdateDirection();
+
             if (Input.GetMouseButtonDown(0))
             {
                 LaunchTongue();
@@ -74,6 +75,7 @@ namespace GamePlay.Player
         private void UpdateDirection()
         {
             if (!Property.HeadCanMove) return;
+            // todo: 方向放在玩家输入里
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var direction = mousePos - transform.position;
             direction.z = 0;

@@ -48,7 +48,6 @@ namespace GamePlay.Player.PlayerState
 
             if (Input.JumpInputDown)
             {
-                // todo: 解耦
                 Player.Head.RetractTongue();
                 HangJump();
             }

@@ -20,8 +20,8 @@ namespace GamePlay.Player.PlayerState
             base.EnterCallback(prev);
             PFCLog.Debug("Enter Air State");
             Player.Head.SetShow(false);
-            Tongue.OnTongueLaunch += LaunchingSpeed;
-            Tongue.OnTongueIdle += RecoverGravity;
+            Tongue.OnTongueLaunch += OnLaunch;
+            Tongue.OnTongueIdle += OnRetracted;
         }
 
         public override void ExitCallback(HState next)
@@ -29,19 +29,11 @@ namespace GamePlay.Player.PlayerState
             base.ExitCallback(next);
             PFCLog.Debug("Exit Air State");
             Player.Head.SetShow(true);
-            Tongue.OnTongueLaunch -= LaunchingSpeed;
-            Tongue.OnTongueIdle -= RecoverGravity;
-            RecoverGravity();
+            Tongue.OnTongueLaunch -= OnLaunch;
+            Tongue.OnTongueIdle -= OnRetracted;
+            OnRetracted();
         }
-
-        private void LaunchingSpeed()
-        {
-            var v = Rb.velocity;
-            v *= Config.launchDragScale;
-            Rb.velocity = v;
-            Rb.gravityScale = 0;
-        }
-
+        
         public override void UpdateCallback(float deltaTime)
         {
             base.UpdateCallback(deltaTime);
@@ -49,9 +41,27 @@ namespace GamePlay.Player.PlayerState
                 Property.ResetPreJumpBufferFlag();
         }
 
-        private void RecoverGravity()
+        private void OnLaunch()
+        {
+            var v = Rb.velocity;
+            v *= Config.launchDragScale;
+            Rb.velocity = v;
+            Rb.gravityScale = 0;
+            
+            var headRight = Player.Head.transform.right;
+            Entity.right = Player.Head.transform.right;
+            Player.Head.transform.right = headRight;
+            Player.Head.SetShow(true);
+            Property.IsAirLaunching = true;
+        }
+        
+        private void OnRetracted()
         {
             Rb.gravityScale = Config.gravityScale;
+            
+            Player.ResetTransform();
+            Player.Head.SetShow(false);
+            Property.IsAirLaunching = false;
         }
         
         public override void FixedUpdateCallback()

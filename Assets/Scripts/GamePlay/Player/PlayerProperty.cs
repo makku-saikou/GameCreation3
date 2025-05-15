@@ -75,16 +75,6 @@ namespace GamePlay.Player
                 if(_isOnWall == value) return;
                 _isOnWall = value;
                 Animator.SetBool("Wall", value);
-                // if(!value)
-                //     Animator.SetBool("Wall", false);
-                // else 
-                // {
-                //     DelayUtility.Delay(0.02f, () =>
-                //     {
-                //         if (_isOnWall)
-                //             Animator.SetBool("Wall", true);
-                //     });
-                // }
             }
         }
         
@@ -150,6 +140,18 @@ namespace GamePlay.Player
                 if (_isClimbing == value) return;
                 _isClimbing = value;
                 Animator.SetBool("Climb", value);
+            }
+        }
+        
+        private bool _isAirLaunching;
+        public bool IsAirLaunching
+        {
+            get => _isAirLaunching;
+            set
+            {
+                if (_isAirLaunching == value) return;
+                _isAirLaunching = value;
+                Animator.SetBool("AirLaunch", value);
             }
         }
         

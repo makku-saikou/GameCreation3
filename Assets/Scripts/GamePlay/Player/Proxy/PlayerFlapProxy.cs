@@ -15,6 +15,7 @@ namespace GamePlay.Player
     {
         [SerializeField] private PlayerController player;
         private PlayerProperty Property => player.Property;
+        private PlayerTongue Tongue => player.Head.Tongue;
         private Rigidbody2D Rb => player.Rb;
         private PlayerFlap _onGround;
         private PlayerFlap _air;
@@ -45,13 +46,24 @@ namespace GamePlay.Player
 
             _air = () =>
             {
-                switch (Rb.velocity.x)
+                if (!Property.IsAirLaunching)
                 {
-                    case > 0 when !Property.IsFacingRight:
-                    case < 0 when Property.IsFacingRight:
-                        Flip();
-                        break;
+                    switch (Rb.velocity.x)
+                    {
+                        case > 0 when !Property.IsFacingRight:
+                        case < 0 when Property.IsFacingRight:
+                            Flip();
+                            break;
+                    }
                 }
+                else
+                {
+                    if(Property.IsFacingRight && Tongue.transform.right.x < 0)
+                        Flip();
+                    else if(!Property.IsFacingRight && Tongue.transform.right.x > 0)
+                        Flip();
+                }
+
             };
 
             _wall = () =>
