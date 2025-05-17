@@ -21,12 +21,14 @@ MonoBehaviour:
   yMaxSpeedRecoverScale: 0.05
   xForceInAir: 200
   variableJumpForce: 0.95
+  preJumpBufferTime: 1
   hangDrag: 2
   hangSwayForce: 100
   hangGravityScale: 12
   tongueLengthChangeSpeed: 8
   launchDragScale: 0.9
   hangJumpForce: 0
+  hangForceCompensate: 10
   onGroundSpeed: 10
   groundCheckHeight: 0.34
   groundCheckWidth: 2.1
@@ -41,6 +43,7 @@ MonoBehaviour:
   wallJumpForce: 120
   wallJumpTimerSet: 0.3
   wallJumpDirection: {x: 1, y: 1.4}
+  wallExitCoefficient: 0.99
   smashVelocity: 30
   tongueSpeed: 40
   retractSpeed: 100
@@ -51,7 +54,16 @@ MonoBehaviour:
     m_Bits: 128
   - serializedVersion: 2
     m_Bits: 64
+  openMouthSpeed: 0.05
+  closeMouthSpeed: 0.05
   climbPileSpeed: 5
+  climbJumpForce: 100
+  climbJumpDirection: {x: 1, y: 1}
   climbBackgroundSpeed: 10
+  cameraSize: {x: 16, y: 25}
+  lerpSpeed: 1
+  cameraSizeThreshold: 20
+  cameraSizeFreezeTime: 1
+  playerSpeedThreshold: 10
   onGroundUpLimit: 0.2
   onGroundDownLimit: 0.6
