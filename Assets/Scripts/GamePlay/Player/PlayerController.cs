@@ -132,8 +132,9 @@ namespace GamePlay.Player
             onWallState.AddTransition(wallJump);
 
             HTransition wallLeave = new HTransition("WallLeave", onWallState, airState);
-            wallLeave.OnCheck += () => property.IsNearWall && (property.IsRightWall && Input.MovementInput < -0.1f ||
-                                                                 !property.IsRightWall && Input.MovementInput > 0.1f);
+            wallLeave.OnCheck += () => property.IsNearWall && 
+                                       (property.IsRightWall && Input.MovementInput < -config.wallExitCoefficient 
+                                        || !property.IsRightWall && Input.MovementInput > config.wallExitCoefficient);
             onWallState.AddTransition(wallLeave);
 
             HTransition wallToGround = new HTransition("WallToGround", onWallState, onGroundState);
