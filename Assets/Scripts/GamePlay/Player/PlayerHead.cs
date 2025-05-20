@@ -7,6 +7,7 @@
 // -------------------------------------------------
 
 using System;
+using GamePlay.Player.PlayerInput;
 using PurpleFlowerCore;
 using UnityEngine;
 
@@ -24,6 +25,7 @@ namespace GamePlay.Player
         public PlayerController Player => player;
         private PlayerProperty Property => player.Property;
         private PlayerConfig Config => player.Config;
+        private PlayerInputBase PlayerInput => player.Input;
         public DirectionLimit DirectionLimit;
         private float _currentMouthOpen;
         private float _targetMouthOpen;
@@ -76,10 +78,7 @@ namespace GamePlay.Player
         {
             if (!Property.HeadCanMove) return;
             // todo: 方向放在玩家输入里
-            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var direction = mousePos - transform.position;
-            direction.z = 0;
-            direction.Normalize();
+            var direction = PlayerInput.AttentionDirection;
             if (DirectionLimit != null)
                 direction = DirectionLimit(direction); // 确保此处输入的方向是归一化的
             // transform.right = Vector3.Lerp(transform.right, direction, 0.1f); 如果插值，落地时头部的转向会有错误

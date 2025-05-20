@@ -31,5 +31,22 @@ namespace GamePlay.Player.PlayerInput
         }
 
         public override bool InteractInput => Input.GetKeyDown(KeyCode.E);
+
+        public override Vector2 AttentionDirection
+        {
+            get
+            {
+                var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                var direction = mousePos - Player.Entity.position;
+                direction.z = 0;
+                direction.Normalize();
+                return direction;
+            }
+        }
+        
+        public PlayerInput_Legacy(PlayerController player) : base(player)
+        {
+            
+        }
     }
 }

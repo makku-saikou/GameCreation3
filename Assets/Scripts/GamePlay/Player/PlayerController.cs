@@ -89,7 +89,7 @@ namespace GamePlay.Player
             //todo:
             property = new(this);
             property.OnColorChanged += ChangeColor;
-            _input = new PlayerInput_Legacy();
+            _input = new PlayerInput_Legacy(this);
             
             // 定义整个状态机
             // 状态
