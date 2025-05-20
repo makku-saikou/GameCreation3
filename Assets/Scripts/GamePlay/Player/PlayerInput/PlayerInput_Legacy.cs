@@ -29,5 +29,7 @@ namespace GamePlay.Player.PlayerInput
                 return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
             }
         }
+
+        public override bool InteractInput => Input.GetKey(KeyCode.E);
     }
 }

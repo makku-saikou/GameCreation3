@@ -31,7 +31,7 @@ namespace GamePlay.Item
 
 		private void EjectPlayer(PlayerController player)
 		{
-			// todo: change player color
+			player.Property.CurrentColor = color;
 			player.Property.XMaxSpeed = xyMaxSpeed.x;
 			player.Property.YMaxSpeed = xyMaxSpeed.y;
 			player.Rb.AddForce(FinalForce, ForceMode2D.Impulse);

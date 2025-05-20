@@ -17,5 +17,7 @@ namespace GamePlay.Player.PlayerInput
         public abstract bool DownInput { get; } // 输入下砸
         public abstract bool UpInput { get; } // 输入上
         public abstract Vector2 DirectionInput { get; } // 输入二维方向
+
+        public abstract bool InteractInput { get; } // 输入交互
     }
 }
