@@ -229,6 +229,7 @@ namespace GamePlay.Player
                 "Air" => root1.position,
                 "Hang" => root1.position,
                 "OnBackground" => root2.position,
+                "OnPillar" => root2.position,
                 _ => root0.position
             };
         }

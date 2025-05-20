@@ -64,7 +64,6 @@ namespace GamePlay.Player
 
         private void Update()
         {
-            // PlayerFlap?.Invoke();
             CheckState();
             StateMachine.UpdateCallback(Time.deltaTime);
             property.Update();
@@ -79,6 +78,7 @@ namespace GamePlay.Player
         {
             StateMachine.FixedUpdateCallback();
             property.FixedUpdate();
+            _input.FixedUpdate();
         }
 
         /// <summary>
@@ -86,7 +86,6 @@ namespace GamePlay.Player
         /// </summary>
         private void Init()
         {
-            //todo:
             property = new(this);
             property.OnColorChanged += ChangeColor;
             _input = new PlayerInput_Legacy(this);
@@ -122,8 +121,6 @@ namespace GamePlay.Player
             hangState.AddTransition(hangJump);
 
             HTransition onWall = new HTransition("OnWall", airState, onWallState);
-            // onWall.OnCheck += () => property.IsWallSliding && (property.IsRightWall && Input.MovementInput >= 0.5f ||
-            //                                                    !property.IsRightWall && Input.MovementInput <= -0.5f);
             onWall.OnCheck += () => property.IsNearWall && !property.OnWallFlag;
             airState.AddTransition(onWall);
 
@@ -133,8 +130,8 @@ namespace GamePlay.Player
 
             HTransition wallLeave = new HTransition("WallLeave", onWallState, airState);
             wallLeave.OnCheck += () => property.IsNearWall && 
-                                       (property.IsRightWall && Input.MovementInput < -config.wallExitCoefficient 
-                                        || !property.IsRightWall && Input.MovementInput > config.wallExitCoefficient);
+                                       (property.IsRightWall && Input.XInputExtent < -config.wallExitCoefficient 
+                                        || !property.IsRightWall && Input.XInputExtent > config.wallExitCoefficient);
             onWallState.AddTransition(wallLeave);
 
             HTransition wallToGround = new HTransition("WallToGround", onWallState, onGroundState);
@@ -170,7 +167,7 @@ namespace GamePlay.Player
             airState.AddTransition(airClimb);
 
             HTransition airToBackground = new HTransition("AirToBackground", airState, onBackgroundState);
-            airToBackground.OnCheck += () => property.CanOnColorBlock && Input.UpInput;
+            airToBackground.OnCheck += () => property.CanOnColorBlock && Input.InteractInput;
             airState.AddTransition(airToBackground);
 
             HTransition backgroundToAir = new HTransition("BackgroundToAir", onBackgroundState, airState);
@@ -178,7 +175,7 @@ namespace GamePlay.Player
             onBackgroundState.AddTransition(backgroundToAir);
 
             HTransition groundToBackground = new HTransition("GroundToBackground", onBackgroundState, onBackgroundState);
-            groundToBackground.OnCheck += () => property.CanOnColorBlock;
+            groundToBackground.OnCheck += () => property.CanOnColorBlock && Input.InteractInput;
             onGroundState.AddTransition(groundToBackground);
 
 
@@ -199,7 +196,7 @@ namespace GamePlay.Player
             _stateMachine.AddState(inCannonState);
 
 #if UNITY_EDITOR
-        DebugSystem.AddCommand("Player/Color/Orange", () => { property.CurrentColor = EPlayerColor.None;});
+        DebugSystem.AddCommand("Player/Color/None", () => { property.CurrentColor = EPlayerColor.None;});
         DebugSystem.AddCommand("Player/Color/Green", () => { property.CurrentColor = EPlayerColor.Green;});
         DebugSystem.AddCommand("Player/Color/Red", () => { property.CurrentColor = EPlayerColor.Red;});
         DebugSystem.AddCommand("Player/Color/Blue", () => { property.CurrentColor = EPlayerColor.Blue;});

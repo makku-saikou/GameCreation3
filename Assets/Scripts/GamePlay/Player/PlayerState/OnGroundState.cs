@@ -72,7 +72,10 @@ namespace GamePlay.Player.PlayerState
         private void ApplyMovement()
         {
             if (!Property.CanMove) return;
-            Rb.velocity = new Vector2(Config.onGroundSpeed * Input.MovementInput, Rb.velocity.y);
+            if(Mathf.Abs(Input.XInputExtent) < Config.onGroundWalkToRunCoefficient)
+                Rb.velocity = new Vector2(Config.onGroundWalkSpeed * Input.MovementInput, Rb.velocity.y);
+            else
+                Rb.velocity = new Vector2(Config.onGroundRunSpeed * Input.MovementInput, Rb.velocity.y);
         }
         
         private void NormalJump()

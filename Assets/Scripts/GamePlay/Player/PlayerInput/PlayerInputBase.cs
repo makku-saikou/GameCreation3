@@ -5,11 +5,11 @@
 // Description:
 // -------------------------------------------------
 
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GamePlay.Player.PlayerInput
 {
-    // todo: 现在玩家输入有点乱了
     public abstract class PlayerInputBase
     {
         public abstract float MovementInput { get; } // x输入
@@ -21,10 +21,30 @@ namespace GamePlay.Player.PlayerInput
         public abstract bool InteractInput { get; } // 输入交互
         public abstract Vector2 AttentionDirection { get; }
 
+        /// <summary>
+        /// X输入方向的“程度”，左负右正，按下时间越长，值越大
+        /// </summary>
+        public float XInputExtent;
+
         protected PlayerController Player;
+        
+        private float _lastMovementInput;
         protected PlayerInputBase(PlayerController player)
         {
             Player = player;
+        }
+
+        public virtual void FixedUpdate()
+        {
+            if(MovementInput * _lastMovementInput <= 0)
+            {
+                XInputExtent = 0;
+            }
+            else
+            {
+                XInputExtent += MovementInput;
+            }
+            _lastMovementInput = MovementInput;
         }
     }
 }

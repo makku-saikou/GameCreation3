@@ -73,8 +73,15 @@ namespace GamePlay.Player
         [FoldoutGroup("悬挂")] [LabelText("退出悬挂补偿力")] [Tooltip("方向为切线，与水平面角度为90，补偿力为0，角度为0，力为该值")]
         public float hangForceCompensate = 10f;
     
-        [FoldoutGroup("地面")] [LabelText("地面移动速度")]
-        public float onGroundSpeed = 10f;
+        [FoldoutGroup("地面")] [LabelText("地面走路速度")]
+        public float onGroundWalkSpeed = 10f;
+        
+        [FoldoutGroup("地面")] [LabelText("地面跑步速度")]
+        public float onGroundRunSpeed = 15f;
+        
+        [FoldoutGroup("地面")] [LabelText("地面助跑系数")] [Tooltip("有点无法量化，数值越大，从走路速度到跑步速度需要的时间越长,详细问LJH")]
+        [Range(0, 80f)]
+        public float onGroundWalkToRunCoefficient = 20f;
     
         [FoldoutGroup("地面")] [LabelText("地面检测高度")]
         public float groundCheckHeight = 0.1f;
@@ -84,9 +91,6 @@ namespace GamePlay.Player
     
         [FoldoutGroup("地面")] [LabelText("地面Layer")]
         public LayerMask groundLayer;
-    
-        [FoldoutGroup("地面")] [LabelText("跳跃缓冲时间")]
-        public float jumpTimerSet = 0.15f;
     
         [FoldoutGroup("地面")] [LabelText("高跳时限")] [Tooltip("跳跃后在一定时间内按跳跃可以跳的更高")]
         public float jumpBufferTime = 0.5f;
@@ -110,8 +114,8 @@ namespace GamePlay.Player
         public Vector2 wallJumpDirection = new(1f, 1f);
     
         [FoldoutGroup("扒墙")] [LabelText("脱离系数")] [Tooltip("有点无法量化，数值越大，脱离墙需要的时间越长,详细问LJH")]
-        [Range(0, 0.99f)]
-        public float wallExitCoefficient = 0.3f;
+        [Range(0, 30f)]
+        public float wallExitCoefficient = 10f;
     
         [FoldoutGroup("下砸")] [LabelText("下砸下降速度")]
         public float smashVelocity = 30f;
@@ -148,8 +152,20 @@ namespace GamePlay.Player
         [FoldoutGroup("爬杆")] [LabelText("爬杆跳跃方向")]
         public Vector2 climbJumpDirection = new(1f, 1f);
     
-        [FoldoutGroup("爬背景墙")] [LabelText("爬背景墙速度")]
-        public float climbBackgroundSpeed = 10f;
+        [FoldoutGroup("色块内")] [LabelText("普通游泳速度")]
+        public float swimSpeed = 10f;
+        
+        [FoldoutGroup("色块内")] [LabelText("游泳冲刺力度")]
+        public float swimDashForce = 80f;
+        
+        [FoldoutGroup("色块内")] [LabelText("游泳冲刺CD")]
+        public float swimDashCD = 2f;
+        
+        [FoldoutGroup("色块内")] [LabelText("游泳时阻力")] [Range(0, 2f)]
+        public float swimDrag = 0.5f;
+        
+        [FoldoutGroup("色块内")] [LabelText("穿梭速度")]
+        public float shuttleSpeed = 20f;
 
         [FoldoutGroup("相机设置")] [LabelText("相机大小范围")] [MinMaxSlider(10, 50, true)] 
         public Vector2 cameraSize = new Vector2(16, 25);
