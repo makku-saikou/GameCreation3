@@ -1,5 +1,4 @@
-﻿using System;
-using Common.Manager;
+﻿using Common.Manager;
 using GamePlay.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -25,6 +24,7 @@ namespace GamePlay.Item
 			if (player.Input.InteractInput)
 			{
 				// 染色
+				Debug.Log("Player Color Change: [ " + player.Property.CurrentColor + " ] -> [ " + color + " ]");
 				player.Property.CurrentColor = color;
 			}
 		}

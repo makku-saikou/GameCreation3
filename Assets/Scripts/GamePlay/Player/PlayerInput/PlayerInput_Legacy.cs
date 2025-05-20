@@ -30,6 +30,6 @@ namespace GamePlay.Player.PlayerInput
             }
         }
 
-        public override bool InteractInput => Input.GetKey(KeyCode.E);
+        public override bool InteractInput => Input.GetKeyDown(KeyCode.E);
     }
 }
