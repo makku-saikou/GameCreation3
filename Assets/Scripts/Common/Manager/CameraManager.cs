@@ -1,15 +1,13 @@
 // -------------------------------------------------
 // Copyright@ makku-saikou
-// Author : jianhao li
+// Author : jianhao li, zehua wu
 // Date: 2025_03_08
-// File: CameraController.cs
+// File: CameraManager.cs
 // Description:
 // -------------------------------------------------
 
-using System;
 using Cinemachine;
 using GamePlay.Player;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Common.Manager
@@ -17,6 +15,8 @@ namespace Common.Manager
     public class CameraManager : MonoBehaviour
     {
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        [SerializeField] private Vector2 maxMouseOffset = new Vector2(2f, 1f);
+        [SerializeField] private float mouseOffsetDamping = 1f;
 
         private static PlayerController Player => GameManager.Instance.Player;
         private static Vector2 CameraSize => Player.Config.cameraSize;
@@ -26,13 +26,21 @@ namespace Common.Manager
         private static float PlayerSpeedThreshold => Player.Config.playerSpeedThreshold;
 
         private float _sizeFreezeCounter;
+        private CinemachineCameraOffset _cameraOffset;
 
         private void Start()
         {
             virtualCamera.Follow = GameManager.Instance.Player.CameraPoint.transform;
+            _cameraOffset = virtualCamera.GetComponent<CinemachineCameraOffset>();
         }
 
         private void Update()
+        {
+            DynamicCameraSize();
+            MouseOffset();
+        }
+
+        private void DynamicCameraSize()
         {
             if (_sizeFreezeCounter > 0)
             {
@@ -49,6 +57,24 @@ namespace Common.Manager
             if (velocity.magnitude < PlayerSpeedThreshold && Mathf.Abs(currentSize - CameraSize.x) < 0.1) return;
 
             virtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(currentSize, targetSize, Time.deltaTime * LerpSpeed);
+        }
+
+        private void MouseOffset()
+        {
+            if (!_cameraOffset) return;
+            var mousePos = new Vector2(
+                Input.mousePosition.x / Screen.width * 2 - 1,
+                Input.mousePosition.y / Screen.height * 2 - 1
+                );
+
+            var targetOffset = new Vector2(
+                Mathf.Clamp(mousePos.x * maxMouseOffset.x, -maxMouseOffset.x, maxMouseOffset.x),
+                Mathf.Clamp(mousePos.y * maxMouseOffset.y, -maxMouseOffset.y, maxMouseOffset.y)
+            );
+
+            var currentOffset = _cameraOffset.m_Offset;
+            var offset = Vector2.Lerp(currentOffset, targetOffset, mouseOffsetDamping * Time.deltaTime);
+            _cameraOffset.m_Offset = new Vector3(offset.x, offset.y, currentOffset.z);
         }
     }
 }

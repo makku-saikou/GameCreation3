@@ -30,7 +30,7 @@ namespace GamePlay.Manager
 					background.sprite.texture.height / background.sprite.pixelsPerUnit * Transform.localScale.y
 				);
 				var size = background.sprite.bounds.size;
-				initialSpriteSize = new Vector2(size.x * Transform.localScale.x, size.y * Transform.localScale.y);
+				initialSpriteSize = new Vector2(size.x / Transform.localScale.x, size.y / Transform.localScale.y);
 				isInitialized = true;
 			}
 		}
