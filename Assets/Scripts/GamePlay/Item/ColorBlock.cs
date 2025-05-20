@@ -15,7 +15,7 @@ namespace GamePlay.Item
 {
     public class ColorBlock : MonoBehaviour
     {
-        [SerializeField] private EPlayerColor color = EPlayerColor.Orange;
+        [SerializeField] private EPlayerColor color = EPlayerColor.None;
         [SerializeField] private Collider2D collider2D;
         [SerializeField] private SpriteRenderer spriteRenderer;
 
@@ -24,8 +24,9 @@ namespace GamePlay.Item
             GameManager.Instance.Player.Property.OnColorChanged += OnPlayerColorChanged;
             switch (color)
             {
-                case EPlayerColor.Orange:
-                    spriteRenderer.color = Color.yellow;
+                case EPlayerColor.None:
+                    PFCLog.Warning("颜色块", "颜色块没有设置颜色");
+                    spriteRenderer.color = Color.white;
                     break;
                 case EPlayerColor.Green:
                     spriteRenderer.color = Color.green;

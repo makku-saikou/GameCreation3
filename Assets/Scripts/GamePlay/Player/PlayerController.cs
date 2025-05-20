@@ -199,7 +199,7 @@ namespace GamePlay.Player
             _stateMachine.AddState(inCannonState);
 
 #if UNITY_EDITOR
-        DebugSystem.AddCommand("Player/Color/Orange", () => { property.CurrentColor = EPlayerColor.Orange;});
+        DebugSystem.AddCommand("Player/Color/Orange", () => { property.CurrentColor = EPlayerColor.None;});
         DebugSystem.AddCommand("Player/Color/Green", () => { property.CurrentColor = EPlayerColor.Green;});
         DebugSystem.AddCommand("Player/Color/Red", () => { property.CurrentColor = EPlayerColor.Red;});
         DebugSystem.AddCommand("Player/Color/Blue", () => { property.CurrentColor = EPlayerColor.Blue;});
@@ -235,7 +235,7 @@ namespace GamePlay.Player
             if (spriteRenderer == null) return;
             switch (to)
             {
-                case EPlayerColor.Orange:
+                case EPlayerColor.None:
                     spriteRenderer.color = Color.white;
                     break;
                 case EPlayerColor.Green:
@@ -259,7 +259,7 @@ namespace GamePlay.Player
 
     public enum EPlayerColor
     {
-        Orange = 0,
+        None = 0,
         Green = 1,
         Red = 2,
         Blue = 3

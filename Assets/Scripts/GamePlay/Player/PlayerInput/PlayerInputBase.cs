@@ -9,6 +9,7 @@ using UnityEngine;
 
 namespace GamePlay.Player.PlayerInput
 {
+    // todo: 现在玩家输入有点乱了
     public abstract class PlayerInputBase
     {
         public abstract float MovementInput { get; } // x输入
