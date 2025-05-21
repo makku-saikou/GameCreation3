@@ -22,7 +22,6 @@ namespace GamePlay.Player.PlayerState
             Player.Head.SetShow(false);
             Player.transform.position = new Vector3(Property.MaxClimbHeight.x,
                 Player.transform.position.y, Player.transform.position.z);
-            Property.IsClimbing = true;
             Player.ResetTransform();
         }
         
@@ -32,7 +31,6 @@ namespace GamePlay.Player.PlayerState
             Rb.gravityScale = Config.gravityScale;
             Player.Head.SetShow(true);
             ClimbJump();
-            Property.IsClimbing = false;
         }
 
         public override void FixedUpdateCallback()

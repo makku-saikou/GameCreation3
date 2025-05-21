@@ -22,9 +22,16 @@ namespace GamePlay.Player.PlayerState
         protected PlayerInputBase Input => Player.Input;
         protected PlayerTongue Tongue => Player.Head.Tongue;
         protected Transform Entity => Player.Entity;
+        protected Animator Animator => Player.Animator;
         public PlayerStateBase(PlayerController player, string name) : base(name)
         {
             Player = player;
+        }
+
+        public override void EnterCallback(HState prev)
+        {
+            base.EnterCallback(prev);
+            Animator.Play(Name);
         }
     }
 }

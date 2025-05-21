@@ -99,6 +99,7 @@ namespace GamePlay.Player
             SmashState smashState = new SmashState(this, "Smash");
             OnPillarState onPillarState = new OnPillarState(this, "OnPillar");
             OnBackgroundState onBackgroundState = new OnBackgroundState(this, "OnBackground");
+            // todo: 自定义状态
             InCannonState inCannonState = new InCannonState(this, "InCannon");
             
             _stateMachine = new HStateMachine(onGroundState);

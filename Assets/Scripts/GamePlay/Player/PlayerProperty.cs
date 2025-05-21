@@ -37,83 +37,18 @@ namespace GamePlay.Player
         }
 
         // 是否在地面上，由Physics2D判定
-        private bool _isGrounded;
-        public bool IsGrounded
-        {
-            get => _isGrounded;
-            set
-            {
-                if(_isGrounded == value) return;
-                _isGrounded = value;
-                Animator.SetBool("Ground", value);
-            }
-        }
-
+        public bool IsGrounded { get; set; }
         // 是否与物体连接
-        private bool _isConnecting;
-        public bool IsConnecting
-        {
-            get => _isConnecting;
-            set
-            {
-                if(_isConnecting == value) return;
-                _isConnecting = value;
-                Animator.SetBool("Connecting", value);
-            }
-        }
+        public bool IsConnecting { get; set; }
 
         // 是否在滑墙
-        // private bool _isOnWall;
         public bool IsNearWall { get; set; }
-        
-        private bool _isOnWall;
-        public bool IsOnWall
-        {
-            get => _isOnWall;
-            set
-            {
-                if(_isOnWall == value) return;
-                _isOnWall = value;
-                Animator.SetBool("Wall", value);
-            }
-        }
-        
-        private bool _isLaunching;
-        public bool IsLaunching
-        {
-            get => _isLaunching;
-            set
-            {
-                if (_isLaunching == value) return;
-                _isLaunching = value;
-                // todo: 发射时的表现
-                // _animator.SetBool("Launch", value);
-            }
-        }
-        
-        private bool _isRetracting;
-        public bool IsRetracting
-        {
-            get => _isRetracting;
-            set
-            {
-                if (_isRetracting == value) return;
-                _isRetracting = value;
-                // _animator.SetBool("Retract", value);
-            }
-        }
+        // todo: 直接获取舌头状态
+        public bool IsLaunching { get; set; }
+        public bool IsRetracting { get; set; }
+
         // 划墙跳后的延迟标记
-        private bool _onOnWallFlag;
-        public bool OnWallFlag
-        {
-            get => _onOnWallFlag;
-            set
-            {
-                if (_onOnWallFlag == value) return;
-                _onOnWallFlag = value;
-                Animator.SetBool("OnWallFlag", value);
-            }
-        }
+        public bool OnWallFlag { get; set; }
         
         // 悬挂时，当前舌头与竖直方向的夹角，-90~90,玩家在右边时为正
         private float _currentHongAngle;
@@ -123,33 +58,19 @@ namespace GamePlay.Player
             set
             {
                 _currentHongAngle = value;
-                // var progress = _currentHongAngle / 90f * 0.5f + 0.5f;
                 var clamp = Mathf.Clamp(_currentHongAngle, -90, 90);
                 float progress = FacingDirection * clamp / 91f * 0.5f + 0.5f;
                 Animator.Play( "Hang", 0, progress);
             }
         }
-        
-        // 是否在
-        private bool _isClimbing;
-        public bool IsClimbing
-        {
-            get => _isClimbing;
-            set
-            {
-                if (_isClimbing == value) return;
-                _isClimbing = value;
-                Animator.SetBool("Climb", value);
-            }
-        }
-        
         private bool _isAirLaunching;
+
         public bool IsAirLaunching
         {
             get => _isAirLaunching;
             set
             {
-                if (_isAirLaunching == value) return;
+                if(_isAirLaunching == value) return;
                 _isAirLaunching = value;
                 Animator.SetBool("AirLaunch", value);
             }
@@ -160,11 +81,8 @@ namespace GamePlay.Player
         public bool JumpBufferFlag { get; set; }               // 是否可以进行更高跳跃 
         public bool CanMove { get; set; }                      // 是否可以移动
         public bool CanFlip { get; set; }                      // 是否可以转向
-        // public float ConnectAngle { get; set; }             // 悬挂时,连接点与玩家的连线与竖直方向的夹角,角度制,当玩家在连接点左侧时为负
-        // public Vector3 ConnectDirection { get; set; }       // 悬挂时,连接点与玩家的连线
         public Vector3 HangPoint => _player.Head.Tongue.TargetPosition;
         public bool CanOnPillar { get; set; }                  // 是否在可攀爬的柱子前
-        public bool IsOnPillar { get; set; }                   // 是否正在爬柱子
         public bool CanOnColorBlock { get; set; }              // 是否在色块前
         
         private EPlayerColor _currentColor;
@@ -203,8 +121,6 @@ namespace GamePlay.Player
         public float CurrentTongueLength { get; set; }       // 舌头当前长度
         
         public Vector2 WallJumpDirection => Config.wallJumpDirection.normalized; // 滑墙跳跃方向
-        // [RO] public bool checkVariableJump;                 // 当成功跳跃时被激活，若跳跃期间松开空格，则会施加额外的向下的力
-        // [RO] public bool isTouchingWall;                    // 是否贴墙，由Physics2D判定
 
         public bool IsInCannon { get; set; } // 是否在炮筒里
 
