@@ -29,13 +29,14 @@ MonoBehaviour:
   launchDragScale: 0.9
   hangJumpForce: 0
   hangForceCompensate: 10
-  onGroundSpeed: 10
+  onGroundWalkSpeed: 10
+  onGroundRunSpeed: 15
+  onGroundWalkToRunCoefficient: 0.6
   groundCheckHeight: 0.34
   groundCheckWidth: 2.1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  jumpTimerSet: 0.15
   jumpBufferTime: 0.5
   wallCheckRadius: 0.1
   wallSlideSpeed: 0
@@ -59,7 +60,11 @@ MonoBehaviour:
   climbPileSpeed: 5
   climbJumpForce: 100
   climbJumpDirection: {x: 1, y: 1}
-  climbBackgroundSpeed: 10
+  swimSpeed: 50
+  swimDashForce: 80
+  swimDashCD: 2
+  swimDrag: 0.5
+  shuttleSpeed: 20
   cameraSize: {x: 16, y: 25}
   lerpSpeed: 1
   cameraSizeThreshold: 20

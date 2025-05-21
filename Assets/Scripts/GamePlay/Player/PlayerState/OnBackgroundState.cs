@@ -7,7 +7,7 @@
 
 using UnityEngine;
 using Common.FSM;
-using PurpleFlowerCore;
+using PurpleFlowerCore.Utility;
 
 namespace GamePlay.Player.PlayerState
 {
@@ -15,11 +15,11 @@ namespace GamePlay.Player.PlayerState
     {
         public OnBackgroundState(PlayerController player, string name) : base(player, name) { }
         private float _currentDashCD;
+        private bool _canSwim = true;
         
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
-            PFCLog.Debug("Enter OnBackground State");
             Player.Head.SetShow(false);
             Rb.gravityScale = 0;
             Rb.velocity = Vector2.zero;
@@ -32,7 +32,6 @@ namespace GamePlay.Player.PlayerState
         public override void ExitCallback(HState next)
         {
             base.ExitCallback(next);
-            PFCLog.Debug("Exit OnBackground State");
             Player.Head.SetShow(true);
             Rb.gravityScale = Config.gravityScale;
             Property.IsOnColorBlock = false;
@@ -45,8 +44,6 @@ namespace GamePlay.Player.PlayerState
         public override void UpdateCallback(float deltaTime)
         {
             base.UpdateCallback(deltaTime);
-            var bodyDirection = Input.AttentionDirection;
-            Player.Entity.up = bodyDirection;
             if(Input.JumpInputDown && _currentDashCD <= 0)
                 Dash();
             _currentDashCD -= deltaTime;
@@ -55,6 +52,13 @@ namespace GamePlay.Player.PlayerState
         public override void FixedUpdateCallback()
         {
             base.FixedUpdateCallback();
+            if(_canSwim)
+                Swim();
+        }
+
+        private void Swim()
+        {
+            Player.Entity.up = Input.DirectionInput == Vector2.zero ? Player.Entity.up : Input.DirectionInput;
             var moveDirection = Input.DirectionInput;
             if (moveDirection != Vector2.zero)
             {
@@ -64,6 +68,12 @@ namespace GamePlay.Player.PlayerState
 
         private void Dash()
         {
+            _canSwim = false;
+            DelayUtility.Delay(Config.swimDashRecoverTime, () =>
+            {
+                _canSwim = true;
+            });
+            Player.Entity.up = Input.AttentionDirection;
             Rb.AddForce(Input.AttentionDirection * Config.swimDashForce, ForceMode2D.Impulse);
             _currentDashCD = Config.swimDashCD;
         }
