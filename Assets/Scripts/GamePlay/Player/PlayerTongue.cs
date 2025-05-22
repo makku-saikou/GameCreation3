@@ -169,8 +169,9 @@ namespace GamePlay.Player
         {
             if(_currentTarget == null) return;
             if (tongueState != ETongueState.Connecting) return;
-            _currentTarget.Interact(Player);
-            Retract();
+            var retract = _currentTarget.Interact(Player);
+            if(retract)
+                Retract();
         }
 
         private void UpdateTarget()

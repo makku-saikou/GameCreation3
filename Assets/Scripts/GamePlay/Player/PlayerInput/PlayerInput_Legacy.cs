@@ -43,7 +43,11 @@ namespace GamePlay.Player.PlayerInput
                 return direction;
             }
         }
-        
+
+        public override bool LaunchDown => Input.GetMouseButtonDown(0);
+        public override bool LaunchUp => Input.GetMouseButtonUp(0);
+        public override bool ConnectInteractDown => Input.GetMouseButtonDown(1);
+
         public PlayerInput_Legacy(PlayerController player) : base(player)
         {
             

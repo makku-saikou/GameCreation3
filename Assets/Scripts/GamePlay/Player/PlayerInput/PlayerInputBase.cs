@@ -19,6 +19,10 @@ namespace GamePlay.Player.PlayerInput
         public abstract Vector2 DirectionInput { get; } // 输入二维方向
         public abstract bool InteractInput { get; } // 输入交互
         public abstract Vector2 AttentionDirection { get; }
+        
+        public abstract bool LaunchDown { get; }
+        public abstract bool LaunchUp { get; }
+        public abstract bool ConnectInteractDown { get; }
 
         /// <summary>
         /// X输入方向的“程度”，左负右正，按下时间越长，值越大

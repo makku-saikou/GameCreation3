@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace GamePlay.Item
 {
-    public class ColorBlock : MonoBehaviour
+    public class ColorBlock_Swim : MonoBehaviour
     {
         [SerializeField] private EPlayerColor color = EPlayerColor.None;
         [SerializeField] private Collider2D collider2D;
