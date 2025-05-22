@@ -19,9 +19,9 @@ namespace GamePlay.Item.Target
 
         public void Interact(PlayerController playerController)
         {
-            Vector3 direction = transform.position - playerController.transform.position;
-            direction.Normalize();
-            playerController.Rb.AddForce(direction * force, ForceMode2D.Impulse);
+            // Vector3 direction = transform.position - playerController.transform.position;
+            // direction.Normalize();
+            // playerController.Rb.AddForce(direction * force, ForceMode2D.Impulse);
         }
     }
 }
