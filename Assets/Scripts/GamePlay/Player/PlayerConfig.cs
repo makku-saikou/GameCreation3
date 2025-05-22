@@ -15,9 +15,6 @@ using UnityEngine;
 
 namespace GamePlay.Player
 {
-    /// <summary>
-    /// 玩家属性的配置类和数据类，我们使用字段配置数
-    /// </summary>
     [CreateAssetMenu(fileName = "PlayerProperty", menuName = "Data/PlayerProperty")]
     [Configurable("Player")]
     public class PlayerConfig : ScriptableObject

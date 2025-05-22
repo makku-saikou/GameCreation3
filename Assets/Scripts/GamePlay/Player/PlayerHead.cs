@@ -6,7 +6,6 @@
 // Description: 头部的控制逻辑,调用舌头的相关方法
 // -------------------------------------------------
 
-using System;
 using GamePlay.Player.PlayerInput;
 using PurpleFlowerCore;
 using UnityEngine;
@@ -55,15 +54,15 @@ namespace GamePlay.Player
         {
             UpdateDirection();
 
-            if (Input.GetMouseButtonDown(0))
+            if (PlayerInput.LaunchDown)
             {
                 LaunchTongue();
             }
-            if (Input.GetMouseButtonUp(0))
+            if (PlayerInput.LaunchUp)
             {
                 RetractTongue();
             }
-            if (Input.GetMouseButtonDown(1))
+            if (PlayerInput.ConnectInteractDown)
             {
                 InteractTongue();
             }
@@ -77,11 +76,9 @@ namespace GamePlay.Player
         private void UpdateDirection()
         {
             if (!Property.HeadCanMove) return;
-            // todo: 方向放在玩家输入里
             var direction = PlayerInput.AttentionDirection;
             if (DirectionLimit != null)
                 direction = DirectionLimit(direction); // 确保此处输入的方向是归一化的
-            // transform.right = Vector3.Lerp(transform.right, direction, 0.1f); 如果插值，落地时头部的转向会有错误
             transform.right = direction;
         }
 

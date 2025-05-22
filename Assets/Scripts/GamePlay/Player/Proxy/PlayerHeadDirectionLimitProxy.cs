@@ -31,11 +31,6 @@ namespace GamePlay.Player
             // 为了确保事件注册在玩家初始化之后，且由于我们不会使该组建失效，所以在Start中注册事件
             playerController.StateMachine.OnStateChanged += CheckDirectionLimit;
         }
-        
-        // private void OnDisable()
-        // {
-        //     playerController.StateMachine.OnStateChanged -= CheckDirectionLimit;
-        // }
 
         private Vector3 OnGroundLimit(Vector3 direction)
         {
