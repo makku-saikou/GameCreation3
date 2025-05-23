@@ -5,6 +5,7 @@
 // Description: 玩家角色主要控制逻辑
 // -------------------------------------------------
 
+using System;
 using Common.FSM;
 using GamePlay.Player.PlayerInput;
 using GamePlay.Player.PlayerState;
@@ -46,7 +47,6 @@ namespace GamePlay.Player
         [SerializeField] private Rigidbody2D rb;
         public Rigidbody2D Rb => rb;
         
-        public PlayerFlap PlayerFlap;
         
         private PlayerInputBase _input;
         public PlayerInputBase Input => _input;
@@ -57,6 +57,10 @@ namespace GamePlay.Player
         [SerializeField] private Transform cameraPoint;
         public Transform CameraPoint => cameraPoint;
 
+        public PlayerFlap PlayerFlap;
+
+        public event Action<Collision2D> OnCollisionEnter;
+        public event Action<Collision2D> OnCollisionExit;
         private void Awake()
         {
             Init();
@@ -101,6 +105,7 @@ namespace GamePlay.Player
             OnBackgroundState onBackgroundState = new OnBackgroundState(this, "OnBackground");
             // todo: 自定义状态
             InCannonState inCannonState = new InCannonState(this, "InCannon");
+            ShuttleState shuttleState = new ShuttleState(this, "Shuttle");
             
             _stateMachine = new HStateMachine(onGroundState);
 
@@ -168,18 +173,18 @@ namespace GamePlay.Player
             airState.AddTransition(airClimb);
 
             HTransition airToBackground = new HTransition("AirToBackground", airState, onBackgroundState);
-            airToBackground.OnCheck += () => property.CanOnColorBlock && Input.InteractInput;
+            airToBackground.OnCheck += () => property.CanOnSwimColorBlock && Input.InteractInput;
             airState.AddTransition(airToBackground);
 
             HTransition backgroundToAir = new HTransition("BackgroundToAir", onBackgroundState, airState);
-            backgroundToAir.OnCheck += () => !property.CanOnColorBlock;
+            backgroundToAir.OnCheck += () => !property.CanOnSwimColorBlock;
             onBackgroundState.AddTransition(backgroundToAir);
 
             HTransition groundToBackground = new HTransition("GroundToBackground", onBackgroundState, onBackgroundState);
-            groundToBackground.OnCheck += () => property.CanOnColorBlock && Input.InteractInput;
+            groundToBackground.OnCheck += () => property.CanOnSwimColorBlock && Input.InteractInput;
             onGroundState.AddTransition(groundToBackground);
 
-
+            // todo: 自定义状态
             HTransition inCannonToAir = new HTransition("InCannonToAir", inCannonState, airState);
             inCannonToAir.OnCheck += () => !property.IsInCannon;
             inCannonState.AddTransition(inCannonToAir);
@@ -187,6 +192,14 @@ namespace GamePlay.Player
             HTransition anyToInCannon = new HTransition("AnyToInCannon",null, inCannonState);
             anyToInCannon.OnCheck += () => property.IsInCannon;
             _stateMachine.AddAnyState(anyToInCannon);
+            
+            HTransition shuttleToAir = new HTransition("ShuttleToAir", shuttleState, airState);
+            shuttleToAir.OnCheck += () => !property.IsShuttle;
+            shuttleState.AddTransition(shuttleToAir);
+
+            HTransition anyToShuttle = new HTransition("AnyToShuttle",null, shuttleState);
+            anyToShuttle.OnCheck += () => property.IsShuttle;
+            _stateMachine.AddAnyState(anyToShuttle);
 
             // 初始化状态机
             _stateMachine.AddState(airState);
@@ -195,13 +208,32 @@ namespace GamePlay.Player
             _stateMachine.AddState(smashState);
             _stateMachine.AddState(onPillarState);
             _stateMachine.AddState(inCannonState);
-
+            _stateMachine.AddState(shuttleState);
+            
 #if UNITY_EDITOR
         DebugSystem.AddCommand("Player/Color/None", () => { property.CurrentColor = EPlayerColor.None;});
         DebugSystem.AddCommand("Player/Color/Green", () => { property.CurrentColor = EPlayerColor.Green;});
         DebugSystem.AddCommand("Player/Color/Red", () => { property.CurrentColor = EPlayerColor.Red;});
         DebugSystem.AddCommand("Player/Color/Blue", () => { property.CurrentColor = EPlayerColor.Blue;});
 #endif
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            // if(other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            // {
+            //     OnCollisionEnter?.Invoke();
+            // }
+            OnCollisionEnter?.Invoke(other);
+        }
+        
+        private void OnCollisionExit2D(Collision2D other)
+        {
+            // if(other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            // {
+            //     OnCollisionExit?.Invoke();
+            // }
+            OnCollisionExit?.Invoke(other);
         }
 
         /// <summary>

@@ -60,7 +60,8 @@ namespace GamePlay.Player
                 _currentHongAngle = value;
                 var clamp = Mathf.Clamp(_currentHongAngle, -90, 90);
                 float progress = FacingDirection * clamp / 91f * 0.5f + 0.5f;
-                Animator.Play( "Hang", 0, progress);
+                if(_player.CurrentStateName == "Hang")
+                    Animator.Play( "Hang", 0, progress);
             }
         }
         private bool _isAirLaunching;
@@ -83,7 +84,7 @@ namespace GamePlay.Player
         public bool CanFlip { get; set; }                      // 是否可以转向
         public Vector3 HangPoint => _player.Head.Tongue.TargetPosition;
         public bool CanOnPillar { get; set; }                  // 是否在可攀爬的柱子前
-        public bool CanOnColorBlock { get; set; }              // 是否在色块前
+        public bool CanOnSwimColorBlock { get; set; }              // 是否在色块前
         
         private EPlayerColor _currentColor;
 
@@ -99,19 +100,7 @@ namespace GamePlay.Player
             }
         }
         public event Action<EPlayerColor, EPlayerColor> OnColorChanged;
-
-        // 是否正在色块背景上爬
-        private bool _isOnColorBlock;
-        public bool IsOnColorBlock
-        {
-            get => _isOnColorBlock;
-            set
-            {
-                if (_isOnColorBlock == value) return;
-                _isOnColorBlock = value;
-                Animator.SetBool("OnBackground", value);
-            }
-        }
+        
         public bool PreJumpBufferFlag { get; set; }          // 在地面时直接进行跳跃
         public Vector2 MaxClimbHeight { get; set; }              // 攀爬最高点
         public float XMaxSpeed { get; set; }                   // 最大速度
@@ -123,6 +112,8 @@ namespace GamePlay.Player
         public Vector2 WallJumpDirection => Config.wallJumpDirection.normalized; // 滑墙跳跃方向
 
         public bool IsInCannon { get; set; } // 是否在炮筒里
+        
+        public bool IsShuttle { get; set; } // 是否在穿梭色块里
 
         public PlayerProperty(PlayerController player)
         {

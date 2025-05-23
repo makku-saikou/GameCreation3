@@ -1,7 +1,7 @@
 ﻿// -------------------------------------------------
 // Copyright@ makku-saikou
 // Author : jianhao li
-// Date: 2025_4_21
+// Date: 2025_05_23
 // Description:
 // -------------------------------------------------
 
@@ -13,12 +13,13 @@ using UnityEngine;
 
 namespace GamePlay.Item
 {
-    public class ColorBlock_Swim : MonoBehaviour
+    public class ColorBlock_Shuttle : MonoBehaviour
     {
         [SerializeField] private EPlayerColor color = EPlayerColor.None;
         [SerializeField] private Collider2D collider2D;
         [SerializeField] private SpriteRenderer spriteRenderer;
-
+        private bool _canShuttle;
+        private bool _playerIn;
         private void Start()
         {
             GameManager.Instance.Player.Property.OnColorChanged += OnPlayerColorChanged;
@@ -40,34 +41,69 @@ namespace GamePlay.Item
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            collider2D.isTrigger = GameManager.Instance.Player.Property.CurrentColor == color;
+            UpdateState();
+        }
+
+        private void Update()
+        {
+            CheckCanShuttle();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.CompareTag("Player")) return;
             var player = other.GetComponent<PlayerController>();
-            // player.Property.CanOnColorBlock = player.Property.CurrentColor == color;
-            player.Property.CanOnColorBlock = true;
             player.Property.OnColorChanged += OnPlayerColorChangedInThis;
+            player.Property.IsShuttle = true;
+            _playerIn = true;
+            player.OnCollisionEnter += OnPlayerBumpInThis;
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
             if (!other.CompareTag("Player")) return;
             var player = other.GetComponent<PlayerController>();
-            player.Property.CanOnColorBlock = false;
             player.Property.OnColorChanged -= OnPlayerColorChangedInThis;
+            player.Property.IsShuttle = false;
+            _playerIn = false;
+            player.OnCollisionEnter -= OnPlayerBumpInThis;
         }
 
         private void OnPlayerColorChanged(EPlayerColor from, EPlayerColor to)
         {
-            collider2D.isTrigger = to == color;
+            UpdateState();
         }
         
         private void OnPlayerColorChangedInThis(EPlayerColor from, EPlayerColor to)
         {
             PFCLog.Debug("ColorBlock", $"player color {to.ToString()}");
+        }
+
+        private void OnPlayerBumpInThis(Collision2D _)
+        {
+            PFCLog.Debug("ColorBlock", "player bumped when shuttling");
+        }
+
+        private void UpdateState()
+        {
+            collider2D.isTrigger = _canShuttle && GameManager.Instance.Player.Property.CurrentColor == color;
+        }
+        
+        private void CheckCanShuttle()
+        {
+            var player = GameManager.Instance.Player;
+            var rb = player.Rb;
+            var config = player.Config;
+            if(rb.velocity.sqrMagnitude > config.shuttleThreshold * config.shuttleThreshold || _playerIn)
+            {
+                _canShuttle = true;
+                UpdateState();
+            }
+            else if(rb.velocity.sqrMagnitude < config.shuttleThreshold * config.shuttleThreshold && _canShuttle)
+            {
+                _canShuttle = false;
+                UpdateState();
+            }
         }
     }
 }

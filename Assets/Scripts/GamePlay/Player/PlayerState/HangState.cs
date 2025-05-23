@@ -70,7 +70,7 @@ namespace GamePlay.Player.PlayerState
         {
             var direction = Property.HangPoint - Player.transform.position;
             direction.Normalize();
-            Player.Entity.transform.up = direction;
+            Player.Entity.up = direction;
             // var faceRight = Property.IsFacingRight;
             // Player.Entity.transform.localScale = new Vector3(faceRight ? -1 : 1, 1, 1);
         }

@@ -1,7 +1,7 @@
 ﻿// -------------------------------------------------
 // Copyright@ makku-saikou
 // Author : jianhao li
-// Date: 2025_05_23
+// Date: 2025_4_21
 // Description:
 // -------------------------------------------------
 
@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace GamePlay.Item
 {
-    public class ColorBlock_Shuttle : MonoBehaviour
+    public class ColorBlock_Swim : MonoBehaviour
     {
         [SerializeField] private EPlayerColor color = EPlayerColor.None;
         [SerializeField] private Collider2D collider2D;
@@ -47,7 +47,8 @@ namespace GamePlay.Item
         {
             if (!other.CompareTag("Player")) return;
             var player = other.GetComponent<PlayerController>();
-            player.Property.CanOnColorBlock = true;
+            // player.Property.CanOnColorBlock = player.Property.CurrentColor == color;
+            player.Property.CanOnSwimColorBlock = true;
             player.Property.OnColorChanged += OnPlayerColorChangedInThis;
         }
 
@@ -55,7 +56,7 @@ namespace GamePlay.Item
         {
             if (!other.CompareTag("Player")) return;
             var player = other.GetComponent<PlayerController>();
-            player.Property.CanOnColorBlock = false;
+            player.Property.CanOnSwimColorBlock = false;
             player.Property.OnColorChanged -= OnPlayerColorChangedInThis;
         }
 

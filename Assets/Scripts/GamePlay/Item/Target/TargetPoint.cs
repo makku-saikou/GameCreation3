@@ -12,7 +12,6 @@ namespace GamePlay.Item.Target
 {
     public class TargetPoint : MonoBehaviour, ITarget
     {
-        [SerializeField] private float force = 10;
         public bool IsAdsorb => true;
         public Vector3 AdsorbPosition => transform.position;
         public Transform Root => transform;
