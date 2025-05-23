@@ -5,12 +5,18 @@
 // Description:
 // -------------------------------------------------
 
+using System;
 using UnityEngine;
 
 namespace Common.Manager
 {
     public class GameManager_Level2 : GameManager
     {
+        private void Start()
+        {
+            
+        }
+        
         
     }
 }

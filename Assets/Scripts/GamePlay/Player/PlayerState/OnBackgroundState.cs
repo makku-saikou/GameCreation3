@@ -23,7 +23,7 @@ namespace GamePlay.Player.PlayerState
             Player.Head.SetShow(false);
             Rb.gravityScale = 0;
             Rb.velocity = Vector2.zero;
-            Property.IsOnColorBlock = true;
+            // Property.IsOnColorBlock = true;
             Property.HeadCanLaunch = false;
             Rb.drag = Config.swimDrag;
             _currentDashCD = 0;
@@ -34,7 +34,7 @@ namespace GamePlay.Player.PlayerState
             base.ExitCallback(next);
             Player.Head.SetShow(true);
             Rb.gravityScale = Config.gravityScale;
-            Property.IsOnColorBlock = false;
+            // Property.IsOnColorBlock = false;
             Property.HeadCanLaunch = true;
             Rb.drag = 0;
             Property.XMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.x), Property.XMaxSpeed);

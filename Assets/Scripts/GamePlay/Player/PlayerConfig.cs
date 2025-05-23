@@ -164,6 +164,9 @@ namespace GamePlay.Player
         [FoldoutGroup("色块内")] [LabelText("冲刺后重新游泳的时间,秒")]
         public float swimDashRecoverTime = 0.5f;
         
+        [FoldoutGroup("色块内")] [LabelText("穿梭速度阈值")] [Tooltip("超过这个速度才能冲入穿梭块")]
+        public float shuttleThreshold;
+        
         [FoldoutGroup("色块内")] [LabelText("穿梭速度")]
         public float shuttleSpeed = 20f;
 

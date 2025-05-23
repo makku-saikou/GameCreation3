@@ -101,6 +101,7 @@ namespace GamePlay.Player
             OnBackgroundState onBackgroundState = new OnBackgroundState(this, "OnBackground");
             // todo: 自定义状态
             InCannonState inCannonState = new InCannonState(this, "InCannon");
+            ShuttleState shuttleState = new ShuttleState(this, "Shuttle");
             
             _stateMachine = new HStateMachine(onGroundState);
 
@@ -168,18 +169,18 @@ namespace GamePlay.Player
             airState.AddTransition(airClimb);
 
             HTransition airToBackground = new HTransition("AirToBackground", airState, onBackgroundState);
-            airToBackground.OnCheck += () => property.CanOnColorBlock && Input.InteractInput;
+            airToBackground.OnCheck += () => property.CanOnSwimColorBlock && Input.InteractInput;
             airState.AddTransition(airToBackground);
 
             HTransition backgroundToAir = new HTransition("BackgroundToAir", onBackgroundState, airState);
-            backgroundToAir.OnCheck += () => !property.CanOnColorBlock;
+            backgroundToAir.OnCheck += () => !property.CanOnSwimColorBlock;
             onBackgroundState.AddTransition(backgroundToAir);
 
             HTransition groundToBackground = new HTransition("GroundToBackground", onBackgroundState, onBackgroundState);
-            groundToBackground.OnCheck += () => property.CanOnColorBlock && Input.InteractInput;
+            groundToBackground.OnCheck += () => property.CanOnSwimColorBlock && Input.InteractInput;
             onGroundState.AddTransition(groundToBackground);
 
-
+            // todo: 自定义状态
             HTransition inCannonToAir = new HTransition("InCannonToAir", inCannonState, airState);
             inCannonToAir.OnCheck += () => !property.IsInCannon;
             inCannonState.AddTransition(inCannonToAir);
@@ -187,6 +188,14 @@ namespace GamePlay.Player
             HTransition anyToInCannon = new HTransition("AnyToInCannon",null, inCannonState);
             anyToInCannon.OnCheck += () => property.IsInCannon;
             _stateMachine.AddAnyState(anyToInCannon);
+            
+            HTransition shuttleToAir = new HTransition("ShuttleToAir", shuttleState, airState);
+            shuttleToAir.OnCheck += () => !property.IsShuttle;
+            shuttleState.AddTransition(shuttleToAir);
+
+            HTransition anyToShuttle = new HTransition("AnyToShuttle",null, shuttleState);
+            anyToShuttle.OnCheck += () => property.IsShuttle;
+            _stateMachine.AddAnyState(anyToShuttle);
 
             // 初始化状态机
             _stateMachine.AddState(airState);
@@ -195,7 +204,8 @@ namespace GamePlay.Player
             _stateMachine.AddState(smashState);
             _stateMachine.AddState(onPillarState);
             _stateMachine.AddState(inCannonState);
-
+            _stateMachine.AddState(shuttleState);
+            
 #if UNITY_EDITOR
         DebugSystem.AddCommand("Player/Color/None", () => { property.CurrentColor = EPlayerColor.None;});
         DebugSystem.AddCommand("Player/Color/Green", () => { property.CurrentColor = EPlayerColor.Green;});

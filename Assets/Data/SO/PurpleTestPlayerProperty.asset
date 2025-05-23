@@ -64,7 +64,9 @@ MonoBehaviour:
   swimDashForce: 80
   swimDashCD: 2
   swimDrag: 0.5
-  shuttleSpeed: 20
+  swimDashRecoverTime: 0.5
+  shuttleThreshold: 10
+  shuttleSpeed: 0
   cameraSize: {x: 16, y: 25}
   lerpSpeed: 1
   cameraSizeThreshold: 20

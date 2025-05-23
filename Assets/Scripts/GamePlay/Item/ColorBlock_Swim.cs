@@ -48,7 +48,7 @@ namespace GamePlay.Item
             if (!other.CompareTag("Player")) return;
             var player = other.GetComponent<PlayerController>();
             // player.Property.CanOnColorBlock = player.Property.CurrentColor == color;
-            player.Property.CanOnColorBlock = true;
+            player.Property.CanOnSwimColorBlock = true;
             player.Property.OnColorChanged += OnPlayerColorChangedInThis;
         }
 
@@ -56,7 +56,7 @@ namespace GamePlay.Item
         {
             if (!other.CompareTag("Player")) return;
             var player = other.GetComponent<PlayerController>();
-            player.Property.CanOnColorBlock = false;
+            player.Property.CanOnSwimColorBlock = false;
             player.Property.OnColorChanged -= OnPlayerColorChangedInThis;
         }
 
