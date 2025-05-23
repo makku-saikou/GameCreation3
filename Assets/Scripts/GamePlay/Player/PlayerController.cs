@@ -5,6 +5,7 @@
 // Description: 玩家角色主要控制逻辑
 // -------------------------------------------------
 
+using System;
 using Common.FSM;
 using GamePlay.Player.PlayerInput;
 using GamePlay.Player.PlayerState;
@@ -46,7 +47,6 @@ namespace GamePlay.Player
         [SerializeField] private Rigidbody2D rb;
         public Rigidbody2D Rb => rb;
         
-        public PlayerFlap PlayerFlap;
         
         private PlayerInputBase _input;
         public PlayerInputBase Input => _input;
@@ -57,6 +57,10 @@ namespace GamePlay.Player
         [SerializeField] private Transform cameraPoint;
         public Transform CameraPoint => cameraPoint;
 
+        public PlayerFlap PlayerFlap;
+
+        public event Action<Collision2D> OnCollisionEnter;
+        public event Action<Collision2D> OnCollisionExit;
         private void Awake()
         {
             Init();
@@ -212,6 +216,24 @@ namespace GamePlay.Player
         DebugSystem.AddCommand("Player/Color/Red", () => { property.CurrentColor = EPlayerColor.Red;});
         DebugSystem.AddCommand("Player/Color/Blue", () => { property.CurrentColor = EPlayerColor.Blue;});
 #endif
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            // if(other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            // {
+            //     OnCollisionEnter?.Invoke();
+            // }
+            OnCollisionEnter?.Invoke(other);
+        }
+        
+        private void OnCollisionExit2D(Collision2D other)
+        {
+            // if(other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            // {
+            //     OnCollisionExit?.Invoke();
+            // }
+            OnCollisionExit?.Invoke(other);
         }
 
         /// <summary>

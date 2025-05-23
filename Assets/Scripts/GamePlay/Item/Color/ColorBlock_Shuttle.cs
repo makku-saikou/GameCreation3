@@ -56,6 +56,7 @@ namespace GamePlay.Item
             player.Property.OnColorChanged += OnPlayerColorChangedInThis;
             player.Property.IsShuttle = true;
             _playerIn = true;
+            player.OnCollisionEnter += OnPlayerBumpInThis;
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -65,6 +66,7 @@ namespace GamePlay.Item
             player.Property.OnColorChanged -= OnPlayerColorChangedInThis;
             player.Property.IsShuttle = false;
             _playerIn = false;
+            player.OnCollisionEnter -= OnPlayerBumpInThis;
         }
 
         private void OnPlayerColorChanged(EPlayerColor from, EPlayerColor to)
@@ -75,6 +77,11 @@ namespace GamePlay.Item
         private void OnPlayerColorChangedInThis(EPlayerColor from, EPlayerColor to)
         {
             PFCLog.Debug("ColorBlock", $"player color {to.ToString()}");
+        }
+
+        private void OnPlayerBumpInThis(Collision2D _)
+        {
+            PFCLog.Debug("ColorBlock", "player bumped when shuttling");
         }
 
         private void UpdateState()

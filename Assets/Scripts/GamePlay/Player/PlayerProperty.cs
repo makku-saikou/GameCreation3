@@ -100,19 +100,7 @@ namespace GamePlay.Player
             }
         }
         public event Action<EPlayerColor, EPlayerColor> OnColorChanged;
-
-        // // 是否正在色块背景上爬
-        // private bool _isOnColorBlock;
-        // public bool IsOnColorBlock
-        // {
-        //     get => _isOnColorBlock;
-        //     set
-        //     {
-        //         if (_isOnColorBlock == value) return;
-        //         _isOnColorBlock = value;
-        //         Animator.SetBool("OnBackground", value);
-        //     }
-        // }
+        
         public bool PreJumpBufferFlag { get; set; }          // 在地面时直接进行跳跃
         public Vector2 MaxClimbHeight { get; set; }              // 攀爬最高点
         public float XMaxSpeed { get; set; }                   // 最大速度
