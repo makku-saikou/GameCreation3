@@ -1,22 +1,18 @@
 ﻿// -------------------------------------------------
 // Copyright@ makku-saikou
 // Author : jianhao li
-// Date: 2025_05_23
+// Date: 2025_05_24
 // Description:
 // -------------------------------------------------
 
-using System;
+using GamePlay.Player;
 using UnityEngine;
 
 namespace Common.Manager
 {
-    public class GameManager_Level2 : GameManager
+    public class UIManager : MonoBehaviour
     {
-        private void Start()
-        {
-            
-        }
-        
+        private PlayerController Player => GameManager.Instance.Player;
         
     }
 }

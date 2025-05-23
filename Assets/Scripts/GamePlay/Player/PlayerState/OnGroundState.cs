@@ -24,6 +24,7 @@ namespace GamePlay.Player.PlayerState
             Property.ResetMaxSpeed();
             Player.ResetTransform();
             Player.Head.SetShow(true);
+            Rb.gravityScale = Config.gravityScale;
         }
         
         public override void UpdateCallback(float deltaTime)
