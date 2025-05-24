@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2e05ae249e43c9bb10008c8f26e762, type: 3}
   m_Name: Gu0kkeTest 3
   m_EditorClassIdentifier: 
-  jumpForce: 33
+  jumpForce: 30
   amountOfJump: 1
-  gravityScale: 9
+  gravityScale: 8
   commonXMaxSpeed: 18
   commonYMaxSpeed: 38
   xMaxSpeedRecoverScale: 0.01
   yMaxSpeedRecoverScale: 0.05
   xForceInAir: 200
   variableJumpForce: 0.95
-  preJumpBufferTime: 1
+  preJumpBufferTime: 0.15
   hangDrag: 2
   hangSwayForce: 100
   hangGravityScale: 12
@@ -29,13 +29,14 @@ MonoBehaviour:
   launchDragScale: 0.3
   hangJumpForce: 10
   hangForceCompensate: 10
-  onGroundSpeed: 15
+  onGroundWalkSpeed: 10
+  onGroundRunSpeed: 15
+  onGroundWalkToRunCoefficient: 20
   groundCheckHeight: 0.34
   groundCheckWidth: 2.1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  jumpTimerSet: 0.15
   jumpBufferTime: 0.5
   wallCheckRadius: 0.1
   wallSlideSpeed: 0
@@ -43,7 +44,8 @@ MonoBehaviour:
   wallJumpForce: 220
   wallJumpTimerSet: 0.2
   wallJumpDirection: {x: 1, y: 1.4}
-  smashVelocity: 30
+  wallExitCoefficient: 10
+  smashVelocity: 83
   tongueSpeed: 40
   retractSpeed: 100
   tongueMaxLength: 10
@@ -58,7 +60,13 @@ MonoBehaviour:
   climbPileSpeed: 5
   climbJumpForce: 100
   climbJumpDirection: {x: 1, y: 1}
-  climbBackgroundSpeed: 10
+  swimSpeed: 10
+  swimDashForce: 80
+  swimDashCD: 2
+  swimDrag: 0.5
+  swimDashRecoverTime: 0.5
+  shuttleThreshold: 0
+  shuttleSpeed: 20
   cameraSize: {x: 16, y: 25}
   lerpSpeed: 1
   cameraSizeThreshold: 20
