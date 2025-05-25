@@ -53,8 +53,9 @@ MonoBehaviour:
     m_Bits: 128
   - serializedVersion: 2
     m_Bits: 64
-  openMouthSpeed: 0.0802
-  closeMouthSpeed: 0.0811
+  launchCD: 0.5
+  openMouthSpeed: 28
+  closeMouthSpeed: 24
   climbPileSpeed: 5
   climbJumpForce: 100
   climbJumpDirection: {x: 1, y: 1}

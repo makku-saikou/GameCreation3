@@ -47,7 +47,6 @@ namespace GamePlay.Item
         {
             if (!other.CompareTag("Player")) return;
             var player = other.GetComponent<PlayerController>();
-            // player.Property.CanOnColorBlock = player.Property.CurrentColor == color;
             player.Property.CanOnSwimColorBlock = true;
             player.Property.OnColorChanged += OnPlayerColorChangedInThis;
         }
@@ -63,6 +62,10 @@ namespace GamePlay.Item
         private void OnPlayerColorChanged(EPlayerColor from, EPlayerColor to)
         {
             collider2D.isTrigger = to == color;
+            if(collider2D.isTrigger)
+                gameObject.layer = LayerMask.NameToLayer("Default");
+            else
+                gameObject.layer = LayerMask.NameToLayer("Ground");
         }
         
         private void OnPlayerColorChangedInThis(EPlayerColor from, EPlayerColor to)
