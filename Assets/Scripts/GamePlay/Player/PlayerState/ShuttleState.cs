@@ -33,8 +33,6 @@ namespace GamePlay.Player.PlayerState
             Player.Head.SetShow(true);
             Rb.gravityScale = Config.gravityScale;
             Player.ResetTransform();
-            Property.XMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.x), Property.XMaxSpeed);
-            Property.YMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.y), Property.YMaxSpeed);
         }
     }
 }

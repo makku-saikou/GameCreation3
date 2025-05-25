@@ -21,7 +21,6 @@ namespace GamePlay.Player.PlayerState
             base.EnterCallback(prev);
 
             PFCLog.Debug("Enter OnGround State");
-            Property.ResetMaxSpeed();
             Player.ResetTransform();
             Player.Head.SetShow(true);
             Rb.gravityScale = Config.gravityScale;

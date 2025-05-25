@@ -49,7 +49,8 @@ namespace Common.Manager
             }
 
             var velocity = Player.Rb.velocity;
-            var maxVelocity = new Vector2(Player.Config.commonXMaxSpeed, Player.Config.commonYMaxSpeed);
+            // var maxVelocity = new Vector2(Player.Config.commonXMaxSpeed, Player.Config.commonYMaxSpeed);
+            var maxVelocity = Player.Config.airMaxSpeed;
             var targetSize = CameraSize.x + (CameraSize.y - CameraSize.x) * (velocity.magnitude / maxVelocity.magnitude);
             var currentSize = virtualCamera.m_Lens.OrthographicSize;
 

@@ -103,8 +103,6 @@ namespace GamePlay.Player
         
         public bool PreJumpBufferFlag { get; set; }          // 在地面时直接进行跳跃
         public Vector2 MaxClimbHeight { get; set; }              // 攀爬最高点
-        public float XMaxSpeed { get; set; }                   // 最大速度
-        public float YMaxSpeed { get; set; }                    // 最大速度
         public bool HeadCanMove { get; set; }
         public bool HeadCanLaunch { get; set; }
         public float CurrentTongueLength { get; set; }       // 舌头当前长度
@@ -124,8 +122,6 @@ namespace GamePlay.Player
             CanFlip = true;
             HeadCanMove = true;
             HeadCanLaunch = true;
-            XMaxSpeed = Config.commonXMaxSpeed;
-            YMaxSpeed = Config.commonYMaxSpeed;
         }
 
         public void Update()
@@ -135,21 +131,7 @@ namespace GamePlay.Player
 
         public void FixedUpdate()
         {
-            RecoverMaxSpeed();
-        }
-        
-        private void RecoverMaxSpeed()
-        {
-            XMaxSpeed = Mathf.Lerp(XMaxSpeed, Config.commonXMaxSpeed,
-                Config.xMaxSpeedRecoverScale);
-            YMaxSpeed = Mathf.Lerp(YMaxSpeed, Config.commonYMaxSpeed,
-                Config.yMaxSpeedRecoverScale);
-        }
-
-        public void ResetMaxSpeed()
-        {
-            XMaxSpeed = Config.commonXMaxSpeed;
-            YMaxSpeed = Config.commonYMaxSpeed;
+            
         }
 
         public void ResetWallJumpTimer()

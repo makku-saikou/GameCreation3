@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3214254032759693590}
   - component: {fileID: 1572265634741389917}
-  - component: {fileID: 4661828729309408710}
   - component: {fileID: 1955074474042757828}
+  - component: {fileID: 8781217472309114648}
   m_Layer: 0
   m_Name: ColorCannon
   m_TagString: Untagged
@@ -86,24 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4661828729309408710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7480654617843261511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f3304e6445e4e918b8bf730b0281be9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: 1
-  direction: 0
-  force: 4
-  xyMaxSpeed: {x: 50, y: 50}
-  ejectDelay: 2
-  cooldown: 2
 --- !u!61 &1955074474042757828
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -149,3 +131,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8781217472309114648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7480654617843261511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f3304e6445e4e918b8bf730b0281be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  direction: 0
+  force: 1
+  xyMaxSpeed: {x: 50, y: 50}
+  ejectDelay: 0.5
+  cooldown: 2

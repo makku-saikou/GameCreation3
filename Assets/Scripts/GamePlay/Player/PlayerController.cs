@@ -83,6 +83,7 @@ namespace GamePlay.Player
             StateMachine.FixedUpdateCallback();
             property.FixedUpdate();
             _input.FixedUpdate();
+            // RecoverMaxSpeed();
         }
 
         /// <summary>

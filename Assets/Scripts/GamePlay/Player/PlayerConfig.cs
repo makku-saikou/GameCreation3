@@ -27,18 +27,12 @@ namespace GamePlay.Player
     
         [FoldoutGroup("公共属性")] [LabelText("常规情况下重力缩放")]
         public float gravityScale = 5f;
+        
+        [FoldoutGroup("空中")] [LabelText("目标最大速度")]
+        public Vector2 airMaxSpeed = new(20f, 40f);
     
-        [FoldoutGroup("公共属性")] [LabelText("常规情况下最大速度")]
-        public float commonXMaxSpeed = 10f;
-    
-        [FoldoutGroup("公共属性")] [LabelText("常规情况下最大速度")]
-        public float commonYMaxSpeed = 60f;
-    
-        [FoldoutGroup("公共属性")] [LabelText("x最大速度插值恢复比率")]
-        public float xMaxSpeedRecoverScale = 0.01f;
-    
-        [FoldoutGroup("公共属性")] [LabelText("y最大速度插值恢复比率")]
-        public float yMaxSpeedRecoverScale = 0.05f;
+        [FoldoutGroup("空中")] [LabelText("最大速度插值恢复比率")]
+        public Vector2 airMaxSpeedRecoverScale = new(0.1f, 0.1f);
     
         [FoldoutGroup("空中")] [LabelText("空中水平移动力度")]
         public float xForceInAir = 200f;

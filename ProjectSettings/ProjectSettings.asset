@@ -153,7 +153,8 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Standalone: com.DefaultCompany.GameCreation3
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -746,7 +747,16 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;PFC_JSON;PFC_DEBUGMENU
+    Android: GAME_2D_WATER_KIT_URP
+    Nintendo Switch: GAME_2D_WATER_KIT_URP
+    PS4: GAME_2D_WATER_KIT_URP
+    PS5: GAME_2D_WATER_KIT_URP
+    Standalone: MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;PFC_JSON;PFC_DEBUGMENU;GAME_2D_WATER_KIT_URP
+    WebGL: GAME_2D_WATER_KIT_URP
+    Windows Store Apps: GAME_2D_WATER_KIT_URP
+    XboxOne: GAME_2D_WATER_KIT_URP
+    iPhone: GAME_2D_WATER_KIT_URP
+    tvOS: GAME_2D_WATER_KIT_URP
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

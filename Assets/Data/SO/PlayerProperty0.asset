@@ -17,7 +17,7 @@ MonoBehaviour:
   gravityScale: 5
   commonXMaxSpeed: 15
   commonYMaxSpeed: 40
-  xMaxSpeedRecoverScale: 0.01
+  xMaxSpeedRecoverScale: 0.08
   yMaxSpeedRecoverScale: 0.05
   xForceInAir: 200
   variableJumpForce: 0.95
@@ -29,13 +29,14 @@ MonoBehaviour:
   launchDragScale: 0.3
   hangJumpForce: 10
   hangForceCompensate: 10
-  onGroundSpeed: 15
+  onGroundWalkSpeed: 10
+  onGroundRunSpeed: 15
+  onGroundWalkToRunCoefficient: 20
   groundCheckHeight: 0.34
   groundCheckWidth: 2.1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  jumpTimerSet: 0.15
   jumpBufferTime: 0.5
   wallCheckRadius: 0.1
   wallSlideSpeed: 0
@@ -43,6 +44,7 @@ MonoBehaviour:
   wallJumpForce: 120
   wallJumpTimerSet: 0.3
   wallJumpDirection: {x: 1, y: 1.4}
+  wallExitCoefficient: 10
   smashVelocity: 30
   tongueSpeed: 40
   retractSpeed: 100
@@ -58,7 +60,13 @@ MonoBehaviour:
   climbPileSpeed: 5
   climbJumpForce: 100
   climbJumpDirection: {x: 1, y: 1}
-  climbBackgroundSpeed: 10
+  swimSpeed: 10
+  swimDashForce: 80
+  swimDashCD: 2
+  swimDrag: 0.5
+  swimDashRecoverTime: 0.5
+  shuttleThreshold: 0
+  shuttleSpeed: 20
   cameraSize: {x: 16, y: 25}
   lerpSpeed: 1
   cameraSizeThreshold: 20

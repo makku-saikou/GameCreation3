@@ -37,8 +37,6 @@ namespace GamePlay.Player.PlayerState
             // Property.IsOnColorBlock = false;
             Property.HeadCanLaunch = true;
             Rb.drag = 0;
-            Property.XMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.x), Property.XMaxSpeed);
-            Property.YMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.y), Property.YMaxSpeed);
         }
 
         public override void UpdateCallback(float deltaTime)
