@@ -15,7 +15,7 @@ MonoBehaviour:
   jumpForce: 20
   amountOfJump: 999
   gravityScale: 5
-  commonXMaxSpeed: 15
+  commonXMaxSpeed: 20
   commonYMaxSpeed: 40
   xMaxSpeedRecoverScale: 0.01
   yMaxSpeedRecoverScale: 0.05

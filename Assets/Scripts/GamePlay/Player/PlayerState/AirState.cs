@@ -65,7 +65,7 @@ namespace GamePlay.Player.PlayerState
         {
             base.FixedUpdateCallback();
             
-            if (Input.MovementInput != 0 && !Property.IsLaunching && Mathf.Abs(Rb.velocity.x) < Config.commonXMaxSpeed)
+            if (Input.MovementInput != 0 && !Property.IsLaunching && Mathf.Abs(Rb.velocity.x) < Config.airMaxSpeed.x)
             {
                 Rb.AddForce(new Vector2(Config.xForceInAir * Input.MovementInput, 0), ForceMode2D.Force);
                 // Rb.velocity = new Vector2(Config.xForceInAir * Input.MovementInput, Rb.velocity.y);
@@ -76,6 +76,25 @@ namespace GamePlay.Player.PlayerState
             {
                 velocity = new Vector2(velocity.x, velocity.y - Config.variableJumpForce);
             }
+            Rb.velocity = velocity;
+
+            RecoverMaxSpeed();
+        }
+        
+        private void RecoverMaxSpeed()
+        {
+            var velocity = Rb.velocity;
+            var x = velocity.x;
+            var y = velocity.y;
+            if (Mathf.Abs(x) > Config.airMaxSpeed.x)
+            {
+                x = Mathf.Lerp(x, Mathf.Sign(x) * Config.airMaxSpeed.x, Config.airMaxSpeedRecoverScale.x);
+            }
+            if (Mathf.Abs(y) > Config.airMaxSpeed.y)
+            {
+                y = Mathf.Lerp(y, Mathf.Sign(y) * Config.airMaxSpeed.y, Config.airMaxSpeedRecoverScale.y);
+            }
+            velocity = new Vector2(x, y);
             Rb.velocity = velocity;
         }
     }
