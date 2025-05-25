@@ -15,22 +15,20 @@ MonoBehaviour:
   jumpForce: 30
   amountOfJump: 1
   gravityScale: 8
-  commonXMaxSpeed: 18
-  commonYMaxSpeed: 38
-  xMaxSpeedRecoverScale: 0.01
-  yMaxSpeedRecoverScale: 0.05
+  airMaxSpeed: {x: 20, y: 40}
+  airMaxSpeedRecoverScale: {x: 0.1, y: 0.1}
   xForceInAir: 200
   variableJumpForce: 0.95
-  preJumpBufferTime: 0.15
+  preJumpBufferTime: 0.17
   hangDrag: 2
-  hangSwayForce: 100
+  hangSwayForce: 150
   hangGravityScale: 12
   tongueLengthChangeSpeed: 6
   launchDragScale: 0.3
-  hangJumpForce: 10
+  hangJumpForce: 20
   hangForceCompensate: 10
-  onGroundWalkSpeed: 10
-  onGroundRunSpeed: 15
+  onGroundWalkSpeed: 15
+  onGroundRunSpeed: 20
   onGroundWalkToRunCoefficient: 20
   groundCheckHeight: 0.34
   groundCheckWidth: 2.1
