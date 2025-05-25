@@ -31,6 +31,7 @@ namespace GamePlay.Player.PlayerState
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
+            Property.AniMove = true;
             Animator.Play(Name);
         }
     }

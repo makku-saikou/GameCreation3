@@ -24,20 +24,8 @@ namespace GamePlay.Player
         public int FacingDirection => IsFacingRight ? 1 : -1;// _isFacingRight的数值形式，方便计算
         public bool IsFacingRight { get; set; }             // 是否正面向右边
 
-        private bool _isWalking;
-        public bool IsWalking
-        {
-            get => _isWalking;
-            set
-            {
-                if(_isWalking == value) return;
-                _isWalking = value;
-                Animator.SetBool("Walking", value);
-            }
-        }
-
         // 是否在地面上，由Physics2D判定
-        public bool IsGrounded { get; set; }
+        public bool IsGrounded { get; set; } = true;
         // 是否与物体连接
         public bool IsConnecting { get; set; }
 
@@ -74,6 +62,18 @@ namespace GamePlay.Player
                 if(_isAirLaunching == value) return;
                 _isAirLaunching = value;
                 Animator.SetBool("AirLaunch", value);
+                _player.EntityBackground.enabled = value;
+            }
+        }
+        
+        private bool _aniMove;
+        public bool AniMove
+        {
+            get => _aniMove;
+            set
+            {
+                _aniMove = value;
+                Animator.enabled = _aniMove;
             }
         }
         

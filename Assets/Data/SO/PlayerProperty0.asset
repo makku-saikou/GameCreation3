@@ -15,10 +15,8 @@ MonoBehaviour:
   jumpForce: 20
   amountOfJump: 1
   gravityScale: 5
-  commonXMaxSpeed: 15
-  commonYMaxSpeed: 40
-  xMaxSpeedRecoverScale: 0.08
-  yMaxSpeedRecoverScale: 0.05
+  airMaxSpeed: {x: 20, y: 40}
+  airMaxSpeedRecoverScale: {x: 0.1, y: 0.1}
   xForceInAir: 200
   variableJumpForce: 0.95
   preJumpBufferTime: 1
@@ -66,7 +64,7 @@ MonoBehaviour:
   swimDrag: 0.5
   swimDashRecoverTime: 0.5
   shuttleThreshold: 0
-  shuttleSpeed: 20
+  shuttleSpeed: 40
   cameraSize: {x: 16, y: 25}
   lerpSpeed: 1
   cameraSizeThreshold: 20

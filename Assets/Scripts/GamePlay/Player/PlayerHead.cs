@@ -21,6 +21,7 @@ namespace GamePlay.Player
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private Animator animator;
         [SerializeField] private PlayerController player;
+        [SerializeField] private SpriteRenderer headBackground;
         public PlayerController Player => player;
         private PlayerProperty Property => player.Property;
         private PlayerConfig Config => player.Config;
@@ -28,6 +29,7 @@ namespace GamePlay.Player
         public DirectionLimit DirectionLimit;
         private float _currentMouthOpen;
         private float _targetMouthOpen;
+        
 
         private void Start()
         {
@@ -89,6 +91,7 @@ namespace GamePlay.Player
             else if(Mathf.Approximately(_targetMouthOpen, 0))
                 _currentMouthOpen = Mathf.MoveTowards(_currentMouthOpen, _targetMouthOpen, Config.closeMouthSpeed);
             animator.Play("Head_Close", 0, _currentMouthOpen);
+            headBackground.enabled = _currentMouthOpen >= 1;
         }
 
         #region Tongue

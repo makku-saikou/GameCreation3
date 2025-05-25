@@ -33,6 +33,12 @@ namespace GamePlay.Player.PlayerState
             ClimbJump();
         }
 
+        public override void UpdateCallback(float deltaTime)
+        {
+            base.UpdateCallback(deltaTime);
+            UpdateAni();
+        }
+
         public override void FixedUpdateCallback()
         {
             base.FixedUpdateCallback();
@@ -47,6 +53,18 @@ namespace GamePlay.Player.PlayerState
             else
             {
                 Rb.velocity = new Vector2(Rb.velocity.x, 0);
+            }
+        }
+
+        private void UpdateAni()
+        {
+            if(Input.UpInput || Input.DownInput)
+            {
+                Property.AniMove = true;
+            }
+            else
+            {
+                Property.AniMove = false;
             }
         }
 

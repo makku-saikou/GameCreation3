@@ -51,7 +51,9 @@ namespace GamePlay.Player.PlayerState
 
         private void CheckMovementState()
         {
-            Property.IsWalking = Math.Abs(Rb.velocity.x) > 0.01f; // rigidbody的速度在移动时会有一个极小的值，故为>0.01，其他小值也可，令人费解的bug
+            // rigidbody的速度在移动时会有一个极小的值，故为>0.01，其他小值也可，令人费解的bug
+            // Property.IsWalking = Math.Abs(Rb.velocity.x) > 0.01f; 
+            Property.AniMove = Mathf.Abs(Rb.velocity.x) > 0.01f;
         }
         
         private void CheckJumpState()
