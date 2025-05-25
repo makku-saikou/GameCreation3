@@ -30,8 +30,6 @@ namespace GamePlay.Player.PlayerState
             PFCLog.Debug("Exit Hang State");
             Rb.gravityScale = Config.gravityScale;
             Player.Rb.drag = 0;
-            Property.XMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.x), Property.XMaxSpeed);
-            Property.YMaxSpeed = Mathf.Max(Mathf.Abs(Rb.velocity.y), Property.YMaxSpeed);
             Player.Head.SetShow(true);
             
             // 补偿力

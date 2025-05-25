@@ -50,7 +50,6 @@ namespace GamePlay.Player.PlayerState
             
             Entity.up = Player.Head.transform.right;
             Player.Head.transform.right = Entity.up;
-            // Player.Head.SetShow(true);
             Property.IsAirLaunching = true;
         }
         
@@ -59,7 +58,6 @@ namespace GamePlay.Player.PlayerState
             Rb.gravityScale = Config.gravityScale;
             
             Player.ResetTransform();
-            // Player.Head.SetShow(false);
             Property.IsAirLaunching = false;
         }
         
@@ -67,20 +65,13 @@ namespace GamePlay.Player.PlayerState
         {
             base.FixedUpdateCallback();
             
-            if (Input.MovementInput != 0 && !Property.IsLaunching)
+            if (Input.MovementInput != 0 && !Property.IsLaunching && Mathf.Abs(Rb.velocity.x) < Config.commonXMaxSpeed)
             {
                 Rb.AddForce(new Vector2(Config.xForceInAir * Input.MovementInput, 0), ForceMode2D.Force);
+                // Rb.velocity = new Vector2(Config.xForceInAir * Input.MovementInput, Rb.velocity.y);
             }
             var velocity = Rb.velocity;
             
-            if (Mathf.Abs(velocity.x) > Property.XMaxSpeed)
-            {
-                velocity = new Vector2(Mathf.Sign(velocity.x) * Property.XMaxSpeed, velocity.y);
-            }
-            if (Mathf.Abs(velocity.y) > Property.YMaxSpeed)
-            {
-                velocity = new Vector2(velocity.x, Mathf.Sign(velocity.y) * Property.YMaxSpeed);
-            }
             if (!Input.JumpInput || velocity.y < 0 || !Property.JumpBufferFlag)
             {
                 velocity = new Vector2(velocity.x, velocity.y - Config.variableJumpForce);
