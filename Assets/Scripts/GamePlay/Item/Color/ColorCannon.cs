@@ -32,8 +32,8 @@ namespace GamePlay.Item
 		private void EjectPlayer(PlayerController player)
 		{
 			player.Property.CurrentColor = color;
-			player.Property.XMaxSpeed = xyMaxSpeed.x;
-			player.Property.YMaxSpeed = xyMaxSpeed.y;
+			// player.Property.XMaxSpeed = xyMaxSpeed.x;
+			// player.Property.YMaxSpeed = xyMaxSpeed.y;
 			player.Rb.AddForce(FinalForce, ForceMode2D.Impulse);
 			_isCooldown = true;
 			player.Property.IsInCannon = false;

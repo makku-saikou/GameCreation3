@@ -28,10 +28,10 @@ namespace GamePlay.Player
         [FoldoutGroup("公共属性")] [LabelText("常规情况下重力缩放")]
         public float gravityScale = 5f;
     
-        [FoldoutGroup("公共属性")] [LabelText("常规情况下最大速度")]
+        [FoldoutGroup("公共属性")] [LabelText("常规情况下X轴最大速度")]
         public float commonXMaxSpeed = 10f;
     
-        [FoldoutGroup("公共属性")] [LabelText("常规情况下最大速度")]
+        [FoldoutGroup("公共属性")] [LabelText("常规情况下Y轴最大速度")]
         public float commonYMaxSpeed = 60f;
     
         [FoldoutGroup("公共属性")] [LabelText("x最大速度插值恢复比率")]

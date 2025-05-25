@@ -83,6 +83,7 @@ namespace GamePlay.Player
             StateMachine.FixedUpdateCallback();
             property.FixedUpdate();
             _input.FixedUpdate();
+            RecoverMaxSpeed();
         }
 
         /// <summary>
@@ -284,6 +285,23 @@ namespace GamePlay.Player
         {
             Entity.rotation = Quaternion.identity;
             Entity.localScale = new Vector3(Property.FacingDirection, 1, 1);
+        }
+        
+        private void RecoverMaxSpeed()
+        {
+            var velocity = Rb.velocity;
+            var x = velocity.x;
+            var y = velocity.y;
+            if (Mathf.Abs(x) > Config.commonXMaxSpeed)
+            {
+                x = Mathf.Lerp(x, Mathf.Sign(x) * Config.commonXMaxSpeed, Config.xMaxSpeedRecoverScale);
+            }
+            if (Mathf.Abs(y) > Config.commonYMaxSpeed)
+            {
+                y = Mathf.Lerp(y, Mathf.Sign(y) * Config.commonYMaxSpeed, Config.yMaxSpeedRecoverScale);
+            }
+            velocity = new Vector2(x, y);
+            Rb.velocity = velocity;
         }
     }
 
