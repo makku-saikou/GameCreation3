@@ -1,7 +1,5 @@
-﻿using System;
-using GamePlay.Player;
+﻿using GamePlay.Player;
 using Hmxs.Toolkit;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace GamePlay.Item
