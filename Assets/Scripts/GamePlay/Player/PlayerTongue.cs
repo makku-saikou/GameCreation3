@@ -154,6 +154,8 @@ namespace GamePlay.Player
 
         public void Retract()
         {
+            if (tongueState is ETongueState.Retracting or ETongueState.Idle)
+                return;
             OnTongueRetract?.Invoke();
             tongueState = ETongueState.Retracting;
             distanceJoint2D.enabled = false;

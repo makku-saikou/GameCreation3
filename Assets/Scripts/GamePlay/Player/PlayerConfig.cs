@@ -125,13 +125,16 @@ namespace GamePlay.Player
     
         [FoldoutGroup("头和舌头")] [LabelText("舌头可以碰撞到的layer")]
         public List<LayerMask> targetLayers;
-    
+        
+        [FoldoutGroup("头和舌头")] [LabelText("发射CD")]
+        public float launchCD = 0.5f;
+        
         [FoldoutGroup("头和舌头")] [LabelText("张嘴速度")]
-        [Range(0, 0.1f)]
+        [Range(0, 100f)]
         public float openMouthSpeed = 0.05f;
     
         [FoldoutGroup("头和舌头")] [LabelText("闭嘴速度")]
-        [Range(0, 0.1f)]
+        [Range(0, 100f)]
         public float closeMouthSpeed = 0.05f;
     
         [FoldoutGroup("爬杆")] [LabelText("爬杆攀爬速度")]

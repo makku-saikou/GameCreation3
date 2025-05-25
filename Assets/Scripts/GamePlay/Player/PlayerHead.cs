@@ -21,15 +21,15 @@ namespace GamePlay.Player
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private Animator animator;
         [SerializeField] private PlayerController player;
-        [SerializeField] private SpriteRenderer headBackground;
+        // [SerializeField] private SpriteRenderer headBackground;
         public PlayerController Player => player;
         private PlayerProperty Property => player.Property;
         private PlayerConfig Config => player.Config;
         private PlayerInputBase PlayerInput => player.Input;
         public DirectionLimit DirectionLimit;
         private float _currentMouthOpen;
-        private float _targetMouthOpen;
-        
+        private bool _targetMouthOpen;
+        private float _currentLaunchCD;
 
         private void Start()
         {
@@ -41,13 +41,13 @@ namespace GamePlay.Player
             
             tongue.OnTongueLaunch += () =>
             {
-                _targetMouthOpen = 1;
+                _targetMouthOpen = true;
                 PFCLog.Debug("Head","Tongue Launch");
             };
             
             tongue.OnTongueRetract += () =>
             {
-                _targetMouthOpen = 0;
+                _targetMouthOpen = false;
                 PFCLog.Debug("Head","Tongue Retract");
             };
         }
@@ -68,10 +68,7 @@ namespace GamePlay.Player
             {
                 InteractTongue();
             }
-        }
-
-        private void FixedUpdate()
-        {
+            _currentLaunchCD -= Time.deltaTime;
             UpdateAni();
         }
 
@@ -86,12 +83,13 @@ namespace GamePlay.Player
 
         private void UpdateAni()
         {
-            if(Mathf.Approximately(_targetMouthOpen, 1))
-                _currentMouthOpen = Mathf.MoveTowards(_currentMouthOpen, _targetMouthOpen, Config.openMouthSpeed);
-            else if(Mathf.Approximately(_targetMouthOpen, 0))
-                _currentMouthOpen = Mathf.MoveTowards(_currentMouthOpen, _targetMouthOpen, Config.closeMouthSpeed);
+            if(_targetMouthOpen)
+                _currentMouthOpen += Time.deltaTime * Config.openMouthSpeed * Time.deltaTime * 30;
+            else
+                _currentMouthOpen -= Time.deltaTime * Config.closeMouthSpeed * Time.deltaTime * 30;
+            _currentMouthOpen = Mathf.Clamp01(_currentMouthOpen);
             animator.Play("Head_Close", 0, _currentMouthOpen);
-            headBackground.enabled = _currentMouthOpen >= 1;
+            // headBackground.enabled = _currentMouthOpen >= 1;
         }
 
         #region Tongue
@@ -99,6 +97,8 @@ namespace GamePlay.Player
         private void LaunchTongue()
         {
             if (!Property.HeadCanLaunch) return;
+            if (_currentLaunchCD > 0) return;
+            _currentLaunchCD = Config.launchCD;
             tongue.Launch(transform.right);
         }
 
