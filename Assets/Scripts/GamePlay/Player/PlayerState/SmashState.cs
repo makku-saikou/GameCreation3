@@ -6,6 +6,7 @@
 // -------------------------------------------------
 
 using Common.FSM;
+using PurpleFlowerCore.Utility;
 using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
@@ -19,6 +20,11 @@ namespace GamePlay.Player.PlayerState
             base.EnterCallback(prev);
             Player.Head.SetShow(false);
             Property.HeadCanLaunch = false;
+            Player.AddGravityEffect("Smash", Config.smashGravityScale, Config.smashGravityScaleTime);
+            DelayUtility.Delay(Config.smashGravityScaleTime, () =>
+            {
+                Rb.velocity = new Vector2(0, -Config.smashVelocity);
+            });
 
         }
         
@@ -27,13 +33,14 @@ namespace GamePlay.Player.PlayerState
             base.ExitCallback(next);
             Player.Head.SetShow(true);
             Property.HeadCanLaunch = true;
-
+            
+            Rb.AddForce(Vector2.up * Config.smashBounceForce, ForceMode2D.Impulse);
         }
 
-        public override void FixedUpdateCallback()
-        {
-            base.FixedUpdateCallback();
-            Rb.velocity = new Vector2(0, -Config.smashVelocity);
-        }
+        // public override void FixedUpdateCallback()
+        // {
+        //     base.FixedUpdateCallback();
+        //     Rb.velocity = new Vector2(0, -Config.smashVelocity);
+        // }
     }
 }

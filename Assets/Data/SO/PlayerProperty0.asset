@@ -20,6 +20,7 @@ MonoBehaviour:
   xForceInAir: 200
   variableJumpForce: 0.95
   preJumpBufferTime: 1
+  airRotateSpeed: 8.6
   hangDrag: 2
   hangSwayForce: 80
   hangGravityScale: 12
@@ -42,8 +43,11 @@ MonoBehaviour:
   wallJumpForce: 120
   wallJumpTimerSet: 0.3
   wallJumpDirection: {x: 1, y: 1.4}
-  wallExitCoefficient: 10
+  wallExitCoefficient: 0.3
+  smashGravityScale: 3
+  smashGravityScaleTime: 0.2
   smashVelocity: 30
+  smashBounceForce: 100
   tongueSpeed: 40
   retractSpeed: 100
   tongueMaxLength: 10
