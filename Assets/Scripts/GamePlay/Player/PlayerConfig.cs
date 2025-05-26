@@ -108,9 +108,9 @@ namespace GamePlay.Player
         [FoldoutGroup("扒墙")] [LabelText("蹬墙跳跃方向")]
         public Vector2 wallJumpDirection = new(1f, 1f);
     
-        [FoldoutGroup("扒墙")] [LabelText("脱离系数")] [Tooltip("有点无法量化，数值越大，脱离墙需要的时间越长,详细问LJH")]
-        [Range(0, 30f)]
-        public float wallExitCoefficient = 10f;
+        [FoldoutGroup("扒墙")] [LabelText("未输入脱离时间，秒")] [Tooltip("当没有按住对应方向一段时间后，脱离扒墙状态")]
+        [Range(0, 2f)]
+        public float wallExitCoefficient = 0.3f;
     
         [FoldoutGroup("下砸")] [LabelText("下砸下降速度")]
         public float smashVelocity = 30f;

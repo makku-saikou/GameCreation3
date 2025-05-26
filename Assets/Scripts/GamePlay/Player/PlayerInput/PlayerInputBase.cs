@@ -29,6 +29,16 @@ namespace GamePlay.Player.PlayerInput
         /// </summary>
         public float XInputExtent;
 
+        /// <summary>
+        /// 未输入X左的时间
+        /// </summary>
+        public float NoLeftTime;
+        
+        /// <summary>
+        /// 未输入X右的时间
+        /// </summary>
+        public float NoRightTime;
+
         protected PlayerController Player;
         
         private float _lastMovementInput;
@@ -48,6 +58,22 @@ namespace GamePlay.Player.PlayerInput
                 XInputExtent += MovementInput;
             }
             _lastMovementInput = MovementInput;
+            
+            if(MovementInput < 0)
+            {
+                NoLeftTime = 0;
+                NoRightTime += Time.fixedDeltaTime;
+            }
+            else if(MovementInput > 0)
+            {
+                NoRightTime = 0;
+                NoLeftTime += Time.fixedDeltaTime;
+            }
+            else
+            {
+                NoLeftTime += Time.fixedDeltaTime;
+                NoRightTime += Time.fixedDeltaTime;
+            }
         }
     }
 }
