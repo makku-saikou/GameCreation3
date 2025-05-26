@@ -20,7 +20,7 @@ namespace GamePlay.Player.PlayerState
         {
             base.EnterCallback(prev);
             Player.Head.SetShow(false);
-            Rb.gravityScale = 0;
+            Player.AddGravityEffect("Shuttle", 0);
             var direction = Rb.velocity.normalized;
             direction.Normalize();
             Player.Entity.up = direction;
@@ -31,7 +31,7 @@ namespace GamePlay.Player.PlayerState
         {
             base.ExitCallback(next);
             Player.Head.SetShow(true);
-            Rb.gravityScale = Config.gravityScale;
+            Player.RemoveGravityEffect("Shuttle");
             Player.ResetTransform();
         }
     }

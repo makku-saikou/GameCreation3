@@ -46,7 +46,6 @@ namespace GamePlay.Player
         [FoldoutGroup("空中")] [LabelText("空中旋转速度")] [Range(0,30)] [Tooltip("玩家移动速度越大，旋转越快")]
         public float airRotateSpeed = 0.5f;
         
-    
         [FoldoutGroup("悬挂")] [LabelText("悬挂且无输入时的空中阻尼")]
         public float hangDrag = 2f;
     
@@ -111,9 +110,18 @@ namespace GamePlay.Player
         [FoldoutGroup("扒墙")] [LabelText("未输入脱离时间，秒")] [Tooltip("当没有按住对应方向一段时间后，脱离扒墙状态")]
         [Range(0, 2f)]
         public float wallExitCoefficient = 0.3f;
+        
+        [FoldoutGroup("下砸")] [LabelText("下砸重力缩放")]
+        public float smashGravityScale = 3f;
+        
+        [FoldoutGroup("下砸")] [LabelText("下砸重力缩放时间")]
+        public float smashGravityScaleTime = 0.2f;
     
         [FoldoutGroup("下砸")] [LabelText("下砸下降速度")]
         public float smashVelocity = 30f;
+        
+        [FoldoutGroup("下砸")] [LabelText("下砸回弹力度")]
+        public float smashBounceForce = 100f;
     
         [FoldoutGroup("头和舌头")] [LabelText("舌头发射速度")]
         public float tongueSpeed = 40;

@@ -23,7 +23,7 @@ namespace GamePlay.Player.PlayerState
             PFCLog.Debug("Enter OnGround State");
             Player.ResetTransform();
             Player.Head.SetShow(true);
-            Rb.gravityScale = Config.gravityScale;
+            // Rb.gravityScale = Config.gravityScale;
         }
         
         public override void UpdateCallback(float deltaTime)

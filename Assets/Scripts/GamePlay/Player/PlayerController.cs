@@ -61,6 +61,8 @@ namespace GamePlay.Player
         public Transform CameraPoint => cameraPoint;
 
         public PlayerFlap PlayerFlap;
+        
+        private PlayerGravityScaleProxy _playerGravityScaleProxy;
 
         public event Action<Collision2D> OnCollisionEnter;
         public event Action<Collision2D> OnCollisionExit;
@@ -74,6 +76,7 @@ namespace GamePlay.Player
             CheckState();
             StateMachine.UpdateCallback(Time.deltaTime);
             property.Update();
+            _playerGravityScaleProxy.Update();
         }
 
         private void LateUpdate()
@@ -97,6 +100,7 @@ namespace GamePlay.Player
             property = new(this);
             property.OnColorChanged += ChangeColor;
             _input = new PlayerInput_Legacy(this);
+            _playerGravityScaleProxy = new PlayerGravityScaleProxy(this);
             
             // 定义整个状态机
             // 状态
@@ -290,6 +294,21 @@ namespace GamePlay.Player
         {
             Entity.rotation = Quaternion.identity;
             Entity.localScale = new Vector3(Property.FacingDirection, 1, 1);
+        }
+        
+        public void AddGravityEffect(string id, float scale, float timer = 10000f, int priority = 0)
+        {
+            _playerGravityScaleProxy.AddGravityEffect(id, scale, timer, priority);
+        }
+        
+        public void RemoveGravityEffect(string id)
+        {
+            _playerGravityScaleProxy.RemoveGravityEffect(id);
+        }
+        
+        public void RemoveAllGravityEffect()
+        {
+            _playerGravityScaleProxy.RemoveAllGravityEffect();
         }
     }
 

@@ -21,7 +21,7 @@ namespace GamePlay.Player.PlayerState
         {
             base.EnterCallback(prev);
             Player.Head.SetShow(false);
-            Rb.gravityScale = 0;
+            Player.AddGravityEffect("OnBackground", 0);
             Rb.velocity = Vector2.zero;
             // Property.IsOnColorBlock = true;
             Property.HeadCanLaunch = false;
@@ -33,7 +33,7 @@ namespace GamePlay.Player.PlayerState
         {
             base.ExitCallback(next);
             Player.Head.SetShow(true);
-            Rb.gravityScale = Config.gravityScale;
+            Player.RemoveGravityEffect("OnBackground");
             // Property.IsOnColorBlock = false;
             Property.HeadCanLaunch = true;
             Rb.drag = 0;

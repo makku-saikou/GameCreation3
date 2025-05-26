@@ -50,7 +50,7 @@ namespace GamePlay.Player.PlayerState
             var v = Rb.velocity;
             v *= Config.launchDragScale;
             Rb.velocity = v;
-            Rb.gravityScale = 0;
+            Player.AddGravityEffect("AirLaunch", 0);
             
             Entity.up = Player.Head.transform.right;
             Player.Head.transform.right = Entity.up;
@@ -59,7 +59,7 @@ namespace GamePlay.Player.PlayerState
         
         private void OnRetracted()
         {
-            Rb.gravityScale = Config.gravityScale;
+            Player.RemoveGravityEffect("AirLaunch");
             
             Player.ResetTransform();
             Property.IsAirLaunching = false;

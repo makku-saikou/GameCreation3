@@ -17,7 +17,7 @@ namespace GamePlay.Player.PlayerState
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
-            Rb.gravityScale = 0;
+            Player.AddGravityEffect("OnPillar", 0);
             Rb.velocity = Vector2.zero;
             Player.Head.SetShow(false);
             Player.transform.position = new Vector3(Property.MaxClimbHeight.x,
@@ -28,7 +28,7 @@ namespace GamePlay.Player.PlayerState
         public override void ExitCallback(HState next)
         {
             base.ExitCallback(next);
-            Rb.gravityScale = Config.gravityScale;
+            Player.RemoveGravityEffect("OnPillar");
             Player.Head.SetShow(true);
             ClimbJump();
         }

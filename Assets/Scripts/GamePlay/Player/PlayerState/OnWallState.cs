@@ -18,7 +18,7 @@ namespace GamePlay.Player.PlayerState
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
-            Rb.gravityScale = 0;
+            Player.AddGravityEffect("OnWall", 0);
 
             Vector2 vector = Rb.velocity;
             vector.x = 0;
@@ -34,7 +34,7 @@ namespace GamePlay.Player.PlayerState
         {
             base.ExitCallback(next);
             Property.ResetWallJumpTimer();
-            Rb.gravityScale = Config.gravityScale;
+            Player.RemoveGravityEffect("OnWall");
             
             Player.Head.SetShow(true);
             Property.HeadCanLaunch = true;

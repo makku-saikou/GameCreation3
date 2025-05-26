@@ -19,8 +19,7 @@ namespace GamePlay.Player.PlayerState
         {
             base.EnterCallback(prev);
             PFCLog.Debug("Enter Hang State");
-            Rb.gravityScale = Config.hangGravityScale;
-            // todo: 解耦
+            Player.AddGravityEffect("Hang", Config.hangGravityScale);
             Player.Head.SetShow(false);
         }
         
@@ -28,7 +27,7 @@ namespace GamePlay.Player.PlayerState
         {
             base.ExitCallback(next);
             PFCLog.Debug("Exit Hang State");
-            Rb.gravityScale = Config.gravityScale;
+            Player.RemoveGravityEffect("Hang");
             Player.Rb.drag = 0;
             Player.Head.SetShow(true);
             
