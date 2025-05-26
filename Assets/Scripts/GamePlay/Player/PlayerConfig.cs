@@ -42,6 +42,10 @@ namespace GamePlay.Player
     
         [FoldoutGroup("空中")] [LabelText("预跳跃缓冲，详细问DZY")]
         public float preJumpBufferTime = 1f;
+        
+        [FoldoutGroup("空中")] [LabelText("空中旋转速度")] [Range(0,30)] [Tooltip("玩家移动速度越大，旋转越快")]
+        public float airRotateSpeed = 0.5f;
+        
     
         [FoldoutGroup("悬挂")] [LabelText("悬挂且无输入时的空中阻尼")]
         public float hangDrag = 2f;

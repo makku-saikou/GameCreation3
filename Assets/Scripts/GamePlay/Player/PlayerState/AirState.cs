@@ -13,6 +13,7 @@ namespace GamePlay.Player.PlayerState
 {
     public class AirState : PlayerStateBase
     {
+        private float _aniSpeedBuffer;
         public AirState(PlayerController player, string name) : base(player, name) { }
 
         public override void EnterCallback(HState prev)
@@ -22,6 +23,7 @@ namespace GamePlay.Player.PlayerState
             Player.Head.SetShow(false);
             Tongue.OnTongueLaunch += OnLaunch;
             Tongue.OnTongueIdle += OnRetracted;
+            _aniSpeedBuffer = Animator.speed;
         }
 
         public override void ExitCallback(HState next)
@@ -32,6 +34,7 @@ namespace GamePlay.Player.PlayerState
             Tongue.OnTongueLaunch -= OnLaunch;
             Tongue.OnTongueIdle -= OnRetracted;
             OnRetracted();
+            Animator.speed = _aniSpeedBuffer;
         }
         
         public override void UpdateCallback(float deltaTime)
@@ -39,6 +42,7 @@ namespace GamePlay.Player.PlayerState
             base.UpdateCallback(deltaTime);
             if(Input.JumpInputDown)
                 Property.ResetPreJumpBufferFlag();
+            UpdateAni();
         }
 
         private void OnLaunch()
@@ -96,6 +100,12 @@ namespace GamePlay.Player.PlayerState
             }
             velocity = new Vector2(x, y);
             Rb.velocity = velocity;
+        }
+
+        private void UpdateAni()
+        {
+            Animator.speed = Rb.velocity.magnitude * Config.airRotateSpeed * 0.01f;
+            Debug.Log(Animator.speed);
         }
     }
 }

@@ -51,8 +51,8 @@ namespace GamePlay.Player
                 {
                     switch (Rb.velocity.x)
                     {
-                        case > 0 when !Property.IsFacingRight:
-                        case < 0 when Property.IsFacingRight:
+                        case < 0 when !Property.IsFacingRight:
+                        case > 0 when Property.IsFacingRight:
                             Flip();
                             break;
                     }
