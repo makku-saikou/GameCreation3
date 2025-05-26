@@ -9,7 +9,7 @@ namespace GamePlay.Player.PlayerState
 	{
 		public InCannonState(PlayerController player, string name) : base(player, name) { }
 
-		private float _gravityScale;
+		// private float _gravityScale;
 
 		public override void EnterCallback(HState prev)
 		{
@@ -17,8 +17,11 @@ namespace GamePlay.Player.PlayerState
 			PFCLog.Debug("Enter InCannon State");
 			Player.Entity.gameObject.SetActive(false);
 			Player.Rb.velocity = Vector2.zero;
-			_gravityScale = Player.Rb.gravityScale;
-			Player.Rb.gravityScale = 0;
+			Player.Rb.angularVelocity = 0f;
+			Player.Rb.rotation = 0f;
+			// Player.Rb.gravityScale = 0;
+			Player.Rb.constraints = RigidbodyConstraints2D.FreezeAll;
+			// _gravityScale = Player.Rb.gravityScale;
 		}
 
 		public override void ExitCallback(HState next)
@@ -26,11 +29,11 @@ namespace GamePlay.Player.PlayerState
 			base.ExitCallback(next);
 			PFCLog.Debug("Exit InCannon State");
 			Player.Entity.gameObject.SetActive(true);
-			Timer.Register(1f, () =>
-			{
-				if (Player.Rb.gravityScale == 0)
-					Player.Rb.gravityScale = _gravityScale;
-			});
+			// Timer.Register(1f, () =>
+			// {
+			// 	if (Player.Rb.gravityScale == 0)
+			// 		Player.Rb.gravityScale = _gravityScale;
+			// });
 		}
 	}
 }

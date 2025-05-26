@@ -9,7 +9,6 @@ namespace GamePlay.Item
 		[SerializeField] private EPlayerColor color = EPlayerColor.Green;
 		[SerializeField] [Range(0f, 360f)] private float direction;
 		[SerializeField] private float force = 1f;
-		[SerializeField] private Vector2 xyMaxSpeed = new Vector2(50, 50);
 		[SerializeField] private float ejectDelay = 0.5f;
 		[SerializeField] private float cooldown = 2f;
 
@@ -22,16 +21,15 @@ namespace GamePlay.Item
 			if (_isCooldown) return;
 			if (!other.CompareTag("Player")) return;
 			if (!other.TryGetComponent(out PlayerController player)) return;
+			if (player.Property.IsInCannon) return;
 			player.Property.IsInCannon = true;
-			// todo: cannon eject animation
 			Timer.Register(ejectDelay, () => EjectPlayer(player));
 		}
 
 		private void EjectPlayer(PlayerController player)
 		{
 			player.Property.CurrentColor = color;
-			// player.Property.XMaxSpeed = xyMaxSpeed.x;
-			// player.Property.YMaxSpeed = xyMaxSpeed.y;
+			player.Rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 			player.Rb.AddForce(FinalForce, ForceMode2D.Impulse);
 			_isCooldown = true;
 			player.Property.IsInCannon = false;
