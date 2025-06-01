@@ -20,6 +20,7 @@ MonoBehaviour:
   xForceInAir: 200
   variableJumpForce: 0.95
   preJumpBufferTime: 1
+  airRotateSpeed: 0.5
   hangDrag: 2
   hangSwayForce: 100
   hangGravityScale: 12
@@ -43,7 +44,11 @@ MonoBehaviour:
   wallJumpTimerSet: 0.3
   wallJumpDirection: {x: 1, y: 1.4}
   wallExitCoefficient: 0.99
+  smashGravityScale: 3
+  smashGravityScaleTime: 0.2
   smashVelocity: 30
+  smashBounceForce: 100
+  smashCD: 1
   tongueSpeed: 40
   retractSpeed: 100
   tongueMaxLength: 8
@@ -53,11 +58,13 @@ MonoBehaviour:
     m_Bits: 128
   - serializedVersion: 2
     m_Bits: 64
+  launchCD: 0.5
   openMouthSpeed: 0.05
   closeMouthSpeed: 0.05
   climbPileSpeed: 5
   climbJumpForce: 100
   climbJumpDirection: {x: 1, y: 1}
+  climbCD: 6.82
   swimSpeed: 50
   swimDashForce: 80
   swimDashCD: 2
