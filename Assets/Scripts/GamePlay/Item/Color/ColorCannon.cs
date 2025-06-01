@@ -23,6 +23,7 @@ namespace GamePlay.Item
 			if (!other.TryGetComponent(out PlayerController player)) return;
 			if (player.Property.IsInCannon) return;
 			player.Property.IsInCannon = true;
+			player.transform.position = transform.position;
 			Timer.Register(ejectDelay, () => EjectPlayer(player));
 		}
 
