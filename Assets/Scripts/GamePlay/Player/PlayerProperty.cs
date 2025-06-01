@@ -112,6 +112,10 @@ namespace GamePlay.Player
         public bool IsInCannon { get; set; } // 是否在炮筒里
         
         public bool IsShuttle { get; set; } // 是否在穿梭色块里
+        
+        public bool SmashFlag { get; set; } // 是否可以下砸
+        
+        public bool ClimbFlag { get; set; }
 
         public PlayerProperty(PlayerController player)
         {
@@ -122,6 +126,8 @@ namespace GamePlay.Player
             CanFlip = true;
             HeadCanMove = true;
             HeadCanLaunch = true;
+            SmashFlag = true;
+            ClimbFlag = true;
         }
 
         public void Update()

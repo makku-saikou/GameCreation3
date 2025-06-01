@@ -77,6 +77,7 @@ namespace GamePlay.Player
             StateMachine.UpdateCallback(Time.deltaTime);
             property.Update();
             _playerGravityScaleProxy.Update();
+            // Debug.Log(property.ClimbFlag + "_" + (property.CanOnPillar && Input.UpInput && property.ClimbFlag));
         }
 
         private void LateUpdate()
@@ -155,7 +156,7 @@ namespace GamePlay.Player
             onWallState.AddTransition(wallToGround);
 
             HTransition smash = new HTransition("Smash", airState, smashState);
-            smash.OnCheck += () => Input.DownInput;
+            smash.OnCheck += () => Input.DownInput && property.SmashFlag;
             airState.AddTransition(smash);
 
             HTransition smashLand = new HTransition("SmashLand", smashState, onGroundState);
@@ -163,7 +164,7 @@ namespace GamePlay.Player
             smashState.AddTransition(smashLand);
 
             HTransition climb = new HTransition("Climb", onGroundState, onPillarState);
-            climb.OnCheck += () => property.CanOnPillar && Input.UpInput;
+            climb.OnCheck += () => property.CanOnPillar && Input.UpInput && property.ClimbFlag;
             onGroundState.AddTransition(climb);
 
             HTransition climbLand = new HTransition("ClimbLand", onPillarState, onGroundState);
@@ -179,7 +180,7 @@ namespace GamePlay.Player
             onPillarState.AddTransition(climbToHang);
 
             HTransition airClimb = new HTransition("AirClimb", airState, onPillarState);
-            airClimb.OnCheck += () => property.CanOnPillar && Input.UpInput;
+            airClimb.OnCheck += () => property.CanOnPillar && Input.UpInput && property.ClimbFlag;
             airState.AddTransition(airClimb);
 
             HTransition airToBackground = new HTransition("AirToBackground", airState, onBackgroundState);

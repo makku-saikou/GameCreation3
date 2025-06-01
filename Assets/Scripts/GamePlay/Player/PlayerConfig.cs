@@ -122,6 +122,9 @@ namespace GamePlay.Player
         
         [FoldoutGroup("下砸")] [LabelText("下砸回弹力度")]
         public float smashBounceForce = 100f;
+        
+        [FoldoutGroup("下砸")] [LabelText("下砸CD")]
+        public float smashCD = 1f;
     
         [FoldoutGroup("头和舌头")] [LabelText("舌头发射速度")]
         public float tongueSpeed = 40;
@@ -157,6 +160,9 @@ namespace GamePlay.Player
     
         [FoldoutGroup("爬杆")] [LabelText("爬杆跳跃方向")]
         public Vector2 climbJumpDirection = new(1f, 1f);
+        
+        [FoldoutGroup("爬杆")] [LabelText("爬杆跳跃CD")]
+        public float climbCD = 1f;
     
         [FoldoutGroup("色块内")] [LabelText("普通游泳速度")]
         public float swimSpeed = 10f;

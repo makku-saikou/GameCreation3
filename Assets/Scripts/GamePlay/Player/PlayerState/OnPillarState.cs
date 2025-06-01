@@ -6,6 +6,7 @@
 // -------------------------------------------------
 
 using Common.FSM;
+using PurpleFlowerCore.Utility;
 using UnityEngine;
 
 namespace GamePlay.Player.PlayerState
@@ -31,6 +32,12 @@ namespace GamePlay.Player.PlayerState
             Player.RemoveGravityEffect("OnPillar");
             Player.Head.SetShow(true);
             ClimbJump();
+            
+            Property.ClimbFlag = false;
+            DelayUtility.Delay(Config.climbCD, () =>
+            {
+                Property.ClimbFlag = true;
+            });
         }
 
         public override void UpdateCallback(float deltaTime)

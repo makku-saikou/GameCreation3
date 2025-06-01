@@ -105,7 +105,6 @@ namespace GamePlay.Player.PlayerState
         private void UpdateAni()
         {
             Animator.speed = Rb.velocity.magnitude * Config.airRotateSpeed * 0.01f;
-            Debug.Log(Animator.speed);
         }
     }
 }

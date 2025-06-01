@@ -25,7 +25,6 @@ namespace GamePlay.Player.PlayerState
             {
                 Rb.velocity = new Vector2(0, -Config.smashVelocity);
             });
-
         }
         
         public override void ExitCallback(HState next)
@@ -35,12 +34,12 @@ namespace GamePlay.Player.PlayerState
             Property.HeadCanLaunch = true;
             
             Rb.AddForce(Vector2.up * Config.smashBounceForce, ForceMode2D.Impulse);
+            
+            Property.SmashFlag = false;
+            DelayUtility.Delay(Config.smashCD, () =>
+            {
+                Property.SmashFlag = true;
+            });
         }
-
-        // public override void FixedUpdateCallback()
-        // {
-        //     base.FixedUpdateCallback();
-        //     Rb.velocity = new Vector2(0, -Config.smashVelocity);
-        // }
     }
 }

@@ -5,7 +5,6 @@
 // Description:
 // -------------------------------------------------
 
-using System;
 using GamePlay.Player;
 using UnityEngine;
 
