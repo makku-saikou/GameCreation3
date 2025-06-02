@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4888038538839123457}
   - component: {fileID: 78083871270120927}
   - component: {fileID: 1880702616627763731}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: ColorBlock_Shuttle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,4 +160,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 150
-  noGravityTime: 1

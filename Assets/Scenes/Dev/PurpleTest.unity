@@ -1672,7 +1672,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 158421110226507994, guid: 400f546dfee8d1f41af02f97e3c4241a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7774208
+      value: 0.347421
       objectReference: {fileID: 0}
     - target: {fileID: 674242105406782930, guid: 400f546dfee8d1f41af02f97e3c4241a, type: 3}
       propertyPath: m_Follow
@@ -1684,7 +1684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5398372873921936203, guid: 400f546dfee8d1f41af02f97e3c4241a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7774208
+      value: 0.347421
       objectReference: {fileID: 0}
     - target: {fileID: 8329447804793215561, guid: 400f546dfee8d1f41af02f97e3c4241a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2320,7 +2320,7 @@ GameObject:
   - component: {fileID: 8696511610476992363}
   - component: {fileID: 9220651886720070566}
   - component: {fileID: 9220651886720070565}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: ColorBlock_Shuttle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2340,7 +2340,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 200
-  noGravityTime: 0.5
 --- !u!114 &9220651886720070566
 MonoBehaviour:
   m_ObjectHideFlags: 0
