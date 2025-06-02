@@ -25,6 +25,7 @@ namespace GamePlay.Player.PlayerState
             direction.Normalize();
             Player.Entity.up = direction;
             Rb.velocity = direction * Config.shuttleSpeed;
+            Player.Property.HeadCanLaunch = false;
         }
         
         public override void ExitCallback(HState next)
@@ -33,6 +34,7 @@ namespace GamePlay.Player.PlayerState
             Player.Head.SetShow(true);
             Player.RemoveGravityEffect("Shuttle");
             Player.ResetTransform();
+            Player.Property.HeadCanLaunch = true;
         }
     }
 }

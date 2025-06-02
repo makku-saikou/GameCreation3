@@ -18,6 +18,7 @@ namespace GamePlay.Item
         [SerializeField] private EPlayerColor color = EPlayerColor.None;
         [SerializeField] private Collider2D collider2D;
         [SerializeField] private SpriteRenderer spriteRenderer;
+        private PlayerController Player => GameManager.Instance.Player;
         private bool _canShuttle;
         private bool _playerIn;
         private void Start()
@@ -86,15 +87,16 @@ namespace GamePlay.Item
 
         private void UpdateState()
         {
+
             collider2D.isTrigger = _canShuttle && GameManager.Instance.Player.Property.CurrentColor == color;
         }
         
         private void CheckCanShuttle()
         {
-            var player = GameManager.Instance.Player;
-            var rb = player.Rb;
-            var config = player.Config;
-            if(rb.velocity.sqrMagnitude > config.shuttleThreshold * config.shuttleThreshold || _playerIn)
+            var rb = Player.Rb;
+            var config = Player.Config;
+            var state = Player.CheckState("Air") || Player.CheckState("Shuttle") || Player.CheckState("Smash");
+            if((state && rb.velocity.sqrMagnitude >= config.shuttleThreshold * config.shuttleThreshold) || _playerIn)
             {
                 _canShuttle = true;
                 UpdateState();

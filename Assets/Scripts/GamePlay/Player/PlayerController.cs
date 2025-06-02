@@ -208,9 +208,13 @@ namespace GamePlay.Player
             shuttleToAir.OnCheck += () => !property.IsShuttle;
             shuttleState.AddTransition(shuttleToAir);
 
-            HTransition anyToShuttle = new HTransition("AnyToShuttle",null, shuttleState);
-            anyToShuttle.OnCheck += () => property.IsShuttle;
-            _stateMachine.AddAnyState(anyToShuttle);
+            HTransition airToShuttle = new HTransition("AirToShuttle",airState, shuttleState);
+            airToShuttle.OnCheck += () => property.IsShuttle;
+            airState.AddTransition(airToShuttle);
+            
+            HTransition smashToShuttle = new HTransition("SmashToShuttle", smashState, shuttleState);
+            smashToShuttle.OnCheck += () => property.IsShuttle;
+            smashState.AddTransition(smashToShuttle);
 
             // 初始化状态机
             _stateMachine.AddState(airState);
@@ -310,6 +314,11 @@ namespace GamePlay.Player
         public void RemoveAllGravityEffect()
         {
             _playerGravityScaleProxy.RemoveAllGravityEffect();
+        }
+        
+        public bool CheckState(string stateName)
+        {
+            return _stateMachine.CurrentState.Name == stateName;
         }
     }
 

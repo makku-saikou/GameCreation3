@@ -15,7 +15,7 @@ namespace GamePlay.Item.Target
     public class TargetBlock_Force : MonoBehaviour, ITarget
     {
         [SerializeField] [LabelText("拉力")] private float force = 200;
-        [SerializeField] [LabelText("无重力时间")]private float noGravityTime = 0.5f;
+        // [SerializeField] [LabelText("无重力时间")]private float noGravityTime = 0.5f;
         public bool IsAdsorb => false;
         public Vector3 AdsorbPosition { get; }
         public bool Interact(PlayerController playerController)
@@ -24,15 +24,17 @@ namespace GamePlay.Item.Target
             direction.Normalize();
             playerController.Rb.AddForce(direction * force, ForceMode2D.Impulse);
             // todo: 玩家数值系统的优化
-            DelayUtility.DelayFrame(3, () =>
-            {
-                playerController.Rb.gravityScale = 0;
-            });
-            DelayUtility.Delay(noGravityTime, () =>
-            {
-                if(playerController.CurrentStateName == "Air" && playerController.Rb.gravityScale == 0)
-                    playerController.Rb.gravityScale = playerController.Config.gravityScale;
-            });
+            // DelayUtility.DelayFrame(3, () =>
+            // {
+            //     playerController.Rb.gravityScale = 0;
+            // });
+            // DelayUtility.Delay(noGravityTime, () =>
+            // {
+            //     if(playerController.CurrentStateName == "Air" && playerController.Rb.gravityScale == 0)
+            //         playerController.Rb.gravityScale = playerController.Config.gravityScale;
+            // });
+            var time = playerController.Config.interactNoGravityTime;
+            playerController.AddGravityEffect("TargetBlock_Force", 0,time);
             return true;
         }
 

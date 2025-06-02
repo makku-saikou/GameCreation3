@@ -164,25 +164,25 @@ namespace GamePlay.Player
         [FoldoutGroup("爬杆")] [LabelText("爬杆跳跃CD")]
         public float climbCD = 1f;
     
-        [FoldoutGroup("色块内")] [LabelText("普通游泳速度")]
+        [FoldoutGroup("色块")] [LabelText("普通游泳速度")]
         public float swimSpeed = 10f;
         
-        [FoldoutGroup("色块内")] [LabelText("游泳冲刺力度")]
+        [FoldoutGroup("色块")] [LabelText("游泳冲刺力度")]
         public float swimDashForce = 80f;
         
-        [FoldoutGroup("色块内")] [LabelText("游泳冲刺CD")]
+        [FoldoutGroup("色块")] [LabelText("游泳冲刺CD")]
         public float swimDashCD = 2f;
         
-        [FoldoutGroup("色块内")] [LabelText("游泳时阻力")] [Range(0, 2f)]
+        [FoldoutGroup("色块")] [LabelText("游泳时阻力")] [Range(0, 2f)]
         public float swimDrag = 0.5f;
         
-        [FoldoutGroup("色块内")] [LabelText("冲刺后重新游泳的时间,秒")]
+        [FoldoutGroup("色块")] [LabelText("冲刺后重新游泳的时间,秒")]
         public float swimDashRecoverTime = 0.5f;
         
-        [FoldoutGroup("色块内")] [LabelText("穿梭速度阈值")] [Tooltip("超过这个速度才能冲入穿梭块")]
+        [FoldoutGroup("色块")] [LabelText("穿梭速度阈值")] [Tooltip("超过这个速度才能冲入穿梭块")]
         public float shuttleThreshold;
         
-        [FoldoutGroup("色块内")] [LabelText("穿梭速度")]
+        [FoldoutGroup("色块")] [LabelText("穿梭速度")]
         public float shuttleSpeed = 20f;
 
         [FoldoutGroup("相机设置")] [LabelText("相机大小范围")] [MinMaxSlider(10, 50, true)] 
@@ -200,6 +200,9 @@ namespace GamePlay.Player
         public float onGroundUpLimit = 0.2f;
         [FoldoutGroup("其他功能")] [Comment("地面上时最大低头角度")] 
         public float onGroundDownLimit = 0.6f;
+        
+        [FoldoutGroup("其他功能")] [LabelText("色块交互无重力时间")]
+        public float interactNoGravityTime = 0.5f;
         
 #if UNITY_EDITOR
         public bool IsPlayerConfig => this == GameManager.Instance?.Player.Config;
