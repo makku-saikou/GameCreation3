@@ -44,11 +44,11 @@ MonoBehaviour:
   wallJumpTimerSet: 0.3
   wallJumpDirection: {x: 1, y: 1.4}
   wallExitCoefficient: 0.3
-  smashGravityScale: 3
+  smashGravityScale: 0
   smashGravityScaleTime: 0.2
   smashVelocity: 30
-  smashBounceForce: 100
-  smashCD: 1
+  smashBounceForce: 30
+  smashCD: 0.5
   tongueSpeed: 40
   retractSpeed: 100
   tongueMaxLength: 10
