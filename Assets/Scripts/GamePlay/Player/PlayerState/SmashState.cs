@@ -57,7 +57,8 @@ namespace GamePlay.Player.PlayerState
         
         private void Bounce()
         {
-            Rb.AddForce(Vector2.up * Config.smashBounceForce, ForceMode2D.Impulse);
+            // Rb.AddForce(Vector2.up * Config.smashBounceForce, ForceMode2D.Impulse);
+            Rb.velocity = new Vector2(Rb.velocity.x, Config.smashBounceForce);
         }
     }
 }
