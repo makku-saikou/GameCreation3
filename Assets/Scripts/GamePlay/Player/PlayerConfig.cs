@@ -124,7 +124,7 @@ namespace GamePlay.Player
         public float smashBounceForce = 100f;
         
         [FoldoutGroup("下砸")] [LabelText("下砸CD")]
-        public float smashCD = 1f;
+        public float smashCD = 0.5f;
     
         [FoldoutGroup("头和舌头")] [LabelText("舌头发射速度")]
         public float tongueSpeed = 40;

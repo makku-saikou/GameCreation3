@@ -10,6 +10,7 @@ using Common.FSM;
 using GamePlay.Player.PlayerInput;
 using GamePlay.Player.PlayerState;
 using PurpleFlowerCore;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 // 考虑到玩家状态较多，各种子状态需要考虑有无连接或其他情况，舌头本身也有多种状态
@@ -34,7 +35,7 @@ namespace GamePlay.Player
             get => config;
             set => config  = value;
         }
-
+        
         private HStateMachine _stateMachine;
         public HStateMachine StateMachine => _stateMachine;
         
@@ -52,7 +53,8 @@ namespace GamePlay.Player
         public PlayerInputBase Input => _input;
         [SerializeField] private SpriteRenderer entityBackground;
         public SpriteRenderer EntityBackground => entityBackground;
-        public string CurrentStateName => _stateMachine.CurrentState.Name;
+        [ShowIf("@UnityEditor.EditorApplication.isPlaying")]
+         public string CurrentStateName => _stateMachine.CurrentState.Name;
         
         [SerializeField] private Transform groundCheckPoint; // 地面检测点
         [SerializeField] private Transform wallCheckPoint1; // 墙壁检测点
@@ -83,6 +85,7 @@ namespace GamePlay.Player
         private void LateUpdate()
         {
             PlayerFlap?.Invoke();
+            StateMachine.LateUpdateCallback(Time.deltaTime);
         }
 
         private void FixedUpdate()
@@ -156,12 +159,16 @@ namespace GamePlay.Player
             onWallState.AddTransition(wallToGround);
 
             HTransition smash = new HTransition("Smash", airState, smashState);
-            smash.OnCheck += () => Input.DownInput && property.SmashFlag;
+            smash.OnCheck += () => Input.DownInputDown && property.SmashFlag;
             airState.AddTransition(smash);
+            
+            HTransition smashToAir = new HTransition("SmashToAir", smashState, airState);
+            smashToAir.OnCheck += () => property.HasSmashLanded;
+            smashState.AddTransition(smashToAir);
 
-            HTransition smashLand = new HTransition("SmashLand", smashState, onGroundState);
-            smashLand.OnCheck += () => property.IsGrounded;
-            smashState.AddTransition(smashLand);
+            // HTransition smashLand = new HTransition("SmashLand", smashState, onGroundState);
+            // smashLand.OnCheck += () => property.IsGrounded;
+            // smashState.AddTransition(smashLand);
 
             HTransition climb = new HTransition("Climb", onGroundState, onPillarState);
             climb.OnCheck += () => property.CanOnPillar && Input.UpInput && property.ClimbFlag;

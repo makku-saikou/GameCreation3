@@ -65,6 +65,18 @@ namespace GamePlay.Player
                 _player.EntityBackground.enabled = value;
             }
         }
+
+        // private bool _isWalking;
+        // public bool IsWalking
+        // {
+        //     get => _isWalking;
+        //     set
+        //     {
+        //         if (_isWalking == value) return;
+        //         _isWalking = value;
+        //         Animator.SetBool("Walk", _isWalking);
+        //     }
+        // }
         
         private bool _aniMove;
         public bool AniMove
@@ -116,6 +128,7 @@ namespace GamePlay.Player
         public bool SmashFlag { get; set; } // 是否可以下砸
         
         public bool ClimbFlag { get; set; }
+        public bool HasSmashLanded { get; set; } // 是否已经下砸到地面过
 
         public PlayerProperty(PlayerController player)
         {

@@ -23,15 +23,19 @@ namespace GamePlay.Player.PlayerState
             PFCLog.Debug("Enter OnGround State");
             Player.ResetTransform();
             Player.Head.SetShow(true);
-            // Rb.gravityScale = Config.gravityScale;
         }
         
         public override void UpdateCallback(float deltaTime)
         {
             base.UpdateCallback(deltaTime);
             CheckInput();
-            CheckMovementState();
             CheckJumpState();
+        }
+
+        public override void LateUpdateCallback(float deltaTime)
+        {
+            base.LateUpdateCallback(deltaTime);
+            CheckAni();
         }
 
         public override void FixedUpdateCallback()
@@ -49,7 +53,7 @@ namespace GamePlay.Player.PlayerState
             }
         }
 
-        private void CheckMovementState()
+        private void CheckAni()
         {
             // rigidbody的速度在移动时会有一个极小的值，故为>0.01，其他小值也可，令人费解的bug
             // Property.IsWalking = Math.Abs(Rb.velocity.x) > 0.01f; 

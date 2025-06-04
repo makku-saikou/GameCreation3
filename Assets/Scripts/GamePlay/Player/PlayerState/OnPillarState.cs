@@ -32,12 +32,14 @@ namespace GamePlay.Player.PlayerState
             Player.RemoveGravityEffect("OnPillar");
             Player.Head.SetShow(true);
             ClimbJump();
-            
-            Property.ClimbFlag = false;
-            DelayUtility.Delay(Config.climbCD, () =>
+            if (next.Name != "OnGround")
             {
-                Property.ClimbFlag = true;
-            });
+                Property.ClimbFlag = false;
+                DelayUtility.Delay(Config.climbCD, () =>
+                {
+                    Property.ClimbFlag = true;
+                });
+            }
         }
 
         public override void UpdateCallback(float deltaTime)

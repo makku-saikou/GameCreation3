@@ -15,6 +15,7 @@ namespace GamePlay.Player.PlayerInput
         public override bool JumpInputDown => Input.GetButtonDown("Jump");
         public override bool JumpInput => Input.GetButton("Jump");
         public override bool DownInput => Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+        public override bool DownInputDown => Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
         public override bool UpInput => Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
 
         public override Vector2 DirectionInput

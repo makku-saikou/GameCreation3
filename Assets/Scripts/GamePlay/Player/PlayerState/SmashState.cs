@@ -18,28 +18,46 @@ namespace GamePlay.Player.PlayerState
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
+            Property.HasSmashLanded = false;
             Player.Head.SetShow(false);
             Property.HeadCanLaunch = false;
             Player.AddGravityEffect("Smash", Config.smashGravityScale, Config.smashGravityScaleTime);
             DelayUtility.Delay(Config.smashGravityScaleTime, () =>
             {
-                Rb.velocity = new Vector2(0, -Config.smashVelocity);
+                Rb.velocity = new Vector2(Rb.velocity.x, -Config.smashVelocity);
             });
         }
-        
+
+        public override void LateUpdateCallback(float deltaTime)
+        {
+            base.LateUpdateCallback(deltaTime);
+            if (Property.IsGrounded)
+            {
+                Bounce();
+                DelayUtility.Delay(0.1f, () =>
+                {
+                    Property.HasSmashLanded = true;
+                });
+            }
+
+        }
+
         public override void ExitCallback(HState next)
         {
             base.ExitCallback(next);
+            Property.HasSmashLanded = false;
             Player.Head.SetShow(true);
             Property.HeadCanLaunch = true;
-            
-            Rb.AddForce(Vector2.up * Config.smashBounceForce, ForceMode2D.Impulse);
-            
             Property.SmashFlag = false;
             DelayUtility.Delay(Config.smashCD, () =>
             {
                 Property.SmashFlag = true;
             });
+        }
+        
+        private void Bounce()
+        {
+            Rb.AddForce(Vector2.up * Config.smashBounceForce, ForceMode2D.Impulse);
         }
     }
 }
