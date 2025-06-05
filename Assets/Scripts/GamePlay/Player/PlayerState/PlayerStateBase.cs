@@ -23,7 +23,12 @@ namespace GamePlay.Player.PlayerState
         protected PlayerTongue Tongue => Player.Head.Tongue;
         protected Transform Entity => Player.Entity;
         protected Animator Animator => Player.Animator;
-        public PlayerStateBase(PlayerController player, string name) : base(name)
+        // public PlayerStateBase(PlayerController player, string name) : base(name)
+        // {
+        //     Player = player;
+        // }
+
+        public PlayerStateBase(PlayerController player, EPlayerState state) : base(state.ToString())
         {
             Player = player;
         }

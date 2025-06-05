@@ -13,7 +13,7 @@ namespace GamePlay.Player.PlayerState
 {
     public class OnBackgroundState : PlayerStateBase
     {
-        public OnBackgroundState(PlayerController player, string name) : base(player, name) { }
+        public OnBackgroundState(PlayerController player, EPlayerState name) : base(player, name) { }
         private float _currentDashCD;
         private bool _canSwim = true;
         

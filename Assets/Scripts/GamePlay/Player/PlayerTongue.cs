@@ -96,7 +96,7 @@ namespace GamePlay.Player
             if(tongueState != ETongueState.Idle) return;
             targetImage.gameObject.SetActive(false);
             Property.HeadCanMove = false;
-            transform.right = direction; // temp
+            transform.right = direction;
             tongueState = ETongueState.Launching;
             tonguePoint.parent = null;
             Property.IsLaunching = true;
@@ -143,7 +143,6 @@ namespace GamePlay.Player
                 tonguePoint.position = transform.position;
                 Property.HeadCanMove = true;
                 tonguePoint.parent = transform;
-                // lineRenderer.enabled = false;
                 Property.IsRetracting = false;
                 OnTongueIdle?.Invoke();
             }
@@ -222,7 +221,6 @@ namespace GamePlay.Player
             distanceJoint2D.enabled = true;
             distanceJoint2D.connectedAnchor = TargetPosition;
             Player.Property.IsConnecting = true;
-            // Property.HangPoint = TargetPosition;
         }
 
         private void ChangeRootPos()

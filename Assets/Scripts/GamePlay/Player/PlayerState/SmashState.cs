@@ -13,7 +13,7 @@ namespace GamePlay.Player.PlayerState
 {
     public class SmashState : PlayerStateBase
     {
-        public SmashState(PlayerController player, string name) : base(player, name) {}
+        public SmashState(PlayerController player, EPlayerState name) : base(player, name) {}
         
         public override void EnterCallback(HState prev)
         {

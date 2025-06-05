@@ -14,7 +14,7 @@ namespace GamePlay.Player.PlayerState
     public class AirState : PlayerStateBase
     {
         private float _aniSpeedBuffer;
-        public AirState(PlayerController player, string name) : base(player, name) { }
+        public AirState(PlayerController player, EPlayerState name) : base(player, name) { }
 
         public override void EnterCallback(HState prev)
         {

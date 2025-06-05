@@ -13,7 +13,7 @@ namespace GamePlay.Player.PlayerState
 {
     public class OnPillarState : PlayerStateBase
     {
-        public OnPillarState(PlayerController player, string name) : base(player, name) { }
+        public OnPillarState(PlayerController player, EPlayerState name) : base(player, name) { }
         
         public override void EnterCallback(HState prev)
         {

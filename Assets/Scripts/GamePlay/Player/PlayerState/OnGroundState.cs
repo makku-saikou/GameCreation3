@@ -14,7 +14,7 @@ namespace GamePlay.Player.PlayerState
 {
     public class OnGroundState : PlayerStateBase
     {
-        public OnGroundState(PlayerController player, string name) : base(player, name) { }
+        public OnGroundState(PlayerController player, EPlayerState name) : base(player, name) { }
         
         public override void EnterCallback(HState prev)
         {

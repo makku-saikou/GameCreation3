@@ -108,16 +108,16 @@ namespace GamePlay.Player
             
             // 定义整个状态机
             // 状态
-            OnGroundState onGroundState = new OnGroundState(this, "OnGround");
-            AirState airState = new AirState(this, "Air");
-            HangState hangState = new HangState(this, "Hang");
-            OnWallState onWallState = new OnWallState(this, "OnWall");
-            SmashState smashState = new SmashState(this, "Smash");
-            OnPillarState onPillarState = new OnPillarState(this, "OnPillar");
-            OnBackgroundState onBackgroundState = new OnBackgroundState(this, "OnBackground");
+            OnGroundState onGroundState = new OnGroundState(this, EPlayerState.OnGround);
+            AirState airState = new AirState(this, EPlayerState.Air);
+            HangState hangState = new HangState(this, EPlayerState.Hang);
+            OnWallState onWallState = new OnWallState(this, EPlayerState.OnWall);
+            SmashState smashState = new SmashState(this, EPlayerState.Smash);
+            OnPillarState onPillarState = new OnPillarState(this, EPlayerState.OnPillar);
+            OnBackgroundState onBackgroundState = new OnBackgroundState(this, EPlayerState.OnBackground);
             // todo: 自定义状态
-            InCannonState inCannonState = new InCannonState(this, "InCannon");
-            ShuttleState shuttleState = new ShuttleState(this, "Shuttle");
+            InCannonState inCannonState = new InCannonState(this, EPlayerState.InCannon);
+            ShuttleState shuttleState = new ShuttleState(this, EPlayerState.Shuttle);
             
             _stateMachine = new HStateMachine(onGroundState);
 
@@ -323,9 +323,9 @@ namespace GamePlay.Player
             _playerGravityScaleProxy.RemoveAllGravityEffect();
         }
         
-        public bool CheckState(string stateName)
+        public bool CheckState(EPlayerState state)
         {
-            return _stateMachine.CurrentState.Name == stateName;
+            return _stateMachine.CurrentState.Name == state.ToString();
         }
     }
 
@@ -335,5 +335,18 @@ namespace GamePlay.Player
         Green = 1,
         Red = 2,
         Blue = 3
+    }
+    
+    public enum EPlayerState
+    {
+        OnGround = 0,
+        Air = 1,
+        Hang = 2,
+        OnWall = 3,
+        Smash = 4,
+        OnPillar = 5,
+        InCannon = 6,
+        OnBackground = 7,
+        Shuttle = 8
     }
 }

@@ -95,7 +95,9 @@ namespace GamePlay.Item
         {
             var rb = Player.Rb;
             var config = Player.Config;
-            var state = Player.CheckState("Air") || Player.CheckState("Shuttle") || Player.CheckState("Smash");
+            var state = Player.CheckState(EPlayerState.Air) 
+                        || Player.CheckState(EPlayerState.Shuttle) 
+                        || Player.CheckState(EPlayerState.Smash);
             if((state && rb.velocity.sqrMagnitude >= config.shuttleThreshold * config.shuttleThreshold) || _playerIn)
             {
                 _canShuttle = true;

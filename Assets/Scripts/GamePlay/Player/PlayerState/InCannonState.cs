@@ -7,7 +7,7 @@ namespace GamePlay.Player.PlayerState
 {
 	public class InCannonState : PlayerStateBase
 	{
-		public InCannonState(PlayerController player, string name) : base(player, name) { }
+		public InCannonState(PlayerController player, EPlayerState name) : base(player, name) { }
 
 		// private float _gravityScale;
 

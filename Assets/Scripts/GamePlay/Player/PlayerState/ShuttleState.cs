@@ -12,7 +12,7 @@ namespace GamePlay.Player.PlayerState
 {
     public class ShuttleState : PlayerStateBase
     {
-        public ShuttleState(PlayerController player, string name) : base(player, name)
+        public ShuttleState(PlayerController player, EPlayerState name) : base(player, name)
         {
         }
         
