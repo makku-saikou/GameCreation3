@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 133963655375277318}
   - component: {fileID: 1335425553052004478}
   - component: {fileID: 4112488563042984708}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ColorBlock_Shuttle_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -16,7 +16,7 @@ namespace GamePlay.Item
 {
     public class ColorBlock_Swim : MonoBehaviour
     {
-        [Title("颜色块-穿梭")]
+        [Title("颜色块-游泳")]
         [SerializeField] private EPlayerColor color = EPlayerColor.None;
         [SerializeField] private Collider2D collider2D;
         // [SerializeField] private SpriteRenderer spriteRenderer;

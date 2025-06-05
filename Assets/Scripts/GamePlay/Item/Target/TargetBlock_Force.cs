@@ -20,20 +20,23 @@ namespace GamePlay.Item.Target
         public Vector3 AdsorbPosition { get; }
         public bool Interact(PlayerController playerController)
         {
-            Vector3 direction = playerController.Entity.up;
+            Vector3 direction = Vector3.up;
+            if (playerController.CheckState(EPlayerState.OnGround))
+            {
+                direction = playerController.Head.Tongue.transform.right;
+            }
+            else
+            {
+                direction = playerController.Entity.up;
+            }
             direction.Normalize();
-            playerController.Rb.AddForce(direction * force, ForceMode2D.Impulse);
-            // todo: 玩家数值系统的优化
-            // DelayUtility.DelayFrame(3, () =>
-            // {
-            //     playerController.Rb.gravityScale = 0;
-            // });
-            // DelayUtility.Delay(noGravityTime, () =>
-            // {
-            //     if(playerController.CurrentStateName == "Air" && playerController.Rb.gravityScale == 0)
-            //         playerController.Rb.gravityScale = playerController.Config.gravityScale;
-            // });
             var time = playerController.Config.interactNoGravityTime;
+            playerController.Property.CanMove = false;
+            DelayUtility.Delay(time, () =>
+            {
+                playerController.Property.CanMove = true;
+            });
+            playerController.Rb.AddForce(direction * force, ForceMode2D.Impulse);
             playerController.AddGravityEffect("TargetBlock_Force", 0,time);
             return true;
         }
