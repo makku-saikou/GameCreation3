@@ -166,10 +166,6 @@ namespace GamePlay.Player
             smashToAir.OnCheck += () => property.HasSmashLanded;
             smashState.AddTransition(smashToAir);
 
-            // HTransition smashLand = new HTransition("SmashLand", smashState, onGroundState);
-            // smashLand.OnCheck += () => property.IsGrounded;
-            // smashState.AddTransition(smashLand);
-
             HTransition climb = new HTransition("Climb", onGroundState, onPillarState);
             climb.OnCheck += () => property.CanOnPillar && Input.UpInput && property.ClimbFlag;
             onGroundState.AddTransition(climb);

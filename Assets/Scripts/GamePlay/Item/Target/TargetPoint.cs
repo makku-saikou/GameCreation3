@@ -18,10 +18,6 @@ namespace GamePlay.Item.Target
 
         public bool Interact(PlayerController playerController)
         {
-            // Vector3 direction = transform.position - playerController.transform.position;
-            // direction.Normalize();
-            // // Vector3 direction = playerController.Head.transform.right;
-            // playerController.Rb.AddForce(direction * force, ForceMode2D.Impulse);
             return false;
         }
     }
