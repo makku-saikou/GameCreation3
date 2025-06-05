@@ -44,6 +44,7 @@ namespace GamePlay.Player
         private int _layerBit;
 
         private ITarget _currentTarget;
+        private RaycastHit2D _currentHit;
         private Vector3 _targetPosition;
         public Vector3 TargetPosition
         {
@@ -163,7 +164,8 @@ namespace GamePlay.Player
             Property.IsRetracting = true;
             Property.IsLaunching = false;
             tonguePoint.parent = null;
-            // _currentFlightDistance = 0;
+            if(_currentHit.normal.Equals(Vector2.up))
+                Player.OnCollisionEnter -= OnNormalUp;
         }
 
         public void Interact()
@@ -179,6 +181,7 @@ namespace GamePlay.Player
         {   
             
             var hit = Physics2D.Raycast(transform.position, transform.right, Config.tongueMaxLength, _layerBit);
+            _currentHit = hit;
             if (hit.collider)
             {
                 _currentTarget = hit.collider.GetComponent<ITarget>();
@@ -221,6 +224,19 @@ namespace GamePlay.Player
             distanceJoint2D.enabled = true;
             distanceJoint2D.connectedAnchor = TargetPosition;
             Player.Property.IsConnecting = true;
+            PFCLog.Debug("Tongue", _currentHit.normal);
+            if (_currentHit.normal.Equals(Vector2.up))
+                Player.OnCollisionEnter += OnNormalUp;
+        }
+        
+        /// <summary>
+        /// 当玩家勾到并撞到法线向上的平面时
+        /// </summary>
+        private void OnNormalUp(Collision2D collision)
+        {
+            PFCLog.Debug("Tongue", collision.contacts[0].normal);
+            if(collision.contacts[0].normal.Equals(Vector2.up))
+                Retract();
         }
 
         private void ChangeRootPos()
