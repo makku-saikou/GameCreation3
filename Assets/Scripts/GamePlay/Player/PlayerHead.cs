@@ -6,6 +6,7 @@
 // Description: 头部的控制逻辑,调用舌头的相关方法
 // -------------------------------------------------
 
+using System.Collections.Generic;
 using GamePlay.Player.PlayerInput;
 using PurpleFlowerCore;
 using UnityEngine;
@@ -20,6 +21,7 @@ namespace GamePlay.Player
         public PlayerTongue Tongue => tongue;
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private Animator animator;
+        [SerializeField] private List<RuntimeAnimatorController> controllers;
         [SerializeField] private PlayerController player;
         // [SerializeField] private SpriteRenderer headBackground;
         public PlayerController Player => player;
@@ -90,6 +92,11 @@ namespace GamePlay.Player
             _currentMouthOpen = Mathf.Clamp01(_currentMouthOpen);
             animator.Play("Head_Close", 0, _currentMouthOpen);
             // headBackground.enabled = _currentMouthOpen >= 1;
+        }
+
+        public void ChangeColor(EPlayerColor from, EPlayerColor to)
+        {
+            animator.runtimeAnimatorController = controllers[(int)to];
         }
 
         #region Tongue

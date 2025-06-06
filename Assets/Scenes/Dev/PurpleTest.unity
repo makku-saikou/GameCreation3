@@ -61972,10 +61972,54 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3959717701253126937, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: controllers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959717701253126937, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: controllers.Array.data[0]
+      value: 
+      objectReference: {fileID: 9100000, guid: 4b09ed875cefb4040b874073b84e7d70, type: 2}
+    - target: {fileID: 3959717701253126937, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: controllers.Array.data[1]
+      value: 
+      objectReference: {fileID: 9100000, guid: 23974e47809a4da4ead6ac88484bf351, type: 2}
+    - target: {fileID: 4466951446267338716, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c89644ee0325170478c11f8bcea04961, type: 2}
     - target: {fileID: 5445178873793561151, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
       propertyPath: targetImage
       value: 
       objectReference: {fileID: 958561669}
+    - target: {fileID: 5553778798862907640, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: controllers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5553778798862907640, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: animatorList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5553778798862907640, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: controllers.Array.data[0]
+      value: 
+      objectReference: {fileID: 9100000, guid: 83f9f6cb13338e943b808041ae15ffcb, type: 2}
+    - target: {fileID: 5553778798862907640, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: controllers.Array.data[1]
+      value: 
+      objectReference: {fileID: 9100000, guid: c89644ee0325170478c11f8bcea04961, type: 2}
+    - target: {fileID: 5553778798862907640, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: animatorList.Array.data[0]
+      value: 
+      objectReference: {fileID: 9100000, guid: 83f9f6cb13338e943b808041ae15ffcb, type: 2}
+    - target: {fileID: 5553778798862907640, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: animatorList.Array.data[1]
+      value: 
+      objectReference: {fileID: 9100000, guid: c89644ee0325170478c11f8bcea04961, type: 2}
+    - target: {fileID: 6760361951091181679, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 23974e47809a4da4ead6ac88484bf351, type: 2}
     - target: {fileID: 8238423557046667480, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.88

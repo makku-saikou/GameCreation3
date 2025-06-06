@@ -88,7 +88,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Climb
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -1856827535973716722}
+  m_DstState: {fileID: 0}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -185,7 +185,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerV2
+  m_Name: PlayerV2_Orange
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Walking
@@ -334,7 +334,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Walking
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -4566198007678384756}
+  m_DstState: {fileID: 0}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -385,7 +385,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Ground
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 7029399437366858405}
+  m_DstState: {fileID: 0}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -503,7 +503,7 @@ AnimatorStateMachine:
     m_Position: {x: 610, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3208413111595679490}
-    m_Position: {x: 130, y: 340, z: 0}
+    m_Position: {x: 150, y: 210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 453165130575548328}
     m_Position: {x: 610, y: 250, z: 0}

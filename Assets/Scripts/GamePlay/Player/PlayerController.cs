@@ -6,6 +6,7 @@
 // -------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using Common.FSM;
 using GamePlay.Player.PlayerInput;
 using GamePlay.Player.PlayerState;
@@ -48,11 +49,11 @@ namespace GamePlay.Player
         [SerializeField] private Rigidbody2D rb;
         public Rigidbody2D Rb => rb;
         
-        
         private PlayerInputBase _input;
         public PlayerInputBase Input => _input;
         [SerializeField] private SpriteRenderer entityBackground;
         public SpriteRenderer EntityBackground => entityBackground;
+        public List<RuntimeAnimatorController> controllers = new();
         [ShowIf("@UnityEditor.EditorApplication.isPlaying")]
          public string CurrentStateName => _stateMachine.CurrentState.Name;
         
@@ -234,6 +235,7 @@ namespace GamePlay.Player
         DebugSystem.AddCommand("Player/Color/Red", () => { property.CurrentColor = EPlayerColor.Red;});
         DebugSystem.AddCommand("Player/Color/Blue", () => { property.CurrentColor = EPlayerColor.Blue;});
 #endif
+            ChangeColor(property.CurrentColor, property.CurrentColor);
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -280,22 +282,31 @@ namespace GamePlay.Player
 
         private void ChangeColor(EPlayerColor from, EPlayerColor to)
         {
-            if (spriteRenderer == null) return;
-            switch (to)
+            int index = (int)to;
+            if(index >= 0 && index < controllers.Count)
             {
-                case EPlayerColor.None:
-                    spriteRenderer.color = Color.white;
-                    break;
-                case EPlayerColor.Green:
-                    spriteRenderer.color = Color.green;
-                    break;
-                case EPlayerColor.Red:
-                    spriteRenderer.color = Color.red;
-                    break;
-                case EPlayerColor.Blue:
-                    spriteRenderer.color = Color.blue;
-                    break;
+                animator.runtimeAnimatorController = controllers[(int)to];
+                animator.enabled = true;
             }
+            else
+            {
+                switch (to)
+                {
+                    case EPlayerColor.None:
+                        spriteRenderer.color = Color.white;
+                        break;
+                    case EPlayerColor.Green:
+                        spriteRenderer.color = Color.green;
+                        break;
+                    case EPlayerColor.Red:
+                        spriteRenderer.color = Color.red;
+                        break;
+                    case EPlayerColor.Blue:
+                        spriteRenderer.color = Color.blue;
+                        break;
+                }
+            }
+            head.ChangeColor(from, to);
         }
         
         public void ResetTransform()
