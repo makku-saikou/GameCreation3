@@ -272,6 +272,9 @@ MonoBehaviour:
   animator: {fileID: 4466951446267338716}
   rb: {fileID: 5388819421085346460}
   entityBackground: {fileID: 588654780781360429}
+  controllers:
+  - {fileID: 9100000, guid: 83f9f6cb13338e943b808041ae15ffcb, type: 2}
+  - {fileID: 9100000, guid: c89644ee0325170478c11f8bcea04961, type: 2}
   groundCheckPoint: {fileID: 6378958791466072281}
   wallCheckPoint1: {fileID: 1066659650842911128}
   wallCheckPoint2: {fileID: 90122832786852693}
@@ -852,7 +855,7 @@ Animator:
   m_GameObject: {fileID: 3430347529730321567}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 83f9f6cb13338e943b808041ae15ffcb, type: 2}
+  m_Controller: {fileID: 9100000, guid: c89644ee0325170478c11f8bcea04961, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1200,8 +1203,10 @@ MonoBehaviour:
   tongue: {fileID: 5445178873793561151}
   spriteRenderer: {fileID: 7217829328899958769}
   animator: {fileID: 6760361951091181679}
+  controllers:
+  - {fileID: 9100000, guid: 4b09ed875cefb4040b874073b84e7d70, type: 2}
+  - {fileID: 9100000, guid: 23974e47809a4da4ead6ac88484bf351, type: 2}
   player: {fileID: 5553778798862907640}
-  headBackground: {fileID: 7555017756564150081}
 --- !u!114 &5333001339523546377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1225,7 +1230,7 @@ Animator:
   m_GameObject: {fileID: 7513485143476877025}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4b09ed875cefb4040b874073b84e7d70, type: 2}
+  m_Controller: {fileID: 9100000, guid: 23974e47809a4da4ead6ac88484bf351, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
