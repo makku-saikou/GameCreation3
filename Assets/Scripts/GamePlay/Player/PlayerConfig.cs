@@ -199,13 +199,16 @@ namespace GamePlay.Player
         [FoldoutGroup("相机设置")] [LabelText("玩家速度导致相机变化的阈值")] 
         public float playerSpeedThreshold = 10f;
 
-        [FoldoutGroup("其他功能")] [Comment("地面上时最大抬头角度")] 
+        [FoldoutGroup("其他功能")] [LabelText("地面上时最大抬头角度")] 
         public float onGroundUpLimit = 0.2f;
-        [FoldoutGroup("其他功能")] [Comment("地面上时最大低头角度")] 
+        [FoldoutGroup("其他功能")] [LabelText("地面上时最大低头角度")] 
         public float onGroundDownLimit = 0.6f;
         
-        [FoldoutGroup("其他功能")] [LabelText("色块交互无重力时间")]
+        [FoldoutGroup("其他功能")] [LabelText("穿梭色块交互无重力时间")]
         public float interactNoGravityTime = 0.5f;
+
+        [FoldoutGroup("其他功能")] [LabelText("变色持续时间,秒")]
+        public float colorDuration = 10;
         
 #if UNITY_EDITOR
         public bool IsPlayerConfig => this == GameManager.Instance?.Player.Config;

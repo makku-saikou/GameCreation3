@@ -98,6 +98,8 @@ namespace GamePlay.Player
         public bool CanOnPillar { get; set; }                  // 是否在可攀爬的柱子前
         public bool CanOnSwimColorBlock { get; set; }              // 是否在色块前
         
+        private float _currentColorDuration;
+        
         private EPlayerColor _currentColor;
 
         public EPlayerColor CurrentColor
@@ -108,6 +110,10 @@ namespace GamePlay.Player
                 if (_currentColor == value) return;
                 var oldColor = _currentColor;
                 _currentColor = value;
+                if (value != EPlayerColor.None)
+                {
+                    _currentColorDuration = Config.colorDuration;
+                }
                 OnColorChanged?.Invoke(oldColor, _currentColor);
             }
         }
@@ -143,12 +149,16 @@ namespace GamePlay.Player
             ClimbFlag = true;
         }
 
-        public void Update()
+        public void Update(float deltaTime)
         {
-            
+            _currentColorDuration -= deltaTime;
+            if(_currentColorDuration <= 0 && CurrentColor != EPlayerColor.None)
+            {
+                CurrentColor = EPlayerColor.None;
+            }
         }
 
-        public void FixedUpdate()
+        public void FixedUpdate(float deltaTime)
         {
             
         }

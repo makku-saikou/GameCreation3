@@ -78,9 +78,8 @@ namespace GamePlay.Player
         {
             CheckState();
             StateMachine.UpdateCallback(Time.deltaTime);
-            property.Update();
+            property.Update(Time.deltaTime);
             _playerGravityScaleProxy.Update();
-            // Debug.Log(property.ClimbFlag + "_" + (property.CanOnPillar && Input.UpInput && property.ClimbFlag));
         }
 
         private void LateUpdate()
@@ -92,9 +91,8 @@ namespace GamePlay.Player
         private void FixedUpdate()
         {
             StateMachine.FixedUpdateCallback();
-            property.FixedUpdate();
+            property.FixedUpdate(Time.deltaTime);
             _input.FixedUpdate();
-            // RecoverMaxSpeed();
         }
 
         /// <summary>
@@ -287,6 +285,7 @@ namespace GamePlay.Player
             {
                 animator.runtimeAnimatorController = controllers[(int)to];
                 animator.enabled = true;
+                spriteRenderer.color = Color.white;
             }
             else
             {
