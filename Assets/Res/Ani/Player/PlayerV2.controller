@@ -458,7 +458,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: OnBackground
+  m_Name: Swim
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -497,19 +497,19 @@ AnimatorStateMachine:
     m_Position: {x: 390, y: 330, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1297336630349627008}
-    m_Position: {x: 870, y: 130, z: 0}
+    m_Position: {x: 870, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8957861539413353573}
-    m_Position: {x: 610, y: 130, z: 0}
+    m_Position: {x: 610, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3208413111595679490}
     m_Position: {x: 130, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 453165130575548328}
-    m_Position: {x: 610, y: 230, z: 0}
+    m_Position: {x: 610, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -117182073308997782}
-    m_Position: {x: 870, y: 230, z: 0}
+    m_Position: {x: 870, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3912328056872862741}
     m_Position: {x: 610, y: 330, z: 0}
@@ -518,7 +518,7 @@ AnimatorStateMachine:
     m_Position: {x: 870, y: 330, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6191624197845011118}
-    m_Position: {x: 620, y: 60, z: 0}
+    m_Position: {x: 610, y: 80, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

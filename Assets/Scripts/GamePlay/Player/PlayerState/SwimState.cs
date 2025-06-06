@@ -8,12 +8,13 @@
 using UnityEngine;
 using Common.FSM;
 using PurpleFlowerCore.Utility;
+using Unity.VisualScripting;
 
 namespace GamePlay.Player.PlayerState
 {
-    public class OnBackgroundState : PlayerStateBase
+    public class SwimState : PlayerStateBase
     {
-        public OnBackgroundState(PlayerController player, EPlayerState name) : base(player, name) { }
+        public SwimState(PlayerController player, EPlayerState name) : base(player, name) { }
         private float _currentDashCD;
         private bool _canSwim = true;
         
@@ -23,7 +24,6 @@ namespace GamePlay.Player.PlayerState
             Player.Head.SetShow(false);
             Player.AddGravityEffect("OnBackground", 0);
             Rb.velocity = Vector2.zero;
-            // Property.IsOnColorBlock = true;
             Property.HeadCanLaunch = false;
             Rb.drag = Config.swimDrag;
             _currentDashCD = 0;
@@ -34,7 +34,6 @@ namespace GamePlay.Player.PlayerState
             base.ExitCallback(next);
             Player.Head.SetShow(true);
             Player.RemoveGravityEffect("OnBackground");
-            // Property.IsOnColorBlock = false;
             Property.HeadCanLaunch = true;
             Rb.drag = 0;
         }
@@ -52,6 +51,24 @@ namespace GamePlay.Player.PlayerState
             base.FixedUpdateCallback();
             if(_canSwim)
                 Swim();
+        }
+        
+        public override void LateUpdateCallback(float deltaTime)
+        {
+            base.LateUpdateCallback(deltaTime);
+            UpdateAni();
+        }
+        
+        private void UpdateAni()
+        {
+            if (Rb.velocity.sqrMagnitude >= 4 || Input.DirectionInput != Vector2.zero)
+            {
+                Property.AniMove = true;
+            }
+            else
+            {
+                Property.AniMove = false;
+            }
         }
 
         private void Swim()

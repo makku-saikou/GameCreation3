@@ -45,6 +45,11 @@ namespace GamePlay.Player.PlayerState
         public override void UpdateCallback(float deltaTime)
         {
             base.UpdateCallback(deltaTime);
+        }
+
+        public override void LateUpdateCallback(float deltaTime)
+        {
+            base.LateUpdateCallback(deltaTime);
             UpdateAni();
         }
 

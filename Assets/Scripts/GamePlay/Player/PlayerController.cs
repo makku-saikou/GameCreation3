@@ -114,7 +114,7 @@ namespace GamePlay.Player
             OnWallState onWallState = new OnWallState(this, EPlayerState.OnWall);
             SmashState smashState = new SmashState(this, EPlayerState.Smash);
             OnPillarState onPillarState = new OnPillarState(this, EPlayerState.OnPillar);
-            OnBackgroundState onBackgroundState = new OnBackgroundState(this, EPlayerState.OnBackground);
+            SwimState swimState = new SwimState(this, EPlayerState.Swim);
             // todo: 自定义状态
             InCannonState inCannonState = new InCannonState(this, EPlayerState.InCannon);
             ShuttleState shuttleState = new ShuttleState(this, EPlayerState.Shuttle);
@@ -186,15 +186,15 @@ namespace GamePlay.Player
             airClimb.OnCheck += () => property.CanOnPillar && Input.UpInput && property.ClimbFlag;
             airState.AddTransition(airClimb);
 
-            HTransition airToBackground = new HTransition("AirToBackground", airState, onBackgroundState);
+            HTransition airToBackground = new HTransition("AirToBackground", airState, swimState);
             airToBackground.OnCheck += () => property.CanOnSwimColorBlock && Input.InteractInput;
             airState.AddTransition(airToBackground);
 
-            HTransition backgroundToAir = new HTransition("BackgroundToAir", onBackgroundState, airState);
+            HTransition backgroundToAir = new HTransition("BackgroundToAir", swimState, airState);
             backgroundToAir.OnCheck += () => !property.CanOnSwimColorBlock;
-            onBackgroundState.AddTransition(backgroundToAir);
+            swimState.AddTransition(backgroundToAir);
 
-            HTransition groundToBackground = new HTransition("GroundToBackground", onBackgroundState, onBackgroundState);
+            HTransition groundToBackground = new HTransition("GroundToBackground", swimState, swimState);
             groundToBackground.OnCheck += () => property.CanOnSwimColorBlock && Input.InteractInput;
             onGroundState.AddTransition(groundToBackground);
 
@@ -342,7 +342,7 @@ namespace GamePlay.Player
         Smash = 4,
         OnPillar = 5,
         InCannon = 6,
-        OnBackground = 7,
+        Swim = 7,
         Shuttle = 8
     }
 }
