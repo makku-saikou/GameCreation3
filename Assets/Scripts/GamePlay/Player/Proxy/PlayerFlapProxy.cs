@@ -11,7 +11,7 @@ using UnityEngine;
 namespace GamePlay.Player
 {
     //todo: 需要重新评估一下某些功能放在Proxy里是否比直接放在状态里更易维护，目前什么机制放在Proxy里，什么机制放在状态里是混淆的
-    public class PlayerFlapProxy : MonoBehaviour
+    public class PlayerFlapProxy : MonoPlayerProxy
     {
         [SerializeField] private PlayerController player;
         private PlayerProperty Property => player.Property;
@@ -26,7 +26,7 @@ namespace GamePlay.Player
         private PlayerFlap _keep;
         private bool _rightBuffer;
 
-        private void Start()
+        protected override void Init()
         {
             _onGround = () =>
             {

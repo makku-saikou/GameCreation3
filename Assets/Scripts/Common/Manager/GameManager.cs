@@ -8,14 +8,17 @@
 using System;
 using GamePlay.Player;
 using Hmxs.Toolkit;
+using PurpleFlowerCore;
 using UnityEngine;
 
 namespace Common.Manager
 {
     public class GameManager : PurpleFlowerCore.Utility.SingletonMono<GameManager>
     {
-        [SerializeField] private PlayerController player;
-        public PlayerController Player => player;
+        [SerializeField] private PlayerController playerPrefab;
+        [SerializeField] private Transform bornPoint;
+        private PlayerController _player;
+        public PlayerController Player => _player;
 
         [SerializeField] private Transform checkPoint;
         public Transform CheckPoint
@@ -31,10 +34,17 @@ namespace Common.Manager
             set => tmpCheckPoint = value;
         }
 
+        protected void  Start()
+        {
+            base.Awake();
+            checkPoint = bornPoint;
+            PlayerReset(bornPoint.position);
+        }
+
         public void PlayerDie()
         {
             // TODO: 播放死亡动画，禁用角色输入
-            Timer.Register(2f, () => PlayerReset(CheckPoint.position));
+            PlayerReset(CheckPoint.position);
         }
 
         public void PlayerToTmpCheckPoint()
@@ -44,9 +54,11 @@ namespace Common.Manager
 
         private void PlayerReset(Vector3 position)
         {
-            player.transform.position = position;
-            player.Rb.velocity = Vector2.zero;
-            player.Rb.angularVelocity = 0;
+            if (_player)
+                Destroy(_player.gameObject);
+            _player = Instantiate(playerPrefab, position, Quaternion.identity);
+            _player.Init();
+            EventSystem.EventTrigger("PlayerInit");
         }
     }
 }

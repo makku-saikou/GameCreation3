@@ -35,7 +35,7 @@ namespace GamePlay.Player
         [SerializeField] private PlayerTongueCurveProxy tongueCurveProxy;
         
         // todo: UI管理
-        [SerializeField] private Image targetImage;
+        public Image targetImage;
         [SerializeField] private Transform root0;
         [SerializeField] private Transform root1;
         [SerializeField] private Transform root2;
