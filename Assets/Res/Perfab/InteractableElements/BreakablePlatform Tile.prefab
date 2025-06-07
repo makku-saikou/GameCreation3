@@ -248,10 +248,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionShaker: {fileID: 8623732820968883240}
   positionShakeSpeed: {x: 0, y: 50}
-  positionShakeRange: {x: 0, y: 0.03}
+  positionShakeRange: {x: 0, y: 0.088828154}
   rotationShaker: {fileID: 5358211510323142979}
   rotationShakeSpeed: {x: 0, y: 50}
-  rotationShakeRange: {x: 0, y: 1}
+  rotationShakeRange: {x: 0, y: 1.788448}
 --- !u!1 &7256280342699079521
 GameObject:
   m_ObjectHideFlags: 0
