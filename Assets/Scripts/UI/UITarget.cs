@@ -7,11 +7,14 @@
 
 using Common.Manager;
 using PurpleFlowerCore;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
-    public partial class UITarget : UINode
+    public class UITarget : MonoBehaviour
     {
+        [SerializeField] private Image targetImage;
         private void OnEnable()
         {
             EventSystem.AddEventListener("PlayerInit", Init);
@@ -20,11 +23,12 @@ namespace UI
         private void Init()
         {
             // todo: 太有侵入性了
-            GameManager.Instance.Player.Head.Tongue.targetImage = TargetImage;
+            GameManager.Instance.Player.Head.Tongue.targetImage = targetImage;
         }
     
         // Do not modify the region's name if you don't know how it works
         #region UI Event
+
         #endregion
     }
 }
