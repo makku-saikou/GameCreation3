@@ -23,7 +23,7 @@ namespace GamePlay.Player
         private DirectionLimit _onBackgroundLimit;
         private DirectionLimit _none;
         
-        private void Start()
+        protected void Start()
         {
             _onGroundLimit = OnGroundLimit;
             _none = direction => direction;

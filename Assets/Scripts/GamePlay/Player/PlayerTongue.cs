@@ -32,9 +32,10 @@ namespace GamePlay.Player
         public ETongueState TongueState => tongueState;
         [SerializeField] private Transform tonguePoint;
         public Transform TonguePoint => tonguePoint;
+        [SerializeField] private PlayerTongueCurveProxy tongueCurveProxy;
         
         // todo: UI管理
-        [SerializeField] private Image targetImage;
+        public Image targetImage;
         [SerializeField] private Transform root0;
         [SerializeField] private Transform root1;
         [SerializeField] private Transform root2;
@@ -54,6 +55,12 @@ namespace GamePlay.Player
                     return _currentTarget.AdsorbPosition;
                 return _targetPosition;
             }
+        }
+
+        public bool Enable
+        {
+            get => tongueCurveProxy.Enable;
+            set => tongueCurveProxy.Enable = value;
         }
 
         private void Start()

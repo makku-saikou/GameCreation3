@@ -14,35 +14,16 @@ using UnityEngine;
 
 namespace GamePlay.Item
 {
-    public class ColorBlock_Swim : MonoBehaviour
+    public class ColorBlock_Swim : MapElement
     {
         [Title("颜色块-游泳")]
         [SerializeField] private EPlayerColor color = EPlayerColor.None;
         [SerializeField] private Collider2D collider2D;
-        // [SerializeField] private SpriteRenderer spriteRenderer;
 
-        private void Start()
+        protected override void Init()
         {
-            GameManager.Instance.Player.Property.OnColorChanged += OnPlayerColorChanged;
-            // switch (color)
-            // {
-            //     case EPlayerColor.None:
-            //         PFCLog.Warning("颜色块", "颜色块没有设置颜色");
-            //         spriteRenderer.color = Color.white;
-            //         break;
-            //     case EPlayerColor.Green:
-            //         spriteRenderer.color = Color.green;
-            //         break;
-            //     case EPlayerColor.Red:
-            //         spriteRenderer.color = Color.red;
-            //         break;
-            //     case EPlayerColor.Blue:
-            //         spriteRenderer.color = Color.blue;
-            //         break;
-            //     default:
-            //         throw new ArgumentOutOfRangeException();
-            // }
-            collider2D.isTrigger = GameManager.Instance.Player.Property.CurrentColor == color;
+            Player.Property.OnColorChanged += OnPlayerColorChanged;
+            collider2D.isTrigger = Player.Property.CurrentColor == color;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -73,6 +54,7 @@ namespace GamePlay.Item
         private void OnPlayerColorChangedInThis(EPlayerColor from, EPlayerColor to)
         {
             PFCLog.Debug("ColorBlock", $"player color {to.ToString()}");
+            GameManager.Instance.PlayerDie();
         }
     }
 }

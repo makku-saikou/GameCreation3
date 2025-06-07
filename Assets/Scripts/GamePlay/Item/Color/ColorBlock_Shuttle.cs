@@ -14,36 +14,16 @@ using UnityEngine;
 
 namespace GamePlay.Item
 {
-    public class ColorBlock_Shuttle : MonoBehaviour
+    public class ColorBlock_Shuttle : MapElement
     {
         [Title("颜色块-穿梭")]
         [SerializeField] private EPlayerColor color = EPlayerColor.None;
         [SerializeField] private Collider2D collider2D;
-        // [SerializeField] private SpriteRenderer spriteRenderer;
-        private PlayerController Player => GameManager.Instance.Player;
         private bool _canShuttle;
         private bool _playerIn;
-        private void Start()
+        protected override void Init()
         {
-            GameManager.Instance.Player.Property.OnColorChanged += OnPlayerColorChanged;
-            // switch (color)
-            // {
-            //     case EPlayerColor.None:
-            //         PFCLog.Warning("颜色块", "颜色块没有设置颜色");
-            //         spriteRenderer.color = Color.white;
-            //         break;
-            //     case EPlayerColor.Green:
-            //         spriteRenderer.color = Color.green;
-            //         break;
-            //     case EPlayerColor.Red:
-            //         spriteRenderer.color = Color.red;
-            //         break;
-            //     case EPlayerColor.Blue:
-            //         spriteRenderer.color = Color.blue;
-            //         break;
-            //     default:
-            //         throw new ArgumentOutOfRangeException();
-            // }
+            Player.Property.OnColorChanged += OnPlayerColorChanged;
             UpdateState();
         }
 
@@ -80,11 +60,13 @@ namespace GamePlay.Item
         private void OnPlayerColorChangedInThis(EPlayerColor from, EPlayerColor to)
         {
             PFCLog.Debug("ColorBlock", $"player color {to.ToString()}");
+            GameManager.Instance.PlayerDie();
         }
 
         private void OnPlayerBumpInThis(Collision2D _)
         {
             PFCLog.Debug("ColorBlock", "player bumped when shuttling");
+            GameManager.Instance.PlayerDie();
         }
 
         private void UpdateState()

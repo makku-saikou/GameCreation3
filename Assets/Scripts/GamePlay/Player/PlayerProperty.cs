@@ -122,7 +122,17 @@ namespace GamePlay.Player
         public bool PreJumpBufferFlag { get; set; }          // 在地面时直接进行跳跃
         public Vector2 MaxClimbHeight { get; set; }              // 攀爬最高点
         public bool HeadCanMove { get; set; }
-        public bool HeadCanLaunch { get; set; }
+        
+        private bool _headCanLaunch;
+        public bool HeadCanLaunch
+        {
+            get => _headCanLaunch;
+            set
+            {
+                _headCanLaunch = value;
+                _player.Head.Tongue.Enable = value;
+            }
+        }
         public float CurrentTongueLength { get; set; }       // 舌头当前长度
         
         public Vector2 WallJumpDirection => Config.wallJumpDirection.normalized; // 滑墙跳跃方向

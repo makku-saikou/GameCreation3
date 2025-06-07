@@ -125,6 +125,9 @@ namespace GamePlay.Player
         
         [FoldoutGroup("下砸")] [LabelText("下砸CD")]
         public float smashCD = 0.5f;
+        
+        [FoldoutGroup("下砸")] [LabelText("下砸捶地反弹方向")] [Tooltip("下砸时，捶地反弹的方向，默认向上，有输入时向左右")]
+        public Vector2 smashDirection = new(1f, 1f);
     
         [FoldoutGroup("头和舌头")] [LabelText("舌头发射速度")]
         public float tongueSpeed = 40;
@@ -209,6 +212,9 @@ namespace GamePlay.Player
 
         [FoldoutGroup("其他功能")] [LabelText("变色持续时间,秒")]
         public float colorDuration = 10;
+        
+        [FoldoutGroup("其他功能")] [LabelText("眨眼频率")]
+        public float blinkFrequency = 10f;
         
 #if UNITY_EDITOR
         public bool IsPlayerConfig => this == GameManager.Instance?.Player.Config;

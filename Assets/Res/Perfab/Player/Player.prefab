@@ -79,6 +79,7 @@ MonoBehaviour:
   head: {fileID: 3959717701253126937}
   tongueState: 0
   tonguePoint: {fileID: 140825107737555479}
+  tongueCurveProxy: {fileID: 874838184081386832}
   targetImage: {fileID: 0}
   root0: {fileID: 1463593771889573033}
   root1: {fileID: 1736917141130917297}
@@ -1230,7 +1231,7 @@ Animator:
   m_GameObject: {fileID: 7513485143476877025}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 23974e47809a4da4ead6ac88484bf351, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4b09ed875cefb4040b874073b84e7d70, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
