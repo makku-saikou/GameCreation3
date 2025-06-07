@@ -32,9 +32,11 @@ namespace GamePlay.Player
         private float _currentMouthOpen;
         private bool _targetMouthOpen;
         private float _currentLaunchCD;
+        private float _currentBlinkCD;
 
         private void Start()
         {
+            _currentBlinkCD = Config.blinkFrequency;
             player.StateMachine.OnStateChanged += (from, to) =>
             {
                 if(tongue.TongueState == ETongueState.Launching && to.Name != "Hang")
@@ -57,7 +59,6 @@ namespace GamePlay.Player
         private void Update()
         {
             UpdateDirection();
-
             if (PlayerInput.LaunchDown)
             {
                 LaunchTongue();
@@ -71,6 +72,7 @@ namespace GamePlay.Player
                 InteractTongue();
             }
             _currentLaunchCD -= Time.deltaTime;
+            _currentBlinkCD -= Time.deltaTime;
             UpdateAni();
         }
 
@@ -89,9 +91,20 @@ namespace GamePlay.Player
                 _currentMouthOpen += Time.deltaTime * Config.openMouthSpeed * Time.deltaTime * 30;
             else
                 _currentMouthOpen -= Time.deltaTime * Config.closeMouthSpeed * Time.deltaTime * 30;
+            
             _currentMouthOpen = Mathf.Clamp01(_currentMouthOpen);
-            animator.Play("Head_Close", 0, _currentMouthOpen);
-            // headBackground.enabled = _currentMouthOpen >= 1;
+            if(_currentMouthOpen >= 0.01f)
+                animator.Play("Head_Close", 0, _currentMouthOpen);
+            else
+            {
+                if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Head_Idle"))
+                    animator.Play("Head_Idle", 0, 1);
+                if(_currentBlinkCD <= 0)
+                {
+                    _currentBlinkCD = Config.blinkFrequency;
+                    animator.Play("Head_Idle", 0, 0);
+                }
+            }
         }
 
         public void ChangeColor(EPlayerColor from, EPlayerColor to)

@@ -210,6 +210,9 @@ namespace GamePlay.Player
         [FoldoutGroup("其他功能")] [LabelText("变色持续时间,秒")]
         public float colorDuration = 10;
         
+        [FoldoutGroup("其他功能")] [LabelText("眨眼频率")]
+        public float blinkFrequency = 10f;
+        
 #if UNITY_EDITOR
         public bool IsPlayerConfig => this == GameManager.Instance?.Player.Config;
         [ShowIf("@!IsPlayerConfig && UnityEditor.EditorApplication.isPlaying")]

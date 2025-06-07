@@ -61976,6 +61976,10 @@ PrefabInstance:
       propertyPath: targetImage
       value: 
       objectReference: {fileID: 958561669}
+    - target: {fileID: 6760361951091181679, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4b09ed875cefb4040b874073b84e7d70, type: 2}
     - target: {fileID: 8238423557046667480, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.88
