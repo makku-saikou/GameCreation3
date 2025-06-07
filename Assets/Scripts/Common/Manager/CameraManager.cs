@@ -6,8 +6,10 @@
 // Description:
 // -------------------------------------------------
 
+using System;
 using Cinemachine;
 using GamePlay.Player;
+using PurpleFlowerCore;
 using UnityEngine;
 
 namespace Common.Manager
@@ -27,10 +29,24 @@ namespace Common.Manager
 
         private float _sizeFreezeCounter;
         private CinemachineCameraOffset _cameraOffset;
+        
+        private void OnEnable()
+        {
+            EventSystem.AddEventListener("PlayerInit",Init);
+        }
+        
+        private void OnDisable()
+        {
+            EventSystem.RemoveEventListener("PlayerInit",Init);
+        }
+
+        private void Init()
+        {
+            virtualCamera.Follow = GameManager.Instance.Player.CameraPoint.transform;
+        }
 
         private void Start()
         {
-            virtualCamera.Follow = GameManager.Instance.Player.CameraPoint.transform;
             _cameraOffset = virtualCamera.GetComponent<CinemachineCameraOffset>();
         }
 

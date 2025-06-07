@@ -26,7 +26,7 @@ namespace GamePlay.Player
         private PlayerFlap _keep;
         private bool _rightBuffer;
 
-        private void Start()
+        protected void Start()
         {
             _onGround = () =>
             {

@@ -69,10 +69,6 @@ namespace GamePlay.Player
 
         public event Action<Collision2D> OnCollisionEnter;
         public event Action<Collision2D> OnCollisionExit;
-        private void Awake()
-        {
-            Init();
-        }
 
         private void Update()
         {
@@ -98,7 +94,7 @@ namespace GamePlay.Player
         /// <summary>
         /// 原则是，我们确保关于Player的逻辑模块都在PlayerController的Init之后初始化
         /// </summary>
-        private void Init()
+        public void Init()
         {
             property = new(this);
             property.OnColorChanged += ChangeColor;
@@ -234,6 +230,7 @@ namespace GamePlay.Player
         DebugSystem.AddCommand("Player/Color/Blue", () => { property.CurrentColor = EPlayerColor.Blue;});
 #endif
             ChangeColor(property.CurrentColor, property.CurrentColor);
+            ResetTransform();
         }
 
         private void OnCollisionEnter2D(Collision2D other)
