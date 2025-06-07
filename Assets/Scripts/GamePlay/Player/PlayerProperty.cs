@@ -129,8 +129,8 @@ namespace GamePlay.Player
             get => _headCanLaunch;
             set
             {
-                HeadCanLaunch = value;
-                // _player.Head.Tongue
+                _headCanLaunch = value;
+                _player.Head.Tongue.Enable = value;
             }
         }
         public float CurrentTongueLength { get; set; }       // 舌头当前长度
