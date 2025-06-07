@@ -33,6 +33,13 @@ namespace GamePlay.Item.Platform
 
 		private void Start()
 		{
+			StartCoroutine(Init());
+		}
+
+		private IEnumerator Init()
+		{
+			yield return 0;
+			yield return 0;
 			left = Detect(Vector2.left);
 			right = Detect(Vector2.right);
 		}
