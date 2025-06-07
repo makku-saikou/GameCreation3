@@ -5,23 +5,24 @@
 // Description:
 // -------------------------------------------------
 
-using PurpleFlowerCore;
+using System;
 using UnityEngine;
 
 namespace GamePlay.Player
 {
+    [Obsolete]
     public abstract class MonoPlayerProxy : MonoBehaviour
     {
-        protected virtual void OnEnable()
-        {
-            EventSystem.AddEventListener("PlayerInit",Init);
-        }
-        
-        protected virtual void OnDisable()
-        {
-            EventSystem.RemoveEventListener("PlayerInit",Init);
-        }
+        // protected virtual void OnEnable()
+        // {
+        //     EventSystem.AddEventListener("PlayerInit",Start);
+        // }
+        //
+        // protected virtual void OnDisable()
+        // {
+        //     EventSystem.RemoveEventListener("PlayerInit",Start);
+        // }
 
-        protected abstract void Init();
+        protected abstract void Start();
     }
 }

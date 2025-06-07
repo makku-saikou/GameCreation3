@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GamePlay.Player
 {
-    public class PlayerTongueCurveProxy : MonoPlayerProxy
+    public class PlayerTongueCurveProxy : MonoBehaviour
     {
         [Header("General References:")]
         [SerializeField] private PlayerTongue tongue;
@@ -38,21 +38,21 @@ namespace GamePlay.Player
 
         private void OnEnable()
         {
-            Init();
+            Start();
             _straightLine = false;
             
             lineRenderer.enabled = true;
             
-            tongue.OnTongueLaunch += Init;
+            tongue.OnTongueLaunch += Start;
         }
         
         private void OnDisable()
         {
             lineRenderer.enabled = false;
-            tongue.OnTongueLaunch -= Init;
+            tongue.OnTongueLaunch -= Start;
         }
         
-        protected override void Init()
+        protected void Start()
         {
             _moveTime = 0;
             _waveSize = startWaveSize;

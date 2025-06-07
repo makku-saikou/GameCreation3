@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace GamePlay.Player
 {
-    public class PlayerHeadDirectionLimitProxy : MonoPlayerProxy
+    public class PlayerHeadDirectionLimitProxy : MonoBehaviour
     {
         [SerializeField] private PlayerController playerController;
         private PlayerHead PlayerHead => playerController.Head;
@@ -23,7 +23,7 @@ namespace GamePlay.Player
         private DirectionLimit _onBackgroundLimit;
         private DirectionLimit _none;
         
-        protected override void Init()
+        protected void Start()
         {
             _onGroundLimit = OnGroundLimit;
             _none = direction => direction;
