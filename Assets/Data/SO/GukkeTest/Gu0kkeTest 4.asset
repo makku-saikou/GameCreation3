@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b2e05ae249e43c9bb10008c8f26e762, type: 3}
+  m_Name: Gu0kkeTest 4
+  m_EditorClassIdentifier: 
+  jumpForce: 30
+  amountOfJump: 1
+  gravityScale: 8
+  airMaxSpeed: {x: 20, y: 40}
+  airMaxSpeedRecoverScale: {x: 0.1, y: 0.1}
+  xForceInAir: 1000
+  variableJumpForce: 0.95
+  preJumpBufferTime: 0.17
+  airRotateSpeed: 2
+  hangDrag: 2
+  hangSwayForce: 120
+  hangGravityScale: 12
+  tongueLengthChangeSpeed: 7
+  launchDragScale: 0.3
+  hangJumpForce: 20
+  hangForceCompensate: 10
+  onGroundWalkSpeed: 15
+  onGroundRunSpeed: 20
+  onGroundWalkToRunCoefficient: 20
+  groundCheckHeight: 0.34
+  groundCheckWidth: 2.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  jumpBufferTime: 0.5
+  wallCheckRadius: 0.1
+  wallSlideSpeed: 0
+  wallSpeedRecoverScale: 0.125
+  wallJumpForce: 220
+  wallJumpTimerSet: 0.15
+  wallJumpDirection: {x: 1, y: 1.4}
+  wallExitCoefficient: 0.26
+  smashGravityScale: 120
+  smashGravityScaleTime: 0.2
+  smashVelocity: 61
+  smashBounceForce: 35
+  smashCD: 0.2
+  tongueSpeed: 40
+  retractSpeed: 180
+  tongueMaxLength: 10
+  tongueMinLength: 3
+  targetLayers:
+  - serializedVersion: 2
+    m_Bits: 128
+  - serializedVersion: 2
+    m_Bits: 64
+  launchCD: 0.1
+  openMouthSpeed: 64
+  closeMouthSpeed: 20
+  climbPileSpeed: 5
+  climbJumpForce: 100
+  climbJumpDirection: {x: 1, y: 1}
+  climbCD: 1
+  swimSpeed: 10
+  swimDashForce: 80
+  swimDashCD: 2
+  swimDrag: 0.5
+  swimDashRecoverTime: 0.5
+  shuttleThreshold: 0
+  shuttleSpeed: 20
+  cameraSize: {x: 16, y: 25}
+  lerpSpeed: 1
+  cameraSizeThreshold: 20
+  cameraSizeFreezeTime: 1
+  playerSpeedThreshold: 10
+  onGroundUpLimit: 0.2
+  onGroundDownLimit: 0.6
+  interactNoGravityTime: 0.5
+  colorDuration: 10
