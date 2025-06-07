@@ -19,6 +19,7 @@ namespace GamePlay.Item.Platform
 
 		[SerializeField] private SpriteRenderer spriteRenderer;
 		[SerializeField] private BreakablePlatformShakeManager shakeManager;
+		[SerializeField] private Animator animator;
 
 		private BoxCollider2D _collider;
 		private BoxCollider2D Collider => _collider ? _collider : GetComponents<BoxCollider2D>().First(col => !col.isTrigger);
@@ -111,7 +112,7 @@ namespace GamePlay.Item.Platform
 		{
 			if (isBroken) return;
 			Debug.Log(name + " is broken!");
-			spriteRenderer.enabled = false;
+			animator.Play("break");
 			Collider.enabled = false;
 			Trigger.enabled = false;
 			isBroken = true;
@@ -131,6 +132,7 @@ namespace GamePlay.Item.Platform
 			Trigger.enabled = true;
 			isBroken = false;
 			_breakingCount = 0;
+			animator.Play("Normal");
 
 			if (left) left.Recover();
 			if (right) right.Recover();
