@@ -109,7 +109,15 @@ namespace GamePlay.Player
 
         public void ChangeColor(EPlayerColor from, EPlayerColor to)
         {
-            animator.runtimeAnimatorController = controllers[(int)to];
+            int index = (int)to;
+            if(index >= 0 && index < controllers.Count)
+            {
+                animator.runtimeAnimatorController = controllers[(int)to];
+            }
+            else
+            {
+                PFCLog.Error("PlayerHead", $"Invalid player color index: {index}");
+            }
         }
 
         #region Tongue

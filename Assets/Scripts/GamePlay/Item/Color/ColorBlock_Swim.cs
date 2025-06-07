@@ -23,7 +23,7 @@ namespace GamePlay.Item
         protected override void Init()
         {
             Player.Property.OnColorChanged += OnPlayerColorChanged;
-            collider2D.isTrigger = Player.Property.CurrentColor == color;
+            OnPlayerColorChanged(EPlayerColor.None, Player.Property.CurrentColor);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
