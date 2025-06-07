@@ -1,4 +1,5 @@
-﻿using GamePlay.Player;
+﻿using System;
+using GamePlay.Player;
 using Hmxs.Toolkit;
 using UnityEngine;
 
@@ -11,10 +12,22 @@ namespace GamePlay.Item
 		[SerializeField] private float force = 1f;
 		[SerializeField] private float ejectDelay = 0.5f;
 		[SerializeField] private float cooldown = 2f;
+		[SerializeField] private Sprite openSprite;
+		[SerializeField] private Sprite closeSprite;
 
 		private bool _isCooldown;
 
 		private Vector2 FinalForce => Quaternion.Euler(0, 0, direction) * transform.rotation * Vector2.right * force * 100;
+
+		private void Start()
+		{
+			if (!openSprite || !closeSprite)
+			{
+				Debug.LogError("Open and Close sprites must be assigned in the ColorCannon component.");
+				return;
+			}
+			GetComponent<SpriteRenderer>().sprite = openSprite;
+		}
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
@@ -24,6 +37,7 @@ namespace GamePlay.Item
 			if (player.Property.IsInCannon) return;
 			player.Property.IsInCannon = true;
 			player.transform.position = transform.position;
+			GetComponent<SpriteRenderer>().sprite = closeSprite;
 			Timer.Register(ejectDelay, () => EjectPlayer(player));
 		}
 
@@ -35,6 +49,7 @@ namespace GamePlay.Item
 			_isCooldown = true;
 			player.Property.IsInCannon = false;
 			// todo: cannon reload animation
+			GetComponent<SpriteRenderer>().sprite = openSprite;
 			Timer.Register(cooldown, () => _isCooldown = false);
 		}
 
