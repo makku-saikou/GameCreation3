@@ -28,6 +28,12 @@ namespace GamePlay.Player.PlayerState
             });
         }
 
+        // public override void UpdateCallback(float deltaTime)
+        // {
+        //     base.UpdateCallback(deltaTime);
+        //     
+        // }
+
         public override void LateUpdateCallback(float deltaTime)
         {
             base.LateUpdateCallback(deltaTime);
@@ -39,7 +45,6 @@ namespace GamePlay.Player.PlayerState
                     Property.HasSmashLanded = true;
                 });
             }
-
         }
 
         public override void ExitCallback(HState next)
@@ -57,8 +62,15 @@ namespace GamePlay.Player.PlayerState
         
         private void Bounce()
         {
-            // Rb.AddForce(Vector2.up * Config.smashBounceForce, ForceMode2D.Impulse);
-            Rb.velocity = new Vector2(Rb.velocity.x, Config.smashBounceForce);
+            if(Input.MovementInput != 0)
+            {
+                var direction = Config.smashDirection;
+                direction = new Vector3(direction.x * Mathf.Sign(Input.MovementInput), direction.y, 0);
+                direction.Normalize();
+                Rb.velocity = direction * Config.smashBounceForce;
+            }
+            else
+                Rb.velocity = new Vector2(Rb.velocity.x, Config.smashBounceForce);
         }
     }
 }
