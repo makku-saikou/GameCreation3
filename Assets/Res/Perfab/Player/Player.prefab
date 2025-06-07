@@ -268,7 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   head: {fileID: 3959717701253126937}
   entity: {fileID: 5654363637517419355}
-  config: {fileID: 11400000, guid: 2a5419c3c0f21e6489a8a4b9d2f1f532, type: 2}
+  config: {fileID: 11400000, guid: 24f96f84d2d3bc0409a11c65a923a3fa, type: 2}
   spriteRenderer: {fileID: 6740037977774092997}
   animator: {fileID: 4466951446267338716}
   rb: {fileID: 5388819421085346460}

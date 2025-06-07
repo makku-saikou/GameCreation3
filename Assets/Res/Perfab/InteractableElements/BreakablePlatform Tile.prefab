@@ -366,9 +366,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b725065fac4de98813eedf6e63d3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakDelay: 5
-  breakDelayRecovery: 2
-  recoverDelay: 3
+  breakDelay: 1.5
+  breakDelayRecovery: 1.5
+  recoverDelay: 2.5
   isBroken: 0
   left: {fileID: 0}
   right: {fileID: 0}
