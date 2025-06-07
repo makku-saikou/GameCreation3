@@ -67,15 +67,18 @@ namespace GamePlay.Player
         [FoldoutGroup("悬挂")] [LabelText("退出悬挂补偿力")] [Tooltip("方向为切线，与水平面角度为90，补偿力为0，角度为0，力为该值")]
         public float hangForceCompensate = 10f;
     
-        [FoldoutGroup("地面")] [LabelText("地面走路速度")]
+        [FoldoutGroup("地面")] [LabelText("地面最低速度")]
         public float onGroundWalkSpeed = 10f;
         
-        [FoldoutGroup("地面")] [LabelText("地面跑步速度")]
+        [FoldoutGroup("地面")] [LabelText("地面最高速度")]
         public float onGroundRunSpeed = 15f;
         
-        [FoldoutGroup("地面")] [LabelText("地面助跑系数")] [Tooltip("有点无法量化，数值越大，从走路速度到跑步速度需要的时间越长,详细问LJH")]
+        [FoldoutGroup("地面")] [LabelText("地面助跑系数")] [Tooltip("有点无法量化，数值越大，从最低速度逐步加速到最高速度需要的时间越长,详细问LJH")]
         [Range(0, 80f)]
         public float onGroundWalkToRunCoefficient = 20f;
+        
+        // [FoldoutGroup("地面")] [LabelText("地面助跑加速度")]
+        // public float onGroundWalkToRunAcceleration = 10f;
     
         [FoldoutGroup("地面")] [LabelText("地面检测高度")]
         public float groundCheckHeight = 0.1f;

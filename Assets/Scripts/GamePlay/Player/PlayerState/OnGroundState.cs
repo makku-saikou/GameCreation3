@@ -78,8 +78,12 @@ namespace GamePlay.Player.PlayerState
         private void ApplyMovement()
         {
             if (!Property.CanMove) return;
-            if(Mathf.Abs(Input.XInputExtent) < Config.onGroundWalkToRunCoefficient)
-                Rb.velocity = new Vector2(Config.onGroundWalkSpeed * Input.MovementInput, Rb.velocity.y);
+            float xInputExtent = Mathf.Abs(Input.XInputExtent);
+            if(xInputExtent < Config.onGroundWalkToRunCoefficient)
+            {
+                var velocity = Mathf.Lerp(Config.onGroundWalkSpeed, Config.onGroundRunSpeed, xInputExtent / Config.onGroundWalkToRunCoefficient);
+                Rb.velocity = new Vector2(velocity * Input.MovementInput, Rb.velocity.y);
+            }
             else
                 Rb.velocity = new Vector2(Config.onGroundRunSpeed * Input.MovementInput, Rb.velocity.y);
         }
