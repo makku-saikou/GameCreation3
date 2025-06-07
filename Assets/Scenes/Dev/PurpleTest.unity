@@ -61252,17 +61252,6 @@ MonoBehaviour:
   MegText: {fileID: 596508857}
   BtnImage: {fileID: 580662264}
   BtnButton: {fileID: 580662263}
---- !u!114 &1210060072 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 874838184081386832, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
-  m_PrefabInstance: {fileID: 508641522131164855}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c3b22dc931c40bfa0ae1c0b5ddbec91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1401399585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61986,19 +61975,11 @@ PrefabInstance:
     - target: {fileID: 4466951446267338716, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 83f9f6cb13338e943b808041ae15ffcb, type: 2}
+      objectReference: {fileID: 9100000, guid: c89644ee0325170478c11f8bcea04961, type: 2}
     - target: {fileID: 5445178873793561151, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
       propertyPath: targetImage
       value: 
       objectReference: {fileID: 958561669}
-    - target: {fileID: 5445178873793561151, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
-      propertyPath: tongueCurveProxy
-      value: 
-      objectReference: {fileID: 1210060072}
-    - target: {fileID: 6760361951091181679, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 4b09ed875cefb4040b874073b84e7d70, type: 2}
     - target: {fileID: 8238423557046667480, guid: 1c0e5729a204a1a4893f1ceb41a48808, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.88
