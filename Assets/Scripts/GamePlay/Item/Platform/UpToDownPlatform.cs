@@ -20,9 +20,13 @@ namespace GamePlay.Item.Platform
 			{
 				_openTimeCounter -= Time.deltaTime;
 				_platformEffector.useOneWay = true;
+				gameObject.layer = LayerMask.NameToLayer("Default");
 			}
 			else
+			{
 				_platformEffector.useOneWay = false;
+				gameObject.layer = LayerMask.NameToLayer("Ground");
+			}
 
 			if (smashMonitor.IsSmashing) _openTimeCounter = openTime;
 		}
