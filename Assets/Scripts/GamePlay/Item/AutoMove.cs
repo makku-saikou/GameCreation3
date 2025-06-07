@@ -88,7 +88,7 @@ namespace GamePlay.Item
 				if (i < waypoints.Count - 1 && reverse)
 					Gizmos.DrawLine(waypoints[i].position, waypoints[i + 1].position);
 				else if (i > 0 && !reverse) Gizmos.DrawLine(waypoints[i].position, waypoints[i - 1].position);
-				if (loopType != LoopType.Loop) break;
+				if (loopType != LoopType.Loop) continue;
 				if (i == waypoints.Count - 1 && reverse)
 					Gizmos.DrawLine(waypoints[i].position, waypoints[0].position);
 				else if (i == 0 && !reverse)

@@ -147,7 +147,7 @@ MonoBehaviour:
   - {fileID: 7004040423323696067}
   targetObject: {fileID: 3860978229374845105}
   speed: 2
-  loopType: 2
+  loopType: 1
   waitTime: 0
   reverse: 0
   isMoving: 0
