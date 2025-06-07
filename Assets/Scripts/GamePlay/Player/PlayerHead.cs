@@ -23,7 +23,6 @@ namespace GamePlay.Player
         [SerializeField] private Animator animator;
         [SerializeField] private List<RuntimeAnimatorController> controllers;
         [SerializeField] private PlayerController player;
-        // [SerializeField] private SpriteRenderer headBackground;
         public PlayerController Player => player;
         private PlayerProperty Property => player.Property;
         private PlayerConfig Config => player.Config;
@@ -54,6 +53,7 @@ namespace GamePlay.Player
                 _targetMouthOpen = false;
                 PFCLog.Debug("Head","Tongue Retract");
             };
+            RetractTongue();
         }
 
         private void Update()
