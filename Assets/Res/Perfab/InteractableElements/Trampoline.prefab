@@ -200,7 +200,7 @@ MonoBehaviour:
         DebugActive: 0
         Mode: 0
         AnimateScaleTarget: {fileID: 1169142717797886616}
-        AnimateScaleDuration: 1
+        AnimateScaleDuration: 0.5
         RemapCurveZero: 1
         RemapCurveOne: 3
         Offset: 0
