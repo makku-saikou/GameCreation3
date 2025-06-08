@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4340768678928625753}
   m_Layer: 0
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Trampoline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -449,7 +449,7 @@ GameObject:
   - component: {fileID: 3473009380309038108}
   m_Layer: 0
   m_Name: Trampoline
-  m_TagString: Untagged
+  m_TagString: Trampoline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
