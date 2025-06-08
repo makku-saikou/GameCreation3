@@ -256,6 +256,9 @@ namespace GamePlay.Player
         /// </summary>
         private void CheckState()
         {
+            property.IsGrounded = Physics2D.OverlapBox(groundCheckPoint.position, new Vector2(Config.groundCheckWidth,
+                Config.groundCheckHeight), 0, Config.groundLayer);
+            
             property.CurrentGroundCollider = Physics2D.OverlapBox(groundCheckPoint.position, new Vector2(Config.groundCheckWidth,
                 Config.groundCheckHeight), 0, ~LayerMask.GetMask("Player") );
             

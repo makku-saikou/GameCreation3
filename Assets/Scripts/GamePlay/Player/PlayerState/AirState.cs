@@ -69,10 +69,10 @@ namespace GamePlay.Player.PlayerState
         {
             base.FixedUpdateCallback();
             
-            if (Input.MovementInput != 0 && !Property.IsLaunching && Mathf.Abs(Rb.velocity.x) < Config.airMaxSpeed.x)
+            bool limitX = Mathf.Abs(Rb.velocity.x) > Config.airMaxSpeed.x;
+            if (Input.MovementInput != 0 && !Property.IsLaunching)
             {
                 Rb.AddForce(new Vector2(Config.xForceInAir * Input.MovementInput, 0), ForceMode2D.Force);
-                // Rb.velocity = new Vector2(Config.xForceInAir * Input.MovementInput, Rb.velocity.y);
             }
             var velocity = Rb.velocity;
             
