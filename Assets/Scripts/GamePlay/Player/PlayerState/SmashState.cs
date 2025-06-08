@@ -21,11 +21,12 @@ namespace GamePlay.Player.PlayerState
             Property.HasSmashLanded = false;
             Player.Head.SetShow(false);
             Property.HeadCanLaunch = false;
+            Rb.velocity = new Vector2(0, Rb.velocity.y);
             Player.AddGravityEffect("Smash", Config.smashGravityScale, Config.smashGravityScaleTime);
             DelayUtility.Delay(Config.smashGravityScaleTime, () =>
             {
-                Rb.velocity = new Vector2(Rb.velocity.x, -Config.smashVelocity);
-                Animator.SetTrigger("SmashDown");
+                Rb.velocity = new Vector2(0, -Config.smashVelocity);
+                Animator.Play("Smash_Down");
             });
         }
 
@@ -57,7 +58,7 @@ namespace GamePlay.Player.PlayerState
         
         private void Bounce()
         {
-            if(Mathf.Abs(Input.MovementInput) > 0.3f)
+            if(Mathf.Abs(Input.MovementInput) > 0.9f)
             {
                 var direction = Config.smashDirection;
                 direction = new Vector3(direction.x * Mathf.Sign(Input.MovementInput), direction.y, 0);
