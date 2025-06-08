@@ -69,8 +69,8 @@ namespace GamePlay.Player.PlayerState
         {
             base.FixedUpdateCallback();
             
-            bool limitX = Mathf.Abs(Rb.velocity.x) > Config.airMaxSpeed.x;
-            if (Input.MovementInput != 0 && !Property.IsLaunching)
+            bool limitX = Mathf.Abs(Rb.velocity.x) < Config.airMaxSpeed.x || Rb.velocity.x * Input.MovementInput < 0;
+            if (Input.MovementInput != 0 && !Property.IsLaunching && limitX)
             {
                 Rb.AddForce(new Vector2(Config.xForceInAir * Input.MovementInput, 0), ForceMode2D.Force);
             }
