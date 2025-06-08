@@ -130,7 +130,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 9, y: 9}
   m_EdgeRadius: 0
 --- !u!114 &3552638358872778936
 MonoBehaviour:
@@ -144,6 +144,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19dfa7f8f4a545c7a65ce367a5963ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 733019472322325953}
+  boxCollider: {fileID: 1798863931099485083}
+  offset: {x: 0, y: 0}
+  sizeAdjust: {x: -1, y: -1}
 --- !u!114 &312215539004799316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,4 +160,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f5bc5e2419408d92839157f832b8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 160

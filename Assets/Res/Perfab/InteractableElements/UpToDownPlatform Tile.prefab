@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smashMonitor: {fileID: 1039375841527846594}
-  openTime: 0.5
+  openTime: 1
 --- !u!1 &7265066669776259213
 GameObject:
   m_ObjectHideFlags: 0
