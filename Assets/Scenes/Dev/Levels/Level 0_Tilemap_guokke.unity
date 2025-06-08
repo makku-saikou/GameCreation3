@@ -197,21 +197,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: CheckPoint
       objectReference: {fileID: 0}
-    - target: {fileID: 5652830539582918410, guid: 67091194f9a690347a234711b1b52ed8, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5652830539582918410, guid: 67091194f9a690347a234711b1b52ed8, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
+    - target: {fileID: 2910623615947475861, guid: 67091194f9a690347a234711b1b52ed8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5652830539582918410, guid: 67091194f9a690347a234711b1b52ed8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -28.11
+      value: -28.13
       objectReference: {fileID: 0}
     - target: {fileID: 5652830539582918410, guid: 67091194f9a690347a234711b1b52ed8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -22.18
+      value: -22.42
       objectReference: {fileID: 0}
     - target: {fileID: 5652830539582918410, guid: 67091194f9a690347a234711b1b52ed8, type: 3}
       propertyPath: m_LocalPosition.z
