@@ -60828,6 +60828,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 990673932}
     m_Modifications:
+    - target: {fileID: 2237757312621303115, guid: f72efca5305d5824aa187a5a072eada2, type: 3}
+      propertyPath: m_ChunkCullingBounds.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3873982566170410356, guid: f72efca5305d5824aa187a5a072eada2, type: 3}
       propertyPath: m_Name
       value: ColorBlock_Shuttle_Green
@@ -61725,6 +61729,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 990673932}
     m_Modifications:
+    - target: {fileID: 4716090840559193309, guid: 184e5d4ebc09b7e43876c311d3bee976, type: 3}
+      propertyPath: m_ChunkCullingBounds.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6181189193095246520, guid: 184e5d4ebc09b7e43876c311d3bee976, type: 3}
       propertyPath: m_LocalPosition.x
       value: 44

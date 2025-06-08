@@ -24,8 +24,20 @@ namespace GamePlay.Player
         public int FacingDirection => IsFacingRight ? 1 : -1;// _isFacingRight的数值形式，方便计算
         public bool IsFacingRight { get; set; }             // 是否正面向右边
 
-        // 是否在地面上，由Physics2D判定
-        public bool IsGrounded { get; set; } = true;
+        public bool IsGrounded
+        {
+            get
+            {
+                if (CurrentGroundCollider)
+                {
+                    return ( 1 << CurrentGroundCollider.gameObject.layer & Config.groundLayer) != 0;
+                }
+
+                return false;
+            }
+        }
+        
+        public Collider2D CurrentGroundCollider { get; set; } // 当前脚下接触的碰撞体
         // 是否与物体连接
         public bool IsConnecting { get; set; }
 

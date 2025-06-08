@@ -6,6 +6,7 @@
 // -------------------------------------------------
 
 using Common.FSM;
+using GamePlay.Item.Platform;
 using PurpleFlowerCore.Utility;
 using UnityEngine;
 
@@ -33,9 +34,21 @@ namespace GamePlay.Player.PlayerState
         public override void LateUpdateCallback(float deltaTime)
         {
             base.LateUpdateCallback(deltaTime);
-            if (Property.IsGrounded)
+            bool trampoline = Property.CurrentGroundCollider 
+                              && Property.CurrentGroundCollider.gameObject.CompareTag("Trampoline");
+            if (Property.IsGrounded || trampoline)
             {
-                Bounce();
+                float bounceForce;
+                if (trampoline)
+                {
+                    bounceForce = Property.CurrentGroundCollider.GetComponentInParent<Trampoline>().BounceForce;
+                    // bounceForce = 0;
+                }
+                else
+                {
+                    bounceForce = Config.smashBounceForce;
+                }
+                Bounce(bounceForce);
                 DelayUtility.Delay(0.1f, () =>
                 {
                     Property.HasSmashLanded = true;
@@ -56,17 +69,17 @@ namespace GamePlay.Player.PlayerState
             });
         }
         
-        private void Bounce()
+        private void Bounce(float bounceForce)
         {
             if(Mathf.Abs(Input.MovementInput) > 0.9f)
             {
                 var direction = Config.smashDirection;
                 direction = new Vector3(direction.x * Mathf.Sign(Input.MovementInput), direction.y, 0);
                 direction.Normalize();
-                Rb.velocity = direction * Config.smashBounceForce;
+                Rb.velocity = direction * bounceForce;
             }
             else
-                Rb.velocity = new Vector2(Rb.velocity.x, Config.smashBounceForce);
+                Rb.velocity = new Vector2(Rb.velocity.x, bounceForce);
         }
     }
 }

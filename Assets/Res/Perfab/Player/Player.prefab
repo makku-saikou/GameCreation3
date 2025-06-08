@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1736917141130917297}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TongueRoot1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7158330813806190610}
   - component: {fileID: 5445178873793561151}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tongue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 5553778798862907640}
   - component: {fileID: 2522039149253004541}
   - component: {fileID: 6356633151648863050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 140825107737555479}
   - component: {fileID: 2671588610722738337}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TonguePoint
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -401,7 +401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2997528915376706869}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CameraPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 90122832786852693}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WallCheck2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1066659650842911128}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WallCheck1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 2290690238094168113}
   - component: {fileID: 874838184081386832}
   - component: {fileID: 3517248687459407483}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TongueLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 5654363637517419355}
   - component: {fileID: 6740037977774092997}
   - component: {fileID: 4466951446267338716}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Entity
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -876,7 +876,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2379234591070049607}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TongueRoot2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -907,7 +907,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1463593771889573033}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TongueRoot0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -939,7 +939,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7814442875036208474}
   - component: {fileID: 7555017756564150081}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeadBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1023,7 +1023,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2015066103832843174}
   - component: {fileID: 588654780781360429}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EntityBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1110,7 +1110,7 @@ GameObject:
   - component: {fileID: 3959717701253126937}
   - component: {fileID: 5333001339523546377}
   - component: {fileID: 6760361951091181679}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1251,7 +1251,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6378958791466072281}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,6 +6,7 @@ namespace GamePlay.Item.Platform
 	public class Trampoline : MonoBehaviour
 	{
 		[SerializeField] private float bounceForce = 10f;
+		public float BounceForce => bounceForce;
 
 		[SerializeField] private MMF_Player feedbacks;
 

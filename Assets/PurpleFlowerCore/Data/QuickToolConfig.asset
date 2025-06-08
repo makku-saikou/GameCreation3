@@ -61,3 +61,11 @@ MonoBehaviour:
     command:
       m_PersistentCalls:
         m_Calls: []
+  - name: Level1-2
+    commandType: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+    lineBreak: 1
+    commandParam: Assets/Scenes/Dev/Levels/Level 1-2 Garden 1stPart_Tilemap 1.unity
+    command:
+      m_PersistentCalls:
+        m_Calls: []
