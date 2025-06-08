@@ -17,7 +17,7 @@ MonoBehaviour:
   gravityScale: 8
   airMaxSpeed: {x: 20, y: 40}
   airMaxSpeedRecoverScale: {x: 0.1, y: 0.1}
-  xForceInAir: 1000
+  xForceInAir: 800
   variableJumpForce: 0.95
   preJumpBufferTime: 0.17
   airRotateSpeed: 2
@@ -49,9 +49,10 @@ MonoBehaviour:
   smashVelocity: 85
   smashBounceForce: 20
   smashCD: 0.2
+  smashDirection: {x: 1, y: 1}
   tongueSpeed: 40
   retractSpeed: 180
-  tongueMaxLength: 10
+  tongueMaxLength: 12
   tongueMinLength: 3
   targetLayers:
   - serializedVersion: 2
@@ -61,7 +62,7 @@ MonoBehaviour:
   launchCD: 0.1
   openMouthSpeed: 64
   closeMouthSpeed: 20
-  climbPileSpeed: 5
+  climbPileSpeed: 8
   climbJumpForce: 100
   climbJumpDirection: {x: 1, y: 1}
   climbCD: 1
@@ -81,3 +82,4 @@ MonoBehaviour:
   onGroundDownLimit: 0.6
   interactNoGravityTime: 0.5
   colorDuration: 10
+  blinkFrequency: 10
