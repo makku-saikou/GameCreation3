@@ -8,6 +8,7 @@ TagManager:
   - PillarPoint
   - ColorBlock
   - Wall
+  - Trampoline
   layers:
   - Default
   - TransparentFX

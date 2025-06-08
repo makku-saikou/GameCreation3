@@ -25,6 +25,7 @@ namespace GamePlay.Player.PlayerState
             DelayUtility.Delay(Config.smashGravityScaleTime, () =>
             {
                 Rb.velocity = new Vector2(Rb.velocity.x, -Config.smashVelocity);
+                Animator.SetTrigger("SmashDown");
             });
         }
 
@@ -39,7 +40,6 @@ namespace GamePlay.Player.PlayerState
                     Property.HasSmashLanded = true;
                 });
             }
-
         }
 
         public override void ExitCallback(HState next)
@@ -57,8 +57,15 @@ namespace GamePlay.Player.PlayerState
         
         private void Bounce()
         {
-            // Rb.AddForce(Vector2.up * Config.smashBounceForce, ForceMode2D.Impulse);
-            Rb.velocity = new Vector2(Rb.velocity.x, Config.smashBounceForce);
+            if(Mathf.Abs(Input.MovementInput) > 0.3f)
+            {
+                var direction = Config.smashDirection;
+                direction = new Vector3(direction.x * Mathf.Sign(Input.MovementInput), direction.y, 0);
+                direction.Normalize();
+                Rb.velocity = direction * Config.smashBounceForce;
+            }
+            else
+                Rb.velocity = new Vector2(Rb.velocity.x, Config.smashBounceForce);
         }
     }
 }

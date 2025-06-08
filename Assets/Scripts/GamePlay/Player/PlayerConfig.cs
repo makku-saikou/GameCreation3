@@ -67,15 +67,18 @@ namespace GamePlay.Player
         [FoldoutGroup("悬挂")] [LabelText("退出悬挂补偿力")] [Tooltip("方向为切线，与水平面角度为90，补偿力为0，角度为0，力为该值")]
         public float hangForceCompensate = 10f;
     
-        [FoldoutGroup("地面")] [LabelText("地面走路速度")]
+        [FoldoutGroup("地面")] [LabelText("地面最低速度")]
         public float onGroundWalkSpeed = 10f;
         
-        [FoldoutGroup("地面")] [LabelText("地面跑步速度")]
+        [FoldoutGroup("地面")] [LabelText("地面最高速度")]
         public float onGroundRunSpeed = 15f;
         
-        [FoldoutGroup("地面")] [LabelText("地面助跑系数")] [Tooltip("有点无法量化，数值越大，从走路速度到跑步速度需要的时间越长,详细问LJH")]
+        [FoldoutGroup("地面")] [LabelText("地面助跑系数")] [Tooltip("有点无法量化，数值越大，从最低速度逐步加速到最高速度需要的时间越长,详细问LJH")]
         [Range(0, 80f)]
         public float onGroundWalkToRunCoefficient = 20f;
+        
+        // [FoldoutGroup("地面")] [LabelText("地面助跑加速度")]
+        // public float onGroundWalkToRunAcceleration = 10f;
     
         [FoldoutGroup("地面")] [LabelText("地面检测高度")]
         public float groundCheckHeight = 0.1f;
@@ -125,6 +128,9 @@ namespace GamePlay.Player
         
         [FoldoutGroup("下砸")] [LabelText("下砸CD")]
         public float smashCD = 0.5f;
+        
+        [FoldoutGroup("下砸")] [LabelText("下砸捶地反弹方向")] [Tooltip("下砸时，捶地反弹的方向，默认向上，有输入时向左右")]
+        public Vector2 smashDirection = new(1f, 1f);
     
         [FoldoutGroup("头和舌头")] [LabelText("舌头发射速度")]
         public float tongueSpeed = 40;
@@ -209,6 +215,9 @@ namespace GamePlay.Player
 
         [FoldoutGroup("其他功能")] [LabelText("变色持续时间,秒")]
         public float colorDuration = 10;
+        
+        [FoldoutGroup("其他功能")] [LabelText("眨眼频率")]
+        public float blinkFrequency = 10f;
         
 #if UNITY_EDITOR
         public bool IsPlayerConfig => this == GameManager.Instance?.Player.Config;

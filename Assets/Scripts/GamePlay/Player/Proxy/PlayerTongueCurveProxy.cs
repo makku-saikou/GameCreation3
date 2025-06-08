@@ -7,6 +7,7 @@ namespace GamePlay.Player
         [Header("General References:")]
         [SerializeField] private PlayerTongue tongue;
         [SerializeField] private LineRenderer lineRenderer;
+        public LineRenderer LineRenderer => lineRenderer;
 
         [Header("General Settings:")]
         [SerializeField] private int precision = 40;
@@ -25,23 +26,33 @@ namespace GamePlay.Player
         private float _moveTime;
         private bool _straightLine = true;
 
+        public bool Enable
+        {
+            get => lineRenderer.enabled;
+            set
+            {
+                if (lineRenderer.enabled == value) return;
+                lineRenderer.enabled = value;
+            }
+        }
+
         private void OnEnable()
         {
-            Init();
+            Start();
             _straightLine = false;
             
             lineRenderer.enabled = true;
             
-            tongue.OnTongueLaunch += Init;
+            tongue.OnTongueLaunch += Start;
         }
-
+        
         private void OnDisable()
         {
             lineRenderer.enabled = false;
-            tongue.OnTongueLaunch -= Init;
+            tongue.OnTongueLaunch -= Start;
         }
         
-        private void Init()
+        protected void Start()
         {
             _moveTime = 0;
             _waveSize = startWaveSize;

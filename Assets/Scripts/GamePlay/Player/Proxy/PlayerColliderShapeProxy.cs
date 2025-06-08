@@ -17,7 +17,7 @@ namespace GamePlay.Player
         [SerializeField] private Collider2D collider0;
         [SerializeField] private Collider2D collider1;
 
-        private void Start()
+        protected void Start()
         {
             player.StateMachine.OnStateChanged += ChangeColliderShape;
         }
