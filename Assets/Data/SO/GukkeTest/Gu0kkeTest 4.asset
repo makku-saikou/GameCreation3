@@ -69,10 +69,10 @@ MonoBehaviour:
   climbJumpForce: 150
   climbJumpDirection: {x: 1, y: 1}
   climbCD: 1
-  swimSpeed: 10
+  swimSpeed: 25
   swimDashForce: 80
   swimDashCD: 2
-  swimDrag: 0.5
+  swimDrag: 0.143
   swimDashRecoverTime: 0.5
   shuttleThreshold: 0
   shuttleSpeed: 20
