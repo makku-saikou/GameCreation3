@@ -25,12 +25,12 @@ namespace GamePlay.Item
         [SerializeField] [LabelText("当颜色和玩家相同时（池）")] private Color poolColor;
 
         private Tilemap _tilemap;
+        private SpriteRenderer _spriteRenderer;
 
         protected override void Init()
         {
             _tilemap = GetComponent<Tilemap>();
-            if (!_tilemap)
-                PFCLog.Error("ColorBlock_Swim", "Tilemap is not found on the ColorBlock_Swim object.");
+            _spriteRenderer = GetComponent<SpriteRenderer>();
             Player.Property.OnColorChanged += OnPlayerColorChanged;
             OnPlayerColorChanged(EPlayerColor.None, Player.Property.CurrentColor);
         }
@@ -61,6 +61,8 @@ namespace GamePlay.Item
 
             if(_tilemap)
                 _tilemap.color = to == color ? poolColor : originColor;
+            if (_spriteRenderer)
+                _spriteRenderer.color = to == color ? poolColor : originColor;
         }
         
         private void OnPlayerColorChangedInThis(EPlayerColor from, EPlayerColor to)
