@@ -647,7 +647,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0.00009763241, z: 0}
+  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -704,3 +704,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: 1
   collider2D: {fileID: 3086194879207652319}
+  originColor: {r: 1, g: 1, b: 1, a: 1}
+  poolColor: {r: 1, g: 1, b: 1, a: 0.19607843}

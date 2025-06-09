@@ -1,5 +1,4 @@
-﻿using System;
-using Common.Manager;
+﻿using Common.Manager;
 using UnityEngine;
 
 namespace GamePlay.Item

@@ -38,8 +38,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   jumpBufferTime: 0.5
-  groundTrailDuration: 0.1
-  groundTrailInterval: 0.02
+  groundTrailDuration: 0.05
+  groundTrailInterval: 0.01
   wallCheckRadius: 0.1
   wallSlideSpeed: 0
   wallSpeedRecoverScale: 0.125
