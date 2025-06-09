@@ -281,6 +281,7 @@ MonoBehaviour:
   wallCheckPoint1: {fileID: 1066659650842911128}
   wallCheckPoint2: {fileID: 90122832786852693}
   cameraPoint: {fileID: 2997528915376706869}
+  keyFollowPoint: {fileID: 3909720598041562372}
 --- !u!114 &2522039149253004541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,6 +483,37 @@ MonoBehaviour:
   - {fileID: 124354341812049596}
   - {fileID: 1153359830208008590}
   - {fileID: 3533510484392226233}
+--- !u!1 &1453438963399946462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3909720598041562372}
+  m_Layer: 8
+  m_Name: KeyFollowPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3909720598041562372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453438963399946462}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.32, y: 1.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5654363637517419355}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1827424106659225990
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,6 +915,7 @@ Transform:
   - {fileID: 1736917141130917297}
   - {fileID: 2379234591070049607}
   - {fileID: 1612872317478879090}
+  - {fileID: 3909720598041562372}
   m_Father: {fileID: 8238423557046667480}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6740037977774092997

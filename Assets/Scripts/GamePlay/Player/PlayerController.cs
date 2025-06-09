@@ -74,6 +74,10 @@ namespace GamePlay.Player
         public event Action<Collision2D> OnCollisionEnter;
         public event Action<Collision2D> OnCollisionExit;
 
+        [Title("Others")]
+        [SerializeField] private Transform keyFollowPoint;
+        public Transform KeyFollowPoint => keyFollowPoint;
+
         private void Update()
         {
             CheckState();

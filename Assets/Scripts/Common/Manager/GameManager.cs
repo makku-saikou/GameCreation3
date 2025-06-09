@@ -23,7 +23,10 @@ namespace Common.Manager
 
         [SerializeField] private Transform checkPoint;
 
+        [Title("Game Info")]
         [SerializeField] [ReadOnly] private int collectionCount;
+        [SerializeField] [ReadOnly] private bool isKeyCollected;
+        public bool IsKeyCollected => isKeyCollected;
 
         public Transform CheckPoint
         {
@@ -68,6 +71,11 @@ namespace Common.Manager
         public void GetCollection()
         {
             collectionCount++;
+        }
+
+        public void GetKey()
+        {
+            isKeyCollected = true;
         }
     }
 }
