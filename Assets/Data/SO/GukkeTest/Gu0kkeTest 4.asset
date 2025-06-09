@@ -63,7 +63,7 @@ MonoBehaviour:
   openMouthSpeed: 64
   closeMouthSpeed: 20
   climbPileSpeed: 8
-  climbJumpForce: 100
+  climbJumpForce: 150
   climbJumpDirection: {x: 1, y: 1}
   climbCD: 1
   swimSpeed: 10
