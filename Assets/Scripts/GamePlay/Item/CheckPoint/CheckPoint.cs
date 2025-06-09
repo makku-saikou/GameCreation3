@@ -23,7 +23,10 @@ namespace GamePlay.Item.CheckPoint
 			flag.SetActive(true);
 			flagFeedback?.PlayFeedbacks();
 			if(!_hasTriggered)
+			{
+				AudioManager.PlayEffect("欢呼声",transform.position);
 				particle.Play();
+			}
 			_hasTriggered = true;
 		}
 	}
