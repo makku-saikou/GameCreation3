@@ -9,6 +9,7 @@ using System;
 using GamePlay.Player;
 using Hmxs.Toolkit;
 using PurpleFlowerCore;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Common.Manager
@@ -21,6 +22,9 @@ namespace Common.Manager
         public PlayerController Player => _player;
 
         [SerializeField] private Transform checkPoint;
+
+        [SerializeField] [ReadOnly] private int collectionCount;
+
         public Transform CheckPoint
         {
             get => checkPoint;
@@ -59,6 +63,11 @@ namespace Common.Manager
             _player = Instantiate(playerPrefab, position, Quaternion.identity);
             _player.Init();
             EventSystem.EventTrigger("PlayerInit");
+        }
+
+        public void GetCollection()
+        {
+            collectionCount++;
         }
     }
 }
