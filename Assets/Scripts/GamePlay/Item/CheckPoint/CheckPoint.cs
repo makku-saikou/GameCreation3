@@ -10,7 +10,8 @@ namespace GamePlay.Item.CheckPoint
 		[SerializeField] private Transform checkPoint;
 		[SerializeField] private GameObject flag;
 		[SerializeField] private MMF_Player flagFeedback;
-
+		[SerializeField] private ParticleSystem particle;
+		private bool _hasTriggered;
 		private void OnTriggerEnter2D(Collider2D other)
 		{
 			if (!other.CompareTag("Player")) return;
@@ -21,6 +22,9 @@ namespace GamePlay.Item.CheckPoint
 			// TODO: checkPoint animation
 			flag.SetActive(true);
 			flagFeedback?.PlayFeedbacks();
+			if(!_hasTriggered)
+				particle.Play();
+			_hasTriggered = true;
 		}
 	}
 }
