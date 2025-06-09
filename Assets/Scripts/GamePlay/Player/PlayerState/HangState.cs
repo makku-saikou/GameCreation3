@@ -19,7 +19,7 @@ namespace GamePlay.Player.PlayerState
 
         private float _tailDisappearTime = 0f;
         private Coroutine _tailDisappearCoroutine;
-        private GameObject _particleBuffer;
+        private ParticleSystem _particleBuffer;
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
@@ -35,6 +35,11 @@ namespace GamePlay.Player.PlayerState
             Player.RemoveGravityEffect("Hang");
             Player.Rb.drag = 0;
             Player.Head.SetShow(true);
+            if(_particleBuffer)
+            {
+                _particleBuffer.Stop(); 
+                Object.Destroy(_particleBuffer.gameObject, 3);
+            }
 
             // 补偿力
             var direction = Player.Entity.right;
@@ -102,12 +107,12 @@ namespace GamePlay.Player.PlayerState
         {
             PFCLog.Debug("HangState", $"Tail Speed: {Rb.velocity.magnitude}");
             var particle = Particle.Get("PlayerTail2");
-            if (Rb.velocity.magnitude < Config.hangTrailSpeedThreshold)
+            if (Rb.velocity.sqrMagnitude < Config.hangTrailSpeedThreshold * Config.hangTrailSpeedThreshold)
             {
                 if(_particleBuffer)
                 {
-                    _particleBuffer.GetComponent<ParticleSystem>().Stop(); 
-                    GameObject.Destroy(_particleBuffer.gameObject, 2);
+                    _particleBuffer.Stop(); 
+                    Object.Destroy(_particleBuffer.gameObject, 3);
                 }
                 _particleBuffer = null;
             }
@@ -115,7 +120,8 @@ namespace GamePlay.Player.PlayerState
             {
                 if (!_particleBuffer)
                 {
-                    _particleBuffer = MonoSystem.Instantiate(particle, particle.transform.position, Quaternion.identity, Particle.transform).gameObject;
+                    _particleBuffer = MonoSystem.Instantiate(particle, particle.transform.position, Quaternion.identity, Particle.transform);
+                    _particleBuffer.Play();
                 }
             }
         }
