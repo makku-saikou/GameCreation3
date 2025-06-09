@@ -9,6 +9,7 @@ TagManager:
   - ColorBlock
   - Wall
   - Trampoline
+  - Tongue
   layers:
   - Default
   - TransparentFX

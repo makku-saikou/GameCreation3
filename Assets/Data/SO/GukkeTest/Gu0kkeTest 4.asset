@@ -20,7 +20,7 @@ MonoBehaviour:
   xForceInAir: 800
   variableJumpForce: 0.95
   preJumpBufferTime: 0.17
-  airRotateSpeed: 2
+  airRotateSpeed: 3.7
   hangDrag: 2
   hangSwayForce: 120
   hangGravityScale: 12
