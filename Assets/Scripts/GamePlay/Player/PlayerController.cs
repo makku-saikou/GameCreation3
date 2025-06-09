@@ -283,6 +283,7 @@ namespace GamePlay.Player
             if(index >= 0 && index < controllers.Count)
             {
                 string ani = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+                PFCLog.Debug("PlayerController", $"ChangeColor: {from} -> {to}, ani: {ani}");
                 float aniTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
                 animator.runtimeAnimatorController = controllers[(int)to];
                 animator.enabled = true;

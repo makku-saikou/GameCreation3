@@ -15,6 +15,7 @@ namespace GamePlay.Player.PlayerState
 		{
 			base.EnterCallback(prev);
 			PFCLog.Debug("Enter InCannon State");
+			Player.Head.RetractTongue();
 			Player.Entity.gameObject.SetActive(false);
 			Player.Rb.velocity = Vector2.zero;
 			Player.Rb.angularVelocity = 0f;

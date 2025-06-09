@@ -203,6 +203,7 @@ namespace GamePlay.Player
                 }
                 else
                 {
+                    // todo: UI管理
                     targetImage.gameObject.SetActive(false);
                     _targetPosition = hit.point;
                 }

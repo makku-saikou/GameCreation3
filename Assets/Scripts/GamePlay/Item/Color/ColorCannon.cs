@@ -1,6 +1,7 @@
 ﻿using System;
 using GamePlay.Player;
 using Hmxs.Toolkit;
+using PurpleFlowerCore.Utility;
 using UnityEngine;
 
 namespace GamePlay.Item
@@ -43,7 +44,10 @@ namespace GamePlay.Item
 
 		private void EjectPlayer(PlayerController player)
 		{
-			player.Property.CurrentColor = color;
+			DelayUtility.DelayFrame(2, () =>
+			{
+				player.Property.CurrentColor = color;
+			});
 			player.Rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 			player.Rb.AddForce(FinalForce, ForceMode2D.Impulse);
 			_isCooldown = true;

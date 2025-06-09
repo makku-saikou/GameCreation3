@@ -112,7 +112,12 @@ namespace GamePlay.Player
             int index = (int)to;
             if(index >= 0 && index < controllers.Count)
             {
+                string ani = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+                float aniTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
                 animator.runtimeAnimatorController = controllers[(int)to];
+                animator.enabled = true;
+                animator.Play(ani, 0, aniTime);
+                animator.Update(0.001f);
             }
             else
             {
