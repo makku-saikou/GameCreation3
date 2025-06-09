@@ -112934,7 +112934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4716090840559193309, guid: 184e5d4ebc09b7e43876c311d3bee976, type: 3}
       propertyPath: m_ChunkCullingBounds.y
-      value: 0
+      value: 0.00009763241
       objectReference: {fileID: 0}
     - target: {fileID: 6181189193095246520, guid: 184e5d4ebc09b7e43876c311d3bee976, type: 3}
       propertyPath: m_LocalPosition.x
@@ -162587,7 +162587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4716090840559193309, guid: 184e5d4ebc09b7e43876c311d3bee976, type: 3}
       propertyPath: m_ChunkCullingBounds.y
-      value: 0
+      value: 0.00009763241
       objectReference: {fileID: 0}
     - target: {fileID: 6181189193095246520, guid: 184e5d4ebc09b7e43876c311d3bee976, type: 3}
       propertyPath: m_LocalPosition.x
@@ -162632,6 +162632,10 @@ PrefabInstance:
     - target: {fileID: 8531263147591168553, guid: 184e5d4ebc09b7e43876c311d3bee976, type: 3}
       propertyPath: m_Name
       value: ColorBlock_Swim_Green
+      objectReference: {fileID: 0}
+    - target: {fileID: 8531263147591168553, guid: 184e5d4ebc09b7e43876c311d3bee976, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -198287,7 +198291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4716090840559193309, guid: 184e5d4ebc09b7e43876c311d3bee976, type: 3}
       propertyPath: m_ChunkCullingBounds.y
-      value: 0
+      value: 0.00009763241
       objectReference: {fileID: 0}
     - target: {fileID: 6181189193095246520, guid: 184e5d4ebc09b7e43876c311d3bee976, type: 3}
       propertyPath: m_LocalPosition.x
