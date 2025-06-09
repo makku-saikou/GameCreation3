@@ -6,6 +6,7 @@
 // -------------------------------------------------
 
 using Common.FSM;
+using GamePlay.Player.Particle;
 using PurpleFlowerCore;
 using UnityEngine;
 
@@ -53,6 +54,7 @@ namespace GamePlay.Player.PlayerState
                 }
                 Rb.AddForce(direction * Config.wallJumpForce, ForceMode2D.Impulse);
                 Property.ResetWallJumpTimer();
+                Particle.Get<JumpJet>().Play(Input.MovementInput);
             }
         }
 

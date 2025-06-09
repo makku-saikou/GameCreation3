@@ -103,6 +103,8 @@ namespace GamePlay.Player.PlayerState
             Property.AmountOfJumpLeft--;
             Property.ResetWallJumpTimer();
             Property.ResetJumpBufferFlag();
+            
+            Particle.Get<JumpJet>().Play(Input.MovementInput);
         }
     }
 }

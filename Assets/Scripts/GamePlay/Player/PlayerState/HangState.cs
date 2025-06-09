@@ -41,6 +41,7 @@ namespace GamePlay.Player.PlayerState
             float compensating = Config.hangForceCompensate * Mathf.Abs(Property.CurrentHongAngle) / 90;
             Rb.AddForce(direction * compensating, ForceMode2D.Impulse);
             PFCLog.Debug("HangState", $"Compensating Force: {compensating} Direction: {direction}");
+            Particle.Get<JumpJet>().Play(Input.MovementInput);
         }
 
         public override void UpdateCallback(float deltaTime)

@@ -28,7 +28,7 @@ MonoBehaviour:
   launchDragScale: 0.3
   hangJumpForce: 20
   hangForceCompensate: 10
-  hangTrailSpeedThreshold: 20
+  hangTrailSpeedThreshold: 30
   onGroundWalkSpeed: 15
   onGroundRunSpeed: 20
   onGroundWalkToRunCoefficient: 20

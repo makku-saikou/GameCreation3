@@ -479,6 +479,7 @@ MonoBehaviour:
   particleSystems:
   - {fileID: 9196815007728192732}
   - {fileID: 124354341812049596}
+  - {fileID: 1153359830208008590}
 --- !u!1 &1827424106659225990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,7 +1468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1593527254892255310, guid: 2d0ca6e04db49f74e8b44ccaf3925f02, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.048
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 1593527254892255310, guid: 2d0ca6e04db49f74e8b44ccaf3925f02, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1501,18 +1502,76 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4075092277565081150, guid: 2d0ca6e04db49f74e8b44ccaf3925f02, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5309154549881864087, guid: 2d0ca6e04db49f74e8b44ccaf3925f02, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.68999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829590764225322542, guid: 2d0ca6e04db49f74e8b44ccaf3925f02, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8732218213377368939, guid: 2d0ca6e04db49f74e8b44ccaf3925f02, type: 3}
       propertyPath: m_Name
       value: JumpParticles
       objectReference: {fileID: 0}
+    - target: {fileID: 9150736888142621652, guid: 2d0ca6e04db49f74e8b44ccaf3925f02, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201512827588384814, guid: 2d0ca6e04db49f74e8b44ccaf3925f02, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.69
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8732218213377368939, guid: 2d0ca6e04db49f74e8b44ccaf3925f02, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1153359830208008590}
   m_SourcePrefab: {fileID: 100100000, guid: 2d0ca6e04db49f74e8b44ccaf3925f02, type: 3}
+--- !u!198 &247542313980914486 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4075092277565081150, guid: 2d0ca6e04db49f74e8b44ccaf3925f02, type: 3}
+  m_PrefabInstance: {fileID: 4315240888721845512}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3314517529493255494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1593527254892255310, guid: 2d0ca6e04db49f74e8b44ccaf3925f02, type: 3}
+  m_PrefabInstance: {fileID: 4315240888721845512}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4813717476855271011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8732218213377368939, guid: 2d0ca6e04db49f74e8b44ccaf3925f02, type: 3}
+  m_PrefabInstance: {fileID: 4315240888721845512}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1153359830208008590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813717476855271011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49c490bcb6c740fb9046730907d08b8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle0: {fileID: 247542313980914486}
+  particle1: {fileID: 7288306493956420390}
+  particle2: {fileID: 4980737157330912988}
+--- !u!198 &4980737157330912988 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 9150736888142621652, guid: 2d0ca6e04db49f74e8b44ccaf3925f02, type: 3}
+  m_PrefabInstance: {fileID: 4315240888721845512}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7288306493956420390 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6829590764225322542, guid: 2d0ca6e04db49f74e8b44ccaf3925f02, type: 3}
   m_PrefabInstance: {fileID: 4315240888721845512}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8014900190238159286

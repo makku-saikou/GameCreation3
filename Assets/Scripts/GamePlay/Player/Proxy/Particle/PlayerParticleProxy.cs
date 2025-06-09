@@ -45,6 +45,21 @@ namespace GamePlay.Player.Particle
             
             throw new System.Exception($"No particle found with type {type}");
         }
+        
+        public T Get<T>() where T : PlayerParticleBase
+        {
+            PlayerParticleBase particle = particleSystems.Find(ps => ps is T);
+            if (particle is not null)
+            {
+                return particle as T;
+            }
+            
+            throw new System.Exception($"No particle found with type {typeof(T)}");
+        }
+        
+        public PlayerParticleBase this[string name] => Get(name);
+
+        public PlayerParticleBase this[Type type] => Get(type);
 
         public void Play(string particleName)
         {
@@ -54,7 +69,7 @@ namespace GamePlay.Player.Particle
         
         public void Play<T>() where T : PlayerParticleBase
         {
-            PlayerParticleBase particle = Get(typeof(T));
+            PlayerParticleBase particle = Get<T>();
             particle.Play();
         }
         
@@ -66,7 +81,7 @@ namespace GamePlay.Player.Particle
         
         public void Stop<T>() where T : PlayerParticleBase
         {
-            PlayerParticleBase particle = Get(typeof(T));
+            PlayerParticleBase particle = Get<T>();
             particle.Stop();
         }
         

@@ -6,6 +6,7 @@
 // -------------------------------------------------
 
 using Common.FSM;
+using GamePlay.Player.Particle;
 using PurpleFlowerCore.Utility;
 using UnityEngine;
 
@@ -92,6 +93,7 @@ namespace GamePlay.Player.PlayerState
                 direction = new Vector2(-direction.x, direction.y);
             
             Rb.AddForce(direction * Config.climbJumpForce, ForceMode2D.Impulse);
+            Particle.Get<JumpJet>().Play(Input.MovementInput);
         }
     }
 }
