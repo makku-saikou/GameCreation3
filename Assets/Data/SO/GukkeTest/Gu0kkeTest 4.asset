@@ -84,5 +84,5 @@ MonoBehaviour:
   onGroundUpLimit: 0.2
   onGroundDownLimit: 0.6
   interactNoGravityTime: 0.5
-  colorDuration: 10
-  blinkFrequency: 10
+  colorDuration: 15
+  blinkFrequency: 3.5
