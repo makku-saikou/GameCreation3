@@ -7,6 +7,7 @@
 // -------------------------------------------------
 
 using Common.FSM;
+using GamePlay.Player.Particle;
 using GamePlay.Player.PlayerInput;
 using UnityEngine;
 

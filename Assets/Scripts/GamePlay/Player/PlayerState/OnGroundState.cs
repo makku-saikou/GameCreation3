@@ -5,8 +5,8 @@
 // Description:
 // -------------------------------------------------
 
-using System;
 using Common.FSM;
+using GamePlay.Player.Particle;
 using PurpleFlowerCore;
 using UnityEngine;
 
@@ -15,7 +15,6 @@ namespace GamePlay.Player.PlayerState
     public class OnGroundState : PlayerStateBase
     {
         public OnGroundState(PlayerController player, EPlayerState name) : base(player, name) { }
-        private float _currentGroundTrailInterval;
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
@@ -36,7 +35,6 @@ namespace GamePlay.Player.PlayerState
             base.UpdateCallback(deltaTime);
             CheckInput();
             CheckJumpState();
-            _currentGroundTrailInterval -= deltaTime;
         }
 
         public override void LateUpdateCallback(float deltaTime)
@@ -93,7 +91,7 @@ namespace GamePlay.Player.PlayerState
             }
             else
             {
-                Poo();
+                Particle.Play<GroundTail>();
                 Rb.velocity = new Vector2(Config.onGroundRunSpeed * Input.MovementInput, Rb.velocity.y);
             }
         }
@@ -105,14 +103,6 @@ namespace GamePlay.Player.PlayerState
             Property.AmountOfJumpLeft--;
             Property.ResetWallJumpTimer();
             Property.ResetJumpBufferFlag();
-        }
-
-        private void Poo()
-        {
-            if (_currentGroundTrailInterval > 0) return;
-            _currentGroundTrailInterval = Config.groundTrailInterval;
-            Vector3 tailPos = Particle.Get("PlayerTail1").transform.position;
-            Particle.PlayerOnce("PlayerTail1", tailPos, Config.groundTrailDuration);
         }
     }
 }

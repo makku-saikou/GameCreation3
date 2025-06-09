@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Common.FSM;
+using GamePlay.Player.Particle;
 using GamePlay.Player.PlayerInput;
 using GamePlay.Player.PlayerState;
 using PurpleFlowerCore;

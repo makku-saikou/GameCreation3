@@ -9,6 +9,7 @@ using Common.FSM;
 using PurpleFlowerCore;
 using UnityEngine;
 using System.Collections;
+using GamePlay.Player.Particle;
 
 namespace GamePlay.Player.PlayerState
 {
@@ -17,9 +18,6 @@ namespace GamePlay.Player.PlayerState
         public HangState(PlayerController player, EPlayerState name) : base(player, name)
         { }
 
-        private float _tailDisappearTime = 0f;
-        private Coroutine _tailDisappearCoroutine;
-        private ParticleSystem _particleBuffer;
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
@@ -35,11 +33,7 @@ namespace GamePlay.Player.PlayerState
             Player.RemoveGravityEffect("Hang");
             Player.Rb.drag = 0;
             Player.Head.SetShow(true);
-            if(_particleBuffer)
-            {
-                _particleBuffer.Stop(); 
-                Object.Destroy(_particleBuffer.gameObject, 3);
-            }
+            Particle.Stop<HangTail>();
 
             // 补偿力
             var direction = Player.Entity.right;
@@ -106,23 +100,13 @@ namespace GamePlay.Player.PlayerState
         private void Tail()
         {
             PFCLog.Debug("HangState", $"Tail Speed: {Rb.velocity.magnitude}");
-            var particle = Particle.Get("PlayerTail2");
             if (Rb.velocity.sqrMagnitude < Config.hangTrailSpeedThreshold * Config.hangTrailSpeedThreshold)
             {
-                if(_particleBuffer)
-                {
-                    _particleBuffer.Stop(); 
-                    Object.Destroy(_particleBuffer.gameObject, 3);
-                }
-                _particleBuffer = null;
+                Particle.Stop<HangTail>();
             }
             else
             {
-                if (!_particleBuffer)
-                {
-                    _particleBuffer = MonoSystem.Instantiate(particle, particle.transform.position, Quaternion.identity, Particle.transform);
-                    _particleBuffer.Play();
-                }
+                Particle.Play<HangTail>();
             }
         }
     }
