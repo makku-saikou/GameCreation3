@@ -15,7 +15,7 @@ namespace GamePlay.Player.PlayerState
     public class OnGroundState : PlayerStateBase
     {
         public OnGroundState(PlayerController player, EPlayerState name) : base(player, name) { }
-        
+        private float _currentGroundTrailInterval;
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
@@ -25,11 +25,18 @@ namespace GamePlay.Player.PlayerState
             Player.Head.SetShow(true);
         }
         
+        public override void ExitCallback(HState next)
+        {
+            base.ExitCallback(next);
+            PFCLog.Debug("Exit OnGround State");
+        }
+        
         public override void UpdateCallback(float deltaTime)
         {
             base.UpdateCallback(deltaTime);
             CheckInput();
             CheckJumpState();
+            _currentGroundTrailInterval -= deltaTime;
         }
 
         public override void LateUpdateCallback(float deltaTime)
@@ -85,7 +92,10 @@ namespace GamePlay.Player.PlayerState
                 Rb.velocity = new Vector2(velocity * Input.MovementInput, Rb.velocity.y);
             }
             else
+            {
+                Poo();
                 Rb.velocity = new Vector2(Config.onGroundRunSpeed * Input.MovementInput, Rb.velocity.y);
+            }
         }
         
         private void NormalJump()
@@ -95,6 +105,14 @@ namespace GamePlay.Player.PlayerState
             Property.AmountOfJumpLeft--;
             Property.ResetWallJumpTimer();
             Property.ResetJumpBufferFlag();
+        }
+
+        private void Poo()
+        {
+            if (_currentGroundTrailInterval > 0) return;
+            _currentGroundTrailInterval = Config.groundTrailInterval;
+            Vector3 tailPos = Particle.Get("PlayerTail1").transform.position;
+            Particle.PlayerOnce("PlayerTail1", tailPos, Config.groundTrailDuration);
         }
     }
 }

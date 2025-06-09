@@ -53,8 +53,11 @@ namespace GamePlay.Player
         public PlayerInputBase Input => _input;
         [SerializeField] private SpriteRenderer entityBackground;
         public SpriteRenderer EntityBackground => entityBackground;
+        
+        [SerializeField] private PlayerParticleProxy playerParticle;
+        public PlayerParticleProxy PlayerParticle => playerParticle;
+        
         public List<RuntimeAnimatorController> controllers = new();
-        [ShowIf("@UnityEditor.EditorApplication.isPlaying")]
          public string CurrentStateName => _stateMachine.CurrentState.Name;
         
         [SerializeField] private Transform groundCheckPoint; // 地面检测点

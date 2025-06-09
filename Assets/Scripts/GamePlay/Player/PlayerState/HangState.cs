@@ -92,5 +92,13 @@ namespace GamePlay.Player.PlayerState
                 Property.CurrentTongueLength += Config.tongueLengthChangeSpeed * Time.deltaTime;
             }
         }
+
+        private void Tail()
+        {
+            if(Rb.velocity.sqrMagnitude < Config.hangTrailSpeedThreshold * Config.hangTrailSpeedThreshold)
+            {
+                return;
+            }
+        }
     }
 }

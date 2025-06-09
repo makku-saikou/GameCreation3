@@ -28,6 +28,7 @@ MonoBehaviour:
   launchDragScale: 0.3
   hangJumpForce: 20
   hangForceCompensate: 10
+  hangTrailSpeedThreshold: 0.1
   onGroundWalkSpeed: 15
   onGroundRunSpeed: 20
   onGroundWalkToRunCoefficient: 20
@@ -37,6 +38,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   jumpBufferTime: 0.5
+  groundTrailDuration: 0.1
+  groundTrailInterval: 0.02
   wallCheckRadius: 0.1
   wallSlideSpeed: 0
   wallSpeedRecoverScale: 0.125

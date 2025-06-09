@@ -30,6 +30,7 @@ namespace GamePlay.Player
         private PlayerConfig Config => Player.Config;
         [SerializeField]private ETongueState tongueState;
         public ETongueState TongueState => tongueState;
+        
         [SerializeField] private Transform tonguePoint;
         public Transform TonguePoint => tonguePoint;
         [SerializeField] private PlayerTongueCurveProxy tongueCurveProxy;

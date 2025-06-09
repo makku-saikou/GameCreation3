@@ -66,6 +66,9 @@ namespace GamePlay.Player
     
         [FoldoutGroup("悬挂")] [LabelText("退出悬挂补偿力")] [Tooltip("方向为切线，与水平面角度为90，补偿力为0，角度为0，力为该值")]
         public float hangForceCompensate = 10f;
+        
+        [FoldoutGroup("悬挂")] [LabelText("悬挂尾迹速度阈值")]
+        public float hangTrailSpeedThreshold = 20f;
     
         [FoldoutGroup("地面")] [LabelText("地面最低速度")]
         public float onGroundWalkSpeed = 10f;
@@ -91,6 +94,12 @@ namespace GamePlay.Player
     
         [FoldoutGroup("地面")] [LabelText("高跳时限")] [Tooltip("跳跃后在一定时间内按跳跃可以跳的更高")]
         public float jumpBufferTime = 0.5f;
+        
+        [FoldoutGroup("地面")] [LabelText("尾迹持续时间")]
+        public float groundTrailDuration = 0.5f;
+        
+        [FoldoutGroup("地面")] [LabelText("尾迹释放间隔")]
+        public float groundTrailInterval = 0.1f;
     
         [FoldoutGroup("扒墙")] [LabelText("检测贴墙距离")]
         public float wallCheckRadius = 0.1f;
@@ -184,9 +193,6 @@ namespace GamePlay.Player
         
         [FoldoutGroup("色块")] [LabelText("冲刺后重新游泳的时间,秒")]
         public float swimDashRecoverTime = 0.5f;
-        
-        // [FoldoutGroup("色块")] [LabelText("游泳动画速度阈值")] [Tooltip("超过这个速度才会播放游泳动画")]
-        // public float swimAniVelocityThreshold = 10f;
         
         [FoldoutGroup("色块")] [LabelText("穿梭速度阈值")] [Tooltip("超过这个速度才能冲入穿梭块")]
         public float shuttleThreshold;
