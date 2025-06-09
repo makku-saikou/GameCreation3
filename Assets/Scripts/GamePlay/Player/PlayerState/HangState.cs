@@ -8,13 +8,18 @@
 using Common.FSM;
 using PurpleFlowerCore;
 using UnityEngine;
+using System.Collections;
 
 namespace GamePlay.Player.PlayerState
 {
     public class HangState : PlayerStateBase
     {
-        public HangState(PlayerController player, EPlayerState name) : base(player, name) { }
-        
+        public HangState(PlayerController player, EPlayerState name) : base(player, name)
+        { }
+
+        private float _tailDisappearTime = 0f;
+        private Coroutine _tailDisappearCoroutine;
+        private GameObject _particleBuffer;
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
@@ -22,7 +27,7 @@ namespace GamePlay.Player.PlayerState
             Player.AddGravityEffect("Hang", Config.hangGravityScale);
             Player.Head.SetShow(false);
         }
-        
+
         public override void ExitCallback(HState next)
         {
             base.ExitCallback(next);
@@ -30,15 +35,15 @@ namespace GamePlay.Player.PlayerState
             Player.RemoveGravityEffect("Hang");
             Player.Rb.drag = 0;
             Player.Head.SetShow(true);
-            
+
             // 补偿力
             var direction = Player.Entity.right;
-            if (Property.CurrentHongAngle <0) direction = -direction;
+            if (Property.CurrentHongAngle < 0) direction = -direction;
             float compensating = Config.hangForceCompensate * Mathf.Abs(Property.CurrentHongAngle) / 90;
             Rb.AddForce(direction * compensating, ForceMode2D.Impulse);
-            PFCLog.Debug("HangState",$"Compensating Force: {compensating} Direction: {direction}");
+            PFCLog.Debug("HangState", $"Compensating Force: {compensating} Direction: {direction}");
         }
-        
+
         public override void UpdateCallback(float deltaTime)
         {
             base.UpdateCallback(deltaTime);
@@ -48,6 +53,8 @@ namespace GamePlay.Player.PlayerState
                 Player.Head.RetractTongue();
                 HangJump();
             }
+
+            Tail();
         }
 
         public override void FixedUpdateCallback()
@@ -57,7 +64,7 @@ namespace GamePlay.Player.PlayerState
             BodyDirection();
             Move();
         }
-        
+
         private void HangJump()
         {
             Rb.velocity += new Vector2(0, Config.hangJumpForce);
@@ -68,8 +75,6 @@ namespace GamePlay.Player.PlayerState
             var direction = Property.HangPoint - Player.transform.position;
             direction.Normalize();
             Player.Entity.up = direction;
-            // var faceRight = Property.IsFacingRight;
-            // Player.Entity.transform.localScale = new Vector3(faceRight ? -1 : 1, 1, 1);
         }
 
         private void Move()
@@ -80,7 +85,7 @@ namespace GamePlay.Player.PlayerState
                 Player.Rb.AddForce(new Vector2(Config.hangSwayForce * Input.MovementInput, 0), ForceMode2D.Force);
             }
         }
-        
+
         private void ChangeTongueLength()
         {
             if (Input.UpInput)
@@ -95,9 +100,23 @@ namespace GamePlay.Player.PlayerState
 
         private void Tail()
         {
-            if(Rb.velocity.sqrMagnitude < Config.hangTrailSpeedThreshold * Config.hangTrailSpeedThreshold)
+            PFCLog.Debug("HangState", $"Tail Speed: {Rb.velocity.magnitude}");
+            var particle = Particle.Get("PlayerTail2");
+            if (Rb.velocity.magnitude < Config.hangTrailSpeedThreshold)
             {
-                return;
+                if(_particleBuffer)
+                {
+                    _particleBuffer.GetComponent<ParticleSystem>().Stop(); 
+                    GameObject.Destroy(_particleBuffer.gameObject, 2);
+                }
+                _particleBuffer = null;
+            }
+            else
+            {
+                if (!_particleBuffer)
+                {
+                    _particleBuffer = MonoSystem.Instantiate(particle, particle.transform.position, Quaternion.identity, Particle.transform).gameObject;
+                }
             }
         }
     }

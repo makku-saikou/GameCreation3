@@ -39,12 +39,13 @@ namespace GamePlay.Player
             }
         }
 
-        public void Play(string particleName)
+        public void Play(string particleName, bool rePlayer = false)
         {
             ParticleSystem particle = particleSystems.Find(ps => ps.name == particleName);
-            if (particle != null)
+            if (particle is not null)
             {
-                particle.Play();
+                if(rePlayer || !particle.isPlaying)
+                    particle.Play();
             }
             else
             {
@@ -55,9 +56,10 @@ namespace GamePlay.Player
         public void Stop(string particleName)
         {
             ParticleSystem particle = particleSystems.Find(ps => ps.name == particleName);
-            if (particle != null)
+            if (particle is not null)
             {
-                particle.Stop();
+                if (particle.isPlaying)
+                    particle.Stop();
             }
             else
             {
@@ -68,7 +70,7 @@ namespace GamePlay.Player
         public ParticleSystem PlayerOnce(string particleName, Vector3 position, float duration = -1f, Transform parent = null)
         {
             ParticleSystem particle = particleSystems.Find(ps => ps.name == particleName);
-            if (particle != null)
+            if (particle is not null)
             {
                 ParticleSystem instance = Instantiate(particle, position, Quaternion.identity, parent);
                 instance.Play();
@@ -76,11 +78,8 @@ namespace GamePlay.Player
                 {
                     DelayUtility.Delay(duration, () =>
                     {
-                        if (instance != null)
-                        {
-                            instance.Stop();
-                            DelayUtility.Delay(5f, ()=>{Destroy(instance.gameObject);});
-                        }
+                        instance.Stop();
+                        DelayUtility.Delay(5f, ()=>{Destroy(instance.gameObject);});
                     });
                 }
                 return instance;
