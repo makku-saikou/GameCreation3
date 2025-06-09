@@ -59,7 +59,8 @@ namespace GamePlay.Item
             else
                 gameObject.layer = LayerMask.NameToLayer("Ground");
 
-            _tilemap.color = to == color ? poolColor : originColor;
+            if(_tilemap)
+                _tilemap.color = to == color ? poolColor : originColor;
         }
         
         private void OnPlayerColorChangedInThis(EPlayerColor from, EPlayerColor to)

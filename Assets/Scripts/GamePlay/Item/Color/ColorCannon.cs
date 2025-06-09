@@ -15,6 +15,7 @@ namespace GamePlay.Item
 		[SerializeField] private float cooldown = 2f;
 		[SerializeField] private Sprite openSprite;
 		[SerializeField] private Sprite closeSprite;
+		[SerializeField] private ParticleSystem particle;
 
 		private bool _isCooldown;
 
@@ -55,6 +56,7 @@ namespace GamePlay.Item
 			// todo: cannon reload animation
 			GetComponent<SpriteRenderer>().sprite = openSprite;
 			Timer.Register(cooldown, () => _isCooldown = false);
+			particle.Play();
 		}
 
 		private void OnDrawGizmos()
