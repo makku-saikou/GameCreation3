@@ -7,6 +7,7 @@
 // -------------------------------------------------
 using System;
 using GamePlay.Item.Target;
+using GamePlay.Player.Particle;
 using PurpleFlowerCore;
 using UnityEngine;
 using UnityEngine.UI;
@@ -236,6 +237,7 @@ namespace GamePlay.Player
             PFCLog.Debug("Tongue", _currentHit.normal);
             if (_currentHit.normal.Equals(Vector2.up))
                 Player.OnCollisionEnter += OnNormalUp;
+            Player.PlayerParticle.Get<HitPieces>().Play(tonguePoint.position, transform.right);
         }
         
         /// <summary>
