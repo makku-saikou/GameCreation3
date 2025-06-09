@@ -346,7 +346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5381111765557946333, guid: fa308edd6f06a7543b7a111673a1eee3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -634,6 +634,10 @@ PrefabInstance:
     - target: {fileID: 565858857560844155, guid: a16ce735daf598746817999224c565fd, type: 3}
       propertyPath: m_Name
       value: UIManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 565858857560844155, guid: a16ce735daf598746817999224c565fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6868274097421800634, guid: a16ce735daf598746817999224c565fd, type: 3}
       propertyPath: m_LocalPosition.x
