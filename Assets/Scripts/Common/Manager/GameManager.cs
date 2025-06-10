@@ -82,5 +82,13 @@ namespace Common.Manager
         {
             isKeyCollected = true;
         }
+
+        public void GameOver()
+        {
+            player.Property.CanMove = false;
+            player.Property.CanFlip = false;
+            player.Property.HeadCanMove = false;
+            player.Rb.velocity = Vector3.zero;
+        }
     }
 }
