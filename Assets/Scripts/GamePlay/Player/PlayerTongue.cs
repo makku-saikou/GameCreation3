@@ -9,6 +9,7 @@ using System;
 using GamePlay.Item.Target;
 using GamePlay.Player.Particle;
 using PurpleFlowerCore;
+using PurpleFlowerCore.Utility;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -67,8 +68,13 @@ namespace GamePlay.Player
 
         private void Start()
         {
-            tonguePoint.position = transform.position;
             transform.position = root0.position;
+            tonguePoint.position = transform.position;
+            // todo: 奇怪的bug
+            DelayUtility.Delay(3f, () =>
+            {
+                tonguePoint.position = transform.position;
+            });
             var layers = Config.targetLayers;
             foreach (var layer in layers)
             {
@@ -156,9 +162,13 @@ namespace GamePlay.Player
                 Property.IsRetracting = false;
                 OnTongueIdle?.Invoke();
             }
-            Vector3 direction = transform.position - tonguePoint.position;
-            direction.Normalize();
-            tonguePoint.position += direction * (Time.deltaTime * Config.retractSpeed);
+            tonguePoint.position = Vector3.MoveTowards(tonguePoint.position, transform.position,
+                Config.retractSpeed * Time.deltaTime);
+        }
+
+        public void DoRetract()
+        {
+            tonguePoint.position = transform.position;
         }
 
         public void Retract()

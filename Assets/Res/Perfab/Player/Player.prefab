@@ -57,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 310538680078435254}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.15, y: 0.23, z: 0}
+  m_LocalPosition: {x: 0.556, y: 0.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -284,6 +284,7 @@ MonoBehaviour:
   wallCheckPoint2: {fileID: 90122832786852693}
   cameraPoint: {fileID: 2997528915376706869}
   keyFollowPoint: {fileID: 3909720598041562372}
+  aniNames: []
 --- !u!114 &2522039149253004541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,8 +339,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712084061048558591}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.75, y: 0.33, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.556, y: 0.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

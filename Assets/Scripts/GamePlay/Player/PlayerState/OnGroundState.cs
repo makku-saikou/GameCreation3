@@ -22,6 +22,7 @@ namespace GamePlay.Player.PlayerState
             PFCLog.Debug("Enter OnGround State");
             Player.ResetTransform();
             Player.Head.SetShow(true);
+            Player.Head.Tongue.DoRetract();
         }
         
         public override void ExitCallback(HState next)

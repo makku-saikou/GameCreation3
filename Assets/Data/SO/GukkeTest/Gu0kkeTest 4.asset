@@ -54,7 +54,7 @@ MonoBehaviour:
   smashCD: 0.2
   smashDirection: {x: 1, y: 1}
   tongueSpeed: 40
-  retractSpeed: 180
+  retractSpeed: 120
   tongueMaxLength: 12
   tongueMinLength: 3
   targetLayers:

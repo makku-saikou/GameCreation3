@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -38,21 +39,28 @@ namespace GamePlay.Player
 
         private void OnEnable()
         {
-            Start();
+            _moveTime = 0;
+            _waveSize = 0;
+            // lineRenderer.positionCount = precision;
+            // for (int i = 0; i < precision; i++)
+            // {
+            //     lineRenderer.SetPosition(i, tongue.transform.position);
+            // }
+            
             _straightLine = false;
             
             lineRenderer.enabled = true;
             
-            tongue.OnTongueLaunch += Start;
+            tongue.OnTongueLaunch += LaunchStart;
         }
         
         private void OnDisable()
         {
             lineRenderer.enabled = false;
-            tongue.OnTongueLaunch -= Start;
+            tongue.OnTongueLaunch -= LaunchStart;
         }
-        
-        protected void Start()
+
+        private void LaunchStart()
         {
             _moveTime = 0;
             _waveSize = startWaveSize;
