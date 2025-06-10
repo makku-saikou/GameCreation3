@@ -220,7 +220,6 @@ namespace GamePlay.Player
 
         private void TryConnect()
         {
-            PFCLog.Debug("Tongue",$"TryConnect: {_currentTarget}");
             Property.IsLaunching = false;
             if (_currentTarget == null)
             {
@@ -234,7 +233,6 @@ namespace GamePlay.Player
             distanceJoint2D.enabled = true;
             distanceJoint2D.connectedAnchor = TargetPosition;
             Player.Property.IsConnecting = true;
-            PFCLog.Debug("Tongue", _currentHit.normal);
             if (_currentHit.normal.Equals(Vector2.up))
                 Player.OnCollisionEnter += OnNormalUp;
             Player.PlayerParticle.Get<HitFeedback>().Play(tonguePoint.position, transform.right);
@@ -245,7 +243,6 @@ namespace GamePlay.Player
         /// </summary>
         private void OnNormalUp(Collision2D collision)
         {
-            PFCLog.Debug("Tongue", collision.contacts[0].normal);
             if(collision.contacts[0].normal.Equals(Vector2.up))
                 Retract();
         }
