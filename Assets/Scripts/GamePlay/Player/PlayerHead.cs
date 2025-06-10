@@ -45,13 +45,11 @@ namespace GamePlay.Player
             tongue.OnTongueLaunch += () =>
             {
                 _targetMouthOpen = true;
-                PFCLog.Debug("Head","Tongue Launch");
             };
             
             tongue.OnTongueRetract += () =>
             {
                 _targetMouthOpen = false;
-                PFCLog.Debug("Head","Tongue Retract");
             };
             RetractTongue();
         }

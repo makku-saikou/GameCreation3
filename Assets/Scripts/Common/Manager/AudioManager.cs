@@ -6,13 +6,14 @@
 // -------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using PurpleFlowerCore;
-using PurpleFlowerCore.Editor.Utility;
 using PurpleFlowerCore.Scripts.System.Audio;
 using UnityEngine;
 
 namespace Common.Manager
 {
+    // 暂时不要使用
     public static class AudioManager
     {
         private static AudioSystemData _audioSystemData;
@@ -22,7 +23,7 @@ namespace Common.Manager
             {
                 if (!_audioSystemData)
                 {
-                    _audioSystemData = SOUtility.GetSOByType<AudioSystemData>();
+                    // _audioSystemData = GetSOByType(typeof (AudioSystemData)) as AudioSystemData;
                     if (!_audioSystemData)
                     {
                         PFCLog.Error("AudioManager","AudioSystemData not found in Resources folder.");

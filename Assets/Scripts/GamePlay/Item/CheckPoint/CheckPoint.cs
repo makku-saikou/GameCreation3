@@ -24,7 +24,7 @@ namespace GamePlay.Item.CheckPoint
 			flagFeedback?.PlayFeedbacks();
 			if(!_hasTriggered)
 			{
-				AudioManager.PlayEffect("欢呼声",transform.position);
+				// AudioManager.PlayEffect("欢呼声",transform.position);
 				particle.Play();
 			}
 			_hasTriggered = true;
