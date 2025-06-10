@@ -7,7 +7,6 @@
 // -------------------------------------------------
 
 using System.Collections.Generic;
-using Common.Attribute;
 using Common.Manager;
 using PurpleFlowerCore;
 using Sirenix.OdinInspector;

@@ -108,7 +108,7 @@ namespace GamePlay.Player
             get => _currentColor;
             set
             {
-                if (_currentColor == value) return;
+                // if (_currentColor == value) return;
                 var oldColor = _currentColor;
                 _currentColor = value;
                 if (value != EPlayerColor.None)
