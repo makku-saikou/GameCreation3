@@ -112,7 +112,7 @@ namespace GamePlay.Player
             int index = (int)to;
             if(index >= 0 && index < controllers.Count)
             {
-                string ani = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+                string ani = animator.GetCurrentAnimatorStateInfo(0).IsName("Head_Idle") ? "Head_Idle" : "Head_Close";
                 float aniTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
                 animator.runtimeAnimatorController = controllers[(int)to];
                 animator.enabled = true;

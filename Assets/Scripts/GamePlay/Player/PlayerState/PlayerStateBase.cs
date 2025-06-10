@@ -29,6 +29,7 @@ namespace GamePlay.Player.PlayerState
         public PlayerStateBase(PlayerController player, EPlayerState state) : base(state.ToString())
         {
             Player = player;
+            player.aniNames.Add(state.ToString());
         }
 
         public override void EnterCallback(HState prev)

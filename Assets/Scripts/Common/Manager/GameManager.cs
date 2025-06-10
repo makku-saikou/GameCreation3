@@ -18,14 +18,14 @@ namespace Common.Manager
     {
         [SerializeField] private PlayerController playerPrefab;
         [SerializeField] private Transform bornPoint;
-        private PlayerController _player;
-        public PlayerController Player => _player;
 
         [SerializeField] private Transform checkPoint;
 
         [Title("Game Info")]
+        [SerializeField] [ReadOnly] private PlayerController player;
         [SerializeField] [ReadOnly] private int collectionCount;
         [SerializeField] [ReadOnly] private bool isKeyCollected;
+        public PlayerController Player => player;
         public bool IsKeyCollected => isKeyCollected;
 
         public Transform CheckPoint
@@ -43,6 +43,10 @@ namespace Common.Manager
 
         protected void  Start()
         {
+#if UNITY_EDITOR
+            var tempPlayer = FindObjectOfType<PlayerController>();
+            Destroy(tempPlayer.gameObject);
+#endif
             base.Awake();
             checkPoint = bornPoint;
             PlayerReset(bornPoint.position);
@@ -61,10 +65,10 @@ namespace Common.Manager
 
         private void PlayerReset(Vector3 position)
         {
-            if (_player)
-                Destroy(_player.gameObject);
-            _player = Instantiate(playerPrefab, position, Quaternion.identity);
-            _player.Init();
+            if (player)
+                Destroy(player.gameObject);
+            player = Instantiate(playerPrefab, position, Quaternion.identity);
+            player.Init();
             EventSystem.EventTrigger("PlayerInit");
         }
 
