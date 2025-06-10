@@ -6,15 +6,21 @@
 // -------------------------------------------------
 
 using PurpleFlowerCore;
+using PurpleFlowerCore.Utility;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Common.Manager
 {
     public class MainMenuManager : MonoBehaviour
     {
+        [SerializeField] private Image blackPanel;
         public void Play()
         {
-            SceneSystem.LoadScene(1);
+            FadeUtility.FadeInAndStay(blackPanel, 80, () =>
+            {
+                SceneSystem.LoadScene(1);
+            });
         }
 
         public void Exit()
