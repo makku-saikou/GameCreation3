@@ -139,6 +139,7 @@ MonoBehaviour:
   followSpeed: 2
   followingQuitThreshold: 2
   idleInThreshold: 0.5
+  particleFeedback: {fileID: 6425747739436245, guid: 96681eb880673f4448e95b09664f8240, type: 3}
   isCollected: 0
   keyState: 0
   isPlaying: 0

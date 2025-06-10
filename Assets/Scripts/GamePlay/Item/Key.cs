@@ -24,6 +24,9 @@ namespace GamePlay.Item
 		[SerializeField] private float followingQuitThreshold = 2f;
 		[SerializeField] private float idleInThreshold = 0.5f;
 
+		[Title("Others")]
+		[SerializeField] private GameObject particleFeedback;
+
 		[Title("Info")]
 		[SerializeField] [ReadOnly] private bool isCollected;
 		[SerializeField] [ReadOnly] private KeyState keyState = KeyState.Idle;
@@ -95,6 +98,8 @@ namespace GamePlay.Item
 			{
 				isCollected = true;
 				GameManager.Instance.GetKey();
+				var particle = Instantiate(particleFeedback, transform.position, Quaternion.identity);
+				Destroy(particle, 2f);
 			}
 		}
 
