@@ -45,7 +45,8 @@ namespace Common.Manager
         {
 #if UNITY_EDITOR
             var tempPlayer = FindObjectOfType<PlayerController>();
-            Destroy(tempPlayer.gameObject);
+            if(tempPlayer)
+                Destroy(tempPlayer.gameObject);
 #endif
             base.Awake();
             checkPoint = bornPoint;
