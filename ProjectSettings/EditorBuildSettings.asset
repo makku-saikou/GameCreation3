@@ -6,7 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Dev/PurpleTest.unity
-    guid: ea68fc096606f3740bd304f222955d96
+    path: Assets/Scenes/Release/MainMenu.unity
+    guid: f8376f6cc86d4be49b216d9c444e2fe1
+  - enabled: 1
+    path: Assets/Scenes/Release/Level 0_Release.unity
+    guid: 2d4de1ed42ae5d345abd251ea38fa557
+  - enabled: 1
+    path: Assets/Scenes/Release/Level 1-1_Release.unity
+    guid: 732a051d02813f74aa29771876ff349c
+  - enabled: 1
+    path: Assets/Scenes/Release/Level 1-2_Release.unity
+    guid: 2cefc1b9f37d9764daa1a2b6c8414620
+  - enabled: 1
+    path: Assets/Scenes/Release/Level 1-3_Release.unity
+    guid: abbbfde8f2045cf4b8cbd4b0c9c28467
+  - enabled: 1
+    path: Assets/Scenes/Release/Level 1-4_Release.unity
+    guid: fb9a496ac8aeb0245be113c02376e801
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 600e0f08a1fcd534ba58f3313c946740, type: 2}
