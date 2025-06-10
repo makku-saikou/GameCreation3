@@ -69,14 +69,6 @@ MonoBehaviour:
     command:
       m_PersistentCalls:
         m_Calls: []
-  - name: MainMenu
-    commandType: 0
-    color: {r: 1, g: 1, b: 1, a: 1}
-    lineBreak: 0
-    commandParam: Assets/Scenes/Dev/MainMenu.unity
-    command:
-      m_PersistentCalls:
-        m_Calls: []
   - name: "\u53D1\u5E03\u573A\u666F\u6587\u4EF6\u5939"
     commandType: 3
     color: {r: 1, g: 1, b: 1, a: 1}
