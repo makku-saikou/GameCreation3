@@ -77,6 +77,7 @@ namespace GamePlay.Player
         [Title("Others")]
         [SerializeField] private Transform keyFollowPoint;
         public Transform KeyFollowPoint => keyFollowPoint;
+        public List<string> aniNames = new();
 
         private void Update()
         {
@@ -290,8 +291,7 @@ namespace GamePlay.Player
             int index = (int)to;
             if(index >= 0 && index < controllers.Count)
             {
-                string ani = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
-                PFCLog.Debug("PlayerController", $"ChangeColor: {from} -> {to}, ani: {ani}");
+                string ani = GetAniName();
                 float aniTime = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
                 animator.runtimeAnimatorController = controllers[(int)to];
                 animator.enabled = true;
@@ -344,6 +344,17 @@ namespace GamePlay.Player
         public bool CheckState(EPlayerState state)
         {
             return _stateMachine.CurrentState.Name == state.ToString();
+        }
+
+        private string GetAniName()
+        {
+            foreach (var ani in aniNames)
+            {
+                if(animator.GetCurrentAnimatorStateInfo(0).IsName(ani))
+                    return ani;
+            }
+            PFCLog.Error("PlayerController", "No matching animation name found in aniNames.");
+            return string.Empty;
         }
     }
 
