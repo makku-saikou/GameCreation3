@@ -2,6 +2,7 @@
 using System.Linq;
 using Fungus;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Hmxs.Toolkit.Plugins.Fungus.FungusTools
 {
@@ -17,13 +18,13 @@ namespace Hmxs.Toolkit.Plugins.Fungus.FungusTools
         public static Flowchart GetFlowchart()
         {
             if (_defaultFlowchart != null) return _defaultFlowchart;
-            
-            var flowchartObj = GameObject.Find("Flowchart");
-            if (flowchartObj == null)
+
+            var flowchartObj = Object.FindObjectOfType<Flowchart>();
+            if (!flowchartObj)
                 throw new Exception("FlowchartManager: Can't Find 'Flowchart' GameObject.");
             
             var flowchart = flowchartObj.GetComponent<Flowchart>();
-            if (flowchart == null)
+            if (!flowchart)
                 throw new Exception("FlowchartManager: Can't Find Flowchart Component on 'Flowchart' GameObject.");
             
             _defaultFlowchart = flowchart;
