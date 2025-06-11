@@ -50,7 +50,8 @@ namespace GamePlay.Item.Platform
 		{
 			var bounds = Collider.bounds;
 			var offset = new Vector3(direction.x * (bounds.extents.x + 0.1f), direction.y * (bounds.extents.y + 0.1f), 0);
-			var hit = Physics2D.Raycast(transform.position + offset, direction, 0.5f);
+			var hit = Physics2D.Raycast(transform.position + offset, direction, 0.5f, LayerMask.GetMask("Ground"));
+			Debug.Log("Detecting " + direction + " for " + name + ", hit: " + hit.collider?.name);
 			if (hit.collider && hit.collider.TryGetComponent(out BreakablePlatform platform) && platform != this)
 				return platform;
 			return null;
