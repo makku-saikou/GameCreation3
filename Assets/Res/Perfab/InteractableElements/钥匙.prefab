@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 619366789359307564}
   - component: {fileID: 1729800036297683599}
-  - component: {fileID: 2505894873475362351}
   - component: {fileID: 5329051372763335229}
+  - component: {fileID: 7395128989639401933}
   m_Layer: 0
   m_Name: "\u94A5\u5319"
   m_TagString: Untagged
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1526342475, guid: 1ccfef8092308a94fa1cbe43e6606843, type: 3}
+  m_Sprite: {fileID: -183449200, guid: 2003e0295120b0d4296bb4b42e2daeea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,8 +86,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &2505894873475362351
-CapsuleCollider2D:
+--- !u!114 &5329051372763335229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3701353002545591082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13cb849e3537468dbee40d96da016c41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleOffset: {x: 0, y: 1}
+  duration: 1
+  easeType: 4
+  followSpeed: 2
+  followingQuitThreshold: 2
+  idleInThreshold: 0.5
+  particleFeedback: {fileID: 6425747739436245, guid: 96681eb880673f4448e95b09664f8240, type: 3}
+  isCollected: 0
+  keyState: 0
+  isPlaying: 0
+--- !u!58 &7395128989639401933
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -119,27 +141,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.468, y: 2.024}
-  m_Direction: 0
---- !u!114 &5329051372763335229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3701353002545591082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13cb849e3537468dbee40d96da016c41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idleOffset: {x: 0, y: 1}
-  duration: 1
-  easeType: 4
-  followSpeed: 2
-  followingQuitThreshold: 2
-  idleInThreshold: 0.5
-  particleFeedback: {fileID: 6425747739436245, guid: 96681eb880673f4448e95b09664f8240, type: 3}
-  isCollected: 0
-  keyState: 0
-  isPlaying: 0
+  serializedVersion: 2
+  m_Radius: 1.6
