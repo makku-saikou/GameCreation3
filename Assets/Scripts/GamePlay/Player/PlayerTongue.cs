@@ -71,10 +71,10 @@ namespace GamePlay.Player
             transform.position = root0.position;
             tonguePoint.position = transform.position;
             // todo: 奇怪的bug
-            DelayUtility.Delay(3f, () =>
-            {
-                tonguePoint.position = transform.position;
-            });
+            // DelayUtility.Delay(3f, () =>
+            // {
+            //     tonguePoint.position = transform.position;
+            // });
             var layers = Config.targetLayers;
             foreach (var layer in layers)
             {
@@ -121,9 +121,13 @@ namespace GamePlay.Player
         
         private void UpdateLaunch()
         {
-            Vector3 direction = TargetPosition - tonguePoint.position;
-            direction.Normalize();
-            tonguePoint.position += direction * (Time.deltaTime * Config.tongueSpeed);
+            // Vector3 direction = TargetPosition - tonguePoint.position;
+            // direction.Normalize();
+            // tonguePoint.position += direction * (Time.deltaTime * Config.tongueSpeed);
+            tonguePoint.position = Vector3.MoveTowards(tonguePoint.position, TargetPosition,
+                Config.tongueSpeed * Time.deltaTime);
+            if(Vector3.SqrMagnitude(tonguePoint.position - transform.position) >= Config.tongueMaxLength * Config.tongueMaxLength)
+                Retract();
             if(Vector3.SqrMagnitude(tonguePoint.position - TargetPosition) < 0.05f)
             {
                 TryConnect();
