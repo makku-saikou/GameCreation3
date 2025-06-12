@@ -11,6 +11,7 @@ using Common.FSM;
 using GamePlay.Player.Particle;
 using GamePlay.Player.PlayerInput;
 using GamePlay.Player.PlayerState;
+using MoreMountains.Feedbacks;
 using PurpleFlowerCore;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -23,8 +24,10 @@ namespace GamePlay.Player
     
     public class PlayerController : MonoBehaviour
     {
+        [Title("Reference")]
         [SerializeField] private PlayerHead head;
         public PlayerHead Head => head;
+
         [SerializeField] private Transform entity;
         public Transform Entity => entity;
 
@@ -78,6 +81,10 @@ namespace GamePlay.Player
         [SerializeField] private Transform keyFollowPoint;
         public Transform KeyFollowPoint => keyFollowPoint;
         public List<string> aniNames = new();
+
+        [Title("Feedbacks")]
+        [SerializeField] private MMF_Player cameraShakeFeedback;
+        public MMF_Player CameraShakeFeedback => cameraShakeFeedback;
 
         private void Update()
         {

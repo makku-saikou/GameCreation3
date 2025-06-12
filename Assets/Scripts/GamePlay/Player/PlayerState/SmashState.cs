@@ -49,6 +49,7 @@ namespace GamePlay.Player.PlayerState
                     bounceForce = Config.smashBounceForce;
                 }
                 Bounce(bounceForce);
+                Player.CameraShakeFeedback.PlayFeedbacks();
                 DelayUtility.Delay(0.1f, () =>
                 {
                     Property.HasSmashLanded = true;

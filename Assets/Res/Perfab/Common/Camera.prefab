@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6547119272842681053}
   - component: {fileID: 3608888550057172000}
   - component: {fileID: 2493025576524582842}
+  - component: {fileID: 4302777598631165427}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -122,6 +123,29 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 4117563808522062445}
   m_ConfineScreenEdges: 1
   m_Damping: 0
+--- !u!114 &4302777598631165427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481328845110371403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 3
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 1
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &2486627411427165365
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +379,7 @@ Transform:
   m_GameObject: {fileID: 8968480450856968337}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.18163681, y: -0.2500012, z: 0.096092224}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
