@@ -150,7 +150,7 @@ MonoBehaviour:
   ejectDelay: 0.5
   cooldown: 0.5
   openSprite: {fileID: 864051714, guid: 08c68bd5af421694cada967ee5cdb39d, type: 3}
-  closeSprite: {fileID: -1196717096, guid: 08c68bd5af421694cada967ee5cdb39d, type: 3}
+  closeSprite: {fileID: 871976761, guid: 08c68bd5af421694cada967ee5cdb39d, type: 3}
   particle: {fileID: 6785167034123999599}
 --- !u!1001 &3359030753318955673
 PrefabInstance:
