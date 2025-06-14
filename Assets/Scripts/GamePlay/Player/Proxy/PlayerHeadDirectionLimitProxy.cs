@@ -30,6 +30,7 @@ namespace GamePlay.Player
 
             // 为了确保事件注册在玩家初始化之后，且由于我们不会使该组建失效，所以在Start中注册事件
             playerController.StateMachine.OnStateChanged += CheckDirectionLimit;
+            CheckDirectionLimit(null, playerController.StateMachine.CurrentState);
         }
 
         private Vector3 OnGroundLimit(Vector3 direction)
@@ -72,7 +73,11 @@ namespace GamePlay.Player
         
         private void CheckDirectionLimit(HState from, HState to)
         {
-            PFCLog.Debug("HeadDirectionProxy",to.Name);
+            // if (to == null)
+            // {
+            //     PlayerHead.DirectionLimit = _onGroundLimit;
+            //     return;
+            // }
             PlayerHead.DirectionLimit = to.Name switch
             {
                 "OnGround" => _onGroundLimit,

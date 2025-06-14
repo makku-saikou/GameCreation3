@@ -36,6 +36,7 @@ namespace Common.FSM
 			_states = new List<HState> ();
             _anyStateTransitions = new List<HTransition>();
 			_defaultState = defaultState;
+			_currentState = defaultState;
 		}
 		
 		public void AddState(HState state)
