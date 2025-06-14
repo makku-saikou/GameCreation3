@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 20250614-172046_0
+      name: E
       rect:
         serializedVersion: 2
         x: 193
@@ -144,7 +144,7 @@ TextureImporter:
         width: 353
         height: 358
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -165,7 +165,7 @@ TextureImporter:
         width: 414
         height: 253
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -188,9 +188,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      20250614-172046_0: 1495132959
       20250614-172046_1: -37558418
       20250614-172046_2: 1173409997
+      E: 1495132959
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
