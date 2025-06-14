@@ -62025,6 +62025,10 @@ PrefabInstance:
       value: UIManager
       objectReference: {fileID: 0}
     - target: {fileID: 5257630753125907712, guid: a16ce735daf598746817999224c565fd, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5257630753125907712, guid: a16ce735daf598746817999224c565fd, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
