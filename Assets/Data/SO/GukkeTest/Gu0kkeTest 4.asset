@@ -49,7 +49,7 @@ MonoBehaviour:
   wallExitCoefficient: 0.26
   smashGravityScale: 0
   smashGravityScaleTime: 0.12
-  smashVelocity: 85
+  smashVelocity: 67
   smashBounceForce: 20
   smashCD: 0.2
   smashDirection: {x: 1, y: 1}
@@ -69,10 +69,10 @@ MonoBehaviour:
   climbJumpForce: 150
   climbJumpDirection: {x: 1, y: 1}
   climbCD: 1
-  swimSpeed: 25
+  swimSpeed: 100
   swimDashForce: 80
   swimDashCD: 2
-  swimDrag: 0.143
+  swimDrag: 2
   swimDashRecoverTime: 0.5
   shuttleThreshold: 0
   shuttleSpeed: 20
@@ -84,5 +84,5 @@ MonoBehaviour:
   onGroundUpLimit: 0.2
   onGroundDownLimit: 0.6
   interactNoGravityTime: 0.5
-  colorDuration: 15
+  colorDuration: 11
   blinkFrequency: 3.5
