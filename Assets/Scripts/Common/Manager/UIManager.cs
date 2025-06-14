@@ -7,6 +7,7 @@
 
 using System;
 using GamePlay.Player;
+using PurpleFlowerCore;
 using PurpleFlowerCore.Utility;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -32,6 +33,14 @@ namespace Common.Manager
             worldCanvas.worldCamera = Camera.main;
             blackPanel.enabled = true;
             FadeIn();
+            // todo: 我知道这太复杂了
+            EventSystem.AddEventListener("PlayerInit", () =>
+            {
+                Player.Property.OnCurrentColorDurationChanged += ((_, f) =>
+                {
+                    SetTimeCount(f / Player.Config.colorDuration);
+                });
+            });
         }
 
         public void FadeIn(UnityAction callback = null, float duration = 1f)
@@ -54,7 +63,11 @@ namespace Common.Manager
 
         public void SetTimeCount(float percent)
         {
-            if (timeCount) timeCount.fillAmount = percent;
+            if (timeCount)
+            {
+                timeCount.fillAmount = percent;
+                SetTimeCountActive(percent > 0);
+            }
         }
 
         public void SetTimeCountActive(bool active)

@@ -100,6 +100,17 @@ namespace GamePlay.Player
         public bool CanOnSwimColorBlock { get; set; }              // 是否在色块前
         
         private float _currentColorDuration;
+        public float CurrentColorDuration
+        {
+            get => _currentColorDuration;
+            set
+            {
+                _currentColorDuration = value;
+                OnCurrentColorDurationChanged?.Invoke(CurrentColor, _currentColorDuration);
+            }
+        }
+        
+        public event Action<EPlayerColor, float> OnCurrentColorDurationChanged; 
         
         private EPlayerColor _currentColor;
 
@@ -113,7 +124,7 @@ namespace GamePlay.Player
                 _currentColor = value;
                 if (value != EPlayerColor.None)
                 {
-                    _currentColorDuration = Config.colorDuration;
+                    CurrentColorDuration = Config.colorDuration;
                 }
                 OnColorChanged?.Invoke(oldColor, _currentColor);
             }
@@ -162,8 +173,8 @@ namespace GamePlay.Player
 
         public void Update(float deltaTime)
         {
-            _currentColorDuration -= deltaTime;
-            if(_currentColorDuration <= 0 && CurrentColor != EPlayerColor.None)
+            CurrentColorDuration -= deltaTime;
+            if(CurrentColorDuration <= 0 && CurrentColor != EPlayerColor.None)
             {
                 CurrentColor = EPlayerColor.None;
             }
