@@ -75,6 +75,8 @@ namespace GamePlay.Player
             // {
             //     tonguePoint.position = transform.position;
             // });
+            Launch(Vector2.right);
+            Retract();
             var layers = Config.targetLayers;
             foreach (var layer in layers)
             {
