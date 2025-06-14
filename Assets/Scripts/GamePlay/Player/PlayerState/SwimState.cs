@@ -88,8 +88,7 @@ namespace GamePlay.Player.PlayerState
             {
                 _canSwim = true;
             });
-            Player.Entity.up = Input.AttentionDirection;
-            Rb.AddForce(Input.AttentionDirection * Config.swimDashForce, ForceMode2D.Impulse);
+            Rb.AddForce(Entity.up * Config.swimDashForce, ForceMode2D.Impulse);
             _currentDashCD = Config.swimDashCD;
         }
     }

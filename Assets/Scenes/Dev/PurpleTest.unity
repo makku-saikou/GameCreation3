@@ -61689,6 +61689,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 2.9574208
       objectReference: {fileID: 0}
+    - target: {fileID: 158421110226507994, guid: 400f546dfee8d1f41af02f97e3c4241a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.096092224
+      objectReference: {fileID: 0}
     - target: {fileID: 674242105406782930, guid: 400f546dfee8d1f41af02f97e3c4241a, type: 3}
       propertyPath: m_Follow
       value: 
@@ -61916,7 +61920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7223150313392721980, guid: 184e5d4ebc09b7e43876c311d3bee976, type: 3}
       propertyPath: color
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8531263147591168553, guid: 184e5d4ebc09b7e43876c311d3bee976, type: 3}
       propertyPath: m_Name
