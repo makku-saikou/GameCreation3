@@ -34,12 +34,12 @@ namespace Common.Manager
             set => checkPoint = value;
         }
 
-        [SerializeField] private Transform tmpCheckPoint;
-        public Transform TmpCheckPoint
-        {
-            get => tmpCheckPoint;
-            set => tmpCheckPoint = value;
-        }
+        // [SerializeField] private Transform tmpCheckPoint;
+        // public Transform TmpCheckPoint
+        // {
+        //     get => tmpCheckPoint;
+        //     set => tmpCheckPoint = value;
+        // }
 
         protected void  Start()
         {
@@ -59,10 +59,10 @@ namespace Common.Manager
             PlayerReset(CheckPoint.position);
         }
 
-        public void PlayerToTmpCheckPoint()
-        {
-            Timer.Register(0.5f, () => PlayerReset(TmpCheckPoint.position));
-        }
+        // public void PlayerToTmpCheckPoint()
+        // {
+        //     Timer.Register(0.5f, () => PlayerReset(TmpCheckPoint.position));
+        // }
 
         private void PlayerReset(Vector3 position)
         {

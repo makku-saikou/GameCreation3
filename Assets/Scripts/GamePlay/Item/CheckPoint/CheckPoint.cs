@@ -18,7 +18,7 @@ namespace GamePlay.Item.CheckPoint
 
 			if (GameManager.Instance.CheckPoint == checkPoint) return;
 			GameManager.Instance.CheckPoint = checkPoint;
-			GameManager.Instance.TmpCheckPoint = checkPoint;
+			// GameManager.Instance.TmpCheckPoint = checkPoint;
 			// TODO: checkPoint animation
 			flag.SetActive(true);
 			flagFeedback?.PlayFeedbacks();

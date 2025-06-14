@@ -10,7 +10,8 @@ namespace GamePlay.Item
 		{
 			if (other.CompareTag("Player"))
 			{
-				GameManager.Instance.PlayerToTmpCheckPoint();
+				// GameManager.Instance.PlayerToTmpCheckPoint();
+				GameManager.Instance.PlayerDie();
 			}
 		}
 	}
