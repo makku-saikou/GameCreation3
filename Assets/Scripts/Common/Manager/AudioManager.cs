@@ -16,34 +16,40 @@ namespace Common.Manager
     // 暂时不要使用
     public static class AudioManager
     {
-        private static AudioSystemData _audioSystemData;
-        public static AudioSystemData AudioSystemData
+        // private static AudioSystemData _audioSystemData;
+        // public static AudioSystemData AudioSystemData
+        // {
+        //     get
+        //     {
+        //         if (!_audioSystemData)
+        //         {
+        //             // _audioSystemData = GetSOByType(typeof (AudioSystemData)) as AudioSystemData;
+        //             if (!_audioSystemData)
+        //             {
+        //                 PFCLog.Error("AudioManager","AudioSystemData not found in Resources folder.");
+        //                 throw new Exception();
+        //             }
+        //         }
+        //         return _audioSystemData;
+        //     }
+        // }
+
+        private static string GetPath(string clip)
         {
-            get
-            {
-                if (!_audioSystemData)
-                {
-                    // _audioSystemData = GetSOByType(typeof (AudioSystemData)) as AudioSystemData;
-                    if (!_audioSystemData)
-                    {
-                        PFCLog.Error("AudioManager","AudioSystemData not found in Resources folder.");
-                        throw new Exception();
-                    }
-                }
-                return _audioSystemData;
-            }
+            return $"Audio/{clip}";
         }
 
         private static AudioClip Get(string name)
         {
-            var clips = AudioSystemData.AudioClips;
-            var theClip = clips.Find(clip => clip.name == name);
-            if (!theClip)
+            // var clips = AudioSystemData.AudioClips;
+            var clip = Resources.Load<AudioClip>(GetPath(name));
+            // var theClip = clips.Find(clip => clip.name == name);
+            if (!clip)
             {
                 PFCLog.Error("AudioManager", $"Audio clip '{name}' not found in AudioSystemData.");
                 throw new Exception();
             }
-            return theClip;
+            return clip;
         }
         
         public static void PlayEffect(string audioName, Vector3 position)

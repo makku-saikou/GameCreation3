@@ -25,6 +25,7 @@ namespace GamePlay.Player.PlayerInput
         public abstract bool LaunchUp { get; }
         public abstract bool ConnectInteractDown { get; }
 
+        public bool CanInput = true;
         /// <summary>
         /// X输入方向的“程度”，左负右正，按下时间越长，值越大
         /// </summary>
