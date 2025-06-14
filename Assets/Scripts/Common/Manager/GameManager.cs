@@ -41,14 +41,13 @@ namespace Common.Manager
         //     set => tmpCheckPoint = value;
         // }
 
-        protected void  Start()
+        protected void Start()
         {
 #if UNITY_EDITOR
             var tempPlayer = FindObjectOfType<PlayerController>();
             if(tempPlayer)
                 Destroy(tempPlayer.gameObject);
 #endif
-            base.Awake();
             checkPoint = bornPoint;
             PlayerReset(bornPoint.position);
         }

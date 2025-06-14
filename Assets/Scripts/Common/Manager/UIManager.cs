@@ -34,11 +34,18 @@ namespace Common.Manager
             blackPanel.enabled = true;
             FadeIn();
             // todo: 我知道这太复杂了
-            EventSystem.AddEventListener("PlayerInit", () =>
+            DelayUtility.DelayFrame(1, () =>
             {
-                Player.Property.OnCurrentColorDurationChanged += ((_, f) =>
+                Player.Property.OnCurrentColorDurationChanged += (_, f) =>
                 {
                     SetTimeCount(f / Player.Config.colorDuration);
+                };
+                EventSystem.AddEventListener("PlayerInit", () =>
+                {
+                    Player.Property.OnCurrentColorDurationChanged += (_, f) =>
+                    {
+                        SetTimeCount(f / Player.Config.colorDuration);
+                    };
                 });
             });
         }
