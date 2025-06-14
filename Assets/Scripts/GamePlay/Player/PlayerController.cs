@@ -80,6 +80,10 @@ namespace GamePlay.Player
         [Title("Others")]
         [SerializeField] private Transform keyFollowPoint;
         public Transform KeyFollowPoint => keyFollowPoint;
+
+        [SerializeField] private Transform timeCountFollowPoint;
+        public Transform TimeCountFollowPoint => timeCountFollowPoint;
+
         public List<string> aniNames = new();
 
         [Title("Feedbacks")]
