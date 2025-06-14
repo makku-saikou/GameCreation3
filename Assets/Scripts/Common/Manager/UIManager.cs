@@ -8,6 +8,7 @@
 using System;
 using GamePlay.Player;
 using PurpleFlowerCore.Utility;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -17,10 +18,18 @@ namespace Common.Manager
     public class UIManager : SingletonMono<UIManager>
     {
         [SerializeField] private Image blackPanel;
-        private PlayerController Player => GameManager.Instance.Player;
+
+        [Title("World UI")]
+        [SerializeField] private Canvas worldCanvas;
+        [SerializeField] private Image timeCount;
+        [SerializeField] private Vector2 timeCountOffset = new Vector2(1.5f, 1.5f);
+        private GameObject TimeCountObj => timeCount ? timeCount.rectTransform.parent.gameObject : null;
+
+        private static PlayerController Player => GameManager.Instance.Player;
 
         private void Start()
         {
+            worldCanvas.worldCamera = Camera.main;
             blackPanel.enabled = true;
             FadeIn();
         }
@@ -41,6 +50,21 @@ namespace Common.Manager
                 blackPanel.CrossFadeAlpha(1, duration, false);
             }
             DelayUtility.Delay(duration, callback);
+        }
+
+        public void SetTimeCount(float percent)
+        {
+            if (timeCount) timeCount.fillAmount = percent;
+        }
+
+        public void SetTimeCountActive(bool active)
+        {
+            if (timeCount) TimeCountObj.SetActive(active);
+        }
+
+        private void Update()
+        {
+            if (TimeCountObj.activeSelf) TimeCountObj.transform.position = Player.TimeCountFollowPoint.position + (Vector3)timeCountOffset;
         }
     }
 }

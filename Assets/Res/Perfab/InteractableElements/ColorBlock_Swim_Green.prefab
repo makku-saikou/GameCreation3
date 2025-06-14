@@ -705,4 +705,4 @@ MonoBehaviour:
   color: 1
   collider2D: {fileID: 3086194879207652319}
   originColor: {r: 1, g: 1, b: 1, a: 1}
-  poolColor: {r: 1, g: 1, b: 1, a: 0.19607843}
+  poolColor: {r: 1, g: 1, b: 1, a: 0.39215687}
