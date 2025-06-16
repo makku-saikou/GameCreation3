@@ -44,6 +44,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Bottom
+    uniqueID: 3747570231
+    locked: 0
   - name: Background
     uniqueID: 1804698263
     locked: 0

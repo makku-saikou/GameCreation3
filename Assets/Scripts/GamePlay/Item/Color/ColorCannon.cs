@@ -2,6 +2,7 @@
 using Common.Manager;
 using GamePlay.Player;
 using Hmxs.Toolkit;
+using MoreMountains.Feedbacks;
 using PurpleFlowerCore.Utility;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace GamePlay.Item
 		[SerializeField] private Sprite openSprite;
 		[SerializeField] private Sprite closeSprite;
 		[SerializeField] private ParticleSystem particle;
+		[SerializeField] private MMF_Player ejectFeedback;
 
 		private bool _isCooldown;
 
@@ -41,6 +43,7 @@ namespace GamePlay.Item
 			player.Property.IsInCannon = true;
 			player.transform.position = transform.position;
 			GetComponent<SpriteRenderer>().sprite = closeSprite;
+			ejectFeedback?.PlayFeedbacks();
 			Timer.Register(ejectDelay, () => EjectPlayer(player));
 			AudioManager.PlayEffect("大炮进入音效",transform.position);
 		}
