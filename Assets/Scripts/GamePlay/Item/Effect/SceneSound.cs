@@ -6,14 +6,18 @@
 // -------------------------------------------------
 
 using Common.Manager;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace GamePlay.Item.Effect
 {
     public class SceneSound : MonoBehaviour
     {
-        [SerializeField] private AudioClip sound;
-        [SerializeField] private float volume = 0.5f;
+        [SerializeField] [LabelText("音效")] private AudioClip sound;
+        [SerializeField] [LabelText("音量")] [Range(0f, 1f)]
+        private float volume = 0.5f;
+        [SerializeField] [LabelText("距离消散")] [Range(0f, 1f)] [Tooltip("越小，声音受距离的影响越小")]
+        private float distanceFade = 1f;
 
         private void Start()
         {
@@ -24,7 +28,7 @@ namespace GamePlay.Item.Effect
         {
             var source = AudioManager.PlayEffect(sound, transform, volume);
             source.loop = true;
-            source.spatialBlend = 1f;
+            source.spatialBlend = distanceFade;
         }
     }
 }
