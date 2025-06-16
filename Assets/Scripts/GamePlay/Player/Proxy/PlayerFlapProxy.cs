@@ -6,6 +6,7 @@
 // -------------------------------------------------
 
 using Common.FSM;
+using PurpleFlowerCore.Utility;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -95,6 +96,11 @@ namespace GamePlay.Player
             };
             
              player.StateMachine.OnStateChanged += CheckFlap;
+             DelayUtility.DelayFrame(2, () =>
+             {
+                 // 确保玩家初始化完成后再设置初始方向限制
+                 CheckFlap(null, player.StateMachine.CurrentState);
+             });
         }
         
         // private void OnDisable()

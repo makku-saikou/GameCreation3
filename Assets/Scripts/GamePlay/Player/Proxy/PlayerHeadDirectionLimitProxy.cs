@@ -8,6 +8,7 @@
 
 using Common.FSM;
 using PurpleFlowerCore;
+using PurpleFlowerCore.Utility;
 using UnityEngine;
 
 namespace GamePlay.Player
@@ -30,7 +31,11 @@ namespace GamePlay.Player
 
             // 为了确保事件注册在玩家初始化之后，且由于我们不会使该组建失效，所以在Start中注册事件
             playerController.StateMachine.OnStateChanged += CheckDirectionLimit;
-            CheckDirectionLimit(null, playerController.StateMachine.CurrentState);
+            DelayUtility.DelayFrame(2, () =>
+            {
+                // 确保玩家初始化完成后再设置初始方向限制
+                CheckDirectionLimit(null, playerController.StateMachine.CurrentState);
+            });
         }
 
         private Vector3 OnGroundLimit(Vector3 direction)
