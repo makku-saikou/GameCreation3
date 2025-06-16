@@ -56,6 +56,7 @@ namespace Common.Manager
         {
             // TODO: 播放死亡动画，禁用角色输入
             PlayerReset(CheckPoint.position);
+            AudioManager.PlayEffect("玩家死亡音效",player.transform.position);
         }
 
         // public void PlayerToTmpCheckPoint()

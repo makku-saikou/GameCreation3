@@ -7,6 +7,7 @@
 // -------------------------------------------------
 
 using System.Collections.Generic;
+using Common.Manager;
 using GamePlay.Player.PlayerInput;
 using PurpleFlowerCore;
 using UnityEngine;
@@ -60,6 +61,7 @@ namespace GamePlay.Player
             if (PlayerInput.LaunchDown)
             {
                 LaunchTongue();
+                AudioManager.PlayEffect("舌头发射音效",transform.position);
             }
             if (PlayerInput.LaunchUp)
             {

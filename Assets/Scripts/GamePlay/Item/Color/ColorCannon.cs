@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Manager;
 using GamePlay.Player;
 using Hmxs.Toolkit;
 using PurpleFlowerCore.Utility;
@@ -41,6 +42,7 @@ namespace GamePlay.Item
 			player.transform.position = transform.position;
 			GetComponent<SpriteRenderer>().sprite = closeSprite;
 			Timer.Register(ejectDelay, () => EjectPlayer(player));
+			AudioManager.PlayEffect("大炮进入音效",transform.position);
 		}
 
 		private void EjectPlayer(PlayerController player)
@@ -57,6 +59,7 @@ namespace GamePlay.Item
 			GetComponent<SpriteRenderer>().sprite = openSprite;
 			Timer.Register(cooldown, () => _isCooldown = false);
 			particle.Play();
+			AudioManager.PlayEffect("大炮发射音效",transform.position);
 		}
 
 		private void OnDrawGizmos()

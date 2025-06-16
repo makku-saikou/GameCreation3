@@ -6,6 +6,7 @@
 // Description: 舌头相关控制逻辑
 // -------------------------------------------------
 using System;
+using Common.Manager;
 using GamePlay.Item.Target;
 using GamePlay.Player.Particle;
 using PurpleFlowerCore;
@@ -252,6 +253,7 @@ namespace GamePlay.Player
             if (_currentHit.normal.Equals(Vector2.up))
                 Player.OnCollisionEnter += OnNormalUp;
             Player.PlayerParticle.Get<HitFeedback>().Play(tonguePoint.position, transform.right);
+            AudioManager.PlayEffect("玩家舔中钩块的声音", transform);
         }
         
         /// <summary>

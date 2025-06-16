@@ -99,6 +99,9 @@ namespace GamePlay.Player
         
         [FoldoutGroup("地面")] [LabelText("尾迹释放间隔")]
         public float groundTrailInterval = 0.1f;
+        
+        [FoldoutGroup("地面")] [LabelText("脚步声音时间间隔")]
+        public float footstepInterval = 1f;
     
         [FoldoutGroup("扒墙")] [LabelText("检测贴墙距离")]
         public float wallCheckRadius = 0.1f;

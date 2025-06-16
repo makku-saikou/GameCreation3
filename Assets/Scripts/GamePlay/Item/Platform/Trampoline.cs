@@ -1,4 +1,5 @@
-﻿using MoreMountains.Feedbacks;
+﻿using Common.Manager;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 namespace GamePlay.Item.Platform
@@ -16,6 +17,7 @@ namespace GamePlay.Item.Platform
 			{
 				rb.velocity = new Vector2(rb.velocity.x, bounceForce);
 				feedbacks?.PlayFeedbacks();
+				AudioManager.PlayEffect("蹦床触发声",transform.position);
 			}
 		}
 	}

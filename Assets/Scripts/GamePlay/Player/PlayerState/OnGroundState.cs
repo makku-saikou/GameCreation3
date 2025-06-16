@@ -6,6 +6,7 @@
 // -------------------------------------------------
 
 using Common.FSM;
+using Common.Manager;
 using GamePlay.Player.Particle;
 using PurpleFlowerCore;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace GamePlay.Player.PlayerState
     public class OnGroundState : PlayerStateBase
     {
         public OnGroundState(PlayerController player, EPlayerState name) : base(player, name) { }
+        private float _soundTimer = 0f;
         public override void EnterCallback(HState prev)
         {
             base.EnterCallback(prev);
@@ -36,6 +38,7 @@ namespace GamePlay.Player.PlayerState
             base.UpdateCallback(deltaTime);
             CheckInput();
             CheckJumpState();
+            _soundTimer -= deltaTime;
         }
 
         public override void LateUpdateCallback(float deltaTime)
@@ -94,6 +97,16 @@ namespace GamePlay.Player.PlayerState
             {
                 Particle.Play<GroundTail>();
                 Rb.velocity = new Vector2(Config.onGroundRunSpeed * Input.MovementInput, Rb.velocity.y);
+            }
+
+            if (xInputExtent > 0) // 有输入
+            {
+                if (_soundTimer <= 0)
+                {
+                    _soundTimer = Config.footstepInterval;
+                    // todo: 修改资产
+                    // AudioManager.PlayEffect("蜥蜴跑步声", Player.Entity);
+                }
             }
         }
         
