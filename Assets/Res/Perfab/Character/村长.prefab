@@ -900,7 +900,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 79197ecfbc3a4294a89ce589dac02cf2, type: 3}
+    m_Font: {fileID: 12800000, guid: d6ad4e137ff8a3048a3018efdf47c8e9, type: 3}
     m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
@@ -999,7 +999,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: bb145366ce7024469a5758b08d31802c, type: 3}
+    m_Font: {fileID: 12800000, guid: d6ad4e137ff8a3048a3018efdf47c8e9, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -1326,7 +1326,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: bb145366ce7024469a5758b08d31802c, type: 3}
+    m_Font: {fileID: 12800000, guid: d6ad4e137ff8a3048a3018efdf47c8e9, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -1406,7 +1406,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 79197ecfbc3a4294a89ce589dac02cf2, type: 3}
+    m_Font: {fileID: 12800000, guid: d6ad4e137ff8a3048a3018efdf47c8e9, type: 3}
     m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
@@ -1528,7 +1528,8 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 5560580501994294522}
-  selectedCommands: []
+  selectedCommands:
+  - {fileID: 2402543193323481618}
   variables:
   - {fileID: 3440757216873043295}
   description: 
@@ -1757,7 +1758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 7
   indentLevel: 0
-  storyText: "\u6B38\uFF0C\u6751\u957F\uFF0C\u65E2\u7136\u60A8\u8BF4\u8D77\u60A8\u7684\u5C3E\u5DF4\uFF0C\u60A8\u544A\u8BC9\u6211\u6751\u95E8\u7684\u94A5\u5319\u5728\u54EA\uFF0C\u6211\u51FA\u95E8\u5E2E\u60A8\u91C7\u70B9\u8349\u836F\u56DE\u6765\uFF0C\u7ED9\u60A8\u7684\u5C3E\u5DF4\u4E0A\u4E9B\u4FDD\u517B\u836F\u600E\u4E48\u6837\uFF1F"
+  storyText: "\u8BF6\uFF0C\u6751\u957F\uFF0C\u65E2\u7136\u60A8\u8BF4\u8D77\u60A8\u7684\u5C3E\u5DF4\uFF0C\u60A8\u544A\u8BC9\u6211\u6751\u95E8\u7684\u94A5\u5319\u5728\u54EA\uFF0C\u6211\u51FA\u95E8\u5E2E\u60A8\u91C7\u70B9\u8349\u836F\u56DE\u6765\uFF0C\u7ED9\u60A8\u7684\u5C3E\u5DF4\u4E0A\u4E9B\u4FDD\u517B\u836F\u600E\u4E48\u6837\uFF1F"
   description: 
   character: {fileID: 5396902530599391236}
   portrait: {fileID: -1373736094, guid: bc3e232aa1e01de4f8f706e26d4fe398, type: 3}
