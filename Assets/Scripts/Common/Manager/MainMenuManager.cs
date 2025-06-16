@@ -17,7 +17,11 @@ namespace Common.Manager
         [SerializeField] private Image blackPanel;
         public void Play()
         {
-            FadeUtility.FadeInAndStay(blackPanel, 80, () =>
+            // FadeUtility.FadeInAndStay(blackPanel, 80, () =>
+            // {
+            //     SceneSystem.LoadScene(1);
+            // });
+            UIManager.Instance.FadeOut(() =>
             {
                 SceneSystem.LoadScene(1);
             });

@@ -10,6 +10,7 @@ using GamePlay.Player;
 using PurpleFlowerCore;
 using PurpleFlowerCore.Utility;
 using Sirenix.OdinInspector;
+using UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -18,8 +19,8 @@ namespace Common.Manager
 {
     public class UIManager : SingletonMono<UIManager>
     {
-        [SerializeField] private Image blackPanel;
-
+        [SerializeField] private FlowerPanel flowerPanel;
+        [SerializeField] private int flowerX;
         [Title("World UI")]
         [SerializeField] private Canvas worldCanvas;
         [SerializeField] private Image timeCount;
@@ -31,9 +32,10 @@ namespace Common.Manager
         private void Start()
         {
             worldCanvas.worldCamera = Camera.main;
-            blackPanel.enabled = true;
+            flowerPanel.Enabled = true;
             FadeIn();
             // todo: 我知道这太复杂了
+            if (!GameManager.Instance) return;
             DelayUtility.DelayFrame(1, () =>
             {
                 Player.Property.OnCurrentColorDurationChanged += (_, f) =>
@@ -50,22 +52,23 @@ namespace Common.Manager
             });
         }
 
-        public void FadeIn(UnityAction callback = null, float duration = 1f)
+        public void FadeIn(Action callback = null, float speed = 2000)
         {
-            if (blackPanel)
-            {
-                blackPanel.CrossFadeAlpha(0, duration, false);
-            }
-            DelayUtility.Delay(duration, callback);
+            // if (flowerPanel)
+            // {
+            //     flowerPanel.CrossFadeAlpha(0, duration, false);
+            // }
+            flowerPanel.Move(0, -flowerX, callback, speed);
         }
         
-        public void FadeOut(UnityAction callback = null, float duration = 1f)
+        public void FadeOut(Action callback = null, float speed = 2000)
         {
-            if (blackPanel)
-            {
-                blackPanel.CrossFadeAlpha(1, duration, false);
-            }
-            DelayUtility.Delay(duration, callback);
+            // if (flowerPanel)
+            // {
+            //     flowerPanel.CrossFadeAlpha(1, duration, false);
+            // }
+            // DelayUtility.Delay(duration, callback);
+            flowerPanel.Move(flowerX, 0, callback, speed);
         }
 
         public void SetTimeCount(float percent)
