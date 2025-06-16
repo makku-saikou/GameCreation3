@@ -33,7 +33,6 @@ namespace Common.Manager
             worldCanvas.worldCamera = Camera.main;
             blackPanel.enabled = true;
             FadeIn();
-            Debug.Log(111);
             // todo: 我知道这太复杂了
             DelayUtility.DelayFrame(1, () =>
             {
@@ -71,7 +70,6 @@ namespace Common.Manager
 
         public void SetTimeCount(float percent)
         {
-            Debug.Log(222);
             if (timeCount)
             {
                 timeCount.fillAmount = percent;
