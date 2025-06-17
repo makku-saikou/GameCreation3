@@ -103,7 +103,7 @@ MonoBehaviour:
   previewInEditor: 1
   renderingLayer: 0
   alwaysOnTop: 0
-  effectGroup: 1
+  effectGroup: 2
   effectGroupLayer:
     serializedVersion: 2
     m_Bits: 4294967295
