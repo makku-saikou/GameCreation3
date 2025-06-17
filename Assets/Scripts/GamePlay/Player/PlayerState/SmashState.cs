@@ -7,6 +7,7 @@
 
 using Common.FSM;
 using GamePlay.Item.Platform;
+using GamePlay.Player.Particle;
 using PurpleFlowerCore.Utility;
 using UnityEngine;
 
@@ -28,6 +29,7 @@ namespace GamePlay.Player.PlayerState
             {
                 Rb.velocity = new Vector2(0, -Config.smashVelocity);
                 Animator.Play("Smash_Down");
+                Particle.Get<HangTail>().Play();
             });
         }
 
@@ -81,6 +83,8 @@ namespace GamePlay.Player.PlayerState
             }
             else
                 Rb.velocity = new Vector2(Rb.velocity.x, bounceForce);
+            Particle.Get<HangTail>().Stop();
+            Particle.Play<Boom>();
         }
     }
 }

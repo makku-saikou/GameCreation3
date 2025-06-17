@@ -40,7 +40,7 @@ MonoBehaviour:
   jumpBufferTime: 0.5
   groundTrailDuration: 0.05
   groundTrailInterval: 0.01
-  footstepInterval: 1
+  footstepInterval: 0.2
   wallCheckRadius: 0.1
   wallSlideSpeed: 0
   wallSpeedRecoverScale: 0.125

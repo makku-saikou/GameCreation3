@@ -104,8 +104,9 @@ namespace GamePlay.Player.PlayerState
                 if (_soundTimer <= 0)
                 {
                     _soundTimer = Config.footstepInterval;
-                    // todo: 修改资产
-                    // AudioManager.PlayEffect("蜥蜴跑步声", Player.Entity);
+                    int index = Random.Range(1, 7);
+                    string path = "脚步声/脚步声-" + index;
+                    AudioManager.PlayEffect(path, Player.Entity);
                 }
             }
         }

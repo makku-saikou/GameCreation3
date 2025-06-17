@@ -19,10 +19,16 @@ namespace UI
         {
             EventSystem.AddEventListener("PlayerInit", Init);
         }
+        
+        private void OnDisable()
+        {
+            EventSystem.RemoveEventListener("PlayerInit", Init);
+        }
 
         private void Init()
         {
             // todo: 太有侵入性了
+            targetImage.enabled = true;
             GameManager.Instance.Player.Head.Tongue.targetImage = targetImage;
         }
     

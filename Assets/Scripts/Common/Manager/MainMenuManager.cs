@@ -5,6 +5,7 @@
 // Description:
 // -------------------------------------------------
 
+using System;
 using PurpleFlowerCore;
 using PurpleFlowerCore.Utility;
 using UnityEngine;
@@ -15,6 +16,14 @@ namespace Common.Manager
     public class MainMenuManager : MonoBehaviour
     {
         [SerializeField] private Image blackPanel;
+        [SerializeField] private AudioClip bgm;
+
+        private void Start()
+        {
+            AudioSystem.PlayBGM(bgm);
+
+        }
+
         public void Play()
         {
             // FadeUtility.FadeInAndStay(blackPanel, 80, () =>

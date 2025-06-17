@@ -2485,6 +2485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blackPanel: {fileID: 1291691430}
+  bgm: {fileID: 8300000, guid: 4db8e97ce6ff17240b3a88cf1cf50993, type: 3}
 --- !u!1 &2136322268
 GameObject:
   m_ObjectHideFlags: 0
