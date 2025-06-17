@@ -19,11 +19,6 @@ namespace UI
         {
             EventSystem.AddEventListener("PlayerInit", Init);
         }
-        
-        private void OnDisable()
-        {
-            EventSystem.RemoveEventListener("PlayerInit", Init);
-        }
 
         private void Init()
         {
