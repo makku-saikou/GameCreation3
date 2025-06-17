@@ -26,8 +26,7 @@ namespace GamePlay.Item.Effect
 
         private void LoopPlay()
         {
-            var source = AudioManager.PlayEffect(sound, transform, volume);
-            source.loop = true;
+            var source = AudioManager.PlayEffect(sound, transform, volume, LoopPlay);
             source.spatialBlend = distanceFade;
         }
     }
