@@ -1,5 +1,6 @@
 ﻿using Common.Manager;
 using GamePlay.Player;
+using GamePlay.Player.Particle;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -26,6 +27,7 @@ namespace GamePlay.Item
 				// 染色
 				Debug.Log("Player Color Change: [ " + player.Property.CurrentColor + " ] -> [ " + color + " ]");
 				player.Property.CurrentColor = color;
+				player.PlayerParticle.Get<ChangeColor>().Play(color);
 			}
 		}
 
