@@ -24,19 +24,24 @@ namespace GamePlay.Player.Particle
         
         public void Play(EPlayerColor color)
         {
+            ParticleSystem particle = null;
             switch (color)
             {
                 case EPlayerColor.Blue:
-                    blue.Play();
+                    particle = blue;
                     break;
                 case EPlayerColor.Green:
-                    green.Play();
+                    particle = green;
                     break;
                 case EPlayerColor.Red:
-                    red.Play();
+                    particle = red;
                     break;
-                default:
-                    break;
+            }
+            if(particle)
+            {
+                var theParticle = Instantiate(particle, Player.transform.position, Quaternion.identity);
+                theParticle.Play();
+                Destroy(theParticle, 5f);
             }
         }
 
