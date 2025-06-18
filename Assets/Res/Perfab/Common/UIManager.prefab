@@ -153,6 +153,7 @@ MonoBehaviour:
   worldCanvas: {fileID: 2394731947687229615}
   timeCount: {fileID: 6534834960485820431}
   timeCountOffset: {x: 0, y: 0}
+  uiTarget: {fileID: 4431145478624251186}
 --- !u!1 &3077240048287051862
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,12 +15,12 @@ namespace UI
     public class UITarget : MonoBehaviour
     {
         [SerializeField] private Image targetImage;
-        private void OnEnable()
-        {
-            EventSystem.AddEventListener("PlayerInit", Init);
-        }
+        // private void OnEnable()
+        // {
+        //     EventSystem.AddEventListener("PlayerInit", Init);
+        // }
 
-        private void Init()
+        public void Init()
         {
             // todo: 太有侵入性了
             targetImage.enabled = true;
