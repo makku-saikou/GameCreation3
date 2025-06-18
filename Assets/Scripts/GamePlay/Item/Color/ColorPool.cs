@@ -28,6 +28,7 @@ namespace GamePlay.Item
 				Debug.Log("Player Color Change: [ " + player.Property.CurrentColor + " ] -> [ " + color + " ]");
 				player.Property.CurrentColor = color;
 				player.PlayerParticle.Get<ChangeColor>().Play(color);
+				AudioManager.PlayEffect("玩家染色块（池）上变色音效",transform);
 			}
 		}
 

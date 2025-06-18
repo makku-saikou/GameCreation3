@@ -6,6 +6,7 @@
 // -------------------------------------------------
 
 using Common.FSM;
+using Common.Manager;
 using GamePlay.Player.Particle;
 using PurpleFlowerCore.Utility;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace GamePlay.Player.PlayerState
     public class OnPillarState : PlayerStateBase
     {
         public OnPillarState(PlayerController player, EPlayerState name) : base(player, name) { }
+        private float _soundTimer = 0f;
         
         public override void EnterCallback(HState prev)
         {
@@ -46,6 +48,16 @@ namespace GamePlay.Player.PlayerState
         public override void UpdateCallback(float deltaTime)
         {
             base.UpdateCallback(deltaTime);
+            if (Input.UpInput || Input.DownInput) // 有输入
+            {
+                if (_soundTimer <= 0)
+                {
+                    _soundTimer = Config.footstepInterval;
+                    int index = Random.Range(1, 5);
+                    string path = "玩家爬杆脚步声/玩家爬杆脚步声-" + index;
+                    AudioManager.PlayEffect(path, Player.Entity);
+                }
+            }
         }
 
         public override void LateUpdateCallback(float deltaTime)
@@ -94,6 +106,7 @@ namespace GamePlay.Player.PlayerState
             
             Rb.AddForce(direction * Config.climbJumpForce, ForceMode2D.Impulse);
             Particle.Get<JumpJet>().Play(Input.MovementInput);
+            AudioManager.PlayEffect("玩家跳跃音效",Entity);
         }
     }
 }

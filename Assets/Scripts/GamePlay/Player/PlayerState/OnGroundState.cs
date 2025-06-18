@@ -120,6 +120,7 @@ namespace GamePlay.Player.PlayerState
             Property.ResetJumpBufferFlag();
             
             Particle.Get<JumpJet>().Play(Input.MovementInput);
+            AudioManager.PlayEffect("玩家跳跃音效",Entity);
         }
     }
 }

@@ -41,6 +41,7 @@ namespace GamePlay.Item
             var player = other.GetComponent<PlayerController>();
             player.Property.CanOnSwimColorBlock = true;
             player.Property.OnColorChanged += OnPlayerColorChangedInThis;
+            AudioManager.PlayEffect("玩家进入色块音效",transform);
         }
 
         private void OnTriggerExit2D(Collider2D other)

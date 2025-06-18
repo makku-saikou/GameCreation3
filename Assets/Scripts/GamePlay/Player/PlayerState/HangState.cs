@@ -9,6 +9,7 @@ using Common.FSM;
 using PurpleFlowerCore;
 using UnityEngine;
 using System.Collections;
+using Common.Manager;
 using GamePlay.Player.Particle;
 
 namespace GamePlay.Player.PlayerState
@@ -54,6 +55,10 @@ namespace GamePlay.Player.PlayerState
             }
 
             Tail();
+            // if (Input.RightDown || Input.LeftDown)
+            // {
+            //     AudioManager.PlayEffect("玩家摆荡音效", Entity);
+            // }
         }
 
         public override void FixedUpdateCallback()
@@ -68,6 +73,7 @@ namespace GamePlay.Player.PlayerState
         {
             Rb.velocity += new Vector2(0, Config.hangJumpForce);
             Particle.Get<JumpJet>().Play(Input.MovementInput);
+            AudioManager.PlayEffect("玩家跳跃音效",Entity);
             
         }
 

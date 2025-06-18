@@ -6,6 +6,7 @@
 // -------------------------------------------------
 
 using Common.FSM;
+using Common.Manager;
 using GamePlay.Item.Platform;
 using GamePlay.Player.Particle;
 using PurpleFlowerCore.Utility;
@@ -85,6 +86,7 @@ namespace GamePlay.Player.PlayerState
                 Rb.velocity = new Vector2(Rb.velocity.x, bounceForce);
             Particle.Get<HangTail>().Stop();
             Particle.Play<Boom>();
+            AudioManager.PlayEffect("玩家下砸落地声",Entity);
         }
     }
 }
