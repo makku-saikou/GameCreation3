@@ -39,6 +39,7 @@ namespace GamePlay.Player.PlayerState
             base.LateUpdateCallback(deltaTime);
             bool trampoline = Property.CurrentGroundCollider 
                               && Property.CurrentGroundCollider.gameObject.CompareTag("Trampoline");
+            Debug.Log(Property.CurrentGroundCollider);
             if (Property.IsGrounded || trampoline)
             {
                 float bounceForce;

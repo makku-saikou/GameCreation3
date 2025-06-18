@@ -60,8 +60,8 @@ namespace GamePlay.Player
             UpdateDirection();
             if (PlayerInput.LaunchDown)
             {
-                LaunchTongue();
-                AudioManager.PlayEffect("舌头发射音效",transform.position);
+                if(LaunchTongue())
+                    AudioManager.PlayEffect("舌头发射音效",transform.position);
             }
             if (PlayerInput.LaunchUp)
             {
@@ -127,12 +127,13 @@ namespace GamePlay.Player
 
         #region Tongue
 
-        private void LaunchTongue()
+        private bool LaunchTongue()
         {
-            if (!Property.HeadCanLaunch) return;
-            if (_currentLaunchCD > 0) return;
+            if (!Property.HeadCanLaunch) return false;
+            if (_currentLaunchCD > 0) return false;
             _currentLaunchCD = Config.launchCD;
             tongue.Launch(transform.right);
+            return true;
         }
 
         public void RetractTongue()
