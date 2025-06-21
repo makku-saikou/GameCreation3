@@ -25,6 +25,7 @@ namespace Common.Manager
         [SerializeField] private Canvas worldCanvas;
         [SerializeField] private Image timeCount;
         [SerializeField] private Vector2 timeCountOffset = new Vector2(1.5f, 1.5f);
+        [SerializeField] private UITarget uiTarget;
         private GameObject TimeCountObj => timeCount ? timeCount.rectTransform.parent.gameObject : null;
 
         private static PlayerController Player => GameManager.Instance.Player;
@@ -35,20 +36,26 @@ namespace Common.Manager
             flowerPanel.Enabled = true;
             FadeIn();
             // todo: 我知道这太复杂了
-            if (!GameManager.Instance) return;
-            DelayUtility.DelayFrame(1, () =>
+            // if (!GameManager.Instance) return;
+            // DelayUtility.DelayFrame(1, () =>
+            // {
+            //
+            // });
+        }
+
+        public void Init()
+        {
+            uiTarget.Init();
+            Player.Property.OnCurrentColorDurationChanged += (_, f) =>
+            {
+                SetTimeCount(f / Player.Config.colorDuration);
+            };
+            EventSystem.AddEventListener("PlayerInit", () =>
             {
                 Player.Property.OnCurrentColorDurationChanged += (_, f) =>
                 {
                     SetTimeCount(f / Player.Config.colorDuration);
                 };
-                EventSystem.AddEventListener("PlayerInit", () =>
-                {
-                    Player.Property.OnCurrentColorDurationChanged += (_, f) =>
-                    {
-                        SetTimeCount(f / Player.Config.colorDuration);
-                    };
-                });
             });
         }
 

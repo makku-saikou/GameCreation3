@@ -12,6 +12,8 @@ namespace GamePlay.Player.PlayerInput
     public class PlayerInput_Legacy : PlayerInputBase
     {
         public override float MovementInput => CanInput ? Input.GetAxis("Horizontal") : 0;
+        public override bool LeftDown => CanInput && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow));
+        public override bool RightDown => CanInput && (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow));
         public override bool JumpInputDown => CanInput && Input.GetButtonDown("Jump");
         public override bool JumpInput => CanInput && Input.GetButton("Jump");
         public override bool DownInput => CanInput && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow));

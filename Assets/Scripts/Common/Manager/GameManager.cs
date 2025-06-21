@@ -71,6 +71,7 @@ namespace Common.Manager
             player = Instantiate(playerPrefab, position, Quaternion.identity);
             player.Init();
             EventSystem.EventTrigger("PlayerInit");
+            UIManager.Instance.Init();
         }
 
         public void GetCollection()

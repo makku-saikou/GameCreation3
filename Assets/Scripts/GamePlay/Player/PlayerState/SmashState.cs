@@ -6,7 +6,9 @@
 // -------------------------------------------------
 
 using Common.FSM;
+using Common.Manager;
 using GamePlay.Item.Platform;
+using GamePlay.Player.Particle;
 using PurpleFlowerCore.Utility;
 using UnityEngine;
 
@@ -28,6 +30,7 @@ namespace GamePlay.Player.PlayerState
             {
                 Rb.velocity = new Vector2(0, -Config.smashVelocity);
                 Animator.Play("Smash_Down");
+                Particle.Get<HangTail>().Play();
             });
         }
 
@@ -36,6 +39,7 @@ namespace GamePlay.Player.PlayerState
             base.LateUpdateCallback(deltaTime);
             bool trampoline = Property.CurrentGroundCollider 
                               && Property.CurrentGroundCollider.gameObject.CompareTag("Trampoline");
+            Debug.Log(Property.CurrentGroundCollider);
             if (Property.IsGrounded || trampoline)
             {
                 float bounceForce;
@@ -81,6 +85,9 @@ namespace GamePlay.Player.PlayerState
             }
             else
                 Rb.velocity = new Vector2(Rb.velocity.x, bounceForce);
+            Particle.Get<HangTail>().Stop();
+            Particle.Play<Boom>();
+            AudioManager.PlayEffect("玩家下砸落地声",Entity);
         }
     }
 }

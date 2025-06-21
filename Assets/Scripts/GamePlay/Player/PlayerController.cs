@@ -243,12 +243,12 @@ namespace GamePlay.Player
             _stateMachine.AddState(inCannonState);
             _stateMachine.AddState(shuttleState);
             
-#if UNITY_EDITOR
+// #if UNITY_EDITOR
         DebugSystem.AddCommand("Player/Color/None", () => { property.CurrentColor = EPlayerColor.None;});
         DebugSystem.AddCommand("Player/Color/Green", () => { property.CurrentColor = EPlayerColor.Green;});
         DebugSystem.AddCommand("Player/Color/Red", () => { property.CurrentColor = EPlayerColor.Red;});
         DebugSystem.AddCommand("Player/Color/Blue", () => { property.CurrentColor = EPlayerColor.Blue;});
-#endif
+// #endif
             ChangeColor(property.CurrentColor, property.CurrentColor);
             ResetTransform();
         }
@@ -280,7 +280,7 @@ namespace GamePlay.Player
                 Config.groundCheckHeight), 0, Config.groundLayer);
             
             property.CurrentGroundCollider = Physics2D.OverlapBox(groundCheckPoint.position, new Vector2(Config.groundCheckWidth,
-                Config.groundCheckHeight), 0, ~LayerMask.GetMask("Player") );
+                Config.groundCheckHeight), 0, ~(LayerMask.GetMask("Player") | LayerMask.GetMask("Ignore")) );
             
             var rightOverlap = Physics2D.OverlapCircle(wallCheckPoint2.position, Config.wallCheckRadius, Config.groundLayer);
             bool rightWall = rightOverlap != null && rightOverlap.CompareTag("Wall");

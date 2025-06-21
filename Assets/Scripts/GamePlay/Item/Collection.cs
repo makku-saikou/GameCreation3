@@ -23,6 +23,7 @@ namespace GamePlay.Item
 		protected virtual void Collect()
 		{
 			GameManager.Instance.GetCollection();
+			AudioManager.PlayEffect("拾取收集物音效",transform.position);
 			if (feedbackParticle)
 			{
 				var particle = Instantiate(feedbackParticle, transform.position, Quaternion.identity);
